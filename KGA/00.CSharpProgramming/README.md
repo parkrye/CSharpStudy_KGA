@@ -1,5 +1,6 @@
 # Github 교육 전 작성한 코드
 
+## 강의 중 작성 코드 목록
 + [프로그래밍 기초](https://github.com/parkrye/KGA/blob/master/KGA/00.CSharpProgramming/00.Programming/Program.cs)
 + [데이터 타입](https://github.com/parkrye/KGA/blob/master/KGA/00.CSharpProgramming/00.Programming/Program.cs)
 + [연산자](https://github.com/parkrye/KGA/blob/master/KGA/00.CSharpProgramming/02_Operator/Program.cs)
@@ -13,7 +14,8 @@
 + [델리게이트](https://github.com/parkrye/KGA/blob/master/KGA/00.CSharpProgramming/11.Delegate/Program.cs)
 + [이벤트](https://github.com/parkrye/KGA/blob/master/KGA/00.CSharpProgramming/12.Event/Program.cs)
 + [추가 문법](https://github.com/parkrye/KGA/blob/master/KGA/00.CSharpProgramming/13.Additional/Program.cs)
----
+
+## 과제 목록
 + [과제 0](https://github.com/parkrye/KGA/blob/master/KGA/00.CSharpProgramming/HomeWork_00/Program.cs)
 + [과제 1](https://github.com/parkrye/KGA/blob/master/KGA/00.CSharpProgramming/HomeWork_01/Program.cs)
 + [과제 2](https://github.com/parkrye/KGA/blob/master/KGA/00.CSharpProgramming/HomeWork_02/Program.cs)
@@ -26,5 +28,6 @@
 + [과제 9](https://github.com/parkrye/KGA/blob/master/KGA/00.CSharpProgramming/HomeWork_09/_Main.cs)
 + [과제 10](https://github.com/parkrye/KGA/blob/master/KGA/00.CSharpProgramming/HomeWork_10/Program.cs)
 + [과제 11](https://github.com/parkrye/KGA/blob/master/KGA/00.CSharpProgramming/HomeWork_11/Program.cs)
-+ ---
+
+## 개인 프로젝트 목록
 + [개인 프로젝트](https://github.com/parkrye/KGA/blob/master/KGA/00.CSharpProgramming/Personal_ProjectD/Program.cs)
