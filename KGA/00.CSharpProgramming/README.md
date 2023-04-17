@@ -12,4 +12,4 @@
 + (일반화)[https://github.com/parkrye/KGA/blob/master/KGA/00.CSharpProgramming/10.Generic/Program.cs
 + (델리게이트)[https://github.com/parkrye/KGA/blob/master/KGA/00.CSharpProgramming/11.Delegate/Program.cs]
 + (이벤트)[https://github.com/parkrye/KGA/blob/master/KGA/00.CSharpProgramming/12.Event/Program.cs]
-+ ()[https://github.com/parkrye/KGA/blob/master/KGA/00.CSharpProgramming/13.Additional/Program.cs]
++ (추가 문법)[https://github.com/parkrye/KGA/blob/master/KGA/00.CSharpProgramming/13.Additional/Program.cs]
