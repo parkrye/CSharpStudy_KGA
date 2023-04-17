@@ -10,7 +10,7 @@
 + [클래스](https://github.com/parkrye/KGA/tree/master/01_CSharpProgramming/Study/07_Class)
 + [객체지향 프로그래밍](https://github.com/parkrye/KGA/tree/master/01_CSharpProgramming/Study/08_OOP)
 + [일반화](https://github.com/parkrye/KGA/tree/master/01_CSharpProgramming/Study/09_Generic)
-+ [델리게이트]()
++ [델리게이트](https://github.com/parkrye/KGA/tree/master/01_CSharpProgramming/Study/10_Delegate)
 + [이벤트](https://github.com/parkrye/KGA/tree/master/01_CSharpProgramming/Study/11_Event)
 + [추가 문법](https://github.com/parkrye/KGA/tree/master/01_CSharpProgramming/Study/12_Additional)
 ## 과제
