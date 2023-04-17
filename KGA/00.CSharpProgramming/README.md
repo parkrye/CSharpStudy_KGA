@@ -27,4 +27,4 @@
 + [과제 10](https://github.com/parkrye/KGA/blob/master/KGA/00.CSharpProgramming/HomeWork_10/Program.cs)
 + [과제 11](https://github.com/parkrye/KGA/blob/master/KGA/00.CSharpProgramming/HomeWork_11/Program.cs)
 + ---
-+ [개인 프로젝트]()
++ [개인 프로젝트](https://github.com/parkrye/KGA/blob/master/KGA/00.CSharpProgramming/Personal_ProjectD/Program.cs)
