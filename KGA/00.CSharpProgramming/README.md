@@ -1,4 +1,4 @@
-# 깃허브 교육 전 작성한 코드
+# Github 교육 전 작성한 코드
 
 + [프로그래밍 기초](https://github.com/parkrye/KGA/blob/master/KGA/00.CSharpProgramming/00.Programming/Program.cs)
 + [데이터 타입](https://github.com/parkrye/KGA/blob/master/KGA/00.CSharpProgramming/00.Programming/Program.cs)
@@ -12,4 +12,4 @@
 + [일반화](https://github.com/parkrye/KGA/blob/master/KGA/00.CSharpProgramming/10.Generic/Program.cs)
 + [델리게이트](https://github.com/parkrye/KGA/blob/master/KGA/00.CSharpProgramming/11.Delegate/Program.cs)
 + [이벤트](https://github.com/parkrye/KGA/blob/master/KGA/00.CSharpProgramming/12.Event/Program.cs)
-+ [추가 문법)](ttps://github.com/parkrye/KGA/blob/master/KGA/00.CSharpProgramming/13.Additional/Program.cs)
++ [추가 문법](ttps://github.com/parkrye/KGA/blob/master/KGA/00.CSharpProgramming/13.Additional/Program.cs)
