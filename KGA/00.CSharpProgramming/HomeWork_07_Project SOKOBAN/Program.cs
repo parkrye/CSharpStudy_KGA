@@ -441,7 +441,7 @@ namespace HomeWork_7_Project_SOKOBAN
             Console.SetCursorPosition(0, UP + 20);  // 종료 출력문이 게임 화면을 가리지 않도록 커서를 아래로 내림
         }
 
-        static void Main(string[] args)
+        static void HW7Main(string[] args)
         {
             Program game = new Program();   // 프로그램 객체 생성
             game.StartGame();               // 생성한 객체로 게임 실행

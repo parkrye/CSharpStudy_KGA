@@ -2,7 +2,7 @@
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static void OperatorMain()
         {
             bool bValue;
             int iValue;

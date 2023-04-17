@@ -69,7 +69,7 @@ namespace _05.Function
         // <함수 사용>
         // 작성한 함수의 이름에 괄호를 붙이고, 괄호 안에 매개변수의 값을 입력하여 사용
 
-        static void Main(string[] args)
+        static void FunctionMain(string[] args)
         {
             int n = Add(1, 2);
             PrintLine(n);

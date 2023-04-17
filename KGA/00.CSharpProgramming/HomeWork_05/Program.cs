@@ -31,7 +31,7 @@
         const char BOX = '●';
         const char BOXGOAL = '■';
 
-        static void Main(string[] args)
+        static void HW5Main(string[] args)
         {
             // Game Init: 게임 초기화
             Console.Title = "Sokoban";          // 콘솔 타이틀 명명

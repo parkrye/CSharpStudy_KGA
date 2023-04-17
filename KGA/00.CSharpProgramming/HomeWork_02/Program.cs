@@ -2,7 +2,7 @@
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static void HW2Main(string[] args)
         {
             // 문제 1.
             int n1 = 10;

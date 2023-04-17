@@ -79,7 +79,7 @@ namespace HomeWork_10
         }
 
 
-        static void Main(string[] args)
+        static void HW10Main(string[] args)
         {
             // 문제 1.
             Console.WriteLine("문제 1.");

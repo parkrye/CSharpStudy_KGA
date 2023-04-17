@@ -2,7 +2,7 @@
 {
     internal class _Main
     {
-        static void Main(string[] args)
+        static void HW9Main(string[] args)
         {
             Pikachu pikachu = new Pikachu(level: 5, name: "내 피카츄");
             Console.WriteLine();

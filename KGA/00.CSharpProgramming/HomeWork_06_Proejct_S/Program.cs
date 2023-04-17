@@ -413,7 +413,7 @@ namespace HomeWork_6_Proejct_S
             Release();              // 게임 종료
         }
 
-        static void Main(string[] args)
+        static void HW6Main(string[] args)
         {
             Program game = new();   // 게임 객체 생성
             game.Play();            // 게임 시작

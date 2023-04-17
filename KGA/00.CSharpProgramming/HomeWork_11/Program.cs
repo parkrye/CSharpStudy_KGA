@@ -2,7 +2,7 @@
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static void HW11Main(string[] args)
         {
             // 문제 1 - 4.
             Console.WriteLine("문제 1 - 4.");

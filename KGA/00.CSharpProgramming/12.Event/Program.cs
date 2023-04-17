@@ -4,7 +4,7 @@ namespace _12.Event
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static void EventMain(string[] args)
         {
             EventClass.Test();
 

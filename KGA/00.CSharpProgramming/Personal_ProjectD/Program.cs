@@ -6,7 +6,7 @@ namespace Personal_ProjectD
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static void PPDMain(string[] args)
         {
             Character npc = new Character();
             CharacterMaking maker = new CharacterMaking();

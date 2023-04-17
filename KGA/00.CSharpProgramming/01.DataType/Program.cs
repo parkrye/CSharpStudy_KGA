@@ -2,7 +2,7 @@
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static void DataTypeMain()
         {
             /*
              * 자료형 (Data Type)

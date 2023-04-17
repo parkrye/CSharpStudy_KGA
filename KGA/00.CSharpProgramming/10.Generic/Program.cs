@@ -33,7 +33,7 @@
             param.Start();
         }
 
-        static void Main(string[] args)
+        static void GenericMain(string[] args)
         {
             byte[] bArr = { 1, 2, 3 };
             Console.WriteLine(ArrayCopy<byte>(bArr));

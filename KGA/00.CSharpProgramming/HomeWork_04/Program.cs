@@ -450,7 +450,7 @@ namespace HomeWork_4
             }
         }
 
-        static void Main(string[] args)
+        static void HW4Main(string[] args)
         {
             RSP1();
 

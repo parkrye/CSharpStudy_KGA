@@ -2,7 +2,7 @@
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static void HW0Main(string[] args)
         {
             Console.WriteLine("Hello, World!");         // 1.콘솔 프로그램을 이용하여 영어 문장을 출력하는 출력문
             Console.WriteLine("안녕하세요");            // 2.한글 문장도 출력이 가능한지 확인하기 위한 출력문

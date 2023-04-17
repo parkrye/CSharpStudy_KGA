@@ -2,7 +2,7 @@
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static void HW1Main(string[] args)
         {
             // 문제 1.
             Console.Write("정수를 입력해주세요: ");                // 사용자 안내 출력문

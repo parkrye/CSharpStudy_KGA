@@ -149,7 +149,7 @@
             }
         }
 
-        static void Main(string[] args)
+        static void UDTMain(string[] args)
         {
             // <열거형 사용>
             Console.WriteLine(Season.Spring);

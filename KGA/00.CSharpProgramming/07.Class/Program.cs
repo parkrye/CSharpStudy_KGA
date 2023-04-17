@@ -146,7 +146,7 @@ namespace _07.Class
             */
         }
 
-        static void Main(string[] args)
+        static void ClassMain(string[] args)
         {
             Student student = new Student("김감자", 50, 70);
             student.name = "김고구마";

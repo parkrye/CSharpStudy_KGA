@@ -56,7 +56,7 @@ namespace _11.Delegate
             // delegate3 = delegate1;   // 델리게이트간의 할당은 같은 형식만 가능
         }
 
-        static void Main(string[] args)
+        static void DelegateMain(string[] args)
         {
             Chain.Test();
         }

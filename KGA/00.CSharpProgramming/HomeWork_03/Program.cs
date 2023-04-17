@@ -239,7 +239,7 @@
             Console.Write(text);
         }
 
-        static void Main(string[] args)
+        static void HW3Main(string[] args)
         {
             PrintLine("1번 문제");
             int result1 = Bigger(10, 50);
