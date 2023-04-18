@@ -1,7 +1,7 @@
 # C# 자료구조 및 알고리즘에 대한 프로젝트
 ## 강의
 + [C# 자료구조 및 알고리즘 기초](https://github.com/parkrye/KGA/tree/master/02_CSharpAlgorithm/Study/00_Algorithm)
-+ []()
++ [C# 리스트](https://github.com/parkrye/KGA/tree/master/02_CSharpAlgorithm/Study/01_List)
 + []()
 + []()
 + []()
@@ -27,4 +27,4 @@
 + []()
 + []()
 ## 개인 프로젝트
-+ [깃허브 테스트](https://github.com/parkrye/KGA/tree/master/02_CSharpAlgorithm/Study/GithubTest)
++ [깃허브 테스트](https://github.com/parkrye/KGA/tree/master/02_CSharpAlgorithm/PersonalProject/GithubTest)
