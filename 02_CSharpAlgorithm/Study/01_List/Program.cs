@@ -63,6 +63,8 @@ namespace _01_List
             stringList.Add("Four");
             stringList.Add("Five");
 
+            Console.WriteLine(stringList.Capacity);
+
             // 배열 요소 삭제 
             stringList.Remove("one");
 
@@ -83,6 +85,29 @@ namespace _01_List
             Array();
             Console.WriteLine(Find(new int[5] { 0, 3, 2, 4, 1 }, 2));
             List();
+
+            Console.WriteLine();
+            DataStructure.List<string> myList = new();
+            myList.Add("1번 데이터"); myList.Add("2번 데이터"); myList.Add("3번 데이터"); myList.Add("4번 데이터"); myList.Add("5번 데이터");
+            Console.WriteLine($"{myList.PrintElements()}, Count = {myList.Count}, Capacity = {myList.Capacity}");
+            myList.Add("1번 데이터"); myList.Add("2번 데이터"); myList.Add("3번 데이터"); myList.Add("4번 데이터"); myList.Add("5번 데이터");
+            Console.WriteLine($"{myList.PrintElements()}, Count = {myList.Count}, Capacity = {myList.Capacity}");
+            myList.Add("1번 데이터"); myList.Add("2번 데이터"); myList.Add("3번 데이터"); myList.Add("4번 데이터"); myList.Add("5번 데이터");
+            Console.WriteLine($"{myList.PrintElements()}, Count = {myList.Count}, Capacity = {myList.Capacity}");
+            Console.WriteLine($"Remove 1번 데이터 => Result = {myList.Remove("1번 데이터")}");
+            Console.WriteLine($"Remove 1번 데이터 => Result = {myList.Remove("1번 데이터")}");
+            Console.WriteLine($"Remove 1번 데이터 => Result = {myList.Remove("1번 데이터")}");
+            Console.WriteLine($"{myList.PrintElements()}, Count = {myList.Count}, Capacity = {myList.Capacity}");
+            Console.WriteLine($"Remove 6번 데이터 => Result = {myList.Remove("6번 데이터")}");
+            Console.WriteLine($"{myList.PrintElements()}, Count = {myList.Count}, Capacity = {myList.Capacity}");
+            myList.RemoveAt(3);
+            Console.WriteLine($"{myList.PrintElements()}, Count = {myList.Count}, Capacity = {myList.Capacity}");
+            myList.Clear();
+            Console.WriteLine($"{myList.PrintElements()}, Count = {myList.Count}, Capacity = {myList.Capacity}");
+            myList.Add("1번 데이터"); myList.Add("2번 데이터"); myList.Add("3번 데이터"); myList.Add("4번 데이터"); myList.Add("5번 데이터");
+            Console.WriteLine($"{myList.PrintElements()}, Count = {myList.Count}, Capacity = {myList.Capacity}");
+            Console.WriteLine(myList.Find(x => x.Contains('2')));
+            Console.WriteLine(myList.FindIndex(x => x.Contains('1')));
         }
     }
 }
