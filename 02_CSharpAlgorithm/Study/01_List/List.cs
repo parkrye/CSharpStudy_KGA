@@ -11,84 +11,111 @@ namespace DataStructure
         T[] items;
         public T this[int index]
         {
-            get { return items[index]; }
-            set { items[index] = value; }
+            get
+            {
+                if (index < 0 || index >= size)
+                    throw new IndexOutOfRangeException();
+                return items[index];
+            }
+            set
+            {
+                if (index < 0 || index >= size)
+                    throw new IndexOutOfRangeException();
+                items[index] = value;
+            }
         }
 
-        int count;
-        public int COUNT 
+        int size;
+        public int Count 
         { 
-            get { return count; }
-            set { count = value; } 
+            get { return size; }
         }
 
-        int capacity;
-        public int CAPACITY
+        const int defaultCapacity = 10;
+        public int Capacity
         {
-            get { return capacity; }
-            set { capacity = value; }
+            get { return items.Length; }
         }
 
         public List() 
         {
-            count = 0;
-            capacity = 10;
-            items = new T[capacity];
+            size = 0;
+            items = new T[defaultCapacity];
         }
 
         public void Add(T value)
         {
-            items[count++] = value;
-            if(count == capacity)
+            if(size == Capacity)
                 Grow();
+            items[size++] = value;
         }
 
         void Grow()
         {
-            capacity *= 2;
-            T[] newItems = new T[capacity];
-            for (int i = 0; i < count; i++)
-                newItems[i] = items[i];
+            T[] newItems = new T[Capacity * 2];
+            Array.Copy(items, 0, newItems, 0, size);
             items = newItems;
         }
 
-        public void Remove(T value)
+        public bool Remove(T value)
         {
-            if(count == 0)
-                throw new Exception("List is Empty");
-            for (int i = 0; i < count; i++)
+            int index = IndexOf(value);
+            if (index < 0)
+                return false;
+            else
             {
-                if (items[i].Equals(value))
-                {
-                    for(int j = i; j < count - 1; j++)
-                        items[j] = items[j + 1];
-                    count--;
-                    return;
-                }
+                RemoveAt(index);
+                return true;
             }
-            throw new Exception($"{value} is Not in List");
+        }
+
+        public void RemoveAt(int index)
+        {
+            if (index < 0 || index >= size)
+                throw new IndexOutOfRangeException();
+            size--;
+            Array.Copy(items, index + 1, items,index,  size - index);
         }
 
         public void Clear()
         {
-            count = 0;
-            capacity = 10;
-            items = new T[capacity];
+            size = 0;
+            items = new T[defaultCapacity];
         }
 
         public int IndexOf(T value)
         {
-            for (int i = 0; i < count; i++)
-                if (items[i].Equals(value))
+            return Array.IndexOf(items, value);
+        }
+
+        public T? Find(Predicate<T> match)
+        {
+            if(match == null)
+                throw new ArgumentNullException("match");
+            foreach (T item in items)
+                if (match(item))
+                    return item;
+            return default(T);
+        }
+
+        public int? FindIndex(Predicate<T> match)
+        {
+            if(match == null)
+                throw new ArgumentNullException("match");
+            for(int i = 0; i < size; i++)
+                if (match(items[i]))
                     return i;
             return -1;
         }
 
-        public string SpreadElements()
+        public string PrintElements()
         {
-            string result = "";
-            for(int i = 0; i < count; i++)
-                result += items[i].ToString();
+            if(size == 0)
+                return "Empty List";
+            string result = "[";
+            for(int i = 0; i < size; i++)
+                result += items[i] + ",";
+            result += "]";
             return result;
         }
     }
