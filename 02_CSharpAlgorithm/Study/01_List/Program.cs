@@ -85,6 +85,39 @@ namespace _01_List
             Array();
             Console.WriteLine(Find(new int[5] { 0, 3, 2, 4, 1 }, 2));
             List();
+
+            DataStructure.List<int> myList = new();
+            myList.Add(1);
+            myList.Add(2);
+            myList.Add(3);
+            myList.Add(4);
+            myList.Add(5);
+            Console.WriteLine($"{myList.SpreadElements()}, {myList.COUNT}, {myList.CAPACITY}");
+            myList.Add(1);
+            myList.Add(2);
+            myList.Add(3);
+            myList.Add(4);
+            myList.Add(5);
+            Console.WriteLine($"{myList.SpreadElements()}, {myList.COUNT}, {myList.CAPACITY}");
+            myList.Add(1);
+            myList.Add(2);
+            myList.Add(3);
+            myList.Add(4);
+            myList.Add(5);
+            Console.WriteLine($"{myList.SpreadElements()}, {myList.COUNT}, {myList.CAPACITY}");
+            myList.Remove(2);
+            myList.Remove(4);
+            myList.Remove(5);
+            myList.Remove(5);
+            myList.Remove(5);
+            Console.WriteLine($"{myList.SpreadElements()}, {myList.COUNT}, {myList.CAPACITY}");
+            // myList.Remove(5);
+            // Console.WriteLine(myList.SpreadElements());
+            myList.Clear();
+            Console.WriteLine($"{myList.SpreadElements()}, {myList.COUNT}, {myList.CAPACITY}");
+            myList.Add(0);
+            myList.Add(1);
+            Console.WriteLine($"{myList.SpreadElements()}, {myList.COUNT}, {myList.CAPACITY}");
         }
     }
 }
