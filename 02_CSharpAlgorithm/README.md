@@ -14,7 +14,7 @@
 + []()
 + []()
 ## 과제
-+ []()
++ [과제 1](https://github.com/parkrye/KGA/tree/master/02_CSharpAlgorithm/Homework/Homerwork_01)
 + []()
 + []()
 + []()
