@@ -63,6 +63,8 @@ namespace _01_List
             stringList.Add("Four");
             stringList.Add("Five");
 
+            Console.WriteLine(stringList.Capacity);
+
             // 배열 요소 삭제 
             stringList.Remove("one");
 
