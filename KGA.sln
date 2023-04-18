@@ -73,8 +73,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Homework_10", "01_CSharpPro
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Homework_11", "01_CSharpProgramming\Homework\Homework_11\Homework_11.csproj", "{55C4E159-3E80-4EE5-B2D5-A77E8D5770F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "00_Algorithm", "00_Algorithm\00_Algorithm.csproj", "{D1DE1692-A332-42D2-A24F-B997FD712F0C}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -189,10 +187,6 @@ Global
 		{55C4E159-3E80-4EE5-B2D5-A77E8D5770F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55C4E159-3E80-4EE5-B2D5-A77E8D5770F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55C4E159-3E80-4EE5-B2D5-A77E8D5770F0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D1DE1692-A332-42D2-A24F-B997FD712F0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D1DE1692-A332-42D2-A24F-B997FD712F0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D1DE1692-A332-42D2-A24F-B997FD712F0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D1DE1692-A332-42D2-A24F-B997FD712F0C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -231,7 +225,6 @@ Global
 		{10FC9FC5-FD6B-4EC9-986A-FF97EE81F43B} = {B7E126C6-B274-4CDF-B2C6-43D676143E37}
 		{2B5790E0-2A18-4DFC-881C-88ED05BA966E} = {B7E126C6-B274-4CDF-B2C6-43D676143E37}
 		{55C4E159-3E80-4EE5-B2D5-A77E8D5770F0} = {B7E126C6-B274-4CDF-B2C6-43D676143E37}
-		{D1DE1692-A332-42D2-A24F-B997FD712F0C} = {AB1DF0A9-521D-4AAC-AFEE-D3DDBE23A839}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F00149AE-EA26-409F-8100-2F27E56F2117}
