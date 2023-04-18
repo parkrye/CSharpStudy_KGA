@@ -1,4 +1,4 @@
-# C# 프로그래밍에 대한 프로젝트
+# C# 프로그래밍 기초에 대한 프로젝트
 ## 강의
 + [C# 기초](https://github.com/parkrye/KGA/tree/master/01_CSharpProgramming/Study/00_Programming)
 + [자료형](https://github.com/parkrye/KGA/tree/master/01_CSharpProgramming/Study/01_DataType)
