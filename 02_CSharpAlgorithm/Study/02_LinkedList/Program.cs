@@ -41,7 +41,7 @@
 
         // <LinkedList의 시간복잡도>
         // 접근		탐색		삽입		삭제
-        // O(1)		O(n)	O(n)	O(n)
+        // O(n)		O(n)	    O(1)	    O(1)
 
         static void Main(string[] args)
         {
