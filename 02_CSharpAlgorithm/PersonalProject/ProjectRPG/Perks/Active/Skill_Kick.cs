@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace ProjectRPG
 {
-    internal class Perk_Kick : Perk_Active, IAttackable
+    internal class Skill_Kick : Skill_Active, IAttackable
     {
-        public Perk_Kick(int _level = 1, int _exp = 0) : base()
+        public Skill_Kick(int _level = 1, int _exp = 0) : base()
         {
             name = "발차기";
             level = _level;

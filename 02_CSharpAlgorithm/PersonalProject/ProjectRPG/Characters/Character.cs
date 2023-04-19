@@ -10,7 +10,9 @@ namespace ProjectRPG
     {
         protected string name;
         protected int hp, sp;
-        protected PerkSlot perkSlot;
+        protected SkillSlot skillSlot;
+
+        public event Func<int, int> OnHPEvent, OnSPEvent, OnHitEvent, OnDeadEvent;
 
         public string NAME 
         { 
@@ -30,15 +32,32 @@ namespace ProjectRPG
             set { sp = value; }
         }
 
-        public PerkSlot PerkSlot
+        public SkillSlot SKILLSLOT
         {
-            get {  return perkSlot; }
-            set { perkSlot = value; }
+            get {  return skillSlot; }
+            set { skillSlot = value; }
+        }
+
+        public void UseSkill(int index, ITargetable targetable)
+        {
+            sp -= skillSlot.UseSkill(index, targetable, sp);
         }
 
         public void Hit(int damage)
         {
-            
+            OnHitEvent.Invoke(damage);
+            TakeDamage(damage);
+        }
+
+        public void TakeDamage(int damage)
+        {
+            OnHitEvent.Invoke(damage);
+            hp -= damage;
+            if (hp < 0)
+            {
+                hp = 0;
+                OnDeadEvent.Invoke(0);
+            }
         }
     }
 }
