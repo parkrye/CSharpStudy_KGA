@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace ProjectRPG
 {
-    internal abstract class Perk_Active : Perk
+    internal abstract class Perk_Passive : Perk
     {
         protected int value;
         protected int cost;
 
-        public Perk_Active()
+        public Perk_Passive()
         {
-            type = PerkType.ACTIVE;
+            type = PerkType.PASSIVE;
         }
 
         public abstract override int Active(ITargetable targetable, params int[] values);

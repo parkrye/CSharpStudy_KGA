@@ -42,5 +42,7 @@ namespace ProjectRPG
             exp -= level * 100;
             level++;
         }
+
+        public abstract int Active(ITargetable targetable, params int[] values);
     }
 }

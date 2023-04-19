@@ -8,9 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Characters\NPCs\" />
     <Folder Include="Items\" />
-    <Folder Include="Perks\Passive\" />
   </ItemGroup>
 
 </Project>

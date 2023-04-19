@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace ProjectRPG
 {
-    internal class Perk_Punch : Perk_Active, IAttackable
+    internal class Perk_Kick : Perk_Active, IAttackable
     {
-        public Perk_Punch(int _level = 1, int _exp = 0) : base()
+        public Perk_Kick(int _level = 1, int _exp = 0) : base()
         {
-            name = "주먹질";
+            name = "발차기";
             level = _level;
             exp = _exp;
             value = 1;
