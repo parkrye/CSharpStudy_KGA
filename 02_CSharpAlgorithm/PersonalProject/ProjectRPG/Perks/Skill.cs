@@ -6,11 +6,14 @@ using System.Threading.Tasks;
 
 namespace ProjectRPG
 {
-    internal abstract class Perk
+    internal abstract class Skill
     {
         protected string name;
         protected int level, exp;
-        protected PerkType type;
+        protected SkillType type;
+
+        protected int value;
+        protected int cost;
 
         public string NAME 
         { 
@@ -24,10 +27,22 @@ namespace ProjectRPG
             set { level = value; }
         }
 
-        public PerkType TYPE 
+        public SkillType TYPE 
         { 
             get { return type; } 
             set { type = value; }
+        }
+
+        public int VALUE
+        {
+            get { return value; }
+            set { this.value = value; }
+        }
+
+        public int COST
+        {
+            get { return cost; }
+            set { cost = value; }
         }
 
         protected void GetEXP(int addEXP)

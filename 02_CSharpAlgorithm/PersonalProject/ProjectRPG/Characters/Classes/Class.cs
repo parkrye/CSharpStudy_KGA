@@ -9,7 +9,8 @@ namespace ProjectRPG
     internal abstract class Class
     {
         protected string name;
-        protected PerkSlot perks;
+        protected SkillSlot skillSlot;
+        protected int defaultHP, defaultSP;
 
         public string NAME
         {
@@ -17,10 +18,22 @@ namespace ProjectRPG
             set { name = value; }
         }
 
-        public PerkSlot PERKS
+        public SkillSlot SKILLSLOT
         {
-            get { return perks; }
-            set { perks = value; }
+            get { return skillSlot; }
+            set { skillSlot = value; }
+        }
+
+        public int HP
+        {
+            get { return defaultHP; }
+            set { defaultHP = value; }
+        }
+
+        public int SP
+        {
+            get { return defaultSP; }
+            set { defaultSP = value; }
         }
     }
 }
