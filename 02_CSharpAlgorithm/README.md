@@ -2,7 +2,7 @@
 ## 강의
 + [자료구조 및 알고리즘 기초](https://github.com/parkrye/KGA/tree/master/02_CSharpAlgorithm/Study/00_Algorithm)
 + [리스트](https://github.com/parkrye/KGA/tree/master/02_CSharpAlgorithm/Study/01_List)
-+ []()
++ [연결 리스트](https://github.com/parkrye/KGA/tree/master/02_CSharpAlgorithm/Study/02_LinkedList)
 + []()
 + []()
 + []()
@@ -15,7 +15,7 @@
 + []()
 ## 과제
 + [과제 1](https://github.com/parkrye/KGA/tree/master/02_CSharpAlgorithm/Homework/Homerwork_01)
-+ []()
++ [과제 2](https://github.com/parkrye/KGA/tree/master/02_CSharpAlgorithm/Homework/HomeWork_02)
 + []()
 + []()
 + []()
@@ -28,3 +28,4 @@
 + []()
 ## 개인 프로젝트
 + [깃허브 테스트](https://github.com/parkrye/KGA/tree/master/02_CSharpAlgorithm/PersonalProject/GithubTest)
++ [Project RPG](https://github.com/parkrye/KGA/tree/master/02_CSharpAlgorithm/PersonalProject/ProjectRPG)
