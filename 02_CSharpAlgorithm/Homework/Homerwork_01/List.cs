@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MyDataStructure
+﻿namespace MyDataStructure
 {
     internal class List<T>
     {
@@ -402,7 +395,7 @@ namespace MyDataStructure
         /// <exception cref="IndexOutOfRangeException">정렬 범위가 리스트 범위를 벗어날 경우 발생</exception>
         public void Sort(int index, int length, Comparer<T> comparer)
         {
-            if (index < 0 || index >= size || index + length < 0 || index + length >= size)
+            if (index < 0 || index > size || index + length < 0 || index + length > size)
                 throw new IndexOutOfRangeException();
             Array.Sort(items, index, length, comparer);
         }
