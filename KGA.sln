@@ -77,11 +77,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "01_List", "02_CSharpAlgorit
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GithubTest", "02_CSharpAlgorithm\PersonalProject\GithubTest\GithubTest.csproj", "{E4A17C79-969C-418C-84F5-6988906FB67A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Homerwork_01", "02_CSharpAlgorithm\Homework\Homerwork_01\Homerwork_01.csproj", "{C70B74DF-8081-41FB-AFA9-76AAD9F82A26}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Homework_01", "02_CSharpAlgorithm\Homework\Homerwork_01\Homework_01.csproj", "{C70B74DF-8081-41FB-AFA9-76AAD9F82A26}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectRPG", "02_CSharpAlgorithm\PersonalProject\ProjectRPG\ProjectRPG.csproj", "{CA0BF0B0-B761-4BE7-8478-E5FE13BDCBE5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "02_LinkedList", "02_CSharpAlgorithm\Study\02_LinkedList\02_LinkedList.csproj", "{978E396D-A0C4-4179-8D9A-0A2581395B70}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeWork_02", "02_CSharpAlgorithm\Homework\HomeWork_02\HomeWork_02.csproj", "{DD21205C-B8B7-4C47-9D68-76EF9C90F7D7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -217,6 +219,10 @@ Global
 		{978E396D-A0C4-4179-8D9A-0A2581395B70}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{978E396D-A0C4-4179-8D9A-0A2581395B70}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{978E396D-A0C4-4179-8D9A-0A2581395B70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD21205C-B8B7-4C47-9D68-76EF9C90F7D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD21205C-B8B7-4C47-9D68-76EF9C90F7D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD21205C-B8B7-4C47-9D68-76EF9C90F7D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD21205C-B8B7-4C47-9D68-76EF9C90F7D7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -260,6 +266,7 @@ Global
 		{C70B74DF-8081-41FB-AFA9-76AAD9F82A26} = {E9FE85DE-09A6-4675-B632-ED7437DF93EC}
 		{CA0BF0B0-B761-4BE7-8478-E5FE13BDCBE5} = {58194FBC-0707-4937-BFE3-7F120480CA26}
 		{978E396D-A0C4-4179-8D9A-0A2581395B70} = {AB1DF0A9-521D-4AAC-AFEE-D3DDBE23A839}
+		{DD21205C-B8B7-4C47-9D68-76EF9C90F7D7} = {E9FE85DE-09A6-4675-B632-ED7437DF93EC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F00149AE-EA26-409F-8100-2F27E56F2117}
