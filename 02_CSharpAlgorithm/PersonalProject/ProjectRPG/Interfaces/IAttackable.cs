@@ -8,6 +8,6 @@ namespace ProjectRPG.Interfaces
 {
     internal interface IAttackable
     {
-        int Attack(ITargetable hitable);
+        void Attack(ITargetable hitable);
     }
 }

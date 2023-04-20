@@ -8,6 +8,6 @@ namespace ProjectRPG
 {
     internal interface ITargetable
     {
-        void Hit(int damage);
+        void Hit(float damage);
     }
 }

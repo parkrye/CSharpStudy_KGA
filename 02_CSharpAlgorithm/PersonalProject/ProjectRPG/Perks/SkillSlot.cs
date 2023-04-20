@@ -71,23 +71,25 @@ namespace ProjectRPG
             size += count;
         }
 
-        public void UseSkill(int index, ITargetable hitable, ref int sp)
+        public float UseSkill(int index, ITargetable hitable, float sp)
         {
             if (index < 0 || index >= size)
-                return;
+                return 0;
             if (skills[index] == null)
-                return;
+                return 0;
             if (sp < skills[index].COST)
-                return;
+                return 0;
 
             if (skills[index] is Skill_Active)
             {
                 if (sp < skills[index].COST)
-                    return;
+                    return 0;
                 skills[index].SetTarget(hitable);
-                skills[index].Active(ref sp);
+                skills[index].Active(sp);
                 skills[index].ResetTarget();
+                return skills[index].COST;
             }
+            return 0;
         }
     }
 }

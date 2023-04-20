@@ -14,8 +14,7 @@ namespace ProjectRPG
         protected int level, exp;
         protected SkillType type;
 
-        protected int value;
-        protected int cost;
+        protected float value, cost;
 
         public string NAME 
         { 
@@ -35,13 +34,13 @@ namespace ProjectRPG
             set { type = value; }
         }
 
-        public int VALUE
+        public float VALUE
         {
             get { return value; }
             set { this.value = value; }
         }
 
-        public int COST
+        public float COST
         {
             get { return cost; }
             set { cost = value; }
@@ -60,7 +59,7 @@ namespace ProjectRPG
             level++;
         }
 
-        public abstract void Active(ref int param);
+        public abstract void Active(float param);
 
         public void SetUser(ITargetable targetable)
         {

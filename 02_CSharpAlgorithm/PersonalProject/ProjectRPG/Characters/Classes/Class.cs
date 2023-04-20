@@ -10,7 +10,7 @@ namespace ProjectRPG
     {
         protected string? name;
         protected SkillSlot? skillSlot;
-        protected int defaultHP, defaultSP;
+        protected float defaultHP, defaultSP;
 
         public string? NAME
         {
@@ -24,13 +24,13 @@ namespace ProjectRPG
             set { skillSlot = value; }
         }
 
-        public int HP
+        public float HP
         {
             get { return defaultHP; }
             set { defaultHP = value; }
         }
 
-        public int SP
+        public float SP
         {
             get { return defaultSP; }
             set { defaultSP = value; }

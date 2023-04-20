@@ -14,6 +14,6 @@ namespace ProjectRPG
             type = SkillType.ACTIVE;
         }
 
-        public abstract override void Active(ref int param);
+        public abstract override void Active(float param);
     }
 }

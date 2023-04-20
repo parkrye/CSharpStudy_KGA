@@ -13,20 +13,21 @@ namespace ProjectRPG
             name = "재생의 바람";
             level = _level;
             exp = _exp;
-            value = 3;
+            value = 1.5f;
             cost = 1;
         }
 
         public override void AddListener(Character character)
         {
-            character.AddListenerOnHPDecreased(Result);
+            if(character is not null)
+                character.AddListenerOnHPDecreased(Result);
         }
 
-        public override void Result(ref int param)
+        public override float Result(float param)
         {
             if (param > 0)
-                return;
-            param += value * level;
+                return 0;
+            return value * level;
         }
     }
 }

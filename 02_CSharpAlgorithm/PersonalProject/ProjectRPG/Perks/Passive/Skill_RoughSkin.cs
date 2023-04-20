@@ -13,21 +13,22 @@ namespace ProjectRPG
             name = "질긴 피부";
             level = _level;
             exp = _exp;
-            value = 1;
+            value = 1.5f;
             cost = 1;
         }
 
         public override void AddListener(Character character)
         {
-            character.AddListenerOnDamaged(Result);
+            if (character is not null)
+                character.AddListenerOnDamaged(Result);
         }
 
-        public override void Result(ref int param)
+        public override float Result(float param)
         {
             if (param > value * level)
-                param -= value * level;
+                return value * level;
             else
-                param = 1;
+                return param - 1;
         }
     }
 }

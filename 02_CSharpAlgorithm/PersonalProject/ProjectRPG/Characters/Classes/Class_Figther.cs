@@ -13,9 +13,10 @@ namespace ProjectRPG
             name = "전사";
             defaultHP = 3;
             defaultSP = 3;
-            skillSlot = new SkillSlot(null, 2);
+            skillSlot = new SkillSlot(null, 3);
             skillSlot.AddSkill(new Skill_SecondWind());
             skillSlot.AddSkill(new Skill_RoughSkin());
+            skillSlot.AddSkill(new Skill_DeepBreath());
         }
     }
 }

@@ -18,20 +18,18 @@ namespace ProjectRPG
             cost = 1;
         }
 
-        public override void Active(ref int sp)
+        public override void Active(float sp)
         {
             if (other is not null)
             {
-                sp -= cost;
                 Attack(other);
             }
         }
 
-        public int Attack(ITargetable targetable)
+        public void Attack(ITargetable targetable)
         {
             targetable.Hit(value * level);
             GetEXP(1);
-            return cost;
         }
     }
 }

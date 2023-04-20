@@ -4,16 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Collections.Specialized.BitVector32;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ProjectRPG
 {
     internal abstract class Character : ITargetable
     {
         protected string? name;
-        protected int hp, sp;
+        protected float hp, sp;
         protected SkillSlot? skillSlot;
 
-        public delegate void Action(ref int param);
+        public delegate float Action(float param);
         protected event Action? OnDamaged, OnHPDecreased, OnSPDecreased;
 
         public string NAME 
@@ -22,13 +23,13 @@ namespace ProjectRPG
             set { name = value; }
         }
 
-        public int HP 
+        public float HP 
         { 
             get { return hp; } 
             set { hp = value; }
         }
 
-        public int SP 
+        public float SP 
         { 
             get { return sp; } 
             set { sp = value; }
@@ -43,18 +44,24 @@ namespace ProjectRPG
         public void UseSkill(int index, ITargetable targetable)
         {
             if (skillSlot is not null)
-                skillSlot.UseSkill(index, targetable, ref sp);
+            {
+                sp -= skillSlot.UseSkill(index, targetable, sp);
+                if (OnSPDecreased is not null)
+                    sp += OnSPDecreased.Invoke(sp);
+            }
         }
 
-        public void Hit(int damage)
+        public void Hit(float damage)
         {
             if(OnDamaged is not null)
-                OnDamaged.Invoke(ref damage);
+                damage -= OnDamaged.Invoke(damage);
 
             hp -= damage;
             if (hp < 0)
             {
                 hp = 0;
+                if (OnHPDecreased is not null)
+                    hp += OnHPDecreased.Invoke(hp);
             }
         }
 

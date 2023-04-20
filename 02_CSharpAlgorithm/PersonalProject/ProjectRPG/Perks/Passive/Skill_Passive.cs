@@ -15,11 +15,11 @@ namespace ProjectRPG
 
         public abstract void AddListener(Character character);
 
-        public override void Active(ref int param)
+        public override void Active(float param)
         {
-            Result(ref param);
+            Result(param);
         }
 
-        public abstract void Result(ref int param);
+        public abstract float Result(float param);
     }
 }
