@@ -42,6 +42,9 @@
                     num = random.Next(num + 1);
                 }
             }
+
+            // 아이템 슬롯은 최대 3
+            itemSlot = new ItemSlot(this, 6);
         }
     }
 }
