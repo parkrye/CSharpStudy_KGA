@@ -41,9 +41,7 @@ namespace ProjectRPG
                 {
                     skills[i] = skill;
                     if (skills[i] is Skill_Passive)
-                    {
-                        character.AddListener(skills[i].Active);
-                    }
+                        ((Skill_Passive)skills[i]).AddListener(character);
                     return true;
                 }
             }

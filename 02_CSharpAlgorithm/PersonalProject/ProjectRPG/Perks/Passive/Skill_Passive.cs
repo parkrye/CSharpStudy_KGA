@@ -13,6 +13,8 @@ namespace ProjectRPG
             type = SkillType.PASSIVE;
         }
 
+        public abstract void AddListener(Character character);
+
         public override void Active(ref int param)
         {
             Result(ref param);

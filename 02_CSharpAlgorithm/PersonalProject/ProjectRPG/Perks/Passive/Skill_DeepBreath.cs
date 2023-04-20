@@ -6,28 +6,27 @@ using System.Threading.Tasks;
 
 namespace ProjectRPG
 {
-    internal class Skill_RoughSkin : Skill_Passive
+    internal class Skill_DeepBreath : Skill_Passive
     {
-        public Skill_RoughSkin(int _level = 1, int _exp = 0) : base()
+        public Skill_DeepBreath(int _level = 1, int _exp = 0) : base()
         {
-            name = "질긴 피부";
+            name = "숨 고르기";
             level = _level;
             exp = _exp;
-            value = 1;
+            value = 3;
             cost = 1;
         }
 
         public override void AddListener(Character character)
         {
-            character.AddListenerOnDamaged(Result);
+            character.AddListenerOnSPDecreased(Result);
         }
 
         public override void Result(ref int param)
         {
-            if (param > value * level)
-                param -= value * level;
-            else
-                param = 1;
+            if (param > 0)
+                return;
+            param += value * level;
         }
     }
 }

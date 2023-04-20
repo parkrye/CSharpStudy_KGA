@@ -17,6 +17,11 @@ namespace ProjectRPG
             cost = 1;
         }
 
+        public override void AddListener(Character character)
+        {
+            character.AddListenerOnHPDecreased(Result);
+        }
+
         public override void Result(ref int param)
         {
             if (param > 0)

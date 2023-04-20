@@ -13,8 +13,8 @@ namespace ProjectRPG
         protected int hp, sp;
         protected SkillSlot? skillSlot;
 
-        public delegate void DamageEvent(ref int param);
-        protected event DamageEvent? OnDamaged;
+        public delegate void Action(ref int param);
+        protected event Action? OnDamaged, OnHPDecreased, OnSPDecreased;
 
         public string NAME 
         { 
@@ -58,9 +58,19 @@ namespace ProjectRPG
             }
         }
 
-        public void AddListener(DamageEvent action)
+        public void AddListenerOnDamaged(Action action)
         {
             OnDamaged += action;
+        }
+
+        public void AddListenerOnHPDecreased(Action action)
+        {
+            OnHPDecreased += action;
+        }
+
+        public void AddListenerOnSPDecreased(Action action)
+        {
+            OnSPDecreased += action;
         }
     }
 }
