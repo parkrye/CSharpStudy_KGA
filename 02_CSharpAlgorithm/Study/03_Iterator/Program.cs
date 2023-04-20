@@ -73,27 +73,31 @@
         static void Main(string[] args)
         {
             Iterator.List<int> list = new Iterator.List<int>();
-            for (int i = 0; i < 5; i++) list.Add(i);
+            for (int i = 0; i < 100; i++) list.Add(i);
 
-            foreach (int i in list) Console.WriteLine(i);
+            foreach (int i in list) Console.Write($"{i} ");
+            Console.WriteLine();
 
             IEnumerator<int> listIter = list.GetEnumerator();
             while (listIter.MoveNext())
             {
-                Console.WriteLine(listIter.Current);
+                Console.Write($"{listIter.Current} ");
             }
-            
+            Console.WriteLine();
+
 
             Iterator.LinkedList<int> linkedList = new Iterator.LinkedList<int>();
-            for (int i = 0; i < 5; i++) linkedList.AddLast(i);
+            for (int i = 0; i < 100; i++) linkedList.AddLast(i);
 
-            foreach (int i in linkedList) Console.WriteLine(i);
+            foreach (int i in linkedList) Console.Write($"{i} ");
+            Console.WriteLine();
 
             IEnumerator<int> linkedListIter = linkedList.GetEnumerator();
             while (linkedListIter.MoveNext())
             {
-                Console.WriteLine(linkedListIter.Current);
+                Console.Write($"{linkedListIter.Current} ");
             }
+            Console.WriteLine();
         }
     }
 }
