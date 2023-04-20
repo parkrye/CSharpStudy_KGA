@@ -1,4 +1,6 @@
-﻿namespace ProjectRPG
+﻿using ProjectRPG.System;
+
+namespace ProjectRPG
 {
     internal abstract class Skill
     {

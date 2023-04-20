@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <Folder Include="Items\" />
+    <Folder Include="Maps\Dungeon\" />
   </ItemGroup>
 
 </Project>

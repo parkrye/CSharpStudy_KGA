@@ -85,5 +85,12 @@
             }
             return 0;
         }
+
+        public Skill GetSkill(int index)
+        {
+            if (index < 0 || index > skills.Length)
+                return null;
+            return skills[index];
+        }
     }
 }
