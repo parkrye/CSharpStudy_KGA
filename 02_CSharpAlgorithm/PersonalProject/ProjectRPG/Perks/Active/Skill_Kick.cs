@@ -1,11 +1,4 @@
-﻿using ProjectRPG.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProjectRPG
+﻿namespace ProjectRPG
 {
     internal class Skill_Kick : Skill_Active, IAttackable
     {
