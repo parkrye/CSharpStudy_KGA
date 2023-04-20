@@ -1,29 +1,44 @@
 ﻿namespace ProjectRPG
 {
+    /// <summary>
+    /// 캐릭터의 직업에 대한 클래스
+    /// </summary>
     internal abstract class Class
     {
-        protected string? name;
-        protected SkillSlot? skillSlot;
-        protected float defaultHP, defaultSP;
+        protected string name;                 // 직업 이름
+        protected SkillSlot skillSlot;         // 직업 스킬
+        protected float defaultHP, defaultSP;   // 직업 능력치
 
-        public string? NAME
+        /// <summary>
+        /// 직업 이름에 대한 프로퍼티
+        /// </summary>
+        public string NAME
         {
             get { return name; }
             set { name = value; }
         }
 
-        public SkillSlot? SKILLSLOT
+        /// <summary>
+        /// 직업 스킬에 대한 프로퍼티
+        /// </summary>
+        public SkillSlot SKILLSLOT
         {
             get { return skillSlot; }
             set { skillSlot = value; }
         }
 
+        /// <summary>
+        /// 직업 체력에 대한 프로퍼티
+        /// </summary>
         public float HP
         {
             get { return defaultHP; }
             set { defaultHP = value; }
         }
 
+        /// <summary>
+        /// 직업 활력에 대한 프로퍼티
+        /// </summary>
         public float SP
         {
             get { return defaultSP; }

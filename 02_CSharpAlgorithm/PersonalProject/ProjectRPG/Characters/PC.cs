@@ -1,22 +1,39 @@
 ﻿namespace ProjectRPG
 {
+    /// <summary>
+    /// 플레이 가능한 캐릭터에 대한 클래스
+    /// </summary>
     internal class PC : Character
     {
+        /// <summary>
+        /// PC 생성자
+        /// </summary>
+        /// <param name="c">캐릭터의 직업</param>
         public PC(Class c = null)
         {
             Random random = new Random();
+
+            // 이름은 랜덤으로 생성
             name += (CharacterFirstName)random.Next(0, 50);
             name += (CharacterLastName)random.Next(0, 50);
             name += (CharacterLastName)random.Next(0, 50);
 
-            hp = random.Next(5, 15) + c.HP;
-            sp = random.Next(5, 15) + c.SP;
+            // 능력치는 5~15 + 직업 기초 능력치
+            hp = random.Next(5, 15);
+            sp = random.Next(5, 15);
+            if (c != null)
+            {
+                hp += c.HP;
+                sp += c.SP;
+            }
 
+            // 스킬 슬롯은 최대 6
             skillSlot = new SkillSlot(this, 6);
             skillSlot.AddSkill(new Skill_Punch());
             skillSlot.AddSkill(new Skill_Kick());
             if (c != null)
             {
+                // 직업 스킬을 랜덤하게 획득
                 int num = random.Next(c.SKILLSLOT.SKILLS.Length + 1);
                 while (num < c.SKILLSLOT.SKILLS.Length && c.SKILLSLOT.SKILLS[num] != null)
                 {

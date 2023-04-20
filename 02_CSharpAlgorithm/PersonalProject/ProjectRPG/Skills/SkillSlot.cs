@@ -1,22 +1,37 @@
 ﻿namespace ProjectRPG
 {
+    /// <summary>
+    /// 스킬 슬롯에 대한 클래스
+    /// </summary>
     internal class SkillSlot
     {
-        Character character;
-        int size;
-        Skill[]? skills;
+        Character character;    // 스킬 슬롯을 가진 캐릭터
+        int size;               // 스킬 슬롯의 현재 크기
+        Skill[] skills;         // 스킬 배열
 
+        /// <summary>
+        /// 스킬 슬롯 크기에 대한 프로퍼티
+        /// </summary>
         public int SIZE
         {
             get { return size; }
             set { size = value; }
         }
-        public Skill[]? SKILLS
+
+        /// <summary>
+        /// 스킬 배열에 대한 프로퍼티
+        /// </summary>
+        public Skill[] SKILLS
         {
             get { return skills; }
             set { skills = value; }
         }
 
+        /// <summary>
+        /// 생성자
+        /// </summary>
+        /// <param name="_character">소유 캐릭터</param>
+        /// <param name="_size">현재 크기</param>
         public SkillSlot(Character _character, int _size)
         {
             character = _character;
@@ -24,6 +39,11 @@
             skills = new Skill[size];
         }
 
+        /// <summary>
+        /// 스킬 추가 메소드
+        /// </summary>
+        /// <param name="skill">추가할 스킬</param>
+        /// <returns>추가 성공 여부</returns>
         public bool AddSkill(Skill skill)
         {
             if (skill == null)
@@ -31,10 +51,10 @@
 
             for(int i = 0; i < size; i++)
             {
-                if (skills is not null && skills[i] == null)
+                if (skills[i] == null)
                 {
                     skills[i] = skill;
-                    if (skills[i] is Skill_Passive)
+                    if (skills[i].TYPE == SkillType.PASSIVE)    // 패시브 스킬이라면 캐릭터 이벤트를 구독한다
                         ((Skill_Passive)skills[i]).AddListener(character);
                     return true;
                 }
@@ -43,21 +63,30 @@
             return false;
         }
 
+        /// <summary>
+        /// 스킬 제거 메소드
+        /// </summary>
+        /// <param name="index">제거할 인덱스</param>
+        /// <returns>제거 성공 여부</returns>
         public bool RemoveSkill(int index)
         {
             if (index < 0 || index >= size)
                 return false;
-            if (skills is null || skills[index] == null)
+            if (skills[index] == null)
                 return false;
 
             skills[index] = null;
             return true;
         }
 
+        /// <summary>
+        /// 스킬 슬롯 크기를 변경하는 메소드
+        /// </summary>
+        /// <param name="count">크기 변동량</param>
         public void ResizeSlot(int count)
         {
             Skill[] newSkills;
-            if (size <= 0)
+            if (size + count <= 0)
                 newSkills = new Skill[1];
             else
                 newSkills = new Skill[size + count];
@@ -65,6 +94,13 @@
             size += count;
         }
 
+        /// <summary>
+        /// 액티브 스킬 사용 메소드
+        /// </summary>
+        /// <param name="index">사용할 인덱스</param>
+        /// <param name="hitable">스킬 대상</param>
+        /// <param name="sp">현재 활력</param>
+        /// <returns></returns>
         public float UseSkill(int index, ITargetable hitable, float sp)
         {
             if (index < 0 || index >= size)
@@ -74,18 +110,23 @@
             if (sp < skills[index].COST)
                 return 0;
 
-            if (skills[index] is Skill_Active)
+            if (skills[index].TYPE == SkillType.ACTIVE)
             {
                 if (sp < skills[index].COST)
                     return 0;
-                skills[index].SetTarget(hitable);
-                skills[index].Active(sp);
-                skills[index].ResetTarget();
-                return skills[index].COST;
+                skills[index].SetTarget(hitable);   // 스킬 대상 지정
+                skills[index].Active(sp);           // 스킬 사용
+                skills[index].ResetTarget();        // 스킬 대상 해제
+                return skills[index].COST;          // 활력 소모량 반환
             }
             return 0;
         }
 
+        /// <summary>
+        /// 특정 스킬을 반환하는 메소드
+        /// </summary>
+        /// <param name="index">원하는 인덱스</param>
+        /// <returns>인덱스의 스킬. 없다면 null 반환</returns>
         public Skill GetSkill(int index)
         {
             if (index < 0 || index > skills.Length)

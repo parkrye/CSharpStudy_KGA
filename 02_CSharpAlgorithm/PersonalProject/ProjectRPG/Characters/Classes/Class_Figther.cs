@@ -1,7 +1,13 @@
 ﻿namespace ProjectRPG
 {
+    /// <summary>
+    /// 직업을 상속한 상세 직업 클래스
+    /// </summary>
     internal class Class_Figther : Class
     {
+        /// <summary>
+        /// 전사 생성자
+        /// </summary>
         public Class_Figther()
         {
             name = "전사";
