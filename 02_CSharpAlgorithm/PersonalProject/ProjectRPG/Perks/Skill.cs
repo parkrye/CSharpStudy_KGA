@@ -8,7 +8,9 @@ namespace ProjectRPG
 {
     internal abstract class Skill
     {
-        protected string name;
+        protected ITargetable? self, other;
+
+        protected string? name;
         protected int level, exp;
         protected SkillType type;
 
@@ -58,6 +60,21 @@ namespace ProjectRPG
             level++;
         }
 
-        public abstract int Active(ITargetable targetable, params int[] values);
+        public abstract void Active(ref int param);
+
+        public void SetUser(ITargetable targetable)
+        {
+            self = targetable;
+        }
+
+        public void SetTarget(ITargetable targetable)
+        {
+            other = targetable;
+        }
+
+        public void ResetTarget()
+        {
+            other = null;
+        }
     }
 }

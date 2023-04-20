@@ -10,14 +10,14 @@ namespace ProjectRPG
     {
         Character character;
         int size;
-        Skill[] skills;
+        Skill[]? skills;
 
         public int SIZE
         {
             get { return size; }
             set { size = value; }
         }
-        public Skill[] SKILLS
+        public Skill[]? SKILLS
         {
             get { return skills; }
             set { skills = value; }
@@ -37,10 +37,13 @@ namespace ProjectRPG
 
             for(int i = 0; i < size; i++)
             {
-                if (skills[i] == null)
+                if (skills is not null && skills[i] == null)
                 {
                     skills[i] = skill;
-                    
+                    if (skills[i] is Skill_Passive)
+                    {
+                        character.AddListener(skills[i].Active);
+                    }
                     return true;
                 }
             }
@@ -52,7 +55,7 @@ namespace ProjectRPG
         {
             if (index < 0 || index >= size)
                 return false;
-            if (skills[index] == null)
+            if (skills is null || skills[index] == null)
                 return false;
 
             skills[index] = null;
@@ -70,19 +73,23 @@ namespace ProjectRPG
             size += count;
         }
 
-        public int UseSkill(int index, ITargetable hitable, int sp)
+        public void UseSkill(int index, ITargetable hitable, ref int sp)
         {
             if (index < 0 || index >= size)
-                return 0;
+                return;
             if (skills[index] == null)
-                return 0;
+                return;
             if (sp < skills[index].COST)
-                return 0;
+                return;
 
             if (skills[index] is Skill_Active)
-                return ((Skill_Active)skills[index]).Active(hitable);
-            else
-                return 0;
+            {
+                if (sp < skills[index].COST)
+                    return;
+                skills[index].SetTarget(hitable);
+                skills[index].Active(ref sp);
+                skills[index].ResetTarget();
+            }
         }
     }
 }

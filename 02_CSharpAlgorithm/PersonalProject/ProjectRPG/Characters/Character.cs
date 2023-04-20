@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Collections.Specialized.BitVector32;
 
 namespace ProjectRPG
 {
     internal abstract class Character : ITargetable
     {
-        protected string name;
+        protected string? name;
         protected int hp, sp;
-        protected SkillSlot skillSlot;
+        protected SkillSlot? skillSlot;
 
-        public event Func<int, int> OnHPEvent, OnSPEvent, OnHitEvent, OnDeadEvent;
+        public delegate void DamageEvent(ref int param);
+        protected event DamageEvent? OnDamaged;
 
         public string NAME 
         { 
@@ -32,7 +34,7 @@ namespace ProjectRPG
             set { sp = value; }
         }
 
-        public SkillSlot SKILLSLOT
+        public SkillSlot? SKILLSLOT
         {
             get {  return skillSlot; }
             set { skillSlot = value; }
@@ -40,24 +42,25 @@ namespace ProjectRPG
 
         public void UseSkill(int index, ITargetable targetable)
         {
-            sp -= skillSlot.UseSkill(index, targetable, sp);
+            if (skillSlot is not null)
+                skillSlot.UseSkill(index, targetable, ref sp);
         }
 
         public void Hit(int damage)
         {
-            OnHitEvent.Invoke(damage);
-            TakeDamage(damage);
-        }
+            if(OnDamaged is not null)
+                OnDamaged.Invoke(ref damage);
 
-        public void TakeDamage(int damage)
-        {
-            OnHitEvent.Invoke(damage);
             hp -= damage;
             if (hp < 0)
             {
                 hp = 0;
-                OnDeadEvent.Invoke(0);
             }
+        }
+
+        public void AddListener(DamageEvent action)
+        {
+            OnDamaged += action;
         }
     }
 }

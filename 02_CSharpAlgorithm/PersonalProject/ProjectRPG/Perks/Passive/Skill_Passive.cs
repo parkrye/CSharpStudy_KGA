@@ -13,21 +13,11 @@ namespace ProjectRPG
             type = SkillType.PASSIVE;
         }
 
-        public void AddEvent(Func<int, int> func)
+        public override void Active(ref int param)
         {
-            func += Result;
+            Result(ref param);
         }
 
-        public void Removevent(Func<int, int> func)
-        {
-            func -= Result;
-        }
-
-        public abstract override int Active(ITargetable targetable, params int[] values);
-
-        public int Result(int values)
-        {
-            return values;
-        }
+        public abstract void Result(ref int param);
     }
 }

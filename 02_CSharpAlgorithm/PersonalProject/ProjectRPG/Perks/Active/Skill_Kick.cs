@@ -18,15 +18,17 @@ namespace ProjectRPG
             cost = 1;
         }
 
-        public override int Active(ITargetable targetable, params int[] values)
+        public override void Active(ref int sp)
         {
-            return Attack(targetable, values[0]);
+            if (other is not null)
+            {
+                sp -= cost;
+                Attack(other);
+            }
         }
 
-        public int Attack(ITargetable targetable, int sp)
+        public int Attack(ITargetable targetable)
         {
-            if (sp < cost)
-                return 0;
             targetable.Hit(value * level);
             GetEXP(1);
             return cost;

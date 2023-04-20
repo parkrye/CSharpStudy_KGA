@@ -8,11 +8,12 @@ namespace ProjectRPG
 {
     internal abstract class Skill_Active : Skill
     {
+
         public Skill_Active()
         {
             type = SkillType.ACTIVE;
         }
 
-        public abstract override int Active(ITargetable targetable, params int[] values);
+        public abstract override void Active(ref int param);
     }
 }

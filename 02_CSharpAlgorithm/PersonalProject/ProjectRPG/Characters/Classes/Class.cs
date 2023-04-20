@@ -8,17 +8,17 @@ namespace ProjectRPG
 {
     internal abstract class Class
     {
-        protected string name;
-        protected SkillSlot skillSlot;
+        protected string? name;
+        protected SkillSlot? skillSlot;
         protected int defaultHP, defaultSP;
 
-        public string NAME
+        public string? NAME
         {
             get { return name; }
             set { name = value; }
         }
 
-        public SkillSlot SKILLSLOT
+        public SkillSlot? SKILLSLOT
         {
             get { return skillSlot; }
             set { skillSlot = value; }

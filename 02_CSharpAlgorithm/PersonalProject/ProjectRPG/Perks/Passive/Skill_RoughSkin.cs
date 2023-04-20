@@ -17,9 +17,12 @@ namespace ProjectRPG
             cost = 1;
         }
 
-        public override int Active(ITargetable targetable, params int[] values)
+        public override void Result(ref int param)
         {
-            return Result(value * level);
+            if (param > value * level)
+                param -= value * level;
+            else
+                param = 1;
         }
     }
 }
