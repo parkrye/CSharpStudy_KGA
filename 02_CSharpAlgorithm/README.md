@@ -7,7 +7,7 @@
 ## 과제
 + [과제 1](https://github.com/parkrye/KGA/tree/master/02_CSharpAlgorithm/Homework/Homerwork_01)
 + [과제 2](https://github.com/parkrye/KGA/tree/master/02_CSharpAlgorithm/Homework/HomeWork_02)
-+ []()
++ [과제 3](https://github.com/parkrye/KGA/tree/master/02_CSharpAlgorithm/Homework/Homework_03)
 ## 개인 프로젝트
 + [깃허브 테스트](https://github.com/parkrye/KGA/tree/master/02_CSharpAlgorithm/PersonalProject/GithubTest)
 + [Project RPG](https://github.com/parkrye/KGA/tree/master/02_CSharpAlgorithm/PersonalProject/ProjectRPG)
