@@ -1,13 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProjectRPG.Interfaces
+﻿namespace ProjectRPG
 {
+    /// <summary>
+    /// 공격 가능에 대한 인터페이스.
+    /// 공격 스킬, 공격 아이템 등에 사용
+    /// </summary>
     internal interface IAttackable
     {
-        int Attack(ITargetable hitable, int sp);
+        /// <summary>
+        /// 공격 메소드
+        /// </summary>
+        /// <param name="hitable">공격 대상</param>
+        void Attack(ITargetable hitable);
     }
 }

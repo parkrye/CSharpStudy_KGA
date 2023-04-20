@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProjectRPG
+﻿namespace ProjectRPG
 {
+    /// <summary>
+    /// 마을에 대한 클래스
+    /// </summary>
     internal class Town
     {
     }

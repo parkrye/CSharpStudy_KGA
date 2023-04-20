@@ -1,36 +1,45 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProjectRPG
+﻿namespace ProjectRPG
 {
+    /// <summary>
+    /// 캐릭터의 직업에 대한 클래스
+    /// </summary>
     internal abstract class Class
     {
-        protected string name;
-        protected SkillSlot skillSlot;
-        protected int defaultHP, defaultSP;
+        protected string name;                 // 직업 이름
+        protected SkillSlot skillSlot;         // 직업 스킬
+        protected float defaultHP, defaultSP;   // 직업 능력치
 
+        /// <summary>
+        /// 직업 이름에 대한 프로퍼티
+        /// </summary>
         public string NAME
         {
             get { return name; }
             set { name = value; }
         }
 
+        /// <summary>
+        /// 직업 스킬에 대한 프로퍼티
+        /// </summary>
         public SkillSlot SKILLSLOT
         {
             get { return skillSlot; }
             set { skillSlot = value; }
         }
 
-        public int HP
+        /// <summary>
+        /// 직업 체력에 대한 프로퍼티
+        /// </summary>
+        public float HP
         {
             get { return defaultHP; }
             set { defaultHP = value; }
         }
 
-        public int SP
+        /// <summary>
+        /// 직업 활력에 대한 프로퍼티
+        /// </summary>
+        public float SP
         {
             get { return defaultSP; }
             set { defaultSP = value; }
