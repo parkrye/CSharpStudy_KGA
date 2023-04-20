@@ -5,9 +5,10 @@
     /// </summary>
     internal abstract class Character : ITargetable
     {
-        protected string name;         // 캐릭터의 이름
+        protected string name;          // 캐릭터의 이름
         protected float hp, sp;         // 캐릭터의 능력치
-        protected SkillSlot skillSlot; // 캐릭터의 스킬
+        protected SkillSlot skillSlot;  // 캐릭터의 스킬
+        protected ItemSlot itemSlot;    // 캐릭터의 아이템
 
         // 이벤트 호출을 위한 대리자
         // 패시브 스킬의 사용을 위해 사용
@@ -51,6 +52,15 @@
         {
             get {  return skillSlot; }
             set { skillSlot = value; }
+        }
+
+        /// <summary>
+        /// 캐릭터 아이템에 대한 프로퍼티
+        /// </summary>
+        public ItemSlot ITEMSLOT
+        {
+            get { return itemSlot; }
+            set { itemSlot = value; }
         }
 
         /// <summary>

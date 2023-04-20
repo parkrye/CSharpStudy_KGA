@@ -121,17 +121,5 @@
             }
             return 0;
         }
-
-        /// <summary>
-        /// 특정 스킬을 반환하는 메소드
-        /// </summary>
-        /// <param name="index">원하는 인덱스</param>
-        /// <returns>인덱스의 스킬. 없다면 null 반환</returns>
-        public Skill GetSkill(int index)
-        {
-            if (index < 0 || index > skills.Length)
-                return null;
-            return skills[index];
-        }
     }
 }

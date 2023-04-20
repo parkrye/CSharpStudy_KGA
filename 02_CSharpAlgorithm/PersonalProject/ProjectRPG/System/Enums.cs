@@ -6,6 +6,11 @@
     internal enum SkillType { PASSIVE, ACTIVE };
 
     /// <summary>
+    /// 아이템 종류에 대한 열거형
+    /// </summary>
+    internal enum ItemType { NONE, PASSIVE, ACTIVE };
+
+    /// <summary>
     /// 캐릭터 성에 대한 열거형
     /// </summary>
     internal enum CharacterFirstName { 김, 이, 박, 최, 정, 강, 조, 윤, 장, 임, 한, 오, 서, 신, 권, 황, 인, 송, 류, 전, 홍, 고, 문, 양, 손, 배, 백, 허, 유, 남, 심, 노, 하, 곽, 성, 차, 주, 우, 구, 라, 민, 진, 지, 채, 원, 천, 방, 공, 현, 함 };
