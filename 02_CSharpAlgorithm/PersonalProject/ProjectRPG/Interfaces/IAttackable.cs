@@ -10,6 +10,7 @@
         /// 공격 메소드
         /// </summary>
         /// <param name="hitable">공격 대상</param>
-        void Attack(ITargetable hitable);
+        /// <returns>공격 성공 여부</returns>
+        bool Attack(ITargetable hitable);
     }
 }

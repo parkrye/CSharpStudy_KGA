@@ -1,7 +1,7 @@
 ﻿namespace ProjectRPG
 {
     /// <summary>
-    /// 패시브 스킬인 재생의 바람에 대한 클래스
+    /// 패시브 스킬을 상속한 상세 스킬 클래스
     /// </summary>
     internal class Skill_SecondWind : Skill_Passive
     {
@@ -26,20 +26,22 @@
         /// <param name="character">대상 캐릭터</param>
         public override void AddListener(Character character)
         {
-            if(character is not null)
-                character.AddListenerOnHPDecreased(Result);
+            if(character != null)
+                character.AddListenerOnHPDecreased(Active);
         }
 
         /// <summary>
-        /// 캐릭터의 이벤트를 구독하는 메소드
+        /// 캐릭터의 이벤트를 구독할 메소드
         /// </summary>
-        /// <param name="param">체력</param>
-        /// <returns>체력 회복량</returns>
-        public override float Result(float param)
+        /// <param name="param">체력, 활력, [데미지]</param>
+        /// <returns>스킬 시전 성공 여부</returns>
+        public override bool Cast(params float[] param)
         {
-            if (param > 0)
-                return 0;
-            return value * level;
+            if (param[0] > 0)
+                return false;
+            param[0] += value * level;
+            used = true;
+            return true;
         }
     }
 }

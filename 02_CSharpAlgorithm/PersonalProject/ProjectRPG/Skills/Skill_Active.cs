@@ -17,6 +17,7 @@
         /// 스킬 사용에 대한 메소드
         /// </summary>
         /// <param name="param">주어지는 변수</param>
-        public abstract override void Active(float param);
+        /// <returns>스킬 발동 성공 여부</returns>
+        public abstract override bool Active(params float[] param);
     }
 }

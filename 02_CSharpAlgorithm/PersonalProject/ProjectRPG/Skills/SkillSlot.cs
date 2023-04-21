@@ -100,26 +100,29 @@
         /// <param name="index">사용할 인덱스</param>
         /// <param name="hitable">스킬 대상</param>
         /// <param name="sp">현재 활력</param>
-        /// <returns></returns>
-        public float UseSkill(int index, ITargetable hitable, float sp)
+        /// <returns>스킬 사용 성공 여부</returns>
+        public bool UseSkill(int index, ITargetable hitable, ref float sp)
         {
             if (index < 0 || index >= size)
-                return 0;
+                return false;
             if (skills[index] == null)
-                return 0;
+                return false;
             if (sp < skills[index].COST)
-                return 0;
+                return false;
 
             if (skills[index].TYPE == SkillType.ACTIVE)
             {
                 if (sp < skills[index].COST)
-                    return 0;
-                skills[index].SetTarget(hitable);   // 스킬 대상 지정
-                skills[index].Active(sp);           // 스킬 사용
-                skills[index].ResetTarget();        // 스킬 대상 해제
-                return skills[index].COST;          // 활력 소모량 반환
+                    return false;
+                skills[index].SetTarget(hitable);       // 스킬 대상 지정
+                if (skills[index].Active(sp))           // 스킬 사용
+                {
+                    skills[index].ResetTarget();        // 스킬 대상 해제
+                    sp -= skills[index].COST;           // 활력 소모
+                    return true;
+                }
             }
-            return 0;
+            return false;
         }
     }
 }
