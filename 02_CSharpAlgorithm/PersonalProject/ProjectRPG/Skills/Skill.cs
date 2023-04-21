@@ -11,7 +11,7 @@
         protected int level, exp;           // 스킬 레벨, 경험ㅁ치
         protected SkillType type;           // 스킬 유형
 
-        protected float value, cost;        // 스킬 변수, 소모량
+        protected int value, cost;          // 스킬 변수, 소모량
 
         /// <summary>
         /// 스킬 이름에 대한 프로퍼티
@@ -43,7 +43,7 @@
         /// <summary>
         /// 스킬 변수에 대한 프로퍼티
         /// </summary>
-        public float VALUE
+        public int VALUE
         {
             get { return value; }
             set { this.value = value; }
@@ -52,7 +52,7 @@
         /// <summary>
         /// 스킬 소모량에 대한 프로퍼티
         /// </summary>
-        public float COST
+        public int COST
         {
             get { return cost; }
             set { cost = value; }
@@ -81,9 +81,10 @@
         /// <summary>
         /// 스킬 발동에 대한 메소드
         /// </summary>
-        /// <param name="param">주어지는 변수</param>
+        /// <param name="param1">능력치 데이터</param>
+        /// <param name="param2">부가 데이터</param>
         /// <returns>스킬 발동 성공 여부</returns>
-        public abstract bool Active(params float[] param);
+        public abstract bool Active(int[] param1, params int[] param2);
 
         /// <summary>
         /// 사용자를 지정하는 메소드

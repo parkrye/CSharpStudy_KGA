@@ -11,8 +11,12 @@
         public Class_Rouge()
         {
             name = "도적";
-            defaultHP = 0;
-            defaultSP = 3;
+            defaultStatus = new int[5];
+            HP = 1;
+            SP = 1;
+            PHYSICAL = 1;
+            MENTAL = 1;
+            INITIATIVE = 2;
             skillSlot = new SkillSlot(null, 3);
             skillSlot.AddSkill(new Skill_Arcrobatics());
             skillSlot.AddSkill(new Skill_LuckyAttack());

@@ -5,7 +5,9 @@
     /// </summary>
     internal abstract class Skill_Passive : Skill
     {
-        protected bool used;    // 사용 여부
+        protected bool used;     // 사용 여부
+        protected int timeFlow;  // 시간 경과
+        protected int coolTime;  // 쿨타임
 
         /// <summary>
         /// 생성자
@@ -25,13 +27,14 @@
         /// <summary>
         /// 스킬 발동 메소드
         /// </summary>
-        /// <param name="param">주어지는 변수</param>
+        /// <param name="param1">능력치 데이터</param>
+        /// <param name="param2">부가 데이터</param>
         /// <returns>스킬 발동 성공 여부</returns>
-        public override bool Active(params float[] param)
+        public override bool Active(int[] param1, params int[] param2)
         {
             if (!used)
             {
-                if (Cast(param))
+                if (Cast(param1, param2))
                 {
                     return true;
                 }
@@ -42,9 +45,10 @@
         /// <summary>
         /// 스킬 시전 메소드
         /// </summary>
-        /// <param name="param">주어지는 변수</param>
+        /// <param name="param1">능력치 데이터</param>
+        /// <param name="param2">부가 데이터</param>
         /// <returns>변수에 대한 반환값</returns>
-        public abstract bool Cast(params float[] param);
+        public abstract bool Cast(int[] param1, params int[] param2);
 
         /// <summary>
         /// 사용 여부를 초기화하는 메소드
@@ -52,6 +56,16 @@
         public void Restore()
         {
             used = false;
+        }
+
+        public void TimeFlow()
+        {
+            timeFlow++;
+            if(timeFlow > coolTime)
+            {
+                Restore();
+                timeFlow = 0;
+            }
         }
     }
 }

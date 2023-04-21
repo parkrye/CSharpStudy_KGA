@@ -5,6 +5,17 @@
     /// </summary>
     internal abstract class Item_Active : Item
     {
+        bool consumable;    // 소모 여부
+
+        /// <summary>
+        /// 소모성에 대한 프로퍼티
+        /// </summary>
+        public bool CONSUMABLE
+        {
+            get { return consumable; }
+            set { consumable = value; }
+        }
+
         /// <summary>
         /// 생성자
         /// </summary>
@@ -12,11 +23,5 @@
         {
             type = ItemType.ACTIVE;
         }
-
-        /// <summary>
-        /// 아이템 사용에 대한 메소드
-        /// </summary>
-        /// <param name="param">주어지는 변수</param>
-        public abstract void Active(float param);
     }
 }

@@ -11,6 +11,6 @@
         /// </summary>
         /// <param name="hitable">공격 대상</param>
         /// <returns>공격 성공 여부</returns>
-        bool Attack(ITargetable hitable);
+        bool Attack(ITargetable hitable, params int[] param);
     }
 }

@@ -16,8 +16,9 @@
         /// <summary>
         /// 스킬 사용에 대한 메소드
         /// </summary>
-        /// <param name="param">주어지는 변수</param>
+        /// <param name="param1">능력치 데이터</param>
+        /// <param name="param2">부가 데이터</param>
         /// <returns>스킬 발동 성공 여부</returns>
-        public abstract override bool Active(params float[] param);
+        public abstract override bool Active(int[] param1, params int[] param2);
     }
 }

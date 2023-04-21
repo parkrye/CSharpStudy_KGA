@@ -15,8 +15,8 @@
             name = "곡예";
             level = _level;
             exp = _exp;
-            value = 1f;
-            cost = 1;
+            value = 1;
+            cost = 0;
         }
 
         /// <summary>
@@ -32,13 +32,14 @@
         /// <summary>
         /// 캐릭터의 이벤트를 구독할 메소드
         /// </summary>
-        /// <param name="param">체력, 활력, [데미지]</param>
+        /// <param name="param1">능력치 데이터</param>
+        /// <param name="param2">부가 데이터: 데미지</param>
         /// <returns>스킬 시전 성공 여부</returns>
-        public override bool Cast(params float[] param)
+        public override bool Cast(int[] param1, params int[] param2)
         {
-            if(new Random().Next(10) < Math.Log(value, 10) * 10)
+            if(new Random().Next(10) < Math.Log(level, 10) * 10)
             {
-                param[2] /= 2;
+                param2[0] /= 2;
                 return true;
             }
             return true;

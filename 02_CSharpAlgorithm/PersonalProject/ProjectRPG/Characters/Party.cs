@@ -1,4 +1,6 @@
-﻿namespace ProjectRPG
+﻿using static ProjectRPG.Character;
+
+namespace ProjectRPG
 {
     /// <summary>
     /// 플레이어 파티에 대한 클래스
@@ -94,6 +96,22 @@
             if (index < 0 || index >= 4)
                 return null;
             return party[index];
+        }
+
+        public void AddListenerOnTurnEnd(Action action)
+        {
+            if(members > 0)
+            {
+                foreach(PC pc in party)
+                {
+                    action += pc.TimeFlow;
+                }
+            }
+        }
+
+        public bool Contains(PC pc)
+        {
+            return party.Contains(pc);
         }
     }
 }
