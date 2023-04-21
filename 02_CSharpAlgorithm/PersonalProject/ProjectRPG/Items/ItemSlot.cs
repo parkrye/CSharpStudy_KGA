@@ -56,13 +56,9 @@ namespace ProjectRPG
                 if (items[i] == null)
                 {
                     items[i] = item;
-                    if (items[i].TYPE == ItemType.ACTIVE)
+                    if (items[i].TYPE == ItemType.PASSIVE)
                     {
-                        // 액티브라면 특수 상황 이벤트 설정
-                    }
-                    else if (items[i].TYPE == ItemType.PASSIVE)
-                    {
-                        // 액티브라면 장착/해제 이벤트 설정
+                        // 패시브라면 장착/해제 이벤트 설정
                     }
                     return true;
                 }
@@ -99,6 +95,27 @@ namespace ProjectRPG
                 newSkills = new Item[size + count];
             Array.Copy(items, newSkills, size);
             size += count;
+        }
+
+        /// <summary>
+        /// 액티브 아이템을 사용하는 메소드
+        /// </summary>
+        /// <param name="index">사용할 아이템의 인덱스</param>
+        /// <param name="param">능력치 데이터</param>
+        /// <param name="targets">사용 대상. 0: 자신 1:추가 대상</param>
+        /// <returns>아이템 사용 성공 여부</returns>
+        public bool UseItem(int index, int[] param, params ITargetable[] targets)
+        {
+            if (index < 0 || index >= size)
+                return false;
+            if (items[index] == null)
+                return false;
+            if (items[index].TYPE != ItemType.ACTIVE)
+                return false;
+
+            items[index].Active(param, targets);
+
+            return true;
         }
     }
 }
