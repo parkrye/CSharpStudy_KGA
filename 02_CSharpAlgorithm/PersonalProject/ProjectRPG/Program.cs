@@ -19,7 +19,7 @@
             Console.WriteLine();
             Console.WriteLine();
 
-            PC pc2 = new PC(new Class_Figther());
+            PC pc2 = new PC(new Class_Rouge());
             Console.WriteLine(pc2.NAME);
             Console.WriteLine(pc2.HP);
             Console.WriteLine(pc2.SP);
@@ -35,8 +35,12 @@
 
             pc.UseSkill(0, pc2);
             pc.UseSkill(1, pc2);
+            pc.UseSkill(2, pc2);
+            pc.UseSkill(3, pc2);
             pc2.UseSkill(0, pc);
             pc2.UseSkill(1, pc);
+            pc2.UseSkill(2, pc);
+            pc2.UseSkill(3, pc);
 
             Console.WriteLine();
             Console.WriteLine();
