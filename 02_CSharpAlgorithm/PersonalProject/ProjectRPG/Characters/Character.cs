@@ -6,16 +6,14 @@
     internal abstract class Character : ITargetable
     {
         protected string name;          // 캐릭터의 이름
-        protected float hp, sp;         // 캐릭터의 능력치
+        protected int[] status;         // 캐릭터의 능력치: hp, sp, physical, mental
         protected SkillSlot skillSlot;  // 캐릭터의 스킬
         protected ItemSlot itemSlot;    // 캐릭터의 아이템
 
         // 이벤트 호출을 위한 대리자
         // 패시브 스킬의 사용을 위해 사용
-        /*
-         * 수정점 : 활력이 감소했을때 체력이 증가 등, 다른 변수에 영향을 주는 스킬!
-         */
-        public delegate bool Action(params float[] param);
+        // param1 : 능력치ㅡ param2 : 부가적인 데이터
+        public delegate bool Action(int[] param1, params int[] param2);
         protected event Action? OnDamaged, OnHPDecreased, OnSPDecreased;
 
         /// <summary>
@@ -30,19 +28,37 @@
         /// <summary>
         /// 캐릭터 체력에 대한 프로퍼티
         /// </summary>
-        public float HP 
+        public int HP 
         { 
-            get { return hp; } 
-            set { hp = value; }
+            get { return status[0]; } 
+            set { status[0] = value; }
         }
 
         /// <summary>
         /// 캐릭터 활력에 대한 프로퍼티
         /// </summary>
-        public float SP 
+        public int SP 
         { 
-            get { return sp; } 
-            set { sp = value; }
+            get { return status[1]; } 
+            set { status[1] = value; }
+        }
+
+        /// <summary>
+        /// 캐릭터 신체능력에 대한 프로퍼티
+        /// </summary>
+        public int PHYSICSAL
+        {
+            get { return status[2]; }
+            set { status[2] = value; }
+        }
+
+        /// <summary>
+        /// 캐릭터 정신능력에 대한 프로퍼티
+        /// </summary>
+        public int MENTAL
+        {
+            get { return status[3]; }
+            set { status[3] = value; }
         }
 
         /// <summary>
@@ -70,23 +86,23 @@
         /// <param name="targetable">스킬 대상</param>
         public void UseSkill(int index, ITargetable targetable)
         {
-            skillSlot.UseSkill(index, targetable, ref sp);    // 스킬 슬롯에서 해당 스킬을 시전하고, 소모 활력을 반환받는다
-            OnSPDecreased?.Invoke(hp, sp);                    // 활력 감소에 대한 패시브 스킬이 시전되고, 활력을 조정한다
+            skillSlot.UseSkill(index, targetable, status);                  // 스킬 슬롯에서 해당 스킬을 시전하고, 소모 활력을 반환받는다
+            OnSPDecreased?.Invoke(status);                                  // 활력 감소에 대한 패시브 스킬이 시전되고, 활력을 조정한다
         }
 
         /// <summary>
         /// 피격시 발생하는 이벤트
         /// </summary>
         /// <param name="damage">데미지</param>
-        public bool Hit(float damage)
+        public bool Hit(int damage)
         {
-            OnDamaged?.Invoke(hp, sp, damage);                   // 데미지 발생에 대한 패시브 스킬이 시전되고, 데미지를 조정한다
+            OnDamaged?.Invoke(status, damage);                   // 데미지 발생에 대한 패시브 스킬이 시전되고, 데미지를 조정한다
 
-            hp -= damage;
-            OnHPDecreased?.Invoke(hp, sp);                       // 체력 감소에 대한 패시프 스킬이 시전되고, 체력을 조정한다
-            if (hp < 0)                                          // 체력이 0 이하라면 사망한다
+            status[0] -= damage;
+            OnHPDecreased?.Invoke(status);                       // 체력 감소에 대한 패시프 스킬이 시전되고, 체력을 조정한다
+            if (status[0] < 0)                                   // 체력이 0 이하라면 사망한다
             {
-                hp = 0;
+                status[0] = 0;
             }
             return true;
         }

@@ -25,13 +25,14 @@
         /// <summary>
         /// 스킬 발동 메소드
         /// </summary>
-        /// <param name="param">주어지는 변수</param>
+        /// <param name="param1">능력치 데이터</param>
+        /// <param name="param2">부가 데이터</param>
         /// <returns>스킬 발동 성공 여부</returns>
-        public override bool Active(params float[] param)
+        public override bool Active(int[] param1, params int[] param2)
         {
             if (!used)
             {
-                if (Cast(param))
+                if (Cast(param1, param2))
                 {
                     return true;
                 }
@@ -42,9 +43,10 @@
         /// <summary>
         /// 스킬 시전 메소드
         /// </summary>
-        /// <param name="param">주어지는 변수</param>
+        /// <param name="param1">능력치 데이터</param>
+        /// <param name="param2">부가 데이터</param>
         /// <returns>변수에 대한 반환값</returns>
-        public abstract bool Cast(params float[] param);
+        public abstract bool Cast(int[] param1, params int[] param2);
 
         /// <summary>
         /// 사용 여부를 초기화하는 메소드

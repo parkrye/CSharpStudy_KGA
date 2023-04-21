@@ -15,19 +15,20 @@
             name = "행운의 일격";
             level = _level;
             exp = _exp;
-            value = 1f;
-            cost = 1.5f;
+            value = 1;
+            cost = 10;
         }
 
         /// <summary>
         /// 스킬 발동에 대한 메소드
         /// </summary>
-        /// <param name="sp">현재 활력. 미사용</param>
-        public override bool Active(params float[] param)
+        /// <param name="param1">능력치 데이터</param>
+        /// <param name="param2">부가 데이터</param>
+        public override bool Active(int[] param1, params int[] param2)
         {
             if (other != null)
             {
-                return Attack(other);
+                return Attack(other, param1);
             }
             return false;
         }
@@ -36,9 +37,10 @@
         /// 공격 메소드
         /// </summary>
         /// <param name="targetable">공격 대상</param>
-        public bool Attack(ITargetable targetable)
+        /// <param name="param">능력치 데이터</param>
+        public bool Attack(ITargetable targetable, params int[] param)
         {
-            if(targetable.Hit(new Random().Next((int)value * 2 + 1) * level))
+            if(targetable.Hit(new Random().Next(value * 2 + 1) * param[2] * level))
             {
                 GetEXP(1);
                 return true;

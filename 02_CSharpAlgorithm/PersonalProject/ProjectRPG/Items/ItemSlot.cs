@@ -67,7 +67,6 @@ namespace ProjectRPG
                     return true;
                 }
             }
-
             return false;
         }
 

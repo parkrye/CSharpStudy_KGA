@@ -19,13 +19,16 @@
             name += (CharacterLastName)random.Next(0, 50);
 
             // 능력치는 5~15 + 직업 기초 능력치
-            hp = random.Next(5, 15);
-            sp = random.Next(5, 15);
+            status = new int[4];
+            HP = random.Next(5, 15);
+            SP = random.Next(5, 15);
             if (c != null)
             {
-                hp += c.HP;
-                sp += c.SP;
+                HP += c.HP;
+                SP += c.SP;
             }
+            PHYSICSAL = random.Next(5, 15);
+            MENTAL = random.Next(5, 15);
 
             // 스킬 슬롯은 최대 6
             skillSlot = new SkillSlot(this, 6);

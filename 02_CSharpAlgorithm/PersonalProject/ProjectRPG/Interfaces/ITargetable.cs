@@ -11,6 +11,6 @@
         /// </summary>
         /// <param name="damage">가한 데미지</param>
         /// <returns>피격 성공 여부</returns>
-        bool Hit(float damage);
+        bool Hit(int damage);
     }
 }

@@ -5,9 +5,9 @@
     /// </summary>
     internal abstract class Class
     {
-        protected string name;                 // 직업 이름
-        protected SkillSlot skillSlot;         // 직업 스킬
-        protected float defaultHP, defaultSP;   // 직업 능력치
+        protected string name;                  // 직업 이름
+        protected SkillSlot skillSlot;          // 직업 스킬
+        protected int[] defaultStatus;          // 직업 능력치
 
         /// <summary>
         /// 직업 이름에 대한 프로퍼티
@@ -30,19 +30,37 @@
         /// <summary>
         /// 직업 체력에 대한 프로퍼티
         /// </summary>
-        public float HP
+        public int HP
         {
-            get { return defaultHP; }
-            set { defaultHP = value; }
+            get { return defaultStatus[0]; }
+            set { defaultStatus[1] = value; }
         }
 
         /// <summary>
         /// 직업 활력에 대한 프로퍼티
         /// </summary>
-        public float SP
+        public int SP
         {
-            get { return defaultSP; }
-            set { defaultSP = value; }
+            get { return defaultStatus[1]; }
+            set { defaultStatus[1] = value; }
+        }
+
+        /// <summary>
+        /// 직업 신체능력에 대한 프로퍼티
+        /// </summary>
+        public int PHYSICAL
+        {
+            get { return defaultStatus[2]; }
+            set { defaultStatus[2] = value; }
+        }
+
+        /// <summary>
+        /// 직업 정신능력에 대한 프로퍼티
+        /// </summary>
+        public int MENTAL
+        {
+            get { return defaultStatus[3]; }
+            set { defaultStatus[3] = value; }
         }
     }
 }
