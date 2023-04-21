@@ -55,7 +55,9 @@
                 {
                     skills[i] = skill;
                     if (skills[i].TYPE == SkillType.PASSIVE)    // 패시브 스킬이라면 캐릭터 이벤트를 구독한다
+                    {
                         ((Skill_Passive)skills[i]).AddListener(character);
+                    }
                     return true;
                 }
             }

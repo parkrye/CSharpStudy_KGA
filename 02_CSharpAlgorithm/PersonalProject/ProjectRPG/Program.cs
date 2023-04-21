@@ -4,72 +4,28 @@
     {
         static void Main(string[] args)
         {
-            PC pc = new PC(new Class_Figther());
-            Console.WriteLine(pc.NAME);
-            Console.WriteLine(pc.HP);
-            Console.WriteLine(pc.SP);
-            for(int i = 0; i < pc.SKILLSLOT.SIZE; i++)
-            {
-                if (pc.SKILLSLOT.SKILLS[i] != null)
-                    Console.Write(pc.SKILLSLOT.SKILLS[i].NAME);
-                else
-                    break;
-                Console.Write(", ");
-            }
-            Console.WriteLine();
-            Console.WriteLine();
+            PC pc11 = new PC(new Class_Figther());
+            PC pc12 = new PC(new Class_Figther());
+            PC pc13 = new PC(new Class_Figther());
+            PC pc14 = new PC(new Class_Figther());
+            Party party1 = new Party();
+            party1.AddPC(pc11);
+            party1.AddPC(pc12);
+            party1.AddPC(pc13);
+            party1.AddPC(pc14);
 
-            PC pc2 = new PC(new Class_Rouge());
-            Console.WriteLine(pc2.NAME);
-            Console.WriteLine(pc2.HP);
-            Console.WriteLine(pc2.SP);
-            for (int i = 0; i < pc2.SKILLSLOT.SIZE; i++)
-            {
-                if (pc2.SKILLSLOT.SKILLS[i] != null)
-                    Console.Write(pc2.SKILLSLOT.SKILLS[i].NAME);
-                else
-                    break;
-                Console.Write(", ");
-            }
-            Console.WriteLine();
+            PC pc21 = new PC(new Class_Rouge());
+            PC pc22 = new PC(new Class_Rouge());
+            PC pc23 = new PC(new Class_Rouge());
+            PC pc24 = new PC(new Class_Rouge());
+            Party party2 = new Party();
+            party2.AddPC(pc21);
+            party2.AddPC(pc22);
+            party2.AddPC(pc23);
+            party2.AddPC(pc24);
 
-            pc.UseSkill(0, pc2);
-            pc.UseSkill(1, pc2);
-            pc.UseSkill(2, pc2);
-            pc.UseSkill(3, pc2);
-            pc2.UseSkill(0, pc);
-            pc2.UseSkill(1, pc);
-            pc2.UseSkill(2, pc);
-            pc2.UseSkill(3, pc);
-
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine(pc.NAME);
-            Console.WriteLine(pc.HP);
-            Console.WriteLine(pc.SP);
-            for (int i = 0; i < pc.SKILLSLOT.SIZE; i++)
-            {
-                if (pc.SKILLSLOT.SKILLS[i] != null)
-                    Console.Write(pc.SKILLSLOT.SKILLS[i].NAME);
-                else
-                    break;
-                Console.Write(", ");
-            }
-            Console.WriteLine();
-            Console.WriteLine();
-
-            Console.WriteLine(pc2.NAME);
-            Console.WriteLine(pc2.HP);
-            Console.WriteLine(pc2.SP);
-            for (int i = 0; i < pc2.SKILLSLOT.SIZE; i++)
-            {
-                if (pc2.SKILLSLOT.SKILLS[i] != null)
-                    Console.Write(pc2.SKILLSLOT.SKILLS[i].NAME);
-                else
-                    break;
-                Console.Write(", ");
-            }
-            Console.WriteLine();
+            Battle battle = new Battle(party1, party2);
+            battle.StartBattle();
         }
     }
 }

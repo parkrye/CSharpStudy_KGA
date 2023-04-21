@@ -62,5 +62,14 @@
             get { return defaultStatus[3]; }
             set { defaultStatus[3] = value; }
         }
+
+        /// <summary>
+        /// 직업 행동 우선도에 대한 프로퍼티
+        /// </summary>
+        public int INITIATIVE
+        {
+            get { return defaultStatus[4]; }
+            set { defaultStatus[4] = value; }
+        }
     }
 }

@@ -5,7 +5,9 @@
     /// </summary>
     internal abstract class Skill_Passive : Skill
     {
-        protected bool used;    // 사용 여부
+        protected bool used;     // 사용 여부
+        protected int timeFlow;  // 시간 경과
+        protected int coolTime;  // 쿨타임
 
         /// <summary>
         /// 생성자
@@ -54,6 +56,16 @@
         public void Restore()
         {
             used = false;
+        }
+
+        public void TimeFlow()
+        {
+            timeFlow++;
+            if(timeFlow > coolTime)
+            {
+                Restore();
+                timeFlow = 0;
+            }
         }
     }
 }

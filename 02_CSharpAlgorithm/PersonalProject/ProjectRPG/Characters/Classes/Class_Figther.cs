@@ -11,11 +11,12 @@
         public Class_Figther()
         {
             name = "전사";
-            defaultStatus = new int[4];
+            defaultStatus = new int[5];
             HP = 3;
             SP = 0;
             PHYSICAL = 2;
             MENTAL = 0;
+            INITIATIVE = 1;
             skillSlot = new SkillSlot(null, 3);
             skillSlot.AddSkill(new Skill_DashAttack());
             skillSlot.AddSkill(new Skill_SecondWind());

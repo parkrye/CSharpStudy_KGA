@@ -17,6 +17,7 @@
             exp = _exp;
             value = 15;
             cost = 0;
+            coolTime = 10;
         }
 
         /// <summary>
@@ -26,7 +27,10 @@
         public override void AddListener(Character character)
         {
             if (character != null)
+            {
                 character.AddListenerOnSPDecreased(Cast);
+                character.AddListenerOnTurnEnd(TimeFlow);
+            }
         }
 
         /// <summary>

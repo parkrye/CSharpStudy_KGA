@@ -6,15 +6,18 @@
     internal abstract class Character : ITargetable
     {
         protected string name;          // 캐릭터의 이름
-        protected int[] status;         // 캐릭터의 능력치: hp, sp, physical, mental
+        protected int[] status;         // 캐릭터의 능력치: hp, sp, physical, mental, initiative
         protected SkillSlot skillSlot;  // 캐릭터의 스킬
         protected ItemSlot itemSlot;    // 캐릭터의 아이템
 
         // 이벤트 호출을 위한 대리자
-        // 패시브 스킬의 사용을 위해 사용
+        // 패시브 스킬, 아이템의 사용을 위해 사용
         // param1 : 능력치ㅡ param2 : 부가적인 데이터
-        public delegate bool Action(int[] param1, params int[] param2);
-        protected event Action? OnDamaged, OnHPDecreased, OnSPDecreased;
+        public delegate bool PlayerDelegate(int[] param1, params int[] param2);
+        protected event PlayerDelegate? OnDamaged, OnHPDecreased, OnSPDecreased;
+
+        // 턴 카운트을 위해 사용
+        protected event Action? OnTimeFlow;
 
         /// <summary>
         /// 캐릭터 이름에 대한 프로퍼티
@@ -59,6 +62,15 @@
         {
             get { return status[3]; }
             set { status[3] = value; }
+        }
+
+        /// <summary>
+        /// 캐릭터 행동 우선도에 대한 프로퍼티
+        /// </summary>
+        public int INITIATIVE
+        {
+            get { return status[4]; }
+            set { status[4] = value; }
         }
 
         /// <summary>
@@ -110,29 +122,39 @@
         /// <summary>
         /// 데미지 발생에 대한 이벤트 구독
         /// </summary>
-        /// <param name="action">(float, float)인 메소드</param>
-        public void AddListenerOnDamaged(Action action)
+        /// <param name="player">(float, float)인 메소드</param>
+        public void AddListenerOnDamaged(PlayerDelegate player)
         {
-            OnDamaged += action;
+            OnDamaged += player;
         }
 
         /// <summary>
         /// 체력 감소에 대한 이벤트 구독
         /// </summary>
-        /// <param name="action">(float, float)인 메소드</param>
-        public void AddListenerOnHPDecreased(Action action)
+        /// <param name="player">(float, float)인 메소드</param>
+        public void AddListenerOnHPDecreased(PlayerDelegate player)
         {
-            OnHPDecreased += action;
+            OnHPDecreased += player;
         }
 
 
         /// <summary>
         /// 활력 감소에 대한 이벤트 구독
         /// </summary>
-        /// <param name="action">(float, float)인 메소드</param>
-        public void AddListenerOnSPDecreased(Action action)
+        /// <param name="player">(float, float)인 메소드</param>
+        public void AddListenerOnSPDecreased(PlayerDelegate player)
         {
-            OnSPDecreased += action;
+            OnSPDecreased += player;
+        }
+
+        public void AddListenerOnTurnEnd(Action action)
+        {
+            OnTimeFlow += action;
+        }
+
+        public void TimeFlow()
+        {
+            OnTimeFlow?.Invoke();
         }
     }
 }
