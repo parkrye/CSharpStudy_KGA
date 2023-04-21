@@ -65,7 +65,7 @@
         protected void GetEXP(int addEXP)
         {
             exp += addEXP;
-            while (exp >= level * 100)
+            while (level < 10 && exp >= level * 100)
                 LevelUp();
         }
 
@@ -82,7 +82,8 @@
         /// 스킬 발동에 대한 메소드
         /// </summary>
         /// <param name="param">주어지는 변수</param>
-        public abstract void Active(float param);
+        /// <returns>스킬 발동 성공 여부</returns>
+        public abstract bool Active(params float[] param);
 
         /// <summary>
         /// 사용자를 지정하는 메소드

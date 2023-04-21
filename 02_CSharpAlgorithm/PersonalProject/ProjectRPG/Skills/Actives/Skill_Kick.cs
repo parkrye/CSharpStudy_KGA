@@ -1,7 +1,7 @@
 ﻿namespace ProjectRPG
 {
     /// <summary>
-    /// 액티브 스킬인 발차기에 대한 클래스
+    /// 액티브 스킬을 상속한 상세 스킬 클래스
     /// </summary>
     internal class Skill_Kick : Skill_Active, IAttackable
     {
@@ -23,22 +23,27 @@
         /// 스킬 발동 메소드
         /// </summary>
         /// <param name="sp">현재 활력, 미사용</param>
-        public override void Active(float sp)
+        public override bool Active(params float[] param)
         {
-            if (other is not null)
+            if (other != null)
             {
-                Attack(other);
+                return Attack(other);
             }
+            return false;
         }
 
         /// <summary>
         /// 공격 메소드
         /// </summary>
         /// <param name="targetable">공격 대상</param>
-        public void Attack(ITargetable targetable)
+        public bool Attack(ITargetable targetable)
         {
-            targetable.Hit(value * level);
-            GetEXP(1);
+            if(targetable.Hit(value * level))
+            {
+                GetEXP(1);
+                return true;
+            }
+            return false;
         }
     }
 }

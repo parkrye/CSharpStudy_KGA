@@ -1,7 +1,7 @@
 ﻿namespace ProjectRPG
 {
     /// <summary>
-    /// 패시브 스킬인 질긴 피부에 대한 클래스
+    /// 패시브 스킬을 상속한 상세 스킬 클래스
     /// </summary>
     internal class Skill_RoughSkin : Skill_Passive
     {
@@ -25,21 +25,22 @@
         /// <param name="character">대상 캐릭터</param>
         public override void AddListener(Character character)
         {
-            if (character is not null)
-                character.AddListenerOnDamaged(Result);
+            if (character != null)
+                character.AddListenerOnDamaged(Active);
         }
 
         /// <summary>
-        /// 캐릭터의 이벤트를 구독하는 메소드
+        /// 캐릭터의 이벤트를 구독할 메소드
         /// </summary>
-        /// <param name="param">데미지</param>
-        /// <returns>데미지 감소량</returns>
-        public override float Result(float param)
+        /// <param name="param">체력, 활력, [데미지]</param>
+        /// <returns>스킬 시전 성공 여부</returns>
+        public override bool Cast(params float[] param)
         {
-            if (param > value * level)
-                return value * level;
+            if (param[2] > value * level)
+                param[2] -= value * level;
             else
-                return param - 1;
+                param[2] = 1;
+            return true;
         }
     }
 }

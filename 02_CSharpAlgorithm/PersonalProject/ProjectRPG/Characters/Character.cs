@@ -15,7 +15,7 @@
         /*
          * 수정점 : 활력이 감소했을때 체력이 증가 등, 다른 변수에 영향을 주는 스킬!
          */
-        public delegate float Action(float param);
+        public delegate bool Action(params float[] param);
         protected event Action? OnDamaged, OnHPDecreased, OnSPDecreased;
 
         /// <summary>
@@ -70,24 +70,25 @@
         /// <param name="targetable">스킬 대상</param>
         public void UseSkill(int index, ITargetable targetable)
         {
-            sp -= skillSlot.UseSkill(index, targetable, sp);    // 스킬 슬롯에서 해당 스킬을 시전하고, 소모 활력을 반환받는다
-            sp += OnSPDecreased.Invoke(sp);                     // 활력 감소에 대한 패시브 스킬이 시전되고, 활력을 조정한다
+            skillSlot.UseSkill(index, targetable, ref sp);    // 스킬 슬롯에서 해당 스킬을 시전하고, 소모 활력을 반환받는다
+            OnSPDecreased?.Invoke(hp, sp);                    // 활력 감소에 대한 패시브 스킬이 시전되고, 활력을 조정한다
         }
 
         /// <summary>
         /// 피격시 발생하는 이벤트
         /// </summary>
         /// <param name="damage">데미지</param>
-        public void Hit(float damage)
+        public bool Hit(float damage)
         {
-            damage -= OnDamaged.Invoke(damage);     // 데미지 발생에 대한 패시브 스킬이 시전되고, 데미지를 조정한다
+            OnDamaged?.Invoke(hp, sp, damage);                   // 데미지 발생에 대한 패시브 스킬이 시전되고, 데미지를 조정한다
 
             hp -= damage;
-            hp += OnHPDecreased.Invoke(hp);         // 체력 감소에 대한 패시프 스킬이 시전되고, 체력을 조정한다
-            if (hp < 0)                             // 체력이 0 이하라면 사망한다
+            OnHPDecreased?.Invoke(hp, sp);                       // 체력 감소에 대한 패시프 스킬이 시전되고, 체력을 조정한다
+            if (hp < 0)                                          // 체력이 0 이하라면 사망한다
             {
                 hp = 0;
             }
+            return true;
         }
 
         /// <summary>

@@ -6,17 +6,17 @@
     internal class Class_Figther : Class
     {
         /// <summary>
-        /// 전사 생성자
+        /// 생성자
         /// </summary>
         public Class_Figther()
         {
             name = "전사";
             defaultHP = 3;
-            defaultSP = 3;
+            defaultSP = 0;
             skillSlot = new SkillSlot(null, 3);
+            skillSlot.AddSkill(new Skill_DashAttack());
             skillSlot.AddSkill(new Skill_SecondWind());
             skillSlot.AddSkill(new Skill_RoughSkin());
-            skillSlot.AddSkill(new Skill_DeepBreath());
         }
     }
 }

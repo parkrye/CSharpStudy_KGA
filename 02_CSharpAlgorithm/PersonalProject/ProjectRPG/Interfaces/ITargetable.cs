@@ -10,6 +10,7 @@
         /// 피격 메소드
         /// </summary>
         /// <param name="damage">가한 데미지</param>
-        void Hit(float damage);
+        /// <returns>피격 성공 여부</returns>
+        bool Hit(float damage);
     }
 }
