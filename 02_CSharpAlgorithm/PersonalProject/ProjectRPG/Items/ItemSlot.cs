@@ -14,20 +14,12 @@ namespace ProjectRPG
         /// <summary>
         /// 아이템 슬롯 크기에 대한 프로퍼티
         /// </summary>
-        public int SIZE
-        {
-            get { return size; }
-            set { size = value; }
-        }
+        public int SIZE { get { return size; } }
 
         /// <summary>
         /// 아이템 배열에 대한 프로퍼티
         /// </summary>
-        public Item[] ITEMS
-        {
-            get { return items; }
-            set { items = value; }
-        }
+        public Item[] ITEMS { get { return items; } }
 
         /// <summary>
         /// 생성자

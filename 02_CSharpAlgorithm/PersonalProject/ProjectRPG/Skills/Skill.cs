@@ -1,10 +1,16 @@
 ﻿namespace ProjectRPG
 {
     /// <summary>
+    /// 스킬 종류에 대한 열거형
+    /// </summary>
+    internal enum SkillType { PASSIVE, ACTIVE };
+
+    /// <summary>
     /// 스킬에 대한 클래스
     /// </summary>
     internal abstract class Skill
     {
+
         protected ITargetable self, other;  // 스킬 보유자, 지목한 대상
 
         protected string name;              // 스킬 이름
@@ -16,47 +22,27 @@
         /// <summary>
         /// 스킬 이름에 대한 프로퍼티
         /// </summary>
-        public string NAME 
-        { 
-            get { return name; } 
-            set { name = value; }
-        }
+        public string NAME { get { return name; } }
 
         /// <summary>
         /// 스킬 레벨에 대한 프로퍼티
         /// </summary>
-        public int LEVEL 
-        { 
-            get { return level; } 
-            set { level = value; }
-        }
+        public int LEVEL { get { return level; } }
 
         /// <summary>
         /// 스킬 유형에 대한 프로퍼티
         /// </summary>
-        public SkillType TYPE 
-        { 
-            get { return type; } 
-            set { type = value; }
-        }
+        public SkillType TYPE { get { return type; } }
 
         /// <summary>
         /// 스킬 변수에 대한 프로퍼티
         /// </summary>
-        public int VALUE
-        {
-            get { return value; }
-            set { this.value = value; }
-        }
+        public int VALUE { get { return value; } }
 
         /// <summary>
         /// 스킬 소모량에 대한 프로퍼티
         /// </summary>
-        public int COST
-        {
-            get { return cost; }
-            set { cost = value; }
-        }
+        public int COST { get { return cost; } }
 
         /// <summary>
         /// 스킬 경험치 획득에 대한 메소드
