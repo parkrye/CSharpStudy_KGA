@@ -5,5 +5,7 @@
     /// </summary>
     internal class Town
     {
+        protected string name;
+        public string NAME { get { return name; } }
     }
 }

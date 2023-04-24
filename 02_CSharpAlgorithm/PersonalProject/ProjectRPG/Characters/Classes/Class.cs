@@ -12,20 +12,12 @@
         /// <summary>
         /// 직업 이름에 대한 프로퍼티
         /// </summary>
-        public string NAME
-        {
-            get { return name; }
-            set { name = value; }
-        }
+        public string NAME { get { return name; } }
 
         /// <summary>
         /// 직업 스킬에 대한 프로퍼티
         /// </summary>
-        public SkillSlot SKILLSLOT
-        {
-            get { return skillSlot; }
-            set { skillSlot = value; }
-        }
+        public SkillSlot SKILLSLOT { get { return skillSlot; } }
 
         /// <summary>
         /// 직업 체력에 대한 프로퍼티

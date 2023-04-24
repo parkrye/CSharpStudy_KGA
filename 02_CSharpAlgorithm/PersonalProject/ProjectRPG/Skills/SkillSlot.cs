@@ -12,20 +12,12 @@
         /// <summary>
         /// 스킬 슬롯 크기에 대한 프로퍼티
         /// </summary>
-        public int SIZE
-        {
-            get { return size; }
-            set { size = value; }
-        }
+        public int SIZE { get { return size; } }
 
         /// <summary>
         /// 스킬 배열에 대한 프로퍼티
         /// </summary>
-        public Skill[] SKILLS
-        {
-            get { return skills; }
-            set { skills = value; }
-        }
+        public Skill[] SKILLS { get { return skills; } }
 
         /// <summary>
         /// 생성자

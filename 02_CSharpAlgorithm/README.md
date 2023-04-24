@@ -6,6 +6,7 @@
 + [반복기](https://github.com/parkrye/KGA/tree/master/02_CSharpAlgorithm/Study/03_Iterator)
 + [스택](https://github.com/parkrye/KGA/tree/master/02_CSharpAlgorithm/Study/04_Stack)
 + [큐](https://github.com/parkrye/KGA/tree/master/02_CSharpAlgorithm/Study/05_Queue)
++ [힙 / 우선순위 큐](https://github.com/parkrye/KGA/tree/master/02_CSharpAlgorithm/Study/06_Heap)
 ## 과제
 + [과제 1](https://github.com/parkrye/KGA/tree/master/02_CSharpAlgorithm/Homework/Homework_01)
 + [과제 2](https://github.com/parkrye/KGA/tree/master/02_CSharpAlgorithm/Homework/Homework_02)

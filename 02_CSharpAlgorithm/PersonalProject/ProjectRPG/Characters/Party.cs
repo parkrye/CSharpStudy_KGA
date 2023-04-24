@@ -13,20 +13,12 @@ namespace ProjectRPG
         /// <summary>
         /// 파티 구성원에 대한 프로퍼티
         /// </summary>
-        public PC[] PCs
-        {
-            get { return party; }
-            set { party = value; }
-        }
+        public PC[] PCs { get { return party; } }
 
         /// <summary>
         /// 파티 인원에 대한 프로퍼티
         /// </summary>
-        public int MEMBERS
-        {
-            get { return members; }
-            set { members = value; }
-        }
+        public int MEMBERS { get { return members; } }
 
         /// <summary>
         /// 파티 생성자. 최대 4
