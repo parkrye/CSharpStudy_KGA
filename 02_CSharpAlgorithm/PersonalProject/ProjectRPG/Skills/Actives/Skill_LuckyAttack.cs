@@ -12,7 +12,7 @@
         /// <param name="_exp">스킬 경험치. 기본 0</param>
         public Skill_LuckyAttack(int _level = 1, int _exp = 0) : base()
         {
-            name = "행운의 일격";
+            name = "(A)행운의 일격";
             level = _level;
             exp = _exp;
             value = 1;

@@ -19,5 +19,11 @@
         {
             type = ItemType.ACTIVE;
         }
+
+        public override void AddListener(Character character) { }
+
+        public override void Removed(int[,] param) { }
+
+        public override void Equiped(int[,] param) { }
     }
 }

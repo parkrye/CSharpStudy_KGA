@@ -12,7 +12,7 @@
         /// <param name="_exp">스킬 경험치. 기본 0</param>
         public Skill_Arcrobatics(int _level = 1, int _exp = 0) : base()
         {
-            name = "곡예";
+            name = "(P)곡예";
             level = _level;
             exp = _exp;
             value = 1;

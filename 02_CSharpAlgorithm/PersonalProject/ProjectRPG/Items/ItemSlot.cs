@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-
-namespace ProjectRPG
+﻿namespace ProjectRPG
 {
     /// <summary>
     /// 아이템 슬롯에 대한 클래스
@@ -48,10 +46,12 @@ namespace ProjectRPG
                 if (items[i] == null)
                 {
                     items[i] = item;
-                    if (items[i].TYPE == ItemType.PASSIVE)
+                    items[i].Equiped(character.STATUS);
+                    if (items[i].HAVEEVENT)
                     {
-                        // 패시브라면 장착/해제 이벤트 설정
+                        items[i].AddListener(character);
                     }
+                    character.DIFFICULTY += 1;
                     return true;
                 }
             }
@@ -70,7 +70,13 @@ namespace ProjectRPG
             if (items[index] == null)
                 return false;
 
-            items[index] = null;
+            items[index].Removed(character.STATUS);
+            for(int i = index; i < size - 1; i++)
+            {
+                items[i] = items[i + 1];
+            }
+            items[size - 1] = null;
+            character.DIFFICULTY -= 1;
             return true;
         }
 
@@ -93,10 +99,9 @@ namespace ProjectRPG
         /// 액티브 아이템을 사용하는 메소드
         /// </summary>
         /// <param name="index">사용할 아이템의 인덱스</param>
-        /// <param name="param">능력치 데이터</param>
-        /// <param name="targets">사용 대상. 0: 자신 1:추가 대상</param>
+        /// <param name="target">사용 대상</param>
         /// <returns>아이템 소모 여부</returns>
-        public bool UseItem(int index, int[,] param, params ITargetable[] targets)
+        public bool UseItem(int index, Character target)
         {
             if (index < 0 || index >= size)
                 return false;
@@ -105,7 +110,7 @@ namespace ProjectRPG
             if (items[index].TYPE != ItemType.ACTIVE)
                 return false;
 
-            if(items[index].Active(param, targets))
+            if(items[index].Active(target))
                 RemoveItem(index);
 
             return true;

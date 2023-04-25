@@ -12,7 +12,7 @@
         /// <param name="_exp">스킬 경험치. 기본 0</param>
         public Skill_RoughSkin(int _level = 1, int _exp = 0) : base()
         {
-            name = "질긴 피부";
+            name = "(P)질긴 피부";
             level = _level;
             exp = _exp;
             value = 15;

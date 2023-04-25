@@ -12,7 +12,7 @@
         /// <param name="_exp">스킬 경험치. 기본 0</param>
         public Skill_DashAttack(int _level = 1, int _exp = 0) : base()
         {
-            name = "돌진 공격";
+            name = "(A)돌진 공격";
             level = _level;
             exp = _exp;
             value = 2;
