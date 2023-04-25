@@ -13,7 +13,7 @@
         /// <param name="_exp">스킬 경험치. 기본 0</param>
         public Skill_SecondWind(int _level = 1, int _exp = 0) : base()
         {
-            name = "재생의 바람";
+            name = "(P)재생의 바람";
             level = _level;
             exp = _exp;
             value = 15;

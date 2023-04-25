@@ -12,5 +12,12 @@
         {
             type = ItemType.NONE;
         }
+
+        public override void AddListener(Character character) { }
+        public override bool Active(Character target) { return false; }
+
+        public override void Removed(int[,] param) { }
+
+        public override void Equiped(int[,] param) { }
     }
 }

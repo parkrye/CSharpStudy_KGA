@@ -50,6 +50,7 @@
                     {
                         ((Skill_Passive)skills[i]).AddListener(character);
                     }
+                    character.DIFFICULTY += 1;
                     return true;
                 }
             }
@@ -69,7 +70,12 @@
             if (skills[index] == null)
                 return false;
 
-            skills[index] = null;
+            for (int i = index; i < size - 1; i++)
+            {
+                skills[i] = skills[i + 1];
+            }
+            skills[size - 1] = null;
+            character.DIFFICULTY -= 1;
             return true;
         }
 

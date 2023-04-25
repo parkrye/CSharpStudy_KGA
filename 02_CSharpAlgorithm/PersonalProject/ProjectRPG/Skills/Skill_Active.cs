@@ -5,6 +5,9 @@
     /// </summary>
     internal abstract class Skill_Active : Skill
     {
+        // 효과 지속 시간
+        protected int duration;
+
         /// <summary>
         /// 생성자
         /// </summary>

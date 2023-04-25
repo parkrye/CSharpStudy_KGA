@@ -1,10 +1,10 @@
 ﻿namespace ProjectRPG
 {
-    internal class Item_SPPotion1 : Item_Active
+    internal class Item_SPPotion1 : Item_Active, IHealable
     {
         public Item_SPPotion1() : base()
         {
-            name = "활력의 포션(1)";
+            name = "(A)활력의 포션(1)";
             price = 5;
             consumable = true;
         }
@@ -12,12 +12,11 @@
         /// <summary>
         /// 아이템 사용에 대한 메소드
         /// </summary>
-        /// <param name="param">능력치 데이터</param>
-        /// <param name="targets">사용 대상. 0: 자신 1:추가 대상</param>
+        /// <param name="target">사용 대상</param>
         /// <returns>아이템 소모 여부</returns>
-        public override bool Active(int[,] param, params ITargetable[] targets)
+        public override bool Active(Character target)
         {
-            param[1, 1] += new Random().Next(6) + 1;
+            target.NOW_SP += new Random().Next(6) + 1;
             return consumable;
         }
     }

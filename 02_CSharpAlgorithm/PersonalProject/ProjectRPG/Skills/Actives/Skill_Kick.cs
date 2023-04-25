@@ -12,7 +12,7 @@
         /// <param name="_exp">스킬 경험치. 기본 0</param>
         public Skill_Kick(int _level = 1, int _exp = 0) : base()
         {
-            name = "발차기";
+            name = "(A)발차기";
             level = _level;
             exp = _exp;
             value = 1;
