@@ -12,5 +12,6 @@
         {
             type = ItemType.PASSIVE;
         }
+        public override bool Active(int[,] param, params ITargetable[] targets) { return false; }
     }
 }

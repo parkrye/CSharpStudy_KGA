@@ -5,6 +5,9 @@
     /// </summary>
     internal abstract class Skill_Active : Skill
     {
+        // 효과 지속 시간
+        protected int duration;
+
         /// <summary>
         /// 생성자
         /// </summary>
@@ -19,6 +22,6 @@
         /// <param name="param1">능력치 데이터</param>
         /// <param name="param2">부가 데이터</param>
         /// <returns>스킬 발동 성공 여부</returns>
-        public abstract override bool Active(int[] param1, params int[] param2);
+        public abstract override bool Active(int[,] param1, params int[] param2);
     }
 }

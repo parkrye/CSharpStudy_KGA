@@ -19,23 +19,24 @@
             name += (CharacterLastName)random.Next(0, 50);
 
             // 능력치는 5~15 + 직업 기초 능력치
-            status = new int[5];
-            HP = random.Next(5, 15);
-            SP = random.Next(5, 15);
-            PHYSICSAL = random.Next(5, 15);
-            MENTAL = random.Next(5, 15);
-            INITIATIVE = random.Next(5, 15);
+            status = new int[2, 5];
+            MAX_HP = random.Next(5, 15);
+            MAX_SP = random.Next(5, 15);
+            MAX_PHYSICSAL = random.Next(5, 15);
+            MAX_MENTAL = random.Next(5, 15);
+            MAX_INITIATIVE = random.Next(5, 15);
             if (c != null)
             {
-                HP += c.HP;
-                SP += c.SP;
-                PHYSICSAL += c.PHYSICAL;
-                MENTAL += c.MENTAL;
-                INITIATIVE += c.INITIATIVE;
+                MAX_HP += c.HP;
+                MAX_SP += c.SP;
+                MAX_PHYSICSAL += c.PHYSICAL;
+                MAX_MENTAL += c.MENTAL;
+                MAX_INITIATIVE += c.INITIATIVE;
             }
+            StatusSetting(true);
 
-            // 스킬 슬롯은 최대 6
-            skillSlot = new SkillSlot(this, 6);
+            // 스킬 슬롯은 일반적으로 최대 3
+            skillSlot = new SkillSlot(this, 3);
             skillSlot.AddSkill(new Skill_Punch());
             skillSlot.AddSkill(new Skill_Kick());
             if (c != null)
@@ -45,13 +46,14 @@
                 while (num < c.SKILLSLOT.SKILLS.Length && c.SKILLSLOT.SKILLS[num] != null)
                 {
                     skillSlot.AddSkill(c.SKILLSLOT.SKILLS[num]);
-                    c.SKILLSLOT.SKILLS[num] = null;
+                    c.SKILLSLOT.RemoveSkill(num);
                     num = random.Next(num + 1);
                 }
             }
 
-            // 아이템 슬롯은 최대 3
-            itemSlot = new ItemSlot(this, 6);
+            // 아이템 슬롯은 일반적으로 최대 3
+            itemSlot = new ItemSlot(this, 3);
+            itemSlot.AddItem(new Item_HPPotion1());
         }
     }
 }

@@ -69,7 +69,11 @@
             if (skills[index] == null)
                 return false;
 
-            skills[index] = null;
+            for (int i = index; i < size - 1; i++)
+            {
+                skills[i] = skills[i + 1];
+            }
+            skills[size - 1] = null;
             return true;
         }
 
@@ -96,24 +100,24 @@
         /// <param name="param1">능력치 데이터</param>
         /// <param name="param2">부가 데이터</param>
         /// <returns>스킬 사용 성공 여부</returns>
-        public bool UseSkill(int index, ITargetable hitable, int[] param1, params int[] param2)
+        public bool UseSkill(int index, ITargetable hitable, int[,] param1, params int[] param2)
         {
             if (index < 0 || index >= size)
                 return false;
             if (skills[index] == null)
                 return false;
-            if (param1[1] < skills[index].COST)
+            if (param1[1, 1] < skills[index].COST)
                 return false;
 
             if (skills[index].TYPE == SkillType.ACTIVE)
             {
-                if (param1[1] < skills[index].COST)
+                if (param1[1, 1] < skills[index].COST)
                     return false;
                 skills[index].SetTarget(hitable);           // 스킬 대상 지정
                 if (skills[index].Active(param1, param2))   // 스킬 사용
                 {
                     skills[index].ResetTarget();            // 스킬 대상 해제
-                    param1[1] -= skills[index].COST;        // 활력 소모
+                    param1[1, 1] -= skills[index].COST;        // 활력 소모
                     return true;
                 }
             }
