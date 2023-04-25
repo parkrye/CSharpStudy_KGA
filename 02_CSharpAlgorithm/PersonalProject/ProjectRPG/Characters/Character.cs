@@ -17,14 +17,14 @@
 
 
         protected string name;          // 캐릭터의 이름
-        protected int[] status;         // 캐릭터의 능력치: hp, sp, physical, mental, initiative
+        protected int[,] status;        // 캐릭터의 최대 능력치, 현재 능력치: hp, sp, physical, mental, initiative
         protected SkillSlot skillSlot;  // 캐릭터의 스킬
         protected ItemSlot itemSlot;    // 캐릭터의 아이템
 
         // 이벤트 호출을 위한 대리자
         // 패시브 스킬, 아이템의 사용을 위해 사용
         // param1 : 능력치ㅡ param2 : 부가적인 데이터
-        public delegate bool PlayerDelegate(int[] param1, params int[] param2);
+        public delegate bool PlayerDelegate(int[,] param1, params int[] param2);
         protected event PlayerDelegate? OnDamaged, OnHPDecreased, OnSPDecreased;
 
         // 턴 카운트을 위해 사용
@@ -38,27 +38,32 @@
         /// <summary>
         /// 캐릭터 체력에 대한 프로퍼티
         /// </summary>
-        public int HP { get { return status[0]; } set { status[0] = value; } }
+        public int MAX_HP { get { return status[0, 0]; } set { status[0, 0] = value; } }
+        public int NOW_HP { get { return status[1, 0]; } set { if(value <= MAX_HP) status[1, 0] = value; } }
 
         /// <summary>
         /// 캐릭터 활력에 대한 프로퍼티
         /// </summary>
-        public int SP { get { return status[1]; } set { status[1] = value; } }
+        public int MAX_SP { get { return status[0, 1]; } set { status[0, 1] = value; } }
+        public int NOW_SP { get { return status[1, 1]; } set { if (value <= MAX_SP) status[1, 1] = value; } }
 
         /// <summary>
         /// 캐릭터 신체능력에 대한 프로퍼티
         /// </summary>
-        public int PHYSICSAL { get { return status[2]; } set { status[2] = value; } }
+        public int MAX_PHYSICSAL { get { return status[0, 2]; } set { status[0, 2] = value; } }
+        public int NOW_PHYSICSAL { get { return status[1, 2]; } set { if (value <= MAX_PHYSICSAL) status[1, 2] = value; } }
 
         /// <summary>
         /// 캐릭터 정신능력에 대한 프로퍼티
         /// </summary>
-        public int MENTAL { get { return status[3]; } set { status[3] = value; } }
+        public int MAX_MENTAL { get { return status[0, 3]; } set { status[0, 3] = value; } }
+        public int NOW_MENTAL { get { return status[1, 3]; } set { if (value <= MAX_MENTAL) status[1, 3] = value; } }
 
         /// <summary>
         /// 캐릭터 행동 우선도에 대한 프로퍼티
         /// </summary>
-        public int INITIATIVE { get { return status[4]; } set { status[4] = value; } }
+        public int MAX_INITIATIVE { get { return status[0, 4]; } set { status[0, 4] = value; } }
+        public int NOW_INITIATIVE { get { return status[1, 4]; } set { if (value <= MAX_INITIATIVE) status[1, 4] = value; } }
 
         /// <summary>
         /// 캐릭터 스킬에 대한 프로퍼티
@@ -89,11 +94,11 @@
         {
             OnDamaged?.Invoke(status, damage);                   // 데미지 발생에 대한 패시브 스킬이 시전되고, 데미지를 조정한다
 
-            status[0] -= damage;
+            NOW_HP -= damage;
             OnHPDecreased?.Invoke(status);                       // 체력 감소에 대한 패시프 스킬이 시전되고, 체력을 조정한다
-            if (status[0] < 0)                                   // 체력이 0 이하라면 사망한다
+            if (NOW_HP < 0)                                   // 체력이 0 이하라면 사망한다
             {
-                status[0] = 0;
+                NOW_HP = 0;
             }
             return true;
         }

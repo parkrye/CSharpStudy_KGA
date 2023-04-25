@@ -30,7 +30,7 @@
         /// <param name="param1">능력치 데이터</param>
         /// <param name="param2">부가 데이터</param>
         /// <returns>스킬 발동 성공 여부</returns>
-        public override bool Active(int[] param1, params int[] param2)
+        public override bool Active(int[,] param1, params int[] param2)
         {
             if (!used)
             {
@@ -48,7 +48,7 @@
         /// <param name="param1">능력치 데이터</param>
         /// <param name="param2">부가 데이터</param>
         /// <returns>변수에 대한 반환값</returns>
-        public abstract bool Cast(int[] param1, params int[] param2);
+        public abstract bool Cast(int[,] param1, params int[] param2);
 
         /// <summary>
         /// 사용 여부를 초기화하는 메소드

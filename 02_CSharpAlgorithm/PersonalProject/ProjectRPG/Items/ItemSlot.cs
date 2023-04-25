@@ -95,8 +95,8 @@ namespace ProjectRPG
         /// <param name="index">사용할 아이템의 인덱스</param>
         /// <param name="param">능력치 데이터</param>
         /// <param name="targets">사용 대상. 0: 자신 1:추가 대상</param>
-        /// <returns>아이템 사용 성공 여부</returns>
-        public bool UseItem(int index, int[] param, params ITargetable[] targets)
+        /// <returns>아이템 소모 여부</returns>
+        public bool UseItem(int index, int[,] param, params ITargetable[] targets)
         {
             if (index < 0 || index >= size)
                 return false;
@@ -105,7 +105,8 @@ namespace ProjectRPG
             if (items[index].TYPE != ItemType.ACTIVE)
                 return false;
 
-            items[index].Active(param, targets);
+            if(items[index].Active(param, targets))
+                RemoveItem(index);
 
             return true;
         }

@@ -36,7 +36,7 @@
         /// </summary>
         /// <param name="param">능력치 데이터</param>
         /// <param name="targets">사용 대상. 0: 자신 1:추가 대상</param>
-        /// <returns>아이템 사용 성공 여부</returns>
-        public abstract bool Active(int[] param, params ITargetable[] targets);
+        /// <returns>아이템 소모 여부</returns>
+        public abstract bool Active(int[,] param, params ITargetable[] targets);
     }
 }

@@ -24,11 +24,11 @@
         /// </summary>
         /// <param name="param1">능력치 데이터</param>
         /// <param name="param2">부가 데이터</param>
-        public override bool Active(int[] param1, params int[] param2)
+        public override bool Active(int[,] param1, params int[] param2)
         {
             if (other != null)
             {
-                return Attack(other, param1);
+                return Attack(other, param1[1, 2]);
             }
             return false;
         }
@@ -40,7 +40,7 @@
         /// <param name="param">능력치 데이터</param>
         public bool Attack(ITargetable targetable, params int[] param)
         {
-            if(targetable.Hit(new Random().Next(value * 2 + 1) * param[2] * level))
+            if(targetable.Hit(new Random().Next(value * 2 + 1) * param[0] * level))
             {
                 GetEXP(1);
                 return true;
