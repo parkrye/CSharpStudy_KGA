@@ -12,7 +12,7 @@
         /// <param name="_exp">스킬 경험치. 기본 0</param>
         public Skill_DeepBreath(int _level = 1, int _exp = 0) : base()
         {
-            name = "숨 고르기";
+            name = "(P)숨고르기";
             level = _level;
             exp = _exp;
             value = 15;

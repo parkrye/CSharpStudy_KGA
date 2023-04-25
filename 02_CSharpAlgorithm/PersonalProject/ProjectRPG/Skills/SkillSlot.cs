@@ -50,6 +50,7 @@
                     {
                         ((Skill_Passive)skills[i]).AddListener(character);
                     }
+                    character.DIFFICULTY += 1;
                     return true;
                 }
             }
@@ -74,6 +75,7 @@
                 skills[i] = skills[i + 1];
             }
             skills[size - 1] = null;
+            character.DIFFICULTY -= 1;
             return true;
         }
 

@@ -4,7 +4,7 @@
     {
         public Item_BronzeCoin() 
         {
-            name = "구리 동전";
+            name = "(N)구리 동전";
             price = 3;
         }
     }

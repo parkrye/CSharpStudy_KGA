@@ -57,9 +57,8 @@
         /// <summary>
         /// 아이템 사용에 대한 메소드
         /// </summary>
-        /// <param name="param">능력치 데이터</param>
-        /// <param name="targets">사용 대상. 0: 자신 1:추가 대상</param>
+        /// <param name="target">사용 대상</param>
         /// <returns>아이템 소모 여부</returns>
-        public abstract bool Active(int[,] param, params ITargetable[] targets);
+        public abstract bool Active(Character targets);
     }
 }

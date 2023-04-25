@@ -34,26 +34,29 @@
                 MAX_INITIATIVE += c.INITIATIVE;
             }
             StatusSetting(true);
+            for (int i = 0; i < 5; i++)
+                DIFFICULTY += status[0, i] / 10;
 
             // 스킬 슬롯은 일반적으로 최대 3
-            skillSlot = new SkillSlot(this, 3);
-            skillSlot.AddSkill(new Skill_Punch());
-            skillSlot.AddSkill(new Skill_Kick());
+            SKILLSLOT = new SkillSlot(this, 3);
+            SKILLSLOT.AddSkill(new Skill_Punch());
+            SKILLSLOT.AddSkill(new Skill_Kick());
             if (c != null)
             {
                 // 직업 스킬을 랜덤하게 획득
                 int num = random.Next(c.SKILLSLOT.SKILLS.Length + 1);
                 while (num < c.SKILLSLOT.SKILLS.Length && c.SKILLSLOT.SKILLS[num] != null)
                 {
-                    skillSlot.AddSkill(c.SKILLSLOT.SKILLS[num]);
+                    SKILLSLOT.AddSkill(c.SKILLSLOT.SKILLS[num]);
                     c.SKILLSLOT.RemoveSkill(num);
                     num = random.Next(num + 1);
+                    DIFFICULTY += 1;
                 }
             }
 
             // 아이템 슬롯은 일반적으로 최대 3
-            itemSlot = new ItemSlot(this, 3);
-            itemSlot.AddItem(new Item_HPPotion1());
+            ITEMSLOT = new ItemSlot(this, 3);
+            ITEMSLOT.AddItem(new Item_HPPotion1());
         }
     }
 }

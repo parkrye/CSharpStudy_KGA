@@ -51,6 +51,7 @@
                     {
                         items[i].AddListener(character);
                     }
+                    character.DIFFICULTY += 1;
                     return true;
                 }
             }
@@ -75,6 +76,7 @@
                 items[i] = items[i + 1];
             }
             items[size - 1] = null;
+            character.DIFFICULTY -= 1;
             return true;
         }
 
@@ -97,10 +99,9 @@
         /// 액티브 아이템을 사용하는 메소드
         /// </summary>
         /// <param name="index">사용할 아이템의 인덱스</param>
-        /// <param name="param">능력치 데이터</param>
-        /// <param name="targets">사용 대상. 0: 자신 1:추가 대상</param>
+        /// <param name="target">사용 대상</param>
         /// <returns>아이템 소모 여부</returns>
-        public bool UseItem(int index, int[,] param, params ITargetable[] targets)
+        public bool UseItem(int index, Character target)
         {
             if (index < 0 || index >= size)
                 return false;
@@ -109,7 +110,7 @@
             if (items[index].TYPE != ItemType.ACTIVE)
                 return false;
 
-            if(items[index].Active(param, targets))
+            if(items[index].Active(target))
                 RemoveItem(index);
 
             return true;

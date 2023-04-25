@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Items\Passives\" />
+    <Folder Include="Items\Equipments\" />
     <Folder Include="Maps\Dungeon\" />
   </ItemGroup>
 

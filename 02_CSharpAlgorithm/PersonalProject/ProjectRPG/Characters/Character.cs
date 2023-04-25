@@ -20,6 +20,7 @@
         protected int[,] status;        // 캐릭터의 최대 능력치, 현재 능력치: hp, sp, physical, mental, initiative
         protected SkillSlot skillSlot;  // 캐릭터의 스킬
         protected ItemSlot itemSlot;    // 캐릭터의 아이템
+        protected int difficulty;       // 캐릭터 위험도(적일때 이용)
 
         // 이벤트 호출을 위한 대리자
         // 패시브 스킬, 아이템의 사용을 위해 사용
@@ -38,7 +39,7 @@
         /// <summary>
         /// 캐릭터 스테이터스에 대한 프로퍼티
         /// </summary>
-        public int[,] STATUS { get { return status; } }
+        public int[,] STATUS { get { return status; } set { status = value; } }
 
         /// <summary>
         /// 캐릭터 체력에 대한 프로퍼티
@@ -71,14 +72,19 @@
         public int NOW_INITIATIVE { get { return status[1, 4]; } set { status[1, 4] = value; } }
 
         /// <summary>
+        /// 위험도에 대한 프로퍼티
+        /// </summary>
+        public int DIFFICULTY { get { return difficulty; } set { difficulty = value; } }
+
+        /// <summary>
         /// 캐릭터 스킬에 대한 프로퍼티
         /// </summary>
-        public SkillSlot SKILLSLOT { get {  return skillSlot; } }
+        public SkillSlot SKILLSLOT { get {  return skillSlot; } set { skillSlot = value; } }
 
         /// <summary>
         /// 캐릭터 아이템에 대한 프로퍼티
         /// </summary>
-        public ItemSlot ITEMSLOT { get { return itemSlot; } }
+        public ItemSlot ITEMSLOT { get { return itemSlot; } set { itemSlot = value; } }
 
         /// <summary>
         /// 현재 스테이터스를 최대 스테이터스로 설정하는 메소드

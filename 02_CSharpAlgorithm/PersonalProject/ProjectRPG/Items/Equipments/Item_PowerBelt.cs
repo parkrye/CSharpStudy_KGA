@@ -1,10 +1,10 @@
 ﻿namespace ProjectRPG
 {
-    internal class Item_MysteriousRing : Item_Passive
+    internal class Item_PowerBelt : Item_Equipment
     {
-        public Item_MysteriousRing()
+        public Item_PowerBelt()
         {
-            name = "신비한 반지";
+            name = "(E)힘의 벨트";
             price = 20;
         }
 
@@ -12,12 +12,12 @@
 
         public override void Equiped(int[,] param)
         {
-            param[0, 3] += 3;
+            param[0, 2] += 2;
         }
 
         public override void Removed(int[,] param)
         {
-            param[0, 3] -= 3;
+            param[0, 2] -= 2;
         }
     }
 }

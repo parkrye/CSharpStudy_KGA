@@ -1,10 +1,10 @@
 ﻿namespace ProjectRPG
 {
-    internal class Item_WindBoots : Item_Passive
+    internal class Item_WindBoots : Item_Equipment
     {
         public Item_WindBoots()
         {
-            name = "바람 신발";
+            name = "(E)바람 신발";
             price = 20;
         }
 

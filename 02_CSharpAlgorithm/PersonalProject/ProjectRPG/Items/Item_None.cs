@@ -14,7 +14,7 @@
         }
 
         public override void AddListener(Character character) { }
-        public override bool Active(int[,] param, params ITargetable[] targets) { return false; }
+        public override bool Active(Character target) { return false; }
 
         public override void Removed(int[,] param) { }
 
