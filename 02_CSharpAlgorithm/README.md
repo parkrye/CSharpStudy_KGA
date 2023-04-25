@@ -7,12 +7,14 @@
 + [스택](https://github.com/parkrye/KGA/tree/master/02_CSharpAlgorithm/Study/04_Stack)
 + [큐](https://github.com/parkrye/KGA/tree/master/02_CSharpAlgorithm/Study/05_Queue)
 + [힙 / 우선순위 큐](https://github.com/parkrye/KGA/tree/master/02_CSharpAlgorithm/Study/06_Heap)
++ [이진탐색트리](https://github.com/parkrye/KGA/tree/master/02_CSharpAlgorithm/Study/07_BinarySearchTree)
 ## 과제
 + [과제 1](https://github.com/parkrye/KGA/tree/master/02_CSharpAlgorithm/Homework/Homework_01)
 + [과제 2](https://github.com/parkrye/KGA/tree/master/02_CSharpAlgorithm/Homework/Homework_02)
 + [과제 3](https://github.com/parkrye/KGA/tree/master/02_CSharpAlgorithm/Homework/Homework_03)
 + [과제 4](https://github.com/parkrye/KGA/tree/master/02_CSharpAlgorithm/Homework/Homework_04)
 + [과제 5](https://github.com/parkrye/KGA/tree/master/02_CSharpAlgorithm/Homework/Homework_05)
++ [과제 6](https://github.com/parkrye/KGA/tree/master/02_CSharpAlgorithm/Homework/Homework_06)
 ## 개인 프로젝트
 + [깃허브 테스트](https://github.com/parkrye/KGA/tree/master/02_CSharpAlgorithm/PersonalProject/GithubTest)
 + [Project RPG](https://github.com/parkrye/KGA/tree/master/02_CSharpAlgorithm/PersonalProject/ProjectRPG)
