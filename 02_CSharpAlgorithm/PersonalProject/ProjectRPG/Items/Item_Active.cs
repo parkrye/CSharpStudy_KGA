@@ -5,16 +5,12 @@
     /// </summary>
     internal abstract class Item_Active : Item
     {
-        bool consumable;    // 소모 여부
+        protected bool consumable;    // 소모 여부
 
         /// <summary>
         /// 소모성에 대한 프로퍼티
         /// </summary>
-        public bool CONSUMABLE
-        {
-            get { return consumable; }
-            set { consumable = value; }
-        }
+        public bool CONSUMABLE { get { return consumable; } }
 
         /// <summary>
         /// 생성자

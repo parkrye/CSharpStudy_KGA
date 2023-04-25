@@ -47,7 +47,7 @@
 
         void TurnOrder()
         {
-            turnOrder = turnOrder.OrderByDescending(x => x.INITIATIVE).ToList();
+            turnOrder = turnOrder.OrderByDescending(x => x.MAX_INITIATIVE).ToList();
         }
 
         void ShowSituation()
@@ -61,7 +61,7 @@
                 Console.SetCursorPosition(i * 10, 2);
                 Console.Write(enemy.PCs[i].NAME);
                 Console.SetCursorPosition(i * 10, 3);
-                Console.Write($"{enemy.PCs[i].HP} | {enemy.PCs[i].SP}");
+                Console.Write($"{enemy.PCs[i].MAX_HP} | {enemy.PCs[i].MAX_SP}");
             }
 
             for (int i = 0; i < player.MEMBERS; i++)
@@ -69,7 +69,7 @@
                 Console.SetCursorPosition(i * 10, 6);
                 Console.Write(player.PCs[i].NAME);
                 Console.SetCursorPosition(i * 10, 7);
-                Console.Write($"{player.PCs[i].HP} | {player.PCs[i].SP}");
+                Console.Write($"{player.PCs[i].MAX_HP} | {player.PCs[i].MAX_SP}");
             }
         }
 
@@ -85,11 +85,7 @@
                     Console.SetCursorPosition(0, 11);
                     Console.WriteLine("[아이템 사용]");
 
-                    int input = -1;
-                    do
-                    {
-                        int.TryParse(Console.ReadLine(), out input);
-                    } while (input < 0 || input > pc.SKILLSLOT.SIZE || pc.SKILLSLOT.SKILLS[input] == null);
+
 
 
                 }

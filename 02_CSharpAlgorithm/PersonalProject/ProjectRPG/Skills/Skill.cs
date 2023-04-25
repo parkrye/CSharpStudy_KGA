@@ -70,7 +70,7 @@
         /// <param name="param1">능력치 데이터</param>
         /// <param name="param2">부가 데이터</param>
         /// <returns>스킬 발동 성공 여부</returns>
-        public abstract bool Active(int[] param1, params int[] param2);
+        public abstract bool Active(int[,] param1, params int[] param2);
 
         /// <summary>
         /// 사용자를 지정하는 메소드

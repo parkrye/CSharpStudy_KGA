@@ -35,7 +35,7 @@
         /// <param name="param1">능력치 데이터</param>
         /// <param name="param2">부가 데이터: 데미지</param>
         /// <returns>스킬 시전 성공 여부</returns>
-        public override bool Cast(int[] param1, params int[] param2)
+        public override bool Cast(int[,] param1, params int[] param2)
         {
             if(new Random().Next(10) < Math.Log(level, 10) * 10)
             {

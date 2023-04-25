@@ -40,11 +40,11 @@
         /// <param name="param1">능력치 데이터</param>
         /// <param name="param2">부가 데이터 : X</param>
         /// <returns>스킬 시전 성공 여부</returns>
-        public override bool Cast(int[] param1, params int[] param2)
+        public override bool Cast(int[,] param1, params int[] param2)
         {
-            if (param1[0] > 0)
+            if (param1[1,0] > 0)
                 return false;
-            param1[0] += value * level;
+            param1[1,0] += value * level;
             used = true;
             return true;
         }
