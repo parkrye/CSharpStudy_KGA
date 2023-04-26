@@ -1,4 +1,6 @@
-﻿namespace ProjectRPG
+﻿using System.Reflection.Metadata.Ecma335;
+
+namespace ProjectRPG
 {
     internal class Player
     {
@@ -42,7 +44,7 @@
         public Player(string _name = "플레이어")
         {
             name = _name;
-            money = 100;
+            money = 10;
             party = new Party();
             inventory = new List<Item>();
             employed = new List<PC>();
@@ -61,11 +63,13 @@
         /// 돈을 제거하는 메소드
         /// </summary>
         /// <param name="lost">제거할 금액</param>
-        public void LoseMoney(int lost)
+        public bool LoseMoney(int lost)
         {
             if (HaveMoney(lost))
                 money -= lost;
-            money = 0;
+            else
+                return false;
+            return true;
         }
 
         /// <summary>
