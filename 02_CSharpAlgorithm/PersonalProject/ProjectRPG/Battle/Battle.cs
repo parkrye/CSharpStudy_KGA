@@ -18,14 +18,13 @@
         /// 생성자
         /// </summary>
         /// <param name="_player">플레이어</param>
-        /// <param name="_playerParty">플레이어 파티</param>
         /// <param name="_enemyParty">적 파티</param>
-        public Battle(Player _player, Party _playerParty, Party _enemyParty)
+        public Battle(Player _player, Party _enemyParty)
         {
             turn = 1;
             battleOver = 0;
             player = _player;
-            playerParty = _playerParty;
+            playerParty = player.PARTY;
             enemyParty = _enemyParty;
             random = new Random();
 
@@ -51,6 +50,7 @@
         /// </summary>
         public void StartBattle()
         {
+            Console.Clear();
             while (battleOver == 0)
             {
                 TurnOrder();
@@ -74,8 +74,15 @@
         /// </summary>
         void ShowSituation()
         {
-            Console.Clear();
+            Console.SetCursorPosition(0, 0);
+            for (int i = 0; i < 6; i++)
+            {
+                for (int j = 0; j < 60; j++)
+                    Console.Write("　");
+                Console.WriteLine();
+            }
 
+            Console.SetCursorPosition(0, 0);
             Console.ForegroundColor = ConsoleColor.White;
             Console.Write($"[Turn {turn}]");
 
@@ -205,7 +212,7 @@
                     {
                         sum += enemyParty.PCs[i].DIFFICULTY;
                     }
-                    player.GetMonsy(sum);
+                    player.AddMoney(sum);
 
                     List<Item> items = new List<Item>();
                     for (int i = 0; i < enemyParty.MEMBERS; i++)
@@ -214,6 +221,12 @@
                         {
                             player.AddItem(enemyParty.PCs[i].ITEMSLOT.ITEMS[j]);
                         }
+                    }
+
+                    for(int i = 0; i < playerParty.MEMBERS; i++)
+                    {
+                        if (playerParty.PCs[i].NOW_HP == 0)
+                            playerParty.PCs[i].NOW_HP++;
                     }
                     break;
                 // 플레이어 패배
@@ -227,6 +240,12 @@
                 case 3:
                     Console.SetCursorPosition(0, 10);
                     Console.WriteLine("전투에서 도망쳤습니다!");
+
+                    for (int i = 0; i < playerParty.MEMBERS; i++)
+                    {
+                        if (playerParty.PCs[i].NOW_HP == 0)
+                            playerParty.PCs[i].NOW_HP++;
+                    }
                     break;
             }
         }
