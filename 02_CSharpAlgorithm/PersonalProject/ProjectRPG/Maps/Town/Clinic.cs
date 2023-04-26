@@ -81,7 +81,6 @@
                         {
                             player.PARTY.PCs[cursor].NOW_HP = player.PARTY.PCs[cursor].MAX_HP;
                         }
-                        cursor = 0;
                         break;
                     case 4:
                         outSite = true;

@@ -113,9 +113,9 @@
                         if (player.LoseMoney(characters[cursor].DIFFICULTY * 2))
                         {
                             player.EmployCharacter(characters[cursor]);
+                            player.EmployedToParty(player.EMPLOYED.Count - 1);
                             characters[cursor] = null;
                         }
-                        cursor = 0;
                         break;
                     case 4:
                         outSite = true;

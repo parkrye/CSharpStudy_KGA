@@ -137,7 +137,9 @@ namespace ProjectRPG
         /// <returns>이동 성공 여부</returns>
         public bool PartyToEmployed(int index)
         {
-            if (index < 0 || index >= party.MEMBERS)
+            if (index < 0 || index >= 4)
+                return false;
+            if (PARTY.PCs[index] == null)
                 return false;
             EmployCharacter(party.PCs[index]);
             if (party.RemovePC(index))

@@ -9,7 +9,8 @@ namespace ProjectRPG
     {
         List<Item> items;  // 아이템 종류와 총 개수 파악을 위한 리스트
         Item[] products;   // 대기중인 아이템들. 최대 4
-        int screen;        // 메인, 구매, 판매 세가지 화면을 나타내는 숫자
+        enum Screen { 메인, 구매, 판매 }
+        Screen screen;
 
         public Market() : base()
         {
@@ -71,8 +72,7 @@ namespace ProjectRPG
             Console.WriteLine($"[{name} | 소지금 : $ {player.MONEY}]");
             switch (screen)
             {
-                // 메인 화면
-                case 0:
+                case Screen.메인:
                     Console.WriteLine();
                     if (cursor == 0)
                         Console.ForegroundColor = ConsoleColor.Green;
@@ -90,9 +90,7 @@ namespace ProjectRPG
                         Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine($"[{name} 나가기]");
                     break;
-
-                // 구매 화면
-                case 1:
+                case Screen.구매:
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine("[구매]");
                     Console.WriteLine();
@@ -118,9 +116,7 @@ namespace ProjectRPG
                         Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine($"[{name} 나가기]");
                     break;
-
-                // 판매 화면
-                case 2:
+                case Screen.판매:
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine("[판매]");
                     Console.WriteLine();
@@ -147,8 +143,7 @@ namespace ProjectRPG
             int key = Input();
             switch (screen)
             {
-                // 메인 화면
-                case 0:
+                case Screen.메인:
                     switch (key)
                     {
                         case 1:
@@ -168,9 +163,7 @@ namespace ProjectRPG
                             break;
                     }
                     break;
-
-                // 구매 화면
-                case 1:
+                case Screen.구매:
                     switch (key)
                     {
                         case 1:
@@ -190,9 +183,7 @@ namespace ProjectRPG
                             break;
                     }
                     break;
-
-                // 판매 화면
-                case 2:
+                case Screen.판매:
                     switch (key)
                     {
                         case 1:
@@ -221,17 +212,16 @@ namespace ProjectRPG
             {
                 switch (screen)
                 {
-                    // 메인 화면
-                    case 0:
+                    case Screen.메인:
                         switch (cursor)
                         {
                             case 0:
-                                screen = 1;
+                                screen = Screen.구매;
                                 cursor = 0;
                                 goSite = false;
                                 break;
                             case 1:
-                                screen = 2;
+                                screen = Screen.판매;
                                 cursor = 0;
                                 goSite = false;
                                 break;
@@ -240,13 +230,11 @@ namespace ProjectRPG
                                 break;
                         }
                         break;
-
-                    // 구매 화면
-                    case 1:
+                    case Screen.구매:
                         goSite = false;
                         if (cursor == 4)
                         {
-                            screen = 0;
+                            screen = Screen.메인;
                             cursor = 0;
                             break;
                         }
@@ -257,16 +245,13 @@ namespace ProjectRPG
                             player.AddItem(products[cursor]);
                             products[cursor] = null;
                         }
-                        cursor = 0;
                         break;
-
-                    // 판매 화면
-                    case 2:
+                    case Screen.판매:
                         goSite = false;
                         if (cursor == player.INVENTORY.Count)
                         {
-                            screen = 0;
-                            cursor = 0;
+                            screen = Screen.메인;
+                            cursor = 1;
                             break;
                         }
                         player.AddMoney(player.INVENTORY[cursor].PRICE);
