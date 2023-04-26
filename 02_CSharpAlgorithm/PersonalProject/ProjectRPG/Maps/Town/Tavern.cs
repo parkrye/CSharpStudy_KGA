@@ -5,8 +5,8 @@
     /// </summary>
     internal class Tavern : TownSite
     {
-        List<Class> classes;
-        PC[] characters;    // 대기중인 캐릭터들. 최대 4
+        List<Class> classes;    // 랜덤 생성을 위한 클래스 모음
+        PC[] characters;        // 대기중인 캐릭터들. 최대 4
 
         public Tavern() : base()
         {
@@ -18,6 +18,9 @@
             CharacterSetting();
         }
 
+        /// <summary>
+        /// 전체 클래스 종류
+        /// </summary>
         void ClassSetting()
         {
             classes.Add(new Class_Clown());
@@ -26,6 +29,9 @@
             classes.Add(new Class_Soldier());
         }
 
+        /// <summary>
+        /// 고용 가능 캐릭터를 생성하는 메소드
+        /// </summary>
         void CharacterSetting()
         {
             for (int i = 0; i < 4; i++)

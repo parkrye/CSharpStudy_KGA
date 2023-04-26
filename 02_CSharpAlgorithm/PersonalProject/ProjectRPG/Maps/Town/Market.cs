@@ -9,7 +9,7 @@ namespace ProjectRPG
     {
         List<Item> items;  // 아이템 종류와 총 개수 파악을 위한 리스트
         Item[] products;   // 대기중인 아이템들. 최대 4
-        int screen;        // 메인, 구매, 판매
+        int screen;        // 메인, 구매, 판매 세가지 화면을 나타내는 숫자
 
         public Market() : base()
         {
@@ -21,6 +21,9 @@ namespace ProjectRPG
             screen = 0;
         }
 
+        /// <summary>
+        /// 아이템의 총 종류 수를 가시적으로 확인하기 위한 리스트 작성
+        /// </summary>
         void ItemSetting()
         {
             items.Add(new Item_HPPotion1());
@@ -34,6 +37,9 @@ namespace ProjectRPG
             items.Add(new Item_WindBoots());
         }
 
+        /// <summary>
+        /// 상점에서 판매될 아이템 생성
+        /// </summary>
         void ProductSetting()
         {
             for (int i = 0; i < 4; i++)
@@ -65,7 +71,9 @@ namespace ProjectRPG
             Console.WriteLine($"[{name} | 소지금 : $ {player.MONEY}]");
             switch (screen)
             {
+                // 메인 화면
                 case 0:
+                    Console.WriteLine();
                     if (cursor == 0)
                         Console.ForegroundColor = ConsoleColor.Green;
                     else
@@ -82,10 +90,13 @@ namespace ProjectRPG
                         Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine($"[{name} 나가기]");
                     break;
+
+                // 구매 화면
                 case 1:
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine("[구매]");
-                    for(int i = 0; i < 4; i++)
+                    Console.WriteLine();
+                    for (int i = 0; i < 4; i++)
                     {
                         if (cursor == i)
                             Console.ForegroundColor = ConsoleColor.Green;
@@ -107,9 +118,12 @@ namespace ProjectRPG
                         Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine($"[{name} 나가기]");
                     break;
+
+                // 판매 화면
                 case 2:
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine("[판매]");
+                    Console.WriteLine();
                     for (int i = 0; i < player.INVENTORY.Count; i++)
                     {
                         if (cursor == i)
@@ -133,6 +147,7 @@ namespace ProjectRPG
             int key = Input();
             switch (screen)
             {
+                // 메인 화면
                 case 0:
                     switch (key)
                     {
@@ -153,6 +168,8 @@ namespace ProjectRPG
                             break;
                     }
                     break;
+
+                // 구매 화면
                 case 1:
                     switch (key)
                     {
@@ -173,6 +190,8 @@ namespace ProjectRPG
                             break;
                     }
                     break;
+
+                // 판매 화면
                 case 2:
                     switch (key)
                     {
@@ -202,6 +221,7 @@ namespace ProjectRPG
             {
                 switch (screen)
                 {
+                    // 메인 화면
                     case 0:
                         switch (cursor)
                         {
@@ -220,6 +240,8 @@ namespace ProjectRPG
                                 break;
                         }
                         break;
+
+                    // 구매 화면
                     case 1:
                         goSite = false;
                         if (cursor == 4)
@@ -237,6 +259,8 @@ namespace ProjectRPG
                         }
                         cursor = 0;
                         break;
+
+                    // 판매 화면
                     case 2:
                         goSite = false;
                         if (cursor == player.INVENTORY.Count)
