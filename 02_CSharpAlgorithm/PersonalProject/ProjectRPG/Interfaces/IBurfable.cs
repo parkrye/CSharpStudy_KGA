@@ -6,5 +6,10 @@
     /// </summary>
     internal interface IBurfable
     {
+        /// <summary>
+        /// 대상을 버프한다
+        /// </summary>
+        /// <param name="target">대상</param>
+        public void Burf(Character target);
     }
 }

@@ -14,6 +14,12 @@
             get { return turn; }
         }
 
+        /// <summary>
+        /// 생성자
+        /// </summary>
+        /// <param name="_player">플레이어</param>
+        /// <param name="_playerParty">플레이어 파티</param>
+        /// <param name="_enemyParty">적 파티</param>
         public Battle(Player _player, Party _playerParty, Party _enemyParty)
         {
             turn = 1;
@@ -31,32 +37,41 @@
                 turnOrder.Add(pc);
                 pc.StatusSetting();
             }
-            foreach(PC pc in enemyParty.PCs)
+            foreach(PC enemy in enemyParty.PCs)
             {
-                if (pc == null)
+                if (enemy == null)
                     break;
-                turnOrder.Add(pc);
-                pc.StatusSetting();
+                turnOrder.Add(enemy);
+                enemy.StatusSetting();
             }
         }
 
+        /// <summary>
+        /// 전투 개시
+        /// </summary>
         public void StartBattle()
         {
             while (battleOver == 0)
             {
                 TurnOrder();
-                ShowSituation();
                 Play();
                 TurnEnd();
             }
+            ShowSituation();
             Result();
         }
 
+        /// <summary>
+        /// 턴 순서 재설정
+        /// </summary>
         void TurnOrder()
         {
             turnOrder = turnOrder.OrderByDescending(x => x.NOW_INITIATIVE).ToList();
         }
 
+        /// <summary>
+        /// 위쪽 UI 출력
+        /// </summary>
         void ShowSituation()
         {
             Console.Clear();
@@ -89,17 +104,25 @@
             }
         }
 
+        /// <summary>
+        /// 턴 진행
+        /// </summary>
         void Play()
         {
-            foreach(PC pc in turnOrder)
+            foreach(PC turnCharacter in turnOrder)
             {
-                if (pc.NOW_HP == 0)
+                if (turnCharacter.NOW_HP == 0)
+                {
                     continue;
-                if (playerParty.Contains(pc))
+                }
+
+                Thread.Sleep(1000);
+                ShowSituation();
+                if (playerParty.Contains(turnCharacter))
                 {
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.SetCursorPosition(0, 8);
-                    Console.WriteLine($"[{pc.NAME}의 차례]");
+                    Console.WriteLine($"[{turnCharacter.NAME}의 차례]");
 
                     bool selectOver = false;
                     while (!selectOver)
@@ -109,10 +132,10 @@
                             default:
                                 break;
                             case 0:
-                                selectOver = Select_Skill(pc);
+                                selectOver = Select_Skill(turnCharacter);
                                 break;
                             case 1:
-                                selectOver = Select_Item(pc);
+                                selectOver = Select_Item(turnCharacter);
                                 break;
                             case 2:
                                 selectOver = Select_Run();
@@ -122,20 +145,14 @@
                 }
                 else
                 {
-                    for (int i = 0; i < enemyParty.MEMBERS; i++)
-                    {
-                        if (enemyParty.PCs[i] == pc)
-                        {
-                            // 랜덤 스킬, 아이템 선택
-                            // IAttackable이면 플레이어쪽 타겟팅
-                            // IHealable, IBurfable이면 적쪽 타겟팅
-                            break;
-                        }
-                    }
+                    EnemyPlay(turnCharacter);
+                }
 
+                if (playerParty.LIVES == 0 || enemyParty.LIVES == 0)
+                {
+                    break;
                 }
             }
-            Console.SetCursorPosition(0, 30);
         }
 
         // 이벤트 호출을 위한 대리자
@@ -147,65 +164,69 @@
         /// </summary>
         void TurnEnd()
         {
-            int playerDead = 0;
-            for(int i = 0; i < playerParty.MEMBERS; i++)
-            {
-                if (playerParty.PCs[i].NOW_HP == 0)
-                    playerDead++;
-            }
-            if(playerDead == playerParty.MEMBERS - 1)
-            {
-                battleOver = 1;
-            }
-
-            int enemyDead = 0;
-            for(int i = 0; i < enemyParty.MEMBERS; i++)
-            {
-                if (enemyParty.PCs[i].NOW_HP == 0)
-                    enemyDead++;
-            }
-            if (enemyDead == enemyParty.MEMBERS - 1)
+            if(playerParty.LIVES == 0)
             {
                 battleOver = 2;
             }
-
-            turn++;
-            OnTurnEnd?.Invoke();
+            else if (enemyParty.LIVES == 0)
+            {
+                battleOver = 1;
+            }
+            else
+            {
+                turn++;
+                OnTurnEnd?.Invoke();
+            }
         }
 
+        /// <summary>
+        /// 전투 결과 결산
+        /// </summary>
         void Result()
         {
+            // 출력창 지우기
+            Console.SetCursorPosition(0, 10);
+            for (int i = 0; i < 10; i++)
+            {
+                for (int j = 0; j < 60; j++)
+                    Console.Write("　");
+                Console.WriteLine();
+            }
+            Console.ForegroundColor = ConsoleColor.White;
+
             switch (battleOver)
             {
                 // 플레이어 승리
                 case 1:
+                    Console.SetCursorPosition(0, 10);
+                    Console.WriteLine("전투에서 승리했습니다!");
                     int sum = 0;
-                    foreach (PC enemy in enemyParty.PCs)
+                    for(int i = 0; i < enemyParty.MEMBERS; i++)
                     {
-                        sum += enemy.DIFFICULTY;
+                        sum += enemyParty.PCs[i].DIFFICULTY;
                     }
                     player.GetMonsy(sum);
 
                     List<Item> items = new List<Item>();
-                    foreach(PC enemy in enemyParty.PCs)
+                    for (int i = 0; i < enemyParty.MEMBERS; i++)
                     {
-                        foreach(Item item in enemy.ITEMSLOT.ITEMS)
+                        for(int j = 0; j < enemyParty.PCs[i].ITEMSLOT.QUANTITY; j++)
                         {
-                            items.Add(item);
+                            player.AddItem(enemyParty.PCs[i].ITEMSLOT.ITEMS[j]);
                         }
-                    }
-                    foreach(Item item in items)
-                    {
-                        player.AddItem(item);
                     }
                     break;
                 // 플레이어 패배
                 case 2:
+                    Console.SetCursorPosition(0, 10);
+                    Console.WriteLine("전투에서 패배했습니다..");
                     while (playerParty.MEMBERS > 0)
                         playerParty.RemovePC(0);
                     break;
                 // 플레이어 도주
                 case 3:
+                    Console.SetCursorPosition(0, 10);
+                    Console.WriteLine("전투에서 도망쳤습니다!");
                     break;
             }
         }
@@ -282,7 +303,7 @@
         bool Select_Skill(PC pc)
         {
             int select = 0;
-            int count = pc.SKILLSLOT.SIZE;
+            int count = pc.SKILLSLOT.QUANTITY;
 
             while (true)
             {
@@ -297,8 +318,6 @@
 
                 for (int i = 0; i < count; i++)
                 {
-                    if (pc.SKILLSLOT.SKILLS[i] == null)
-                        break;
                     if (i == select)
                         Console.ForegroundColor = ConsoleColor.Green;
                     else
@@ -329,7 +348,7 @@
                             select = 0;
                         break;
                     case 5:
-                        PC target = Targeting(pc);
+                        PC target = Targeting(pc, pc.SKILLSLOT.SKILLS[select] is IAttackable);
                         if (target == null)
                             break;
                         if (pc.SKILLSLOT.UseSkill(select, target, pc.STATUS))
@@ -350,7 +369,7 @@
         bool Select_Item(PC pc)
         {
             int select = 0;
-            int count = pc.ITEMSLOT.SIZE;
+            int count = pc.ITEMSLOT.QUANTITY;
 
             while (true)
             {
@@ -365,8 +384,6 @@
 
                 for (int i = 0; i < count; i++)
                 {
-                    if (pc.ITEMSLOT.ITEMS[i] == null)
-                        break;
                     if (i == select)
                         Console.ForegroundColor = ConsoleColor.Green;
                     else
@@ -397,7 +414,7 @@
                             select = 0;
                         break;
                     case 5:
-                        PC target = Targeting(pc);
+                        PC target = Targeting(pc, pc.ITEMSLOT.ITEMS[select] is IAttackable);
                         if (target == null)
                             break;
                         pc.ITEMSLOT.UseItem(select, target);
@@ -422,10 +439,15 @@
                     Console.Write("　");
                 Console.WriteLine();
             }
+            Console.SetCursorPosition(0, 10);
 
             if (random.Next(10) < 5 - enemyParty.MEMBERS * 2 + playerParty.MEMBERS)
             {
                 battleOver = 3;
+            }
+            else
+            {
+                Console.WriteLine("도망치는데 실패했습니다..");
             }
 
             return true;
@@ -435,8 +457,9 @@
         /// 타겟팅
         /// </summary>
         /// <param name="pc">시전자</param>
+        /// <param name="isAttack">공격인지</param>
         /// <returns>타겟. 없을 경우 null</returns>
-        PC Targeting(PC pc)
+        PC Targeting(PC pc, bool isAttack)
         {
             int select = 0;
 
@@ -452,6 +475,7 @@
                 }
 
                 Console.SetCursorPosition(0, 14);
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine($"[대상 : {turnOrder[select].NAME}]");
 
                 int input = Input();
@@ -464,15 +488,27 @@
                         select--;
                         if (select < 0)
                             select = turnOrder.Count - 1;
+                        if (isAttack && playerParty.Contains(turnOrder[select]))
+                            select--;
+                        if (select < 0)
+                            select = turnOrder.Count - 1;
                         while (turnOrder[select] == null)
                             select--;
+                        if (select < 0)
+                            select = turnOrder.Count - 1;
                         break;
                     case 2:
                     case 4:
                         select++;
                         if (select >= turnOrder.Count)
                             select = 0;
+                        if (isAttack && playerParty.Contains(turnOrder[select]))
+                            select++;
+                        if (select >= turnOrder.Count)
+                            select = 0;
                         if (turnOrder[select] == null)
+                            select = 0;
+                        if (select >= turnOrder.Count)
                             select = 0;
                         break;
                     case 5:
@@ -484,10 +520,99 @@
         }
 
         /// <summary>
+        /// 적 행동
+        /// </summary>
+        /// <param name="enemy">행동하는 적 캐릭터</param>
+        void EnemyPlay(PC enemy)
+        {
+            bool done = false;
+            while (!done)
+            {
+                bool targeting = false;
+                int count = enemy.ITEMSLOT.QUANTITY + enemy.SKILLSLOT.QUANTITY;
+                int select = 0;
+                PC target = null;
+
+                while (!targeting)
+                {
+                    select = random.Next(count);
+                    if (select < enemy.ITEMSLOT.QUANTITY)
+                    {
+                        if (enemy.ITEMSLOT.ITEMS[select] is IAttackable)
+                        {
+                            target = playerParty.PCs[random.Next(playerParty.MEMBERS)];
+                            if (target.NOW_HP > 0)
+                                targeting = true;
+                        }
+                        else if (enemy.ITEMSLOT.ITEMS[select] is IHealable)
+                        {
+                            target = enemyParty.PCs[random.Next(enemyParty.MEMBERS)];
+                            if (target.NOW_HP < target.MAX_HP)
+                                targeting = true;
+                        }
+                        else if (enemy.ITEMSLOT.ITEMS[select] is IBurfable)
+                        {
+                            target = enemyParty.PCs[random.Next(enemyParty.MEMBERS)];
+                            if (target.NOW_HP > 0)
+                                targeting = true;
+                        }
+                    }
+                    else
+                    {
+                        if (enemy.SKILLSLOT.SKILLS[select - enemy.ITEMSLOT.QUANTITY] is IAttackable)
+                        {
+                            target = playerParty.PCs[random.Next(playerParty.MEMBERS)];
+                            if (target.NOW_HP > 0)
+                                targeting = true;
+                        }
+                        else if (enemy.SKILLSLOT.SKILLS[select - enemy.ITEMSLOT.QUANTITY] is IHealable)
+                        {
+                            target = enemyParty.PCs[random.Next(enemyParty.MEMBERS)];
+                            if (target.NOW_HP < target.MAX_HP)
+                                targeting = true;
+                        }
+                        else if (enemy.ITEMSLOT.ITEMS[select - enemy.ITEMSLOT.QUANTITY] is IBurfable)
+                        {
+                            target = enemyParty.PCs[random.Next(enemyParty.MEMBERS)];
+                            if (target.NOW_HP > 0)
+                                targeting = true;
+                        }
+                    }
+                }
+
+                // 출력창 지우기
+                Console.SetCursorPosition(0, 10);
+                for (int i = 0; i < 10; i++)
+                {
+                    for (int j = 0; j < 60; j++)
+                        Console.Write("　");
+                    Console.WriteLine();
+                }
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.SetCursorPosition(0, 10);
+                Console.Write($"{enemy.NAME} 은 {target.NAME} 에게 ");
+
+                if (select < enemy.ITEMSLOT.QUANTITY)
+                {
+                    Console.WriteLine($"{enemy.ITEMSLOT.ITEMS[select].NAME} 을 사용했다!");
+                    if (enemy.ITEMSLOT.UseItem(select, target))
+                        done = true;
+                }
+                else
+                {
+                    select -= enemy.ITEMSLOT.QUANTITY;
+                    Console.WriteLine($"{enemy.SKILLSLOT.SKILLS[select].NAME} 을 사용했다!");
+                    if (enemy.SKILLSLOT.UseSkill(select, target, enemy.STATUS))
+                        done = true;
+                }
+            }
+        }
+
+        /// <summary>
         /// 입력 처리
         /// </summary>
         /// <returns>입력 종류</returns>
-        public int Input()
+        int Input()
         {
             switch (InputManager.GetInput())
             {

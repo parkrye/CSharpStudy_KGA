@@ -6,7 +6,7 @@
     internal abstract class Item_None : Item
     {
         /// <summary>
-        /// 생성자
+        /// 아이템 타입을 설정하는 생성자
         /// </summary>
         public Item_None()
         {

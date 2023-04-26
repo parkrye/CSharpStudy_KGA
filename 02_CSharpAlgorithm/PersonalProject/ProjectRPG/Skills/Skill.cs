@@ -11,7 +11,7 @@
     internal abstract class Skill
     {
 
-        protected ITargetable self, other;  // 스킬 보유자, 지목한 대상
+        protected IHitable self, other;  // 스킬 보유자, 지목한 대상
 
         protected string name;              // 스킬 이름
         protected int level, exp;           // 스킬 레벨, 경험ㅁ치
@@ -76,7 +76,7 @@
         /// 사용자를 지정하는 메소드
         /// </summary>
         /// <param name="targetable">지정할 사용자</param>
-        public void SetUser(ITargetable targetable)
+        public void SetUser(IHitable targetable)
         {
             self = targetable;
         }
@@ -85,7 +85,7 @@
         /// 대상을 지정하는 메소드
         /// </summary>
         /// <param name="targetable">지정할 대상</param>
-        public void SetTarget(ITargetable targetable)
+        public void SetTarget(IHitable targetable)
         {
             other = targetable;
         }
