@@ -1,6 +1,6 @@
 ﻿namespace ProjectRPG
 {
-    public enum Key { LEFT, RIGHT, UP, DOWN, ENTER, CANEL, NONE };
+    public enum Key { NONE, LEFT, RIGHT, UP, DOWN, ENTER, CANEL };
 
     internal static class InputManager
     {

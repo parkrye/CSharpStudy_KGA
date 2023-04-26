@@ -2,12 +2,14 @@
 {
     internal class Field
     {
-        protected enum Tile { BLOCK, ROAD, EVENT, PORTAL }
+        enum Tile { BLOCK, ROAD, BUSH, TOWN }
 
-        protected Tile[,] tiles;
-        protected string name;
-        protected int posX, posY;
-        protected bool inMap;
+        Tile[,] tiles;
+        string name;
+        int posX, posY;
+        bool inMap;
+
+        Player player;
 
         public string NAME
         {
@@ -15,17 +17,46 @@
             set { name = value; }
         }
 
-        public void StartMap()
+        public void StartMap(Player _player)
         {
+            player = _player;
             inMap = true;
+            SetField();
             while (inMap)
             {
                 DrawMap();
-                Input();
+                Move();
             }
         }
 
-        public void DrawMap()
+        void SetField()
+        {
+            tiles = new Tile[20, 20]
+            {
+                {Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK },
+                {Tile.BLOCK, Tile.ROAD, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK },
+                {Tile.BLOCK, Tile.ROAD, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK },
+                {Tile.BLOCK, Tile.ROAD, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK },
+                {Tile.BLOCK, Tile.ROAD, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK },
+                {Tile.BLOCK, Tile.ROAD, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK },
+                {Tile.BLOCK, Tile.ROAD, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK },
+                {Tile.BLOCK, Tile.ROAD, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK },
+                {Tile.BLOCK, Tile.ROAD, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK },
+                {Tile.BLOCK, Tile.ROAD, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK },
+                {Tile.BLOCK, Tile.ROAD, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK },
+                {Tile.BLOCK, Tile.ROAD, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK },
+                {Tile.BLOCK, Tile.ROAD, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK },
+                {Tile.BLOCK, Tile.ROAD, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK },
+                {Tile.BLOCK, Tile.ROAD, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK },
+                {Tile.BLOCK, Tile.ROAD, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK },
+                {Tile.BLOCK, Tile.ROAD, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK },
+                {Tile.BLOCK, Tile.ROAD, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK },
+                {Tile.BLOCK, Tile.ROAD, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK },
+                {Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK, Tile.BLOCK },
+            };
+        }
+
+        void DrawMap()
         {
             Console.SetCursorPosition(0, 0);
             for (int y = 0; y < tiles.GetLength(0); y++)
@@ -34,21 +65,32 @@
                 {
                     switch (tiles[y, x])
                     {
+                        default:
                         case Tile.BLOCK:
+                            Console.ForegroundColor = ConsoleColor.Gray;
                             Console.Write("■");
                             break;
                         case Tile.ROAD:
                             Console.Write("　");
                             break;
-                        case Tile.PORTAL:
-                            Console.Write("◎");
+                        case Tile.BUSH:
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.Write("□");
+                            break;
+                        case Tile.TOWN:
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            Console.Write("▤");
                             break;
                     }
                 }
+                Console.WriteLine();
             }
+            Console.SetCursorPosition(posX, posY);
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write("☆");
         }
 
-        public void Input()
+        void Move()
         {
             switch (InputManager.GetInput())
             {
@@ -61,15 +103,15 @@
                     {
                         if (tiles[posY, posX + 1] == Tile.ROAD)
                         {
-                            posX++;
+                            posX--;
                         }
-                        else if (tiles[posY, posX + 1] == Tile.EVENT)
+                        else if (tiles[posY, posX + 1] == Tile.BUSH)
                         {
-                            posX++;
+                            posX--;
                         }
-                        else if (tiles[posY, posX + 1] == Tile.PORTAL)
+                        else if (tiles[posY, posX + 1] == Tile.TOWN)
                         {
-                            posX++;
+                            posX--;
                         }
                     }
                     break;
@@ -78,15 +120,15 @@
                     {
                         if (tiles[posY, posX - 1] == Tile.ROAD)
                         {
-                            posX--;
+                            posX++;
                         }
-                        else if (tiles[posY, posX - 1] == Tile.EVENT)
+                        else if (tiles[posY, posX - 1] == Tile.BUSH)
                         {
-                            posX--;
+                            posX++;
                         }
-                        else if (tiles[posY, posX - 1] == Tile.PORTAL)
+                        else if (tiles[posY, posX - 1] == Tile.TOWN)
                         {
-                            posX--;
+                            posX++;
                         }
                     }
                     break;
@@ -97,11 +139,11 @@
                         {
                             posY--;
                         }
-                        else if (tiles[posY - 1, posX] == Tile.EVENT)
+                        else if (tiles[posY - 1, posX] == Tile.BUSH)
                         {
                             posY--;
                         }
-                        else if (tiles[posY - 1, posX] == Tile.PORTAL)
+                        else if (tiles[posY - 1, posX] == Tile.TOWN)
                         {
                             posY--;
                         }
@@ -114,22 +156,22 @@
                         {
                             posY++;
                         }
-                        else if (tiles[posY + 1, posX] == Tile.EVENT)
+                        else if (tiles[posY + 1, posX] == Tile.BUSH)
                         {
                             posY++;
                         }
-                        else if (tiles[posY + 1, posX] == Tile.PORTAL)
+                        else if (tiles[posY + 1, posX] == Tile.TOWN)
                         {
                             posY++;
                         }
                     }
                     break;
                 case Key.ENTER:
-                    if (tiles[posX, posY] == Tile.PORTAL)
+                    if (tiles[posY, posX] == Tile.TOWN)
                     {
                         inMap = false;
                     }
-                    else if (tiles[posX, posY] == Tile.EVENT)
+                    else if (tiles[posY, posX] == Tile.BUSH)
                     {
 
                     }

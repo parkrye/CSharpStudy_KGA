@@ -25,6 +25,8 @@
         /// </summary>
         public Item[] ITEMS { get { return items; } }
 
+        public bool HASSLOT { get { return quantity < size; } }
+
         /// <summary>
         /// 생성자
         /// </summary>

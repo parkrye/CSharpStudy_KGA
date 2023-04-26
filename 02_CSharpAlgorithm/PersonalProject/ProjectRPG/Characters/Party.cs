@@ -1,4 +1,5 @@
-﻿using static ProjectRPG.Character;
+﻿using System.Drawing;
+using static ProjectRPG.Character;
 
 namespace ProjectRPG
 {
@@ -9,6 +10,7 @@ namespace ProjectRPG
     {
         PC[] party;     // 파티 구성원. 최대 넷
         int members;    // 파티 인원. 0~4
+        int size;       // 파티 최대 인원. 4
 
         /// <summary>
         /// 파티 구성원에 대한 프로퍼티
@@ -38,9 +40,10 @@ namespace ProjectRPG
         /// <summary>
         /// 파티 생성자. 최대 4
         /// </summary>
-        public Party()
+        public Party(int _size = 4)
         {
-            party = new PC[4];
+            size = _size;
+            party = new PC[size];
         }
 
         /// <summary>
@@ -52,7 +55,7 @@ namespace ProjectRPG
         {
             if (members == 4)
                 return false;
-            for(int i = 0; i < 4; i++)
+            for(int i = 0; i < size; i++)
             {
                 if (party[i] == null)
                 {
@@ -71,11 +74,15 @@ namespace ProjectRPG
         /// <returns>제외 성공 여부</returns>
         public bool RemovePC(int index)
         {
-            if (index < 0 || index >= 4)
+            if (index < 0 || index >= size)
                 return false;
             if (party[index] != null)
             {
-                party[index] = null;
+                for(int i = index; i < size - 1; i++)
+                {
+                    party[i] = party[i + 1];
+                }
+                party[size - 1] = null;
                 members--;
                 return true;
             }
@@ -100,7 +107,7 @@ namespace ProjectRPG
         /// <returns>인덱스의 캐릭터. 없을 경우 null 반환</returns>
         public PC GetMember(int index)
         {
-            if (index < 0 || index >= 4)
+            if (index < 0 || index >= size)
                 return null;
             return party[index];
         }
