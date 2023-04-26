@@ -3,14 +3,14 @@
     /// <summary>
     /// 직업을 상속한 상세 직업 클래스
     /// </summary>
-    internal class Class_Figther : Class
+    internal class Class_Soldier : Class
     {
         /// <summary>
         /// 생성자
         /// </summary>
-        public Class_Figther()
+        public Class_Soldier()
         {
-            name = "장사";
+            name = "병사";
             defaultStatus = new int[5];
             HP = 3;
             SP = 0;
