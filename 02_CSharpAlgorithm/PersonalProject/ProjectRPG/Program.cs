@@ -10,8 +10,8 @@
             player.AddItem(new Item_HPPotion3());
             player.AddItem(new Item_HPPotion3());
 
-            Town town = new Town();
-            town.GetIn(player);
+            Field field = new Field();
+            field.StartMap(player);
         }
     }
 }
