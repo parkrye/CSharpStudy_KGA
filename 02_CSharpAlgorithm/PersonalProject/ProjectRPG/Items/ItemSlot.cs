@@ -7,12 +7,18 @@
     {
         Character character;    // 아이템 슬롯을 가진 캐릭터
         int size;               // 아이템 슬롯 크기
+        int quantity;           // 아이템 개수
         Item[] items;           // 아이템 배열
 
         /// <summary>
         /// 아이템 슬롯 크기에 대한 프로퍼티
         /// </summary>
         public int SIZE { get { return size; } }
+
+        /// <summary>
+        /// 아이템 개수에 대한 프로퍼티
+        /// </summary>
+        public int QUANTITY { get { return quantity; } }
 
         /// <summary>
         /// 아이템 배열에 대한 프로퍼티
@@ -51,7 +57,9 @@
                     {
                         items[i].AddListener(character);
                     }
-                    character.DIFFICULTY += 1;
+                    if (character != null)
+                        character.DIFFICULTY++;
+                    quantity++;
                     return true;
                 }
             }
@@ -76,7 +84,9 @@
                 items[i] = items[i + 1];
             }
             items[size - 1] = null;
-            character.DIFFICULTY -= 1;
+            if(character != null)
+                character.DIFFICULTY--;
+            quantity--;
             return true;
         }
 

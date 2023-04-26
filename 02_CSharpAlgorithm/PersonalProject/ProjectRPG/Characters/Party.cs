@@ -21,6 +21,21 @@ namespace ProjectRPG
         public int MEMBERS { get { return members; } }
 
         /// <summary>
+        /// 살아있는 캐릭터 수에 대한 프로퍼티
+        /// </summary>
+        public int LIVES
+        {
+            get 
+            { 
+                int count = 0;
+                for(int i = 0; i < members; i++)
+                    if (PCs[i].NOW_HP > 0)
+                        count++;
+                return count;
+            }
+        }
+
+        /// <summary>
         /// 파티 생성자. 최대 4
         /// </summary>
         public Party()

@@ -3,7 +3,7 @@
     /// <summary>
     /// 아이템 종류에 대한 열거형
     /// </summary>
-    internal enum ItemType { NONE, PASSIVE, ACTIVE };
+    internal enum ItemType { NONE, EQUIPMENT, ACTIVE };
 
 
     /// <summary>

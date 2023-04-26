@@ -7,12 +7,18 @@
     {
         Character character;    // 스킬 슬롯을 가진 캐릭터
         int size;               // 스킬 슬롯의 현재 크기
+        int quantity;           // 스킬 개수
         Skill[] skills;         // 스킬 배열
 
         /// <summary>
         /// 스킬 슬롯 크기에 대한 프로퍼티
         /// </summary>
         public int SIZE { get { return size; } }
+
+        /// <summary>
+        /// 스킬 개수에 대한 프로퍼티
+        /// </summary>
+        public int QUANTITY { get { return quantity; } }
 
         /// <summary>
         /// 스킬 배열에 대한 프로퍼티
@@ -50,7 +56,9 @@
                     {
                         ((Skill_Passive)skills[i]).AddListener(character);
                     }
-                    character.DIFFICULTY += 1;
+                    if (character != null)
+                        character.DIFFICULTY++;
+                    quantity++;
                     return true;
                 }
             }
@@ -75,7 +83,9 @@
                 skills[i] = skills[i + 1];
             }
             skills[size - 1] = null;
-            character.DIFFICULTY -= 1;
+            if (character != null)
+                character.DIFFICULTY--;
+            quantity--;
             return true;
         }
 
@@ -102,7 +112,7 @@
         /// <param name="param1">능력치 데이터</param>
         /// <param name="param2">부가 데이터</param>
         /// <returns>스킬 사용 성공 여부</returns>
-        public bool UseSkill(int index, ITargetable hitable, int[,] param1, params int[] param2)
+        public bool UseSkill(int index, IHitable hitable, int[,] param1, params int[] param2)
         {
             if (index < 0 || index >= size)
                 return false;

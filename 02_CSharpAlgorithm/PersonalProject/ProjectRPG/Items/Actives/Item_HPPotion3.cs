@@ -9,15 +9,15 @@
             consumable = true;
         }
 
-        /// <summary>
-        /// 아이템 사용에 대한 메소드
-        /// </summary>
-        /// <param name="target">사용 대상</param>
-        /// <returns>아이템 소모 여부</returns>
         public override bool Active(Character target)
         {
-            target.NOW_HP += new Random().Next(12) + new Random().Next(12) + 2;
+            Heal(target);
             return consumable;
+        }
+
+        public void Heal(Character target)
+        {
+            target.NOW_HP += new Random().Next(12) + new Random().Next(12) + 2;
         }
     }
 }

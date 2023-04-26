@@ -13,7 +13,7 @@
     /// <summary>
     /// 캐릭터에 대한 클래스
     /// </summary>
-    internal abstract class Character : ITargetable
+    internal abstract class Character : IHitable
     {
 
         protected string name;          // 캐릭터의 이름
@@ -107,7 +107,7 @@
         /// </summary>
         /// <param name="index">사용할 스킬 번호</param>
         /// <param name="targetable">스킬 대상</param>
-        public void UseSkill(int index, ITargetable targetable)
+        public void UseSkill(int index, IHitable targetable)
         {
             skillSlot.UseSkill(index, targetable, status);                  // 스킬 슬롯에서 해당 스킬을 시전하고, 소모 활력을 반환받는다
             OnSPDecreased?.Invoke(status);                                  // 활력 감소에 대한 패시브 스킬이 시전되고, 활력을 조정한다

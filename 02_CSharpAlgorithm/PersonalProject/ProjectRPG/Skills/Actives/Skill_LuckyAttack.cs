@@ -16,14 +16,9 @@
             level = _level;
             exp = _exp;
             value = 1;
-            cost = 10;
+            cost = 5;
         }
 
-        /// <summary>
-        /// 스킬 발동에 대한 메소드
-        /// </summary>
-        /// <param name="param1">능력치 데이터</param>
-        /// <param name="param2">부가 데이터</param>
         public override bool Active(int[,] param1, params int[] param2)
         {
             if (other != null)
@@ -33,14 +28,9 @@
             return false;
         }
 
-        /// <summary>
-        /// 공격 메소드
-        /// </summary>
-        /// <param name="targetable">공격 대상</param>
-        /// <param name="param">능력치 데이터</param>
-        public bool Attack(ITargetable targetable, params int[] param)
+        public bool Attack(IHitable hitable, params int[] param)
         {
-            if(targetable.Hit(new Random().Next(value * 2 + 1) * param[0] * level))
+            if(hitable.Hit(new Random().Next(value * 2 + 1) * param[0] * level))
             {
                 GetEXP(1);
                 return true;

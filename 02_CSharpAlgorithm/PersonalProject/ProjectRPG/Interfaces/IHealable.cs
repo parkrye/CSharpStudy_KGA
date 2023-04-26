@@ -6,5 +6,10 @@
     /// </summary>
     internal interface IHealable
     {
+        /// <summary>
+        /// 대상을 회복시킨다
+        /// </summary>
+        /// <param name="target">대상</param>
+        public void Heal(Character target);
     }
 }
