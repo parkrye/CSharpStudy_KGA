@@ -1,13 +1,13 @@
 ﻿namespace ProjectRPG
 {
     /// <summary>
-    /// 마을의 집에 대한 클래스
+    /// 마을의 의원에 대한 클래스
     /// </summary>
-    internal class Home : TownSite
+    internal class Clinic : TownSite
     {
-        public Home()
+        public Clinic()
         {
-            name = "집";
+            name = "의료소";
         }
 
         public override void GetIn()

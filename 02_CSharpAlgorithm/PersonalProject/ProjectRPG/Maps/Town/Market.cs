@@ -1,13 +1,13 @@
 ﻿namespace ProjectRPG
 {
     /// <summary>
-    /// 마을의 집에 대한 클래스
+    /// 마을의 상점에 대한 클래스
     /// </summary>
-    internal class Home : TownSite
+    internal class Market : TownSite
     {
-        public Home()
+        public Market()
         {
-            name = "집";
+            name = "상점";
         }
 
         public override void GetIn()
