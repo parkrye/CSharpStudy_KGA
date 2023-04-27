@@ -9,8 +9,9 @@ namespace ProjectRPG
     {
         List<Item> items;  // 아이템 종류와 총 개수 파악을 위한 리스트
         Item[] products;   // 대기중인 아이템들. 최대 4
-        enum Screen { 메인, 구매, 판매 }
+        enum Screen { MAIN, BUY, SELL }
         Screen screen;
+        int subCursor;
 
         public Market() : base()
         {
@@ -20,6 +21,7 @@ namespace ProjectRPG
             products = new Item[4];
             ProductSetting();
             screen = 0;
+            subCursor = 0;
         }
 
         /// <summary>
@@ -66,70 +68,105 @@ namespace ProjectRPG
         protected override void ShowSites()
         {
             Console.Clear();
+            Console.ForegroundColor = ConsoleColor.White;
+            for (int i = 0; i < 60; i++)
+            {
+                Console.SetCursorPosition(i, 0);
+                Console.Write("=");
+                Console.SetCursorPosition(i, 10);
+                Console.Write("=");
+            }
+            for (int i = 1; i < 10; i++)
+            {
+                Console.SetCursorPosition(0, i);
+                Console.Write("||");
+                Console.SetCursorPosition(58, i);
+                Console.Write("||");
+            }
 
-            Console.SetCursorPosition(0, 0);
+            Console.SetCursorPosition(20, 1);
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine($"[{name} | 소지금 : $ {player.MONEY}]");
             switch (screen)
             {
-                case Screen.메인:
-                    Console.WriteLine();
-                    if (cursor == 0)
+                case Screen.MAIN:
+                    Console.SetCursorPosition(10, 4);
+                    if (cursor == 0 && subCursor == 0)
                         Console.ForegroundColor = ConsoleColor.Green;
                     else
                         Console.ForegroundColor = ConsoleColor.White;
-                    Console.WriteLine("[구매]");
-                    if (cursor == 1)
+                    Console.Write("[구매]");
+
+                    Console.SetCursorPosition(40, 4);
+                    if (cursor == 1 && subCursor == 0)
                         Console.ForegroundColor = ConsoleColor.Green;
                     else
                         Console.ForegroundColor = ConsoleColor.White;
-                    Console.WriteLine("[판매]");
-                    if (cursor == 2)
+                    Console.Write("[판매]");
+
+                    Console.SetCursorPosition(40, 9);
+                    if (subCursor == 1)
                         Console.ForegroundColor = ConsoleColor.Green;
                     else
                         Console.ForegroundColor = ConsoleColor.White;
-                    Console.WriteLine($"[{name} 나가기]");
+                    Console.Write($"[{name} 나가기]");
                     break;
-                case Screen.구매:
+
+                case Screen.BUY:
                     Console.ForegroundColor = ConsoleColor.White;
-                    Console.WriteLine("[구매]");
-                    Console.WriteLine();
+                    Console.SetCursorPosition(25, 2);
+                    Console.Write("[구매]");
+
                     for (int i = 0; i < 4; i++)
                     {
+                        Console.SetCursorPosition(10, i + 4);
+
                         if (cursor == i)
                             Console.ForegroundColor = ConsoleColor.Green;
                         else
                             Console.ForegroundColor = ConsoleColor.White;
 
+                        
                         if (products[i] != null)
                         {
-                            Console.WriteLine($"[{products[i].NAME} : $ {products[i].PRICE}]");
+                            Console.Write($"[{products[i].NAME} : $ {products[i].PRICE}]");
                         }
                         else
                         {
-                            Console.WriteLine("[---]");
+                            Console.Write("[---]");
                         }
                     }
+
+                    Console.SetCursorPosition(40, 9);
                     if (cursor == 4)
                         Console.ForegroundColor = ConsoleColor.Green;
                     else
                         Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine($"[{name} 나가기]");
                     break;
-                case Screen.판매:
+
+                case Screen.SELL:
                     Console.ForegroundColor = ConsoleColor.White;
-                    Console.WriteLine("[판매]");
-                    Console.WriteLine();
-                    for (int i = 0; i < player.INVENTORY.Count; i++)
+                    Console.SetCursorPosition(25, 2);
+                    Console.Write("[판매]");
+
+                    for (int i = 0; i < 4; i++)
                     {
+                        if (subCursor + i >= player.INVENTORY.Count)
+                            break;
+
+                        Console.SetCursorPosition(10, i + 4);
+
                         if (cursor == i)
                             Console.ForegroundColor = ConsoleColor.Green;
                         else
                             Console.ForegroundColor = ConsoleColor.White;
 
-                        Console.WriteLine($"[{player.INVENTORY[i].NAME} : $ {player.INVENTORY[i].PRICE}]");
+                        Console.WriteLine($"[{player.INVENTORY[i + subCursor].NAME} : $ {player.INVENTORY[i + subCursor].PRICE}]");
                     }
-                    if (cursor == player.INVENTORY.Count)
+
+                    Console.SetCursorPosition(40, 9);
+                    if (cursor == 4)
                         Console.ForegroundColor = ConsoleColor.Green;
                     else
                         Console.ForegroundColor = ConsoleColor.White;
@@ -140,66 +177,96 @@ namespace ProjectRPG
 
         protected override void GetCursor()
         {
-            int key = Input();
             switch (screen)
             {
-                case Screen.메인:
-                    switch (key)
+                case Screen.MAIN:
+                    switch (InputManager.GetInput())
                     {
-                        case 1:
-                        case 3:
+                        default:
+                            break;
+                        case Key.LEFT:
                             cursor--;
                             if (cursor < 0)
-                                cursor = 2;
+                                cursor = 1;
                             break;
-                        case 2:
-                        case 4:
+                        case Key.UP:
+                            subCursor--;
+                            if(subCursor < 0)
+                                subCursor = 1;
+                            break;
+                        case Key.RIGHT:
                             cursor++;
-                            if (cursor > 2)
+                            if (cursor > 1)
                                 cursor = 0;
                             break;
-                        case 5:
+                        case Key.DOWN:
+                            subCursor++;
+                            if (subCursor > 1)
+                                subCursor = 0;
+                            break;
+                        case Key.ENTER:
                             goSite = true;
+                            break;
+                        case Key.CANEL:
+                            outSite = true;
                             break;
                     }
                     break;
-                case Screen.구매:
-                    switch (key)
+
+                case Screen.BUY:
+                    switch (InputManager.GetInput())
                     {
-                        case 1:
-                        case 3:
+                        default:
+                            break;
+                        case Key.LEFT:
+                        case Key.UP:
                             cursor--;
                             if (cursor < 0)
                                 cursor = 4;
                             break;
-                        case 2:
-                        case 4:
+                        case Key.RIGHT:
+                        case Key.DOWN:
                             cursor++;
                             if (cursor > 4)
                                 cursor = 0;
                             break;
-                        case 5:
+                        case Key.ENTER:
                             goSite = true;
+                            break;
+                        case Key.CANEL:
+                            screen = Screen.MAIN;
                             break;
                     }
                     break;
-                case Screen.판매:
-                    switch (key)
+
+                case Screen.SELL:
+                    switch (InputManager.GetInput())
                     {
-                        case 1:
-                        case 3:
+                        default:
+                            break;
+                        case Key.LEFT:
+                            if (subCursor > 0)
+                                subCursor -= 4;
+                            break;
+                        case Key.UP:
                             cursor--;
                             if (cursor < 0)
-                                cursor = player.INVENTORY.Count;
+                                cursor = 4;
                             break;
-                        case 2:
-                        case 4:
+                        case Key.RIGHT:
+                            if (player.INVENTORY.Count > (subCursor + 4))
+                                subCursor += 4;
+                            break;
+                        case Key.DOWN:
                             cursor++;
-                            if (cursor > player.INVENTORY.Count)
+                            if (cursor > 4)
                                 cursor = 0;
                             break;
-                        case 5:
+                        case Key.ENTER:
                             goSite = true;
+                            break;
+                        case Key.CANEL:
+                            screen = Screen.MAIN;
                             break;
                     }
                     break;
@@ -212,32 +279,37 @@ namespace ProjectRPG
             {
                 switch (screen)
                 {
-                    case Screen.메인:
-                        switch (cursor)
+                    case Screen.MAIN:
+                        if(subCursor == 0)
                         {
-                            case 0:
-                                screen = Screen.구매;
-                                cursor = 0;
-                                goSite = false;
-                                break;
-                            case 1:
-                                screen = Screen.판매;
-                                cursor = 0;
-                                goSite = false;
-                                break;
-                            case 2:
-                                outSite = true;
-                                break;
+                            switch (cursor)
+                            {
+                                case 0:
+                                    screen = Screen.BUY;
+                                    break;
+                                case 1:
+                                    screen = Screen.SELL;
+                                    break;
+                            }
                         }
+                        else
+                            outSite = true;
+
+                        goSite = false;
+                        cursor = 0;
+                        subCursor = 0;
                         break;
-                    case Screen.구매:
+
+                    case Screen.BUY:
                         goSite = false;
                         if (cursor == 4)
                         {
-                            screen = Screen.메인;
+                            screen = Screen.MAIN;
                             cursor = 0;
+                            subCursor = 0;
                             break;
                         }
+
                         if (products[cursor] == null)
                             break;
                         if (player.LoseMoney(products[cursor].PRICE))
@@ -245,18 +317,23 @@ namespace ProjectRPG
                             player.AddItem(products[cursor]);
                             products[cursor] = null;
                         }
-                        break;
-                    case Screen.판매:
-                        goSite = false;
-                        if (cursor == player.INVENTORY.Count)
-                        {
-                            screen = Screen.메인;
-                            cursor = 1;
-                            break;
-                        }
-                        player.AddMoney(player.INVENTORY[cursor].PRICE);
-                        player.RemoveItem(cursor);
                         cursor = 0;
+                        subCursor = 0;
+                        break;
+
+                    case Screen.SELL:
+                        goSite = false;
+                        if (cursor == 4)
+                        {
+                            screen = Screen.MAIN;
+                        }
+                        else
+                        {
+                            player.AddMoney(player.INVENTORY[cursor + subCursor].PRICE);
+                            player.RemoveItem(cursor + subCursor);
+                        }
+                        cursor = 1;
+                        subCursor = 0;
                         break;
                 }
             }

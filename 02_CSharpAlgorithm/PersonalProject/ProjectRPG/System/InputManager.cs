@@ -4,7 +4,10 @@
 
     internal static class InputManager
     {
-
+        /// <summary>
+        /// 키 입력을 열거형 키로 반환하는 메소드
+        /// </summary>
+        /// <returns>열거형 키</returns>
         public static Key GetInput()
         {
             ConsoleKey inputKey = Console.ReadKey().Key;
