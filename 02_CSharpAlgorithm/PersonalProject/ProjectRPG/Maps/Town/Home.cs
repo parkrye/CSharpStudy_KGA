@@ -129,6 +129,16 @@ namespace ProjectRPG
                 case Screen.PartyCharacter:
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine($"[{player.PARTY.PCs[prevCursor].NAME}]");
+                    Console.WriteLine($"[HP : {player.PARTY.PCs[prevCursor].MAX_HP} | SP : {player.PARTY.PCs[prevCursor].MAX_HP}]");
+                    Console.WriteLine($"[신체 : {player.PARTY.PCs[prevCursor].MAX_PHYSICSAL} | 정신 : {player.PARTY.PCs[prevCursor].MAX_MENTAL} | 순발력 : {player.PARTY.PCs[prevCursor].MAX_INITIATIVE}]");
+                    Console.Write($"[보유 기술] ");
+                    for(int i = 0; i < player.PARTY.PCs[prevCursor].SKILLSLOT.QUANTITY; i++)
+                        Console.Write($"[{player.PARTY.PCs[prevCursor].SKILLSLOT.SKILLS[i].NAME}]");
+                    Console.WriteLine();
+                    Console.Write($"[보유 아이템] ");
+                    for(int i = 0; i < player.PARTY.PCs[prevCursor].ITEMSLOT.QUANTITY; i++)
+                        Console.Write($"[{player.PARTY.PCs[prevCursor].ITEMSLOT.ITEMS[i].NAME}]");
+                    Console.WriteLine();
                     Console.WriteLine();
                     if (cursor == 0)
                         Console.ForegroundColor = ConsoleColor.Green;
