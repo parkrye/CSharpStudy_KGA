@@ -22,56 +22,85 @@
         protected override void ShowSites()
         {
             Console.Clear();
-
-            Console.SetCursorPosition(0, 0);
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine($"[{name}]");
+            for (int i = 0; i < 60; i++)
+            {
+                Console.SetCursorPosition(i, 0);
+                Console.Write("=");
+                Console.SetCursorPosition(i, 10);
+                Console.Write("=");
+            }
+            for (int i = 1; i < 10; i++)
+            {
+                Console.SetCursorPosition(0, i);
+                Console.Write("||");
+                Console.SetCursorPosition(58, i);
+                Console.Write("||");
+            }
+
+            Console.SetCursorPosition(25, 1);
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write($"[{name}]");
+
+            Console.SetCursorPosition(10, 4);
             if (cursor == 0)
                 Console.ForegroundColor = ConsoleColor.Green;
             else
                 Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine($"[{home.NAME}]");
+            Console.Write($"[{home.NAME}]");
+
+            Console.SetCursorPosition(10, 5);
             if (cursor == 1)
                 Console.ForegroundColor = ConsoleColor.Green;
             else
                 Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine($"[{tavern.NAME}]");
+            Console.Write($"[{tavern.NAME}]");
+
+            Console.SetCursorPosition(10, 6);
             if (cursor == 2)
                 Console.ForegroundColor = ConsoleColor.Green;
             else
                 Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine($"[{clinic.NAME}]");
+            Console.Write($"[{clinic.NAME}]");
+
+            Console.SetCursorPosition(10, 7);
             if (cursor == 3)
                 Console.ForegroundColor = ConsoleColor.Green;
             else
                 Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine($"[{market.NAME}]");
+            Console.Write($"[{market.NAME}]");
+
+            Console.SetCursorPosition(40, 9);
             if (cursor == 4)
                 Console.ForegroundColor = ConsoleColor.Green;
             else
                 Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine($"[{name} 나가기]");
+            Console.Write($"[{name} 나가기]");
         }
 
         protected override void GetCursor()
         {
-            int key = Input();
-            switch (key)
+            switch (InputManager.GetInput())
             {
-                case 1:
-                case 3:
+                default:
+                    break;
+                case Key.LEFT:
+                case Key.UP:
                     cursor--;
                     if (cursor < 0)
                         cursor = 4;
                     break;
-                case 2:
-                case 4:
+                case Key.RIGHT:
+                case Key.DOWN:
                     cursor++;
                     if (cursor > 4)
                         cursor = 0;
                     break;
-                case 5:
+                case Key.ENTER:
                     goSite = true;
+                    break;
+                case Key.CANEL:
+                    outSite = true;
                     break;
             }
         }

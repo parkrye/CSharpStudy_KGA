@@ -4,12 +4,15 @@ namespace ProjectRPG
 {
     internal class Player
     {
-        string name;             // 플레이어 이름
-        int money;               // 플레이어 자금
-        Party party;             // 현재 파티
+        string name;                // 플레이어 이름
+        int money;                  // 플레이어 자금
+        Party party;                // 현재 파티
 
-        List<Item> inventory;    // 보유 아이템들
-        List<PC> employed;       // 고용한 캐릭터들
+        List<Item> inventory;       // 보유 아이템들
+        List<PC> employed;          // 고용한 캐릭터들
+
+        (int x, int y) fieldPos;    // 필드에서의 위치
+        bool[] findings;            // 찾은 던전 목록
 
         /// <summary>
         /// 플레이어 이름에 대한 프로퍼티
@@ -37,6 +40,16 @@ namespace ProjectRPG
         public List<PC> EMPLOYED { get { return employed; } set { employed = value; } }
 
         /// <summary>
+        /// 필드 위치에 대한 프로퍼티
+        /// </summary>
+        public (int x, int y) POSITION { get { return fieldPos; } set { fieldPos = value; } }
+
+        /// <summary>
+        /// 발견 던전에 대한 프로퍼티
+        /// </summary>
+        public bool[] FINDINGS { get { return findings; } set { findings = value; } }
+
+        /// <summary>
         /// 생성자
         /// 초기 자금 100
         /// </summary>
@@ -48,6 +61,9 @@ namespace ProjectRPG
             party = new Party();
             inventory = new List<Item>();
             employed = new List<PC>();
+            fieldPos.x = 8;
+            fieldPos.y = 10;
+            findings = new bool[4];
         }
 
         /// <summary>

@@ -289,26 +289,25 @@
                 Console.SetCursorPosition(0, 12);
                 Console.WriteLine("[도망치기]");
 
-                int input = Input();
-                switch (input)
+                switch (InputManager.GetInput())
                 {
                     default:
                         break;
-                    case 1:
-                    case 3:
+                    case Key.LEFT:
+                    case Key.UP:
                         select--;
                         if (select < 0)
                             select = 2;
                         break;
-                    case 2:
-                    case 4:
+                    case Key.RIGHT:
+                    case Key.DOWN:
                         select++;
                         if (select > 2)
                             select = 0;
                         break;
-                    case 5:
+                    case Key.ENTER:
                         return select;
-                    case 6:
+                    case Key.CANEL:
                         return -1;
                 }
             }
@@ -345,35 +344,34 @@
                     Console.WriteLine($"[{pc.SKILLSLOT.SKILLS[i].NAME}]");
                 }
 
-                int input = Input();
-                switch (input)
+                switch (InputManager.GetInput())
                 {
                     default:
                         break;
-                    case 1:
-                    case 3:
+                    case Key.LEFT:
+                    case Key.UP:
                         select--;
                         if (select < 0)
                             select = count - 1;
                         while (pc.SKILLSLOT.SKILLS[select] == null)
                             select--;
                         break;
-                    case 2:
-                    case 4:
+                    case Key.RIGHT:
+                    case Key.DOWN:
                         select++;
                         if (select >= count)
                             select = 0;
                         if (pc.SKILLSLOT.SKILLS[select] == null)
                             select = 0;
                         break;
-                    case 5:
+                    case Key.ENTER:
                         PC target = Targeting(pc, pc.SKILLSLOT.SKILLS[select] is IAttackable);
                         if (target == null)
                             break;
                         if (pc.SKILLSLOT.UseSkill(select, target, pc.STATUS))
                             return true;
                         break;
-                    case 6:
+                    case Key.CANEL:
                         return false;
                 }
             }
@@ -411,34 +409,33 @@
                     Console.WriteLine($"[{pc.ITEMSLOT.ITEMS[i].NAME}]");
                 }
 
-                int input = Input();
-                switch (input)
+                switch (InputManager.GetInput())
                 {
                     default:
                         break;
-                    case 1:
-                    case 3:
+                    case Key.LEFT:
+                    case Key.UP:
                         select--;
                         if (select < 0)
                             select = count - 1;
                         while (pc.ITEMSLOT.ITEMS[select] == null)
                             select--;
                         break;
-                    case 2:
-                    case 4:
+                    case Key.RIGHT:
+                    case Key.DOWN:
                         select++;
                         if (select >= count)
                             select = 0;
                         if (pc.ITEMSLOT.ITEMS[select] == null)
                             select = 0;
                         break;
-                    case 5:
+                    case Key.ENTER:
                         PC target = Targeting(pc, pc.ITEMSLOT.ITEMS[select] is IAttackable);
                         if (target == null)
                             break;
                         pc.ITEMSLOT.UseItem(select, target);
                         return true;
-                    case 6:
+                    case Key.CANEL:
                         return false;
                 }
             }
@@ -497,13 +494,12 @@
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine($"[대상 : {turnOrder[select].NAME}]");
 
-                int input = Input();
-                switch (input)
+                switch (InputManager.GetInput())
                 {
                     default:
                         break;
-                    case 1:
-                    case 3:
+                    case Key.LEFT:
+                    case Key.UP:
                         select--;
                         if (select < 0)
                             select = turnOrder.Count - 1;
@@ -516,8 +512,8 @@
                         if (select < 0)
                             select = turnOrder.Count - 1;
                         break;
-                    case 2:
-                    case 4:
+                    case Key.RIGHT:
+                    case Key.DOWN:
                         select++;
                         if (select >= turnOrder.Count)
                             select = 0;
@@ -530,9 +526,9 @@
                         if (select >= turnOrder.Count)
                             select = 0;
                         break;
-                    case 5:
+                    case Key.ENTER:
                         return turnOrder[select];
-                    case 6:
+                    case Key.CANEL:
                         return null;
                 }
             }
@@ -624,32 +620,6 @@
                     if (enemy.SKILLSLOT.UseSkill(select, target, enemy.STATUS))
                         done = true;
                 }
-            }
-        }
-
-        /// <summary>
-        /// 입력 처리
-        /// </summary>
-        /// <returns>입력 종류</returns>
-        int Input()
-        {
-            switch (InputManager.GetInput())
-            {
-                default:
-                case Key.NONE:
-                    return 0;
-                case Key.LEFT:
-                    return 1;
-                case Key.RIGHT:
-                    return 2;
-                case Key.UP:
-                    return 3;
-                case Key.DOWN:
-                    return 4;
-                case Key.ENTER:
-                    return 5;
-                case Key.CANEL:
-                    return 6;
             }
         }
     }
