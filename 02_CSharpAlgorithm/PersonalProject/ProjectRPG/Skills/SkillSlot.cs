@@ -10,10 +10,6 @@
         int quantity;           // 스킬 개수
         Skill[] skills;         // 스킬 배열
 
-        /// <summary>
-        /// 스킬 슬롯 크기에 대한 프로퍼티
-        /// </summary>
-        public int SIZE { get { return size; } }
 
         /// <summary>
         /// 스킬 개수에 대한 프로퍼티
@@ -90,21 +86,6 @@
         }
 
         /// <summary>
-        /// 스킬 슬롯 크기를 변경하는 메소드
-        /// </summary>
-        /// <param name="count">크기 변동량</param>
-        public void ResizeSlot(int count)
-        {
-            Skill[] newSkills;
-            if (size + count <= 0)
-                newSkills = new Skill[1];
-            else
-                newSkills = new Skill[size + count];
-            Array.Copy(skills, newSkills, size);
-            size += count;
-        }
-
-        /// <summary>
         /// 액티브 스킬 사용 메소드
         /// </summary>
         /// <param name="index">사용할 인덱스</param>
@@ -112,7 +93,7 @@
         /// <param name="param1">능력치 데이터</param>
         /// <param name="param2">부가 데이터</param>
         /// <returns>스킬 사용 성공 여부</returns>
-        public bool UseSkill(int index, IHitable hitable, int[,] param1, params int[] param2)
+        public bool UseSkill(int index, Character target, int[,] param1, params int[] param2)
         {
             if (index < 0 || index >= size)
                 return false;
@@ -125,7 +106,7 @@
             {
                 if (param1[1, 1] < skills[index].COST)
                     return false;
-                skills[index].SetTarget(hitable);           // 스킬 대상 지정
+                skills[index].SetTarget(target);           // 스킬 대상 지정
                 if (skills[index].Active(param1, param2))   // 스킬 사용
                 {
                     skills[index].ResetTarget();            // 스킬 대상 해제

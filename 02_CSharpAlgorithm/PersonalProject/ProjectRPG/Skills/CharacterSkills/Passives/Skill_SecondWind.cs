@@ -13,7 +13,7 @@
         /// <param name="_exp">스킬 경험치. 기본 0</param>
         public Skill_SecondWind(int _level = 1, int _exp = 0) : base()
         {
-            name = "(P)재생의 바람";
+            name = "(P)자연 치유";
             level = _level;
             exp = _exp;
             value = 15;
@@ -26,7 +26,6 @@
             if(character != null)
             {
                 character.AddListenerOnHPDecreased(Active);
-                character.AddListenerOnTurnEnd(TimeFlow);
             }
         }
 
@@ -34,9 +33,25 @@
         {
             if (param1[1,0] > 0)
                 return false;
-            param1[1,0] += value * level;
+            param1[1,0] += value * (level + rank * 10);
             used = true;
             return true;
+        }
+
+        protected override void RankUp()
+        {
+            rank++;
+            level -= 10;
+
+            switch (rank)
+            {
+                case 1:
+                    name = "(A)재생력";
+                    break;
+                case 2:
+                    name = "(A)재기의 바람";
+                    break;
+            }
         }
     }
 }

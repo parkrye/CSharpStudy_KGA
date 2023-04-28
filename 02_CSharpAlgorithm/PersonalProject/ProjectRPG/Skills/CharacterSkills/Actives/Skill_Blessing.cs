@@ -3,20 +3,20 @@
     /// <summary>
     /// 액티브 스킬을 상속한 상세 스킬 클래스
     /// </summary>
-    internal class Skill_Kick : Skill_Active, IAttackable
+    internal class Skill_Blessing : Skill_Active, IBurfable
     {
         /// <summary>
         /// 생성자
         /// </summary>
         /// <param name="_level">스킬 레벨. 기본 1</param>
         /// <param name="_exp">스킬 경험치. 기본 0</param>
-        public Skill_Kick(int _level = 1, int _exp = 0) : base()
+        public Skill_Blessing(int _level = 1, int _exp = 0) : base()
         {
-            name = "(A)발차기";
+            name = "(A)축성";
             level = _level;
             exp = _exp;
             value = 1;
-            cost = 0;
+            cost = 10;
             rank = 0;
         }
 
@@ -24,21 +24,17 @@
         {
             if (other != null)
             {
-                if (other is IHitable)
-                    return Attack(other, param1[1, 2]);
-                return false;
+                Burf(other);
+                return true;
             }
             return false;
         }
 
-        public bool Attack(IHitable hitable, params int[] param)
+        public void Burf(Character target)
         {
-            if(hitable.Hit(param[0] / 2 * value * (level + rank * 10)))
-            {
-                GetEXP(1);
-                return true;
-            }
-            return false;
+            target.NOW_PHYSICSAL += value + (level + rank * 10) / 10;
+            target.NOW_MENTAL += value + (level + rank * 10) / 10;
+            target.NOW_INITIATIVE += value + (level + rank * 10) / 10;
         }
 
         protected override void RankUp()
@@ -49,12 +45,14 @@
             switch (rank)
             {
                 case 1:
-                    name = "(A)하이킥";
-                    value += 1;
+                    name = "(A)축복";
+                    value += 2;
+                    cost += 3;
                     break;
                 case 2:
-                    name = "(A)섬머솔트 킥";
-                    value += 1;
+                    name = "(A)대축복";
+                    value += 2;
+                    cost += 3;
                     break;
             }
         }

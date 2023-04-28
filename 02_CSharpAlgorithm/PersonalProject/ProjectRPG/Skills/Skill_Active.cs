@@ -5,9 +5,6 @@
     /// </summary>
     internal abstract class Skill_Active : Skill
     {
-        // 효과 지속 시간
-        protected int duration;
-
         /// <summary>
         /// 스킬 타입을 결정하는 생성자
         /// </summary>

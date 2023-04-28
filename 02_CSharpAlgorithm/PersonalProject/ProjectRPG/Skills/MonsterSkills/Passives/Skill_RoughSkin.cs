@@ -17,6 +17,7 @@
             exp = _exp;
             value = 15;
             cost = 0;
+            rank = 0;
         }
 
         public override void AddListener(Character character)
@@ -27,11 +28,17 @@
 
         public override bool Cast(int[,] param1, params int[] param2)
         {
-            if (param2[0] > value * level)
-                param2[0] -= value * level;
+            if (param2[0] > value * (level + rank * 10))
+                param2[0] -= value * (level + rank * 10);
             else
                 param2[0] = 1;
             return true;
+        }
+
+        protected override void RankUp()
+        {
+            rank++;
+            level -= 10;
         }
     }
 }
