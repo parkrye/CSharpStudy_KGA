@@ -45,22 +45,23 @@
                     if(player.PARTY.MEMBERS > 0)
                     {
                         ShowUI();
-                        Console.SetCursorPosition(20, 6);
-                        Console.ForegroundColor = ConsoleColor.White;
-                        Console.Write("[다음 방으로 나아가자]");
+                        Console.SetCursorPosition(18, 6);
                         Thread.Sleep(1000);
                     }
                     else
                     {
                         ShowUI();
-                        Console.SetCursorPosition(15, 6);
+                        Console.SetCursorPosition(18, 6);
                         Console.ForegroundColor = ConsoleColor.White;
                         Console.Write("[모든 파티원을 잃었다]");
                         Thread.Sleep(1000);
                     }
                 }
+                else
+                {
+                    inRoom = false;
+                }
                 clicked = false;
-                inRoom = false;
             }
         }
     }

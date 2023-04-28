@@ -37,7 +37,7 @@
 
                 if (player.PARTY.PCs[i] != null)
                 {
-                    Console.Write($"[{player.PARTY.PCs[i].NAME}({player.PARTY.PCs[i].NOW_HP} / {player.PARTY.PCs[i].MAX_HP}) : $ {player.PARTY.PCs[i].MAX_HP - player.PARTY.PCs[i].NOW_HP}]");
+                    Console.Write($"[{player.PARTY.PCs[i].NAME}({player.PARTY.PCs[i].NOW_HP} / {player.PARTY.PCs[i].MAX_HP}) : $ {player.PARTY.PCs[i].MAX_HP - player.PARTY.PCs[i].NOW_HP + player.PARTY.PCs[i].MAX_SP - player.PARTY.PCs[i].NOW_SP}]");
                 }
                 else
                 {
@@ -92,9 +92,15 @@
                     case 3:
                         if (player.PARTY.PCs[cursor] == null)
                             break;
-                        if (player.LoseMoney(player.PARTY.PCs[cursor].MAX_HP - player.PARTY.PCs[cursor].NOW_HP))
+                        if (player.LoseMoney(player.PARTY.PCs[cursor].MAX_HP - player.PARTY.PCs[cursor].NOW_HP + player.PARTY.PCs[cursor].MAX_SP - player.PARTY.PCs[cursor].NOW_SP))
                         {
                             player.PARTY.PCs[cursor].NOW_HP = player.PARTY.PCs[cursor].MAX_HP;
+                            player.PARTY.PCs[cursor].NOW_SP = player.PARTY.PCs[cursor].MAX_SP;
+                            for(int i = 0; i < player.PARTY.PCs[cursor].SKILLSLOT.QUANTITY; i++)
+                            {
+                                if (player.PARTY.PCs[cursor].SKILLSLOT.SKILLS[i] is Skill_Passive)
+                                    ((Skill_Passive)(player.PARTY.PCs[cursor].SKILLSLOT.SKILLS[i])).Restore();
+                            }
                         }
                         break;
                     case 4:

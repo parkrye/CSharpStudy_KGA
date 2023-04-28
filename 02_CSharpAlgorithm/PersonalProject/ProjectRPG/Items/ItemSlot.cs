@@ -93,21 +93,6 @@
         }
 
         /// <summary>
-        /// 아이템 슬롯 크기를 재설정하는 메소드
-        /// </summary>
-        /// <param name="count">변경값</param>
-        public void ResizeSlot(int count)
-        {
-            Item[] newSkills;
-            if (size + count <= 0)
-                newSkills = new Item[1];
-            else
-                newSkills = new Item[size + count];
-            Array.Copy(items, newSkills, size);
-            size += count;
-        }
-
-        /// <summary>
         /// 액티브 아이템을 사용하는 메소드
         /// </summary>
         /// <param name="index">사용할 아이템의 인덱스</param>

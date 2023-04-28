@@ -130,6 +130,8 @@ namespace ProjectRPG
         public void EmployCharacter(PC character)
         {
             employed.Add(character);
+            if (party.MEMBERS < party.PCs.Length)
+                EmployedToParty(employed.Count - 1);
         }
 
         /// <summary>

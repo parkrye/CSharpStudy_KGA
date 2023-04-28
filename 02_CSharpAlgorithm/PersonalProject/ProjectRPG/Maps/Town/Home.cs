@@ -236,6 +236,8 @@ namespace ProjectRPG
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.SetCursorPosition(24, 3);
                     Console.Write($"[{player.EMPLOYED[prevCursor].NAME}]");
+                    Console.SetCursorPosition(20, 4);
+                    Console.Write($"[현재 파티 인원 ({player.PARTY.MEMBERS}/{player.PARTY.PCs.Length})]");
 
                     Console.SetCursorPosition(10, 6);
                     if (cursor == 0)

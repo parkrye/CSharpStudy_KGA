@@ -89,40 +89,6 @@ namespace ProjectRPG
             return false;
         }
 
-        /// <summary>
-        /// 파티 인원이 비어있는지 반환하는 메소드
-        /// </summary>
-        /// <returns>파티가 비어있는지 여부</returns>
-        public bool IsEmpty()
-        {
-            if (members > 0)
-                return false;
-            return true;
-        }
-
-        /// <summary>
-        /// 파티의 특정 캐릭터를 반환하는 메소드
-        /// </summary>
-        /// <param name="index">반환할 인덱스</param>
-        /// <returns>인덱스의 캐릭터. 없을 경우 null 반환</returns>
-        public PC GetMember(int index)
-        {
-            if (index < 0 || index >= size)
-                return null;
-            return party[index];
-        }
-
-        public void AddListenerOnTurnEnd(Action action)
-        {
-            if(members > 0)
-            {
-                foreach(PC pc in party)
-                {
-                    action += pc.TimeFlow;
-                }
-            }
-        }
-
         public bool Contains(PC pc)
         {
             return party.Contains(pc);

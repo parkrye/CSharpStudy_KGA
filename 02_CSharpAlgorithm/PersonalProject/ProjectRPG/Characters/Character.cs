@@ -28,9 +28,6 @@
         public delegate bool PlayerDelegate(int[,] param1, params int[] param2);
         protected event PlayerDelegate? OnDamaged, OnHPDecreased, OnSPDecreased;
 
-        // 턴 카운트을 위해 사용
-        protected event Action? OnTimeFlow;
-
         /// <summary>
         /// 캐릭터 이름에 대한 프로퍼티
         /// </summary>
@@ -107,10 +104,11 @@
         /// </summary>
         /// <param name="index">사용할 스킬 번호</param>
         /// <param name="targetable">스킬 대상</param>
-        public void UseSkill(int index, IHitable targetable)
+        public bool UseSkill(int index, Character target)
         {
-            skillSlot.UseSkill(index, targetable, status);                  // 스킬 슬롯에서 해당 스킬을 시전하고, 소모 활력을 반환받는다
+            bool result = skillSlot.UseSkill(index, target, status);                  // 스킬 슬롯에서 해당 스킬을 시전하고, 소모 활력을 반환받는다
             OnSPDecreased?.Invoke(status);                                  // 활력 감소에 대한 패시브 스킬이 시전되고, 활력을 조정한다
+            return result;
         }
 
         /// <summary>
@@ -156,16 +154,6 @@
         public void AddListenerOnSPDecreased(PlayerDelegate player)
         {
             OnSPDecreased += player;
-        }
-
-        public void AddListenerOnTurnEnd(Action action)
-        {
-            OnTimeFlow += action;
-        }
-
-        public void TimeFlow()
-        {
-            OnTimeFlow?.Invoke();
         }
     }
 }

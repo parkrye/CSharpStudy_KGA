@@ -65,16 +65,16 @@ namespace ProjectRPG
                     Party enemy = tEnemies.party[new Random().Next(enemies.party.Count)];
                     Item item = tItems.items[new Random().Next(items.items.Count)];
 
-                    switch (new Random().Next(3))
+                    switch (new Random().Next(5))
                     {
                         case 0:
-                            room.Enqueue(new BattleRoom(player, enemy, item));
-                            break;
-                        case 1:
                             room.Enqueue(new EmptyRoom(player, enemy, item));
                             break;
-                        case 2:
+                        case 1:
                             room.Enqueue(new ChestRoom(player, enemy, item));
+                            break;
+                        default:
+                            room.Enqueue(new BattleRoom(player, enemy, item));
                             break;
                     }
                 }
