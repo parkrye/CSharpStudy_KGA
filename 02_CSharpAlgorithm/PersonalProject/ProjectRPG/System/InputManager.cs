@@ -31,9 +31,10 @@
                     key = Key.DOWN;
                     break;
                 case ConsoleKey.Enter:
+                case ConsoleKey.Spacebar:
                     key = Key.ENTER;
                     break;
-                case ConsoleKey.Escape:
+                case ConsoleKey.Backspace:
                     key = Key.CANEL;
                     break;
             }
