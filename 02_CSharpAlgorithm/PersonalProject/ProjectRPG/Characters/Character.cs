@@ -21,6 +21,7 @@
         protected SkillSlot skillSlot;  // 캐릭터의 스킬
         protected ItemSlot itemSlot;    // 캐릭터의 아이템
         protected int difficulty;       // 캐릭터 위험도(적일때 이용)
+        protected int exp;              // 캐릭터 성장도
 
         // 이벤트 호출을 위한 대리자
         // 패시브 스킬, 아이템의 사용을 위해 사용
@@ -82,6 +83,31 @@
         /// 캐릭터 아이템에 대한 프로퍼티
         /// </summary>
         public ItemSlot ITEMSLOT { get { return itemSlot; } set { itemSlot = value; } }
+
+        /// <summary>
+        /// 캐릭터 성장에 대한 프로퍼티
+        /// </summary>
+        public int EXP 
+        { 
+            get 
+            { 
+                return exp; 
+            } 
+            set 
+            { 
+                exp = value; 
+                while (exp > 100) 
+                { 
+                    exp -= 100;
+                    MAX_HP += MAX_HP / 10;
+                    MAX_SP += MAX_SP / 10;
+                    MAX_PHYSICSAL += MAX_PHYSICSAL / 10;
+                    MAX_MENTAL += MAX_MENTAL / 10;
+                    MAX_INITIATIVE += MAX_INITIATIVE / 10;
+                    StatusSetting(true);
+                }  
+            } 
+        }
 
         /// <summary>
         /// 현재 스테이터스를 최대 스테이터스로 설정하는 메소드

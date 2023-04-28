@@ -17,15 +17,6 @@ namespace ProjectRPG
 
             field = new Field();
             player = new Player();
-            player.AddItem(new Item_HPPotion1());
-            player.AddItem(new Item_HPPotion2());
-            player.AddItem(new Item_HPPotion3());
-            player.AddItem(new Item_SPPotion1());
-            player.AddItem(new Item_SPPotion2());
-            player.EmployCharacter(new PC(new Class_Soldier()));
-            player.EmployCharacter(new PC(new Class_Soldier()));
-            player.EmployCharacter(new PC(new Class_Soldier()));
-            player.EmployCharacter(new PC(new Class_Soldier()));
             player.EmployCharacter(new PC(new Class_Soldier()));
             player.FINDINGS[0] = true;
             isPlaying = true;

@@ -105,9 +105,9 @@
                 else
                     Console.ForegroundColor = ConsoleColor.Blue;
                 Console.SetCursorPosition(i * 10, 5);
-                Console.Write(playerParty.PCs[i].NAME);
+                Console.Write($"{playerParty.PCs[i].NAME}　");
                 Console.SetCursorPosition(i * 10, 6);
-                Console.Write($"{playerParty.PCs[i].NOW_HP} | {playerParty.PCs[i].NOW_SP}");
+                Console.Write($"{playerParty.PCs[i].NOW_HP} | {playerParty.PCs[i].NOW_SP}　");
             }
         }
 
@@ -226,6 +226,7 @@
 
                     for(int i = 0; i < playerParty.MEMBERS; i++)
                     {
+                        playerParty.PCs[i].EXP += sum;
                         if (playerParty.PCs[i].NOW_HP == 0)
                             playerParty.PCs[i].NOW_HP++;
                         if (playerParty.PCs[i].NOW_SP == 0)
@@ -398,6 +399,9 @@
             int select = 0;
             int count = pc.ITEMSLOT.QUANTITY;
 
+            if (select == count)
+                return false;
+
             while (true)
             {
                 // 출력창 지우기
@@ -429,15 +433,23 @@
                         if (select < 0)
                             select = count - 1;
                         while (pc.ITEMSLOT.ITEMS[select] == null)
+                        {
                             select--;
+                            if (select < 0)
+                                select = count - 1;
+                        }
                         break;
                     case Key.RIGHT:
                     case Key.DOWN:
                         select++;
                         if (select >= count)
                             select = 0;
-                        if (pc.ITEMSLOT.ITEMS[select] == null)
-                            select = 0;
+                        while (pc.ITEMSLOT.ITEMS[select] == null)
+                        {
+                            select++;
+                            if (select >= count)
+                                select = 0;
+                        }
                         break;
                     case Key.ENTER:
                         PC target = Targeting(pc.ITEMSLOT.ITEMS[select] is IAttackable);
@@ -487,30 +499,17 @@
         PC Targeting(bool isAttack)
         {
             int select = 0;
-            for(int i = 0; i < turnOrder.Count; i++)
+            while ((isAttack && (playerParty.Contains(turnOrder[select]) || turnOrder[select].NOW_HP == 0)) || (!isAttack && enemyParty.Contains(turnOrder[select])))
             {
-                if (isAttack)
-                {
-                    if (enemyParty.Contains(turnOrder[i]))
-                    {
-                        select = i;
-                        break;
-                    }
-                }
-                else
-                {
-                    if (playerParty.Contains(turnOrder[i]))
-                    {
-                        select = i;
-                        break;
-                    }
-                }
+                select++;
+                if (select >= turnOrder.Count)
+                    select = 0;
             }
 
             while (true)
             {
                 // 출력창 지우기
-                Console.SetCursorPosition(0, 14);
+                Console.SetCursorPosition(0, 15);
                 for (int i = 0; i < 5; i++)
                 {
                     for (int j = 0; j < 60; j++)
@@ -518,14 +517,8 @@
                     Console.WriteLine();
                 }
 
-                Console.SetCursorPosition(0, 14);
+                Console.SetCursorPosition(0, 15);
                 Console.ForegroundColor = ConsoleColor.White;
-                while (select < turnOrder.Count && isAttack && playerParty.Contains(turnOrder[select]) || isAttack && turnOrder[select].NOW_HP == 0)
-                {
-                    select++;
-                    if (select >= turnOrder.Count)
-                        select = 0;
-                }
                 Console.WriteLine($"[대상 : {turnOrder[select].NAME}]");
 
                 switch (InputManager.GetInput())
@@ -535,7 +528,9 @@
                     case Key.LEFT:
                     case Key.UP:
                         select--;
-                        while (select >= 0 && isAttack && playerParty.Contains(turnOrder[select]) || isAttack && turnOrder[select].NOW_HP == 0)
+                        if (select < 0)
+                            select = turnOrder.Count - 1;
+                        while ((isAttack && (playerParty.Contains(turnOrder[select]) || turnOrder[select].NOW_HP == 0)) || (!isAttack && enemyParty.Contains(turnOrder[select])))
                         {
                             select--;
                             if (select < 0)
@@ -545,7 +540,9 @@
                     case Key.RIGHT:
                     case Key.DOWN:
                         select++;
-                        while (select < turnOrder.Count && isAttack && playerParty.Contains(turnOrder[select]) || isAttack && turnOrder[select].NOW_HP == 0)
+                        if (select >= turnOrder.Count)
+                            select = 0;
+                        while ((isAttack && (playerParty.Contains(turnOrder[select]) || turnOrder[select].NOW_HP == 0)) || (!isAttack && enemyParty.Contains(turnOrder[select])))
                         {
                             select++;
                             if(select >= turnOrder.Count)

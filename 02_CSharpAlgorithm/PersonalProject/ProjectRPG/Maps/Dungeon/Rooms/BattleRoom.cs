@@ -46,7 +46,8 @@
                     {
                         ShowUI();
                         Console.SetCursorPosition(18, 6);
-                        Thread.Sleep(1000);
+                        Thread.Sleep(500);
+                        battleOver = true;
                     }
                     else
                     {

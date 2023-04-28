@@ -83,5 +83,14 @@
         {
             other = null;
         }
+
+        /// <summary>
+        /// 스킬이 추가되었을 때 self를 설정하는 메소드
+        /// </summary>
+        /// <param name="character">스킬 보유 캐릭터</param>
+        public void Added(Character character)
+        {
+            self = character;
+        }
     }
 }

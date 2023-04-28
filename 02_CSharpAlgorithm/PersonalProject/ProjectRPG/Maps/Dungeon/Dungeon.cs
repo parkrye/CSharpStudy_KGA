@@ -8,8 +8,6 @@
         protected string name;                      // 던전 이름
         protected int depth;                        // 던전 깊이
         protected Queue<Queue<DungeonRoom>> floors; // 던전 층
-        protected Enemies enemies;                  // 등장 적
-        protected Items items;                      // 등장 아이템
         protected BossRoom bossRoom;                // 보스룸
 
         protected Player player;
@@ -32,8 +30,6 @@
             player = _player;
 
             floors = new Queue<Queue<DungeonRoom>>();
-            enemies = new Enemies();
-            items = new Items();
         }
 
         public void EnterDungeon()
@@ -55,31 +51,15 @@
             bossRoom.GetIn(99);
         }
 
-        protected abstract void EnemySetting();
-        protected abstract void ItemSetting();
+
+        protected abstract Party EnemySetting();
+
+        protected abstract Item ItemSetting();
+
         protected abstract void FloorSetting();
+
         protected abstract void BossSetting();
 
         protected abstract void BossCutScene();
-
-        protected struct Enemies
-        {
-            public List<Party> party;
-
-            public Enemies()
-            {
-                party = new List<Party>();
-            }
-        }
-
-        protected struct Items
-        {
-            public List<Item> items;
-
-            public Items()
-            {
-                items = new List<Item>();
-            }
-        }
     }
 }

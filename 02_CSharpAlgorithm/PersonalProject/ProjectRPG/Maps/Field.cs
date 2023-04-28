@@ -5,20 +5,13 @@
         enum Tile { B, R, W, T, S, D }                   // 벽, 길, 수풀, 마을, 바다, 던전
 
         Tile[,] tiles;                                   // x, y
-        string name;
-        (int x, int y) position;
-        bool inMap;
+        (int x, int y) position;                         // 플레이어 위치
+        bool inMap;                                      // 필드에 남아있는지 여부
 
         Dictionary<int, (int y, int x)> dungeonDict1;    // 던전 번호, 던전 위치(y, x)
         Dictionary<(int y, int x), int> dungeonDict2;    // 던전 위치(y, x), 던전 번호
 
         Player player;
-
-        public string NAME
-        {
-            get { return name; }
-            set { name = value; }
-        }
 
         public Field()
         {
@@ -28,6 +21,7 @@
 
             SetField();
             SetDungeons();
+            EnemySetting();
         }
 
         public void StartMap(Player _player)
@@ -310,8 +304,70 @@
 
             if (tiles[position.y, position.x] == Tile.W)
             {
-
+                if(new Random().Next(10) == 0)
+                {
+                    if (player.PARTY.MEMBERS > 0)
+                    {
+                        new Battle(player, EnemySetting()).StartBattle();
+                        if(player.PARTY.MEMBERS > 0)
+                        {
+                            Console.Clear();
+                            Thread.Sleep(500);
+                        }
+                        else
+                        {
+                            Console.Clear();
+                            Console.SetCursorPosition(18, 5);
+                            Console.ForegroundColor = ConsoleColor.White;
+                            Console.Write("[모든 파티원을 잃었다]");
+                            Console.SetCursorPosition(18, 5);
+                            Console.Write("[그리고 돈을 빼앗겼다]");
+                            player.LoseMoney(player.MONEY / 2);
+                            Thread.Sleep(1000);
+                        }
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        Console.SetCursorPosition(15, 6);
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.Write("[도적을 만나 돈을 빼앗겼다]");
+                        player.LoseMoney(player.MONEY / 2);
+                        Thread.Sleep(1000);
+                    }
+                    DrawMap();
+                    DrawPlayer();
+                }
             }
+        }
+
+        Party EnemySetting()
+        {
+            Party party = new Party();
+            int num = new Random().Next(4) + 1;
+            for (int j = 0; j < num; j++)
+            {
+                int mon = new Random().Next(20);
+                switch (mon)
+                {
+                    case 0:
+                        party.AddPC(new PC(new Class_Soldier()));
+                        break;
+                    case 1:
+                        party.AddPC(new PC(new Class_Clown()));
+                        break;
+                    case 2:
+                        party.AddPC(new PC(new Class_Hunter()));
+                        break;
+                    case 3:
+                        party.AddPC(new PC(new Class_Soccerer()));
+                        break;
+                    default:
+                        party.AddPC(new Monster_Goblin(j + 1));
+                        break;
+                }
+            }
+            return party;
         }
     }
 }

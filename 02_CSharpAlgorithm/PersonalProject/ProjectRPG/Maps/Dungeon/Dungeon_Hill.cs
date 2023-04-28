@@ -15,41 +15,37 @@ namespace ProjectRPG
             BossSetting();
         }
 
-        protected override void EnemySetting()
+        protected override Party EnemySetting()
         {
-            for(int i = 0; i < 100; i++)
+            Party party = new Party();
+            int num = new Random().Next(4) + 1;
+            for (int j = 0; j < num; j++)
             {
-                Party party = new Party();
-                int num = new Random().Next(4) + 1;
-                for(int j = 0; j < num; j++)
+                switch (new Random().Next(10))
                 {
-                    int mon = new Random().Next(4);
-                    switch (mon)
-                    {
-                        case 0:
-                            party.AddPC(new Monster_Orc(j + 1));
-                            break;
-                        default:
-                            party.AddPC(new Monster_Goblin(j + 1));
-                            break;
-                    }
+                    case 0:
+                        party.AddPC(new Monster_Orc(j + 1));
+                        break;
+                    default:
+                        party.AddPC(new Monster_Goblin(j + 1));
+                        break;
                 }
-                enemies.party.Add(party);
             }
+            return party;
         }
 
-        protected override void ItemSetting()
+        protected override Item ItemSetting()
         {
-            items.items.Add((new Item_HPPotion1()));
-            items.items.Add((new Item_SPPotion1()));
-            items.items.Add(new Item_WoodenAculpture());
-            items.items.Add(new Item_WoodenAculpture());
-            items.items.Add(new Item_WoodenAculpture());
-            items.items.Add(new Item_WoodenAculpture());
-            items.items.Add(new Item_WoodenAculpture());
-            items.items.Add(new Item_WoodenAculpture());
-            items.items.Add(new Item_WoodenAculpture());
-            items.items.Add(new Item_WoodenAculpture());
+
+            switch (new Random().Next(10))
+            {
+                case 0:
+                    return new Item_HPPotion1();
+                case 1:
+                    return new Item_SPPotion1();
+                default:
+                    return new Item_WoodenAculpture();
+            }
         }
 
         protected override void FloorSetting()
@@ -59,11 +55,8 @@ namespace ProjectRPG
                 Queue<DungeonRoom> room = new Queue<DungeonRoom>();
                 for (int j = 0; j < 10; j++)
                 {
-                    Enemies tEnemies = enemies;
-                    Items tItems = items;
-
-                    Party enemy = tEnemies.party[new Random().Next(enemies.party.Count)];
-                    Item item = tItems.items[new Random().Next(items.items.Count)];
+                    Party enemy = EnemySetting();
+                    Item item = ItemSetting();
 
                     switch (new Random().Next(5))
                     {
@@ -110,6 +103,7 @@ namespace ProjectRPG
             Console.WriteLine("　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　");
             Thread.Sleep(500);
             Console.SetCursorPosition(0, 0);
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　");
             Console.WriteLine("　■■■　　　■■　　■　　■　　■■■　■■■■　■■■　　");
             Console.WriteLine("　■　　■　■　　■　■　　■　■　　　　■　　　　■　　■　");
@@ -122,6 +116,7 @@ namespace ProjectRPG
             Console.WriteLine("　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　");
             Thread.Sleep(500);
             Console.SetCursorPosition(0, 0);
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　");
             Console.WriteLine("　□□□　　　□□　　□　　□　　□□□　□□□□　□□□　　");
             Console.WriteLine("　□　　□　□　　□　□　　□　□　　　　□　　　　□　　□　");
@@ -134,6 +129,7 @@ namespace ProjectRPG
             Console.WriteLine("　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　");
             Thread.Sleep(500);
             Console.SetCursorPosition(0, 0);
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　");
             Console.WriteLine("　■■■　　　■■　　■　　■　　■■■　■■■■　■■■　　");
             Console.WriteLine("　■　　■　■　　■　■　　■　■　　　　■　　　　■　　■　");
@@ -146,6 +142,7 @@ namespace ProjectRPG
             Console.WriteLine("　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　");
             Thread.Sleep(500);
             Console.SetCursorPosition(0, 0);
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　");
             Console.WriteLine("　□□□　　　□□　　□　　□　　□□□　□□□□　□□□　　");
             Console.WriteLine("　□　　□　□　　□　□　　□　□　　　　□　　　　□　　□　");
