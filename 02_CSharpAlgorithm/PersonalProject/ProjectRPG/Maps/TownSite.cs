@@ -29,6 +29,7 @@
         public void GetIn(Player _player)
         {
             player = _player;
+            ShowUI();
             while (!outSite)
             {
                 ShowSites();
@@ -38,6 +39,26 @@
             cursor = 0;
             outSite = false;
             Console.Clear();
+        }
+
+        protected void ShowUI()
+        {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.White;
+            for (int i = 0; i < 60; i++)
+            {
+                Console.SetCursorPosition(i, 0);
+                Console.Write("=");
+                Console.SetCursorPosition(i, 10);
+                Console.Write("=");
+            }
+            for (int i = 1; i < 10; i++)
+            {
+                Console.SetCursorPosition(0, i);
+                Console.Write("||");
+                Console.SetCursorPosition(58, i);
+                Console.Write("||");
+            }
         }
 
         /// <summary>

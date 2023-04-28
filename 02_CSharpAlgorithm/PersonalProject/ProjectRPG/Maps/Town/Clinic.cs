@@ -12,21 +12,13 @@
 
         protected override void ShowSites()
         {
-            Console.Clear();
-            Console.ForegroundColor = ConsoleColor.White;
-            for (int i = 0; i < 60; i++)
+            for (int j = 1; j < 10; j++)
             {
-                Console.SetCursorPosition(i, 0);
-                Console.Write("=");
-                Console.SetCursorPosition(i, 10);
-                Console.Write("=");
-            }
-            for (int i = 1; i < 10; i++)
-            {
-                Console.SetCursorPosition(0, i);
-                Console.Write("||");
-                Console.SetCursorPosition(58, i);
-                Console.Write("||");
+                for (int i = 1; i < 59; i++)
+                {
+                    Console.SetCursorPosition(i, j);
+                    Console.Write(" ");
+                }
             }
 
             Console.SetCursorPosition(20, 1);
