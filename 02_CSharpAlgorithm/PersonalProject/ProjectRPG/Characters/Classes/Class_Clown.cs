@@ -10,17 +10,15 @@
         /// </summary>
         public Class_Clown()
         {
-            name = "광대";
             defaultStatus = new int[5];
             HP = 1;
             SP = 1;
             PHYSICAL = 1;
             MENTAL = 1;
             INITIATIVE = 2;
-            skillSlot = new SkillSlot(null, 3);
+            skillSlot = new SkillSlot(null, 2);
             skillSlot.AddSkill(new Skill_Arcrobatics());
             skillSlot.AddSkill(new Skill_LuckyAttack());
-            skillSlot.AddSkill(new Skill_ThrowDagger());
         }
     }
 }
