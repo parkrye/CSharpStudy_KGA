@@ -27,6 +27,7 @@ namespace ProjectRPG
             player.EmployCharacter(new PC(new Class_Soldier()));
             player.EmployCharacter(new PC(new Class_Soldier()));
             player.EmployCharacter(new PC(new Class_Soldier()));
+            player.FINDINGS[0] = true;
             isPlaying = true;
             cursor = 0;
             select = false;
