@@ -365,7 +365,7 @@
                             select = 0;
                         break;
                     case Key.ENTER:
-                        PC target = Targeting(pc, pc.SKILLSLOT.SKILLS[select] is IAttackable);
+                        PC target = Targeting(pc.SKILLSLOT.SKILLS[select] is IAttackable);
                         if (target == null)
                             break;
                         if (pc.SKILLSLOT.UseSkill(select, target, pc.STATUS))
@@ -430,7 +430,7 @@
                             select = 0;
                         break;
                     case Key.ENTER:
-                        PC target = Targeting(pc, pc.ITEMSLOT.ITEMS[select] is IAttackable);
+                        PC target = Targeting(pc.ITEMSLOT.ITEMS[select] is IAttackable);
                         if (target == null)
                             break;
                         pc.ITEMSLOT.UseItem(select, target);
@@ -470,14 +470,32 @@
         }
 
         /// <summary>
-        /// 타겟팅
+        /// 플레이어 타겟팅
         /// </summary>
-        /// <param name="pc">시전자</param>
         /// <param name="isAttack">공격인지</param>
         /// <returns>타겟. 없을 경우 null</returns>
-        PC Targeting(PC pc, bool isAttack)
+        PC Targeting(bool isAttack)
         {
             int select = 0;
+            for(int i = 0; i < turnOrder.Count; i++)
+            {
+                if (isAttack)
+                {
+                    if (enemyParty.Contains(turnOrder[i]))
+                    {
+                        select = i;
+                        break;
+                    }
+                }
+                else
+                {
+                    if (playerParty.Contains(turnOrder[i]))
+                    {
+                        select = i;
+                        break;
+                    }
+                }
+            }
 
             while (true)
             {
