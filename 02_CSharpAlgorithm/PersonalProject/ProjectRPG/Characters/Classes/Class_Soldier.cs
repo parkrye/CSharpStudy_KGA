@@ -20,7 +20,6 @@
             skillSlot = new SkillSlot(null, 3);
             skillSlot.AddSkill(new Skill_DashAttack());
             skillSlot.AddSkill(new Skill_SecondWind());
-            skillSlot.AddSkill(new Skill_RoughSkin());
         }
     }
 }
