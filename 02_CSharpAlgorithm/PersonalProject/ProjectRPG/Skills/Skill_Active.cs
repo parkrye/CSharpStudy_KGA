@@ -3,6 +3,7 @@
     /// <summary>
     /// 액티브 스킬에 대한 클래스
     /// </summary>
+    [Serializable]
     internal abstract class Skill_Active : Skill
     {
         /// <summary>

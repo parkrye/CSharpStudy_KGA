@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Xml.Linq;
 using static ProjectRPG.Character;
 
 namespace ProjectRPG
@@ -47,6 +48,18 @@ namespace ProjectRPG
             party = new PC[size];
         }
 
+        public Party(SerializedParty serializedParty)
+        {
+            party = new PC[serializedParty.party.Length];
+            for(int i = 0; i < serializedParty.party.Length && serializedParty.party[i] != null; i++)
+            {
+                PC pc = new PC(serializedParty.party[i]);
+                party[i] = pc;
+            }
+            members = serializedParty.members;
+            size = serializedParty.size;
+        }
+
         /// <summary>
         /// 파티 추가 메소드
         /// </summary>
@@ -93,6 +106,28 @@ namespace ProjectRPG
         public bool Contains(PC pc)
         {
             return party.Contains(pc);
+        }
+
+        public SerializedParty GetSerialized()
+        {
+            return new SerializedParty(party, members, size);
+        }
+    }
+
+    [Serializable]
+    internal class SerializedParty
+    {
+        public SerializedPC[] party;     // 파티 구성원. 최대 넷
+        public int members;    // 파티 인원. 0~4
+        public int size;       // 파티 최대 인원. 4
+
+        public SerializedParty(PC[] _party, int _members, int _size)
+        {
+            party = new SerializedPC[_party.Length];
+            for(int i = 0; i < _party.Length && _party[i] != null; i++)
+                party[i] = _party[i].GetSerialized();
+            members = _members;
+            size = _size;
         }
     }
 }

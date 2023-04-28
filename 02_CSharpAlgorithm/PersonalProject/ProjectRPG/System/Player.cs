@@ -70,6 +70,23 @@ namespace ProjectRPG
             findings[0] = true;
         }
 
+        public Player(SerializedPlayer serializedPlayer)
+        {
+            name = serializedPlayer.name;
+            money = serializedPlayer.money;
+            inventory = serializedPlayer.inventory;
+            fieldPos = serializedPlayer.fieldPos;
+            findings = serializedPlayer.findings;
+
+            party = new Party(serializedPlayer.party);
+            employed = new List<PC>();
+            for(int i = 0; i < serializedPlayer.employed.Count && serializedPlayer.employed[i] != null; i++)
+            {
+                PC pc = new PC(serializedPlayer.employed[i]);
+                employed.Add(pc);
+            }
+        }
+
         /// <summary>
         /// 돈을 추가하는 메소드
         /// </summary>
@@ -184,10 +201,36 @@ namespace ProjectRPG
             return true;
         }
 
-        // Memento 객체를 생성하여 현재 상태를 저장
-        public Memento SaveState()
+        public SerializedPlayer GetSerialized()
         {
-            return new Memento(this);
+            return new SerializedPlayer(name, money, party, inventory, employed, fieldPos, findings);
+        }
+    }
+
+    [Serializable]
+    internal class SerializedPlayer
+    {
+        public string name;                // 플레이어 이름
+        public int money;                  // 플레이어 자금
+        public SerializedParty party;                // 현재 파티
+
+        public List<Item> inventory;       // 보유 아이템들
+        public List<SerializedPC> employed;          // 고용한 캐릭터들
+
+        public  (int x, int y) fieldPos;    // 필드에서의 위치
+        public bool[] findings;            // 찾은 던전 목록
+
+        public SerializedPlayer(string _name, int _money, Party _party, List<Item> _inventory, List<PC> _employed, (int x, int y) _fieldPos, bool[] _findings)
+        {
+            name = _name;
+            money = _money;
+            party = _party.GetSerialized();
+            inventory = _inventory;
+            employed = new List<SerializedPC>();
+            foreach(PC pc in _employed)
+                employed.Add(pc.GetSerialized());
+            fieldPos = _fieldPos;
+            findings = _findings;
         }
     }
 }

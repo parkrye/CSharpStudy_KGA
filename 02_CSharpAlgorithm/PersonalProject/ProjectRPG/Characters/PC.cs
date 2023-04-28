@@ -1,4 +1,7 @@
-﻿namespace ProjectRPG
+﻿using System.Drawing;
+using System.IO;
+
+namespace ProjectRPG
 {
     /// <summary>
     /// 플레이 가능한 캐릭터에 대한 클래스
@@ -88,6 +91,16 @@
             }
         }
 
+        public PC(SerializedPC serializedPC)
+        {
+            name = serializedPC.name;
+            status = serializedPC.status;
+            skillSlot = serializedPC.skillSlot;
+            itemSlot = serializedPC.itemSlot;
+            difficulty = serializedPC.difficulty;
+            exp = serializedPC.exp;
+        }
+
         /// <summary>
         /// 직업 추가 메소드
         /// </summary>
@@ -118,5 +131,30 @@
             }
         }
 
+        public SerializedPC GetSerialized()
+        {
+            return new SerializedPC(name, status, skillSlot, itemSlot, difficulty, exp);
+        }
+    }
+
+    [Serializable]
+    internal class SerializedPC
+    {
+        public string name;
+        public int[,] status;
+        public SkillSlot skillSlot;
+        public ItemSlot itemSlot;
+        public int difficulty;
+        public int exp;
+
+        public SerializedPC(string _name, int[,] _status, SkillSlot _skillSlot, ItemSlot _itemSlot, int _difficulty, int _exp)
+        {
+            name = _name;
+            status = _status;
+            skillSlot = _skillSlot;
+            itemSlot = _itemSlot;
+            difficulty = _difficulty;
+            exp = _exp;
+        }
     }
 }

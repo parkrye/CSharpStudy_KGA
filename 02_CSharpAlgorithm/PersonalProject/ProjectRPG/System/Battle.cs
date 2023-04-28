@@ -609,7 +609,7 @@
                             if (target.NOW_HP < target.MAX_HP)
                                 targeting = true;
                         }
-                        else if (enemy.ITEMSLOT.ITEMS[select - enemy.ITEMSLOT.QUANTITY] is IBurfable)
+                        else if (enemy.SKILLSLOT.SKILLS[select - enemy.ITEMSLOT.QUANTITY] is IBurfable)
                         {
                             target = enemyParty.PCs[random.Next(enemyParty.MEMBERS)];
                             if (target.NOW_HP > 0)

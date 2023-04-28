@@ -119,8 +119,7 @@ namespace ProjectRPG
                         field.StartMap(player);
                         break;
                     case 1:
-                        player = new Player();
-                        DataManager.LoadFile(player);
+                        player = new Player(DataManager.LoadFile());
                         field.StartMap(player);
                         break;
                     case 2:

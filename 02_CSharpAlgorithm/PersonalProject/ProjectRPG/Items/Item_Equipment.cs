@@ -3,6 +3,7 @@
     /// <summary>
     /// 캐릭터에게 상시 적용되는 아이템에 대한 클래스
     /// </summary>
+    [Serializable]
     internal abstract class Item_Equipment : Item
     {
         /// <summary>
