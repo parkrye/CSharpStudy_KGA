@@ -6,7 +6,7 @@ namespace ProjectRPG
     {
         public Monster_Orc(int index)
         {
-            name = $"오수귀 {index}";
+            name = $"오크 {index}";
 
             Random random = new Random();
 
@@ -15,7 +15,7 @@ namespace ProjectRPG
             MAX_SP = random.Next(12, 18);
             MAX_PHYSICSAL = random.Next(5, 10);
             MAX_MENTAL = random.Next(2, 8);
-            MAX_INITIATIVE = random.Next(2, 10);
+            MAX_INITIATIVE = random.Next(8, 20);
             StatusSetting(true);
 
             SKILLSLOT = new SkillSlot(this, 3);
@@ -23,6 +23,7 @@ namespace ProjectRPG
             SKILLSLOT.AddSkill(new Skill_RoughSkin());
 
             ITEMSLOT = new ItemSlot(this, 3);
+            ITEMSLOT.AddItem(new Item_WoodenClub());
             if(random.Next(10) < 2)
                 ITEMSLOT.AddItem(new Item_WoodenAculpture());
         }

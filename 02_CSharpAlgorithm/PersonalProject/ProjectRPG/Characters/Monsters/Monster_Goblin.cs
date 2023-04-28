@@ -4,7 +4,7 @@
     {
         public Monster_Goblin(int index)
         {
-            name = $"소귀 {index}";
+            name = $"고블린 {index}";
 
             Random random = new Random();
 
@@ -13,7 +13,7 @@
             MAX_SP = random.Next(5, 8);
             MAX_PHYSICSAL = random.Next(3, 8);
             MAX_MENTAL = random.Next(1, 5);
-            MAX_INITIATIVE = random.Next(1, 8);
+            MAX_INITIATIVE = random.Next(8, 11);
             StatusSetting(true);
 
             SKILLSLOT = new SkillSlot(this, 3);
