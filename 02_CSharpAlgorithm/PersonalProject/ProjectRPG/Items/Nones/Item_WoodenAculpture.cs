@@ -1,5 +1,6 @@
 ﻿namespace ProjectRPG
 {
+    [Serializable]
     internal class Item_WoodenAculpture : Item_None
     {
         public Item_WoodenAculpture() : base()

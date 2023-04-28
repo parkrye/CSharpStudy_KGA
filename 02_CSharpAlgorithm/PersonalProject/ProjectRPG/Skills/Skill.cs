@@ -8,6 +8,7 @@
     /// <summary>
     /// 스킬에 대한 클래스
     /// </summary>
+    [Serializable]
     internal abstract class Skill
     {
 

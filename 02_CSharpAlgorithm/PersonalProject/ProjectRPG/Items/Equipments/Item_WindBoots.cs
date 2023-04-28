@@ -1,5 +1,6 @@
 ﻿namespace ProjectRPG
 {
+    [Serializable]
     internal class Item_WindBoots : Item_Equipment
     {
         public Item_WindBoots()

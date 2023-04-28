@@ -6,6 +6,7 @@ namespace ProjectRPG
     /// <summary>
     /// 플레이어 파티에 대한 클래스
     /// </summary>
+    [Serializable]
     internal class Party
     {
         PC[] party;     // 파티 구성원. 최대 넷

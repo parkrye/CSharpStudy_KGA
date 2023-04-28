@@ -3,6 +3,7 @@
     /// <summary>
     /// 스킬 슬롯에 대한 클래스
     /// </summary>
+    [Serializable]
     internal class SkillSlot
     {
         Character character;    // 스킬 슬롯을 가진 캐릭터

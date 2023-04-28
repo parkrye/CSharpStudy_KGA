@@ -3,6 +3,7 @@
     /// <summary>
     /// 플레이 가능한 캐릭터에 대한 클래스
     /// </summary>
+    [Serializable]
     internal class PC : Character
     {
         /// <summary>
@@ -116,5 +117,6 @@
                 DIFFICULTY += 1;
             }
         }
+
     }
 }

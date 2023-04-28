@@ -13,6 +13,7 @@
     /// <summary>
     /// 캐릭터에 대한 클래스
     /// </summary>
+    [Serializable]
     internal abstract class Character : IHitable
     {
 

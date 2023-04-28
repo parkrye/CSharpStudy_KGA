@@ -3,6 +3,7 @@
     /// <summary>
     /// 액티브 스킬을 상속한 상세 스킬 클래스
     /// </summary>
+    [Serializable]
     internal class Skill_Punch : Skill_Active, IAttackable
     {
         /// <summary>

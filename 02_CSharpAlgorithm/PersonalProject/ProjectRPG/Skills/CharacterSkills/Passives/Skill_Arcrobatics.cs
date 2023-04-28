@@ -3,6 +3,7 @@
     /// <summary>
     /// 패시브 스킬을 상속한 상세 스킬 클래스
     /// </summary>
+    [Serializable]
     internal class Skill_Arcrobatics : Skill_Passive
     {
         /// <summary>

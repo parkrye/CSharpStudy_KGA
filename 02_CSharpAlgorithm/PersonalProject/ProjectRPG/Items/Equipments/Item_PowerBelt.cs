@@ -1,5 +1,6 @@
 ﻿namespace ProjectRPG
 {
+    [Serializable]
     internal class Item_PowerBelt : Item_Equipment
     {
         public Item_PowerBelt()

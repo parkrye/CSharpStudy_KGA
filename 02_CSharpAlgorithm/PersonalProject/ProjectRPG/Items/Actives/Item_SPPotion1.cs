@@ -1,5 +1,6 @@
 ﻿namespace ProjectRPG
 {
+    [Serializable]
     internal class Item_SPPotion1 : Item_Active, IHealable
     {
         public Item_SPPotion1() : base()

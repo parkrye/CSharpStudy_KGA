@@ -1,5 +1,6 @@
 ﻿namespace ProjectRPG
 {
+    [Serializable]
     internal class Item_BronzeCoin : Item_None
     {
         public Item_BronzeCoin() : base()
