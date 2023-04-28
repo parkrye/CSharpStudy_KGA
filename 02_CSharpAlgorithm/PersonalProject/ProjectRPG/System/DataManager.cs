@@ -7,29 +7,27 @@ namespace ProjectRPG
     {
         static string path = "save.dat";
 
-        public static void SaveFile(Player player)
+        public static void SaveFile(Player _player)
         {
-            Memento memento = player.SaveState();
+            SerializedPlayer player = _player.GetSerialized();
 
-            using (FileStream fs = new FileStream(path, FileMode.Create))
+            BinaryFormatter formatter = new BinaryFormatter();
+            using (FileStream stream = new FileStream(path, FileMode.Create))
             {
-                BinaryFormatter bf = new BinaryFormatter();
-                bf.Serialize(fs, memento);
+                formatter.Serialize(stream, player);
             }
         }
 
-        public static void LoadFile(Player player)
+        public static SerializedPlayer LoadFile()
         {
-            if (File.Exists(path))
+            SerializedPlayer player;
+            BinaryFormatter formatter = new BinaryFormatter();
+            using (FileStream stream = new FileStream(path, FileMode.Open))
             {
-                using (FileStream fs = new FileStream(path, FileMode.Open))
-                {
-                    BinaryFormatter bf = new BinaryFormatter();
-                    Memento memento = (Memento)bf.Deserialize(fs);
-                    player = memento.player;
-                }
-                Console.WriteLine("Game loaded.");
+                player = (SerializedPlayer)formatter.Deserialize(stream);
             }
+
+            return player;
         }
     }
 

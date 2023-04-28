@@ -160,7 +160,7 @@ namespace ProjectRPG
                     }
 
                     Console.SetCursorPosition(40, 9);
-                    if (cursor == 4)
+                    if (cursor == (player.INVENTORY.Count - subCursor >= 4 ? 4 : player.INVENTORY.Count - subCursor))
                         Console.ForegroundColor = ConsoleColor.Green;
                     else
                         Console.ForegroundColor = ConsoleColor.White;
@@ -245,7 +245,7 @@ namespace ProjectRPG
                         case Key.UP:
                             cursor--;
                             if (cursor < 0)
-                                cursor = 4;
+                                cursor = (player.INVENTORY.Count - subCursor >= 4 ? 4 : player.INVENTORY.Count - subCursor);
                             break;
                         case Key.RIGHT:
                             if (player.INVENTORY.Count > (subCursor + 4))
@@ -253,7 +253,7 @@ namespace ProjectRPG
                             break;
                         case Key.DOWN:
                             cursor++;
-                            if (cursor > 4)
+                            if (cursor > (player.INVENTORY.Count - subCursor >= 4 ? 4 : player.INVENTORY.Count - subCursor))
                                 cursor = 0;
                             break;
                         case Key.ENTER:
@@ -317,7 +317,7 @@ namespace ProjectRPG
 
                     case Screen.SELL:
                         goSite = false;
-                        if (cursor == 4)
+                        if (cursor == (player.INVENTORY.Count - subCursor >= 4 ? 4 : player.INVENTORY.Count - subCursor))
                         {
                             screen = Screen.MAIN;
                         }

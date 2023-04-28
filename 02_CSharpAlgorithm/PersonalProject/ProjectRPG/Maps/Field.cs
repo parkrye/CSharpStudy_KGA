@@ -29,7 +29,6 @@
             inMap = true;
             player = _player;
             position = player.POSITION;
-            OpenDungeons();
 
             DrawMap();
             while (inMap)
@@ -128,6 +127,7 @@
         void DrawMap()
         {
             Console.Clear();
+            OpenDungeons();
             Console.SetCursorPosition(0, 0);
             for (int y = 0; y < tiles.GetLength(0); y++)
             {

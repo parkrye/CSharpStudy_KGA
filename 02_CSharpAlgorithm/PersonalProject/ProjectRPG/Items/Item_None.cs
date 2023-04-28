@@ -3,6 +3,7 @@
     /// <summary>
     /// 기능이 없는 아이템에 대한 클래스
     /// </summary>
+    [Serializable]
     internal abstract class Item_None : Item
     {
         /// <summary>

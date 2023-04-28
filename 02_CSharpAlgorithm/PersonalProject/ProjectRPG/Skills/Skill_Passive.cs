@@ -3,6 +3,7 @@
     /// <summary>
     /// 패시브 스킬에 대한 메소드
     /// </summary>
+    [Serializable]
     internal abstract class Skill_Passive : Skill
     {
         protected bool used;     // 사용 여부

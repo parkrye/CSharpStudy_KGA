@@ -3,6 +3,7 @@
     /// <summary>
     /// 특수한 효과를 발동하는 아이템에 대한 클래스
     /// </summary>
+    [Serializable]
     internal abstract class Item_Active : Item
     {
         protected bool consumable;    // 소모 여부

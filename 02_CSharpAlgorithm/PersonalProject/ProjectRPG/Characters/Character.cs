@@ -28,6 +28,7 @@
         // 패시브 스킬, 아이템의 사용을 위해 사용
         // param1 : 능력치ㅡ param2 : 부가적인 데이터
         public delegate bool PlayerDelegate(int[,] param1, params int[] param2);
+        [field: NonSerialized]
         protected event PlayerDelegate? OnDamaged, OnHPDecreased, OnSPDecreased;
 
         /// <summary>

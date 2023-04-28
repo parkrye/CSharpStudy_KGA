@@ -78,7 +78,7 @@ namespace ProjectRPG
         protected override void BossSetting()
         {
             Party boss = new Party();
-            boss.AddPC(new Monster_Orc(0));
+            boss.AddPC(new Monster_GreenLord());
             Item bossDrop = new Item_HPPotion2();
 
             bossRoom = new BossRoom(player, boss, bossDrop);

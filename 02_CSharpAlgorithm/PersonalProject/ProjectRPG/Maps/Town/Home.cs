@@ -236,7 +236,7 @@ namespace ProjectRPG
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.SetCursorPosition(24, 3);
                     Console.Write($"[{player.EMPLOYED[prevCursor].NAME}]");
-                    Console.SetCursorPosition(20, 4);
+                    Console.SetCursorPosition(18, 4);
                     Console.Write($"[현재 파티 인원 ({player.PARTY.MEMBERS}/{player.PARTY.PCs.Length})]");
 
                     Console.SetCursorPosition(10, 6);
@@ -498,6 +498,7 @@ namespace ProjectRPG
         {
             if (goSite)
             {
+                goSite = false;
                 switch (screen)
                 {
                     case Screen.Main:
@@ -506,22 +507,18 @@ namespace ProjectRPG
                             case 0:
                                 screen = Screen.Party;
                                 cursor = 0;
-                                goSite = false;
                                 break;
                             case 1:
                                 screen = Screen.Storage;
                                 cursor = 0;
-                                goSite = false;
                                 break;
                             case 2:
                                 screen = Screen.Lodging;
                                 cursor = 0;
-                                goSite = false;
                                 break;
                             case 3:
                                 screen = Screen.Room;
                                 cursor = 0;
-                                goSite = false;
                                 break;
                             case 4:
                                 outSite = true;
@@ -530,7 +527,6 @@ namespace ProjectRPG
                         break;
 
                     case Screen.Party:
-                        goSite = false;
                         if (cursor == player.PARTY.MEMBERS)
                         {
                             screen = Screen.Main;
@@ -546,7 +542,6 @@ namespace ProjectRPG
                         break;
 
                     case Screen.Storage:
-                        goSite = false;
                         if (cursor == (player.INVENTORY.Count - subCursor >= 4 ? 4 : player.INVENTORY.Count - subCursor))
                         {
                             screen = Screen.Main;
@@ -562,7 +557,6 @@ namespace ProjectRPG
                         break;
 
                     case Screen.Lodging:
-                        goSite = false;
                         if (cursor == (player.EMPLOYED.Count - subCursor >= 4 ? 4 : player.EMPLOYED.Count - subCursor))
                         {
                             screen = Screen.Main;
@@ -578,7 +572,6 @@ namespace ProjectRPG
                         break;
 
                     case Screen.Room:
-                        goSite = false;
                         if (cursor == 1)
                         {
                             screen = Screen.Main;
@@ -590,7 +583,6 @@ namespace ProjectRPG
                         break;
 
                     case Screen.PartyCharacter:
-                        goSite = false;
                         if(subCursor == 0)
                         {
                             switch (cursor)
@@ -611,14 +603,13 @@ namespace ProjectRPG
                         }
                         else
                         {
-                            screen = Screen.Main;
+                            screen = Screen.Party;
                         }
                         cursor = 0;
                         subCursor = 0;
                         break;
 
                     case Screen.StorageItem:
-                        goSite = false;
                         if (cursor == player.PARTY.MEMBERS)
                         {
                         }
@@ -633,7 +624,6 @@ namespace ProjectRPG
                         break;
 
                     case Screen.LodgingCharacter:
-                        goSite = false;
                         if (cursor != 1)
                         {
                             player.EmployedToParty(prevCursor);
@@ -652,6 +642,7 @@ namespace ProjectRPG
             Console.ForegroundColor = ConsoleColor.White;
             Console.SetCursorPosition(25, 6);
             Console.Write("[저장중...]");
+            Thread.Sleep(500);
             DataManager.SaveFile(player);
             Console.Clear();
             Console.SetCursorPosition(20, 6);
