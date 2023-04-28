@@ -21,23 +21,14 @@
 
         protected override void ShowSites()
         {
-            Console.Clear();
-            Console.ForegroundColor = ConsoleColor.White;
-            for (int i = 0; i < 60; i++)
+            for(int j = 1; j < 10; j++)
             {
-                Console.SetCursorPosition(i, 0);
-                Console.Write("=");
-                Console.SetCursorPosition(i, 10);
-                Console.Write("=");
+                for (int i = 1; i < 59; i++)
+                {
+                    Console.SetCursorPosition(i, j);
+                    Console.Write(" ");
+                }
             }
-            for (int i = 1; i < 10; i++)
-            {
-                Console.SetCursorPosition(0, i);
-                Console.Write("||");
-                Console.SetCursorPosition(58, i);
-                Console.Write("||");
-            }
-
             Console.SetCursorPosition(25, 1);
             Console.ForegroundColor = ConsoleColor.White;
             Console.Write($"[{name}]");
@@ -113,15 +104,19 @@
                 {
                     case 0:
                         home.GetIn(player);
+                        ShowUI();
                         break;
                     case 1:
                         tavern.GetIn(player);
+                        ShowUI();
                         break;
                     case 2:
                         clinic.GetIn(player);
+                        ShowUI();
                         break;
                     case 3:
                         market.GetIn(player);
+                        ShowUI();
                         break;
                     case 4:
                         outSite = true;

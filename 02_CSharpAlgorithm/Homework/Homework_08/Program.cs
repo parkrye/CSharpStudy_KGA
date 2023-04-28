@@ -4,45 +4,106 @@
     {
         static void Main(string[] args)
         {
-            int num = int.Parse(Console.ReadLine());
-            Console.WriteLine(Math.Pow(2, num) - 1);
-            Hanoi(num, 1, 2, 3);
+            Hanoi();
 
-            string[] line = Console.ReadLine().Split(" ");
-            string answer = "";
-            NnM(int.Parse(line[0]), int.Parse(line[1]), answer);
+            NnM();
 
-            Lost(Console.ReadLine());
+            Lost();
 
             Paper();
 
             Triangle();
         }
 
+        static void Hanoi()
+        {
+            int num = int.Parse(Console.ReadLine());
+            Console.WriteLine(Math.Pow(2, num) - 1);
+            HanoiSolve(num, 1, 2, 3);
+        }
+
+        static void NnM()
+        {
+            string[] line = Console.ReadLine().Split(" ");
+            string answer = "";
+            NnMSolve(int.Parse(line[0]), int.Parse(line[1]), answer);
+        }
+
+        static void Lost()
+        {
+            string problem = Console.ReadLine();
+            LostSolve(problem);
+        }
+
+        static void Paper()
+        {
+            int size = int.Parse(Console.ReadLine());
+            int[,] paper = new int[size,size];
+            for(int i = 0; i < size; i++)
+            {
+                string[] line = Console.ReadLine().Split(" ");
+                for(int j = 0; j < line.Length; j++)
+                {
+                    paper[i,j] = int.Parse(line[j]);
+                }
+            }
+            int blue = 0, white = 0;
+            PaperSolve(paper, 0, 0, size, ref blue, ref white);
+            Console.WriteLine(white);
+            Console.WriteLine(blue);
+        }
+
+        static void Triangle()
+        {
+            int height = int.Parse(Console.ReadLine());
+
+            int[,] triangle = new int[height, height];
+
+            for (int i = 0; i < height; i++)
+            {
+                string[] line = Console.ReadLine().Split(" ");
+                for (int j = 0; j < height; j++)
+                {
+                    if (j <= i)
+                    {
+                        triangle[i, j] = int.Parse(line[j]);
+                    }
+                    else
+                    {
+                        triangle[i, j] = -1;
+                    }
+                }
+            }
+
+            int max = int.MinValue;
+            TriangleSolve(triangle, 0, 0, 0, ref max);
+            Console.WriteLine(max);
+        }
+
         /// <summary>
         /// 하노이 : 시간 초과
         /// </summary>
-        /// <param name="count"></param>
-        /// <param name="start"></param>
-        /// <param name="mid"></param>
-        /// <param name="end"></param>
-        static void Hanoi(int count, int start, int mid, int end)
+        /// <param name="count">옮겨야하는 개수</param>
+        /// <param name="start">옮길 시작지</param>
+        /// <param name="mid">중간 지점</param>
+        /// <param name="end">옮길 목적지</param>
+        static void HanoiSolve(int count, int start, int mid, int end)
         {
             if (count == 0)
                 return;
 
-            Hanoi(count - 1, start, end, mid);
+            HanoiSolve(count - 1, start, end, mid);
             Console.WriteLine($"{start} {end}");
-            Hanoi(count - 1, mid, start, end);
+            HanoiSolve(count - 1, mid, start, end);
         }
 
         /// <summary>
         /// N과 M : 시간 초과
         /// </summary>
-        /// <param name="n"></param>
-        /// <param name="m"></param>
-        /// <param name="answer"></param>
-        static void NnM(int n, int m, string answer)
+        /// <param name="n">N</param>
+        /// <param name="m">M</param>
+        /// <param name="answer">정답 출력</param>
+        static void NnMSolve(int n, int m, string answer)
         {
             if (answer.Length == m * 2)
             {
@@ -52,15 +113,15 @@
 
             for (int i = 1; i <= n; i++)
             {
-                NnM(i, m, answer + ($"{i} "));
+                NnMSolve(i, m, answer + ($"{i} "));
             }
         }
 
         /// <summary>
         /// 잃어버린 괄호 : 괄호가 여러개인 경우를 고려하지 못함
         /// </summary>
-        /// <param name="problem"></param>
-        static void Lost(string problem)
+        /// <param name="problem">연산 문자열</param>
+        static void LostSolve(string problem)
         {
             List<int> numbers = new List<int>();
             List<bool> ops = new List<bool>();
@@ -147,35 +208,60 @@
         }
 
 
-        static void Paper()
+        /// <summary>
+        /// 색종이 자르기 : 통과
+        /// </summary>
+        /// <param name="paper">색종이</param>
+        /// <param name="left">왼쪽</param>
+        /// <param name="top">위</param>
+        /// <param name="size">자른 크기</param>
+        /// <param name="blue">파란 개수</param>
+        /// <param name="white">하얀 개수</param>
+        static void PaperSolve(int[,] paper, int left, int top, int size, ref int blue, ref int white)
         {
-
-        }
-
-        static void Triangle()
-        {
-            int height = int.Parse(Console.ReadLine());
-            int[,] triangle = new int[height, height];
-            int size = height;
-            for (int i = 2; i < height; i++)
-                size *= i;
-            int[] answer = new int[size];
-
-            for (int i = 0; i < height; i++)
+            bool isBlue = paper[top, left] == 1;
+            for(int i = top; i < top + size; i++)
             {
-                string[] line = Console.ReadLine().Split(" ");
-                for(int j = 0; j < height; j++)
+                for(int j = left; j < left + size; j++)
                 {
-                    if(j <= i)
+                    if(isBlue != (paper[i, j] == 1))
                     {
-                        triangle[i, j] = int.Parse(line[j]);
-                    }
-                    else
-                    {
-                        triangle[i, j] = -1;
+                        PaperSolve(paper, left, top, size/2, ref blue, ref white);
+                        PaperSolve(paper, left + size / 2, top, size/2, ref blue, ref white);
+                        PaperSolve(paper, left, top + size / 2, size/2, ref blue, ref white);
+                        PaperSolve(paper, left + size / 2, top + size / 2, size/2, ref blue, ref white);
+                        return;
                     }
                 }
             }
+            if (isBlue)
+                blue++;
+            else
+                white++;
+        }
+
+        /// <summary>
+        /// 삼각형 최대 경로 : 시간초과
+        /// </summary>
+        /// <param name="triangle">삼각형 배열</param>
+        /// <param name="row">현재 가로줄</param>
+        /// <param name="col">현재 세로줄</param>
+        /// <param name="sum">현재 합</param>
+        /// <param name="max">최대값</param>
+        static void TriangleSolve(int[,] triangle, int row, int col, int sum, ref int max)
+        {
+            if(row == triangle.GetLength(0))
+            {
+                if (sum > max)
+                    max = sum;
+                return;
+            }
+
+            if(col > 0)
+                TriangleSolve(triangle, row + 1, col - 1, sum + triangle[row, col], ref max);
+            TriangleSolve(triangle, row + 1, col, sum + triangle[row, col], ref max);
+            if(col < row)
+                TriangleSolve(triangle, row + 1, col + 1, sum + triangle[row, col], ref max);
         }
     }
 }

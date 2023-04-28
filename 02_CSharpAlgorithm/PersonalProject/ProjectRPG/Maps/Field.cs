@@ -75,7 +75,7 @@
 
         void SetDungeons()
         {
-            dungeonDict1.Add(0, (5, 8));    dungeonDict2.Add((5, 9), 0);
+            dungeonDict1.Add(0, (5, 8));    dungeonDict2.Add((5, 8), 0);
             dungeonDict1.Add(1, (17, 3));   dungeonDict2.Add((17, 3), 1);
             dungeonDict1.Add(2, (10, 14));  dungeonDict2.Add((10, 14), 2);
             dungeonDict1.Add(3, (14, 18));  dungeonDict2.Add((14, 18), 3);
@@ -133,6 +133,7 @@
 
         void DrawMap()
         {
+            Console.Clear();
             Console.SetCursorPosition(0, 0);
             for (int y = 0; y < tiles.GetLength(0); y++)
             {
@@ -282,12 +283,21 @@
                             switch(dungeonDict2[(position.y, position.x)])
                             {
                                 case 0:
+                                    new Dungeon_Hill(player).EnterDungeon();
+                                    DrawMap();
+                                    DrawPlayer();
                                     break;
                                 case 1:
+                                    DrawMap();
+                                    DrawPlayer();
                                     break;
                                 case 2:
+                                    DrawMap();
+                                    DrawPlayer();
                                     break;
                                 case 3:
+                                    DrawMap();
+                                    DrawPlayer();
                                     break;
                             }
                         }
