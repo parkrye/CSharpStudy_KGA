@@ -236,6 +236,8 @@ namespace ProjectRPG
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.SetCursorPosition(24, 3);
                     Console.Write($"[{player.EMPLOYED[prevCursor].NAME}]");
+                    Console.SetCursorPosition(20, 4);
+                    Console.Write($"[현재 파티 인원 ({player.PARTY.MEMBERS}/{player.PARTY.PCs.Length})]");
 
                     Console.SetCursorPosition(10, 6);
                     if (cursor == 0)
@@ -589,23 +591,27 @@ namespace ProjectRPG
 
                     case Screen.PartyCharacter:
                         goSite = false;
-                        switch (cursor)
+                        if(subCursor == 0)
                         {
-                            case 0:
-                                while (player.PARTY.PCs[prevCursor].ITEMSLOT.QUANTITY > 0)
-                                {
-                                    player.AddItem(player.PARTY.PCs[prevCursor].ITEMSLOT.ITEMS[0]);
-                                    player.PARTY.PCs[prevCursor].ITEMSLOT.RemoveItem(0);
-                                }
-                                screen = Screen.Party;
-                                break;
-                            case 1:
-                                player.PartyToEmployed(prevCursor);
-                                screen = Screen.Party;
-                                break;
-                            case 2:
-                                screen = Screen.Main;
-                                break;
+                            switch (cursor)
+                            {
+                                case 0:
+                                    while (player.PARTY.PCs[prevCursor].ITEMSLOT.QUANTITY > 0)
+                                    {
+                                        player.AddItem(player.PARTY.PCs[prevCursor].ITEMSLOT.ITEMS[0]);
+                                        player.PARTY.PCs[prevCursor].ITEMSLOT.RemoveItem(0);
+                                    }
+                                    screen = Screen.Party;
+                                    break;
+                                case 1:
+                                    player.PartyToEmployed(prevCursor);
+                                    screen = Screen.Party;
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            screen = Screen.Main;
                         }
                         cursor = 0;
                         subCursor = 0;
@@ -644,19 +650,15 @@ namespace ProjectRPG
         {
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.White;
-            Console.Write("저장중");
-            Thread.Sleep(500);
-            Console.Write(".");
-            Thread.Sleep(500);
-            Console.Write(".");
-            Thread.Sleep(500);
-            Console.Write(".");
+            Console.SetCursorPosition(25, 6);
+            Console.Write("[저장중...]");
+            DataManager.SaveFile(player);
+            Console.Clear();
+            Console.SetCursorPosition(20, 6);
+            Console.WriteLine("[저장되었습니다!]");
             Thread.Sleep(500);
             Console.Clear();
-            Console.WriteLine("저장되었습니다!");
-            Thread.Sleep(1500);
-
-            // 이하 파일 저장 코드 추가
+            ShowUI();
         }
     }
 }

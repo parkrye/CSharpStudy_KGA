@@ -1,5 +1,6 @@
 ﻿namespace ProjectRPG
 {
+    [Serializable]
     internal class Item_MysteriousRing : Item_Equipment
     {
         public Item_MysteriousRing()

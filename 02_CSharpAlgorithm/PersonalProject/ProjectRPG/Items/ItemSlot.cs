@@ -3,6 +3,7 @@
     /// <summary>
     /// 아이템 슬롯에 대한 클래스
     /// </summary>
+    [Serializable]
     internal class ItemSlot
     {
         Character character;    // 아이템 슬롯을 가진 캐릭터
@@ -90,21 +91,6 @@
                 character.DIFFICULTY--;
             quantity--;
             return true;
-        }
-
-        /// <summary>
-        /// 아이템 슬롯 크기를 재설정하는 메소드
-        /// </summary>
-        /// <param name="count">변경값</param>
-        public void ResizeSlot(int count)
-        {
-            Item[] newSkills;
-            if (size + count <= 0)
-                newSkills = new Item[1];
-            else
-                newSkills = new Item[size + count];
-            Array.Copy(items, newSkills, size);
-            size += count;
         }
 
         /// <summary>

@@ -1,7 +1,10 @@
-﻿using System.Reflection.Metadata.Ecma335;
+﻿using System.Dynamic;
+using System.Reflection.Emit;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace ProjectRPG
 {
+    [Serializable]
     internal class Player
     {
         string name;                // 플레이어 이름
@@ -64,6 +67,7 @@ namespace ProjectRPG
             fieldPos.x = 8;
             fieldPos.y = 10;
             findings = new bool[4];
+            findings[0] = true;
         }
 
         /// <summary>
@@ -130,6 +134,8 @@ namespace ProjectRPG
         public void EmployCharacter(PC character)
         {
             employed.Add(character);
+            if (party.MEMBERS < party.PCs.Length)
+                EmployedToParty(employed.Count - 1);
         }
 
         /// <summary>
@@ -160,7 +166,6 @@ namespace ProjectRPG
             EmployCharacter(party.PCs[index]);
             if (party.RemovePC(index))
                 return true;
-            FireCharacter(employed.Count - 1);
             return false;
         }
 
@@ -177,6 +182,12 @@ namespace ProjectRPG
                 return false;
             party.AddPC(FireCharacter(index));
             return true;
+        }
+
+        // Memento 객체를 생성하여 현재 상태를 저장
+        public Memento SaveState()
+        {
+            return new Memento(this);
         }
     }
 }

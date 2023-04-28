@@ -59,7 +59,7 @@
                                 Console.SetCursorPosition(15, 6);
                                 Console.ForegroundColor = ConsoleColor.White;
                                 Console.Write("[어둠 속에서 적이 나타났다!]");
-                                Thread.Sleep(1000);
+                                Thread.Sleep(500);
                                 new Battle(player, enemy).StartBattle();
                                 inRoom = false;
                                 if (player.PARTY.MEMBERS > 0)

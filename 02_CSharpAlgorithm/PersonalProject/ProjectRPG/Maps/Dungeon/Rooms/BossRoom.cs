@@ -46,10 +46,22 @@
                 else
                 {
                     new Battle(player, enemy).StartBattle();
-                    Console.SetCursorPosition(15, 5);
-                    Console.Write("[보스를 격퇴하고 아이템을 획득했다]");
-                    player.AddItem(item);
-                    battleOver = true;
+                    if (player.PARTY.MEMBERS > 0)
+                    {
+                        Console.SetCursorPosition(15, 5);
+                        Console.Write("[보스를 격퇴하고 아이템을 획득했다]");
+                        player.AddItem(item);
+                        battleOver = true;
+                        player.FINDINGS[1] = true;
+                    }
+                    else
+                    {
+                        ShowUI();
+                        Console.SetCursorPosition(15, 6);
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.Write("[모든 파티원을 잃었다]");
+                        Thread.Sleep(1000);
+                    }
                 }
                 clicked = false;
             }

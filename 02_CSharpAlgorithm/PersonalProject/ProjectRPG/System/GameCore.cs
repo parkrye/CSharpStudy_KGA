@@ -13,21 +13,10 @@ namespace ProjectRPG
 
         public GameCore()
         {
+            Console.Title = "Project RPG";
             Console.CursorVisible = false;
 
             field = new Field();
-            player = new Player();
-            player.AddItem(new Item_HPPotion1());
-            player.AddItem(new Item_HPPotion2());
-            player.AddItem(new Item_HPPotion3());
-            player.AddItem(new Item_SPPotion1());
-            player.AddItem(new Item_SPPotion2());
-            player.EmployCharacter(new PC(new Class_Soldier()));
-            player.EmployCharacter(new PC(new Class_Soldier()));
-            player.EmployCharacter(new PC(new Class_Soldier()));
-            player.EmployCharacter(new PC(new Class_Soldier()));
-            player.EmployCharacter(new PC(new Class_Soldier()));
-            player.FINDINGS[0] = true;
             isPlaying = true;
             cursor = 0;
             select = false;
@@ -122,9 +111,16 @@ namespace ProjectRPG
                 switch (cursor)
                 {
                     case 0:
+                        Console.Clear();
+                        Console.SetCursorPosition(8, 6);
+                        Console.Write("이름을 입력해주세요 : ");
+                        player = new Player(Console.ReadLine());
+                        player.EmployCharacter(new PC(new Class_Soldier()));
                         field.StartMap(player);
                         break;
                     case 1:
+                        player = new Player();
+                        DataManager.LoadFile(player);
                         field.StartMap(player);
                         break;
                     case 2:

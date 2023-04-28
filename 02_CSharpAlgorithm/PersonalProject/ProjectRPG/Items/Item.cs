@@ -9,6 +9,7 @@
     /// <summary>
     /// 아이템에 대한 클래스
     /// </summary>
+    [Serializable]
     internal abstract class Item
     {    
 

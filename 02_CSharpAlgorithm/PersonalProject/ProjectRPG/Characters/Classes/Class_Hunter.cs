@@ -10,15 +10,15 @@
         /// </summary>
         public Class_Hunter()
         {
-            name = "엽사";
             defaultStatus = new int[5];
             HP = 1;
             SP = 1;
             PHYSICAL = 2;
             MENTAL = 1;
             INITIATIVE = 1;
-            skillSlot = new SkillSlot(null, 3);
-
+            skillSlot = new SkillSlot(null, 2);
+            SKILLSLOT.AddSkill(new Skill_ThrowDagger());
+            SKILLSLOT.AddSkill(new Skill_DeepBreath());
         }
     }
 }

@@ -3,6 +3,7 @@
     /// <summary>
     /// 액티브 스킬을 상속한 상세 스킬 클래스
     /// </summary>
+    [Serializable]
     internal class Skill_ThrowDagger : Skill_Active, IAttackable
     {
         /// <summary>
@@ -12,30 +13,53 @@
         /// <param name="_exp">스킬 경험치. 기본 0</param>
         public Skill_ThrowDagger(int _level = 1, int _exp = 0) : base()
         {
-            name = "(A)단검 투척";
+            name = "(A)투석";
             level = _level;
             exp = _exp;
             value = 2;
             cost = 5;
+            rank = 0;
         }
 
         public override bool Active(int[,] param1, params int[] param2)
         {
             if (other != null)
             {
-                return Attack(other, param1[1,2]);
+                if (other is IHitable)
+                    return Attack(other, param1[1, 2]);
+                return false;
             }
             return false;
         }
 
         public bool Attack(IHitable hitable, params int[] param)
         {
-            if(hitable.Hit(param[0] / 2 * value * level))
+            if(hitable.Hit(param[0] / 2 * value * (level + rank * 10)))
             {
                 GetEXP(1);
                 return true;
             }
             return false;
+        }
+
+        protected override void RankUp()
+        {
+            rank++;
+            level -= 10;
+
+            switch (rank)
+            {
+                case 1:
+                    name = "(A)다트 투척";
+                    value += 1;
+                    cost += 2;
+                    break;
+                case 2:
+                    name = "(A)단검 투척";
+                    value += 1;
+                    cost += 2;
+                    break;
+            }
         }
     }
 }

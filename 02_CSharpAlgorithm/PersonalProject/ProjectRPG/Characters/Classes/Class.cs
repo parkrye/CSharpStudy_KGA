@@ -5,14 +5,8 @@
     /// </summary>
     internal abstract class Class
     {
-        protected string name;                  // 직업 이름
         protected SkillSlot skillSlot;          // 직업 스킬
         protected int[] defaultStatus;          // 직업 능력치
-
-        /// <summary>
-        /// 직업 이름에 대한 프로퍼티
-        /// </summary>
-        public string NAME { get { return name; } }
 
         /// <summary>
         /// 직업 스킬에 대한 프로퍼티

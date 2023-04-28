@@ -3,6 +3,7 @@
     /// <summary>
     /// 플레이 가능한 캐릭터에 대한 클래스
     /// </summary>
+    [Serializable]
     internal class PC : Character
     {
         /// <summary>
@@ -26,14 +27,13 @@
             MAX_INITIATIVE = random.Next(5, 15);
             StatusSetting(true);
 
-            // 스킬 슬롯은 일반적으로 최대 3
-            SKILLSLOT = new SkillSlot(this, 3);
+            // 스킬 슬롯은 일반적으로 최대 4
+            SKILLSLOT = new SkillSlot(this, 4);
             SKILLSLOT.AddSkill(new Skill_Punch());
             SKILLSLOT.AddSkill(new Skill_Kick());
 
             // 아이템 슬롯은 일반적으로 최대 3
             ITEMSLOT = new ItemSlot(this, 3);
-            ITEMSLOT.AddItem(new Item_HPPotion1());
         }
 
         /// <summary>
@@ -59,13 +59,12 @@
             StatusSetting(true);
 
             // 스킬 슬롯은 일반적으로 최대 3
-            SKILLSLOT = new SkillSlot(this, 3);
+            SKILLSLOT = new SkillSlot(this, 4);
             SKILLSLOT.AddSkill(new Skill_Punch());
             SKILLSLOT.AddSkill(new Skill_Kick());
 
             // 아이템 슬롯은 일반적으로 최대 3
             ITEMSLOT = new ItemSlot(this, 3);
-            ITEMSLOT.AddItem(new Item_HPPotion1());
 
             // 직업 스테이터스 획득
             MAX_HP += c.HP;
@@ -118,5 +117,6 @@
                 DIFFICULTY += 1;
             }
         }
+
     }
 }

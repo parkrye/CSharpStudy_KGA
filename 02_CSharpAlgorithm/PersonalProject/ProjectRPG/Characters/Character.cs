@@ -13,6 +13,7 @@
     /// <summary>
     /// 캐릭터에 대한 클래스
     /// </summary>
+    [Serializable]
     internal abstract class Character : IHitable
     {
 
@@ -21,15 +22,13 @@
         protected SkillSlot skillSlot;  // 캐릭터의 스킬
         protected ItemSlot itemSlot;    // 캐릭터의 아이템
         protected int difficulty;       // 캐릭터 위험도(적일때 이용)
+        protected int exp;              // 캐릭터 성장도
 
         // 이벤트 호출을 위한 대리자
         // 패시브 스킬, 아이템의 사용을 위해 사용
         // param1 : 능력치ㅡ param2 : 부가적인 데이터
         public delegate bool PlayerDelegate(int[,] param1, params int[] param2);
         protected event PlayerDelegate? OnDamaged, OnHPDecreased, OnSPDecreased;
-
-        // 턴 카운트을 위해 사용
-        protected event Action? OnTimeFlow;
 
         /// <summary>
         /// 캐릭터 이름에 대한 프로퍼티
@@ -87,6 +86,31 @@
         public ItemSlot ITEMSLOT { get { return itemSlot; } set { itemSlot = value; } }
 
         /// <summary>
+        /// 캐릭터 성장에 대한 프로퍼티
+        /// </summary>
+        public int EXP 
+        { 
+            get 
+            { 
+                return exp; 
+            } 
+            set 
+            { 
+                exp = value; 
+                while (exp > 100) 
+                { 
+                    exp -= 100;
+                    MAX_HP += MAX_HP / 10;
+                    MAX_SP += MAX_SP / 10;
+                    MAX_PHYSICSAL += MAX_PHYSICSAL / 10;
+                    MAX_MENTAL += MAX_MENTAL / 10;
+                    MAX_INITIATIVE += MAX_INITIATIVE / 10;
+                    StatusSetting(true);
+                }  
+            } 
+        }
+
+        /// <summary>
         /// 현재 스테이터스를 최대 스테이터스로 설정하는 메소드
         /// <param name="reset">초기화 여부. true: 체력과 활력도 설정</param>
         /// </summary>
@@ -107,10 +131,11 @@
         /// </summary>
         /// <param name="index">사용할 스킬 번호</param>
         /// <param name="targetable">스킬 대상</param>
-        public void UseSkill(int index, IHitable targetable)
+        public bool UseSkill(int index, Character target)
         {
-            skillSlot.UseSkill(index, targetable, status);                  // 스킬 슬롯에서 해당 스킬을 시전하고, 소모 활력을 반환받는다
+            bool result = skillSlot.UseSkill(index, target, status);                  // 스킬 슬롯에서 해당 스킬을 시전하고, 소모 활력을 반환받는다
             OnSPDecreased?.Invoke(status);                                  // 활력 감소에 대한 패시브 스킬이 시전되고, 활력을 조정한다
+            return result;
         }
 
         /// <summary>
@@ -156,16 +181,6 @@
         public void AddListenerOnSPDecreased(PlayerDelegate player)
         {
             OnSPDecreased += player;
-        }
-
-        public void AddListenerOnTurnEnd(Action action)
-        {
-            OnTimeFlow += action;
-        }
-
-        public void TimeFlow()
-        {
-            OnTimeFlow?.Invoke();
         }
     }
 }

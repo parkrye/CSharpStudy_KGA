@@ -38,6 +38,7 @@ namespace ProjectRPG
             items.Add(new Item_MysteriousRing());
             items.Add(new Item_PowerBelt());
             items.Add(new Item_WindBoots());
+            items.Add(new Item_WoodenClub());
         }
 
         /// <summary>
@@ -58,8 +59,9 @@ namespace ProjectRPG
                     case 4: product = new Item_SPPotion2(); break;
                     case 5: product = new Item_SPPotion3(); break;
                     case 6: product = new Item_MysteriousRing(); break;
-                    case 8: product = new Item_PowerBelt(); break;
-                    case 7: product = new Item_WindBoots(); break;
+                    case 7: product = new Item_PowerBelt(); break;
+                    case 8: product = new Item_WindBoots(); break;
+                    case 9: product = new Item_WoodenClub(); break;
                 }
                 products[i] = product;
             }

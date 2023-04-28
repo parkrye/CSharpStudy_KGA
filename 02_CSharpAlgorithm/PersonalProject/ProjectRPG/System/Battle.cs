@@ -105,9 +105,9 @@
                 else
                     Console.ForegroundColor = ConsoleColor.Blue;
                 Console.SetCursorPosition(i * 10, 5);
-                Console.Write(playerParty.PCs[i].NAME);
+                Console.Write($"{playerParty.PCs[i].NAME}　");
                 Console.SetCursorPosition(i * 10, 6);
-                Console.Write($"{playerParty.PCs[i].NOW_HP} | {playerParty.PCs[i].NOW_SP}");
+                Console.Write($"{playerParty.PCs[i].NOW_HP} | {playerParty.PCs[i].NOW_SP}　");
             }
         }
 
@@ -123,7 +123,7 @@
                     continue;
                 }
 
-                Thread.Sleep(1000);
+                Thread.Sleep(500);
                 ShowSituation();
                 if (playerParty.Contains(turnCharacter))
                 {
@@ -212,21 +212,31 @@
                     {
                         sum += enemyParty.PCs[i].DIFFICULTY;
                     }
-                    player.AddMoney(sum);
+                    player.AddMoney(sum / 2);
 
                     List<Item> items = new List<Item>();
                     for (int i = 0; i < enemyParty.MEMBERS; i++)
                     {
                         for(int j = 0; j < enemyParty.PCs[i].ITEMSLOT.QUANTITY; j++)
                         {
-                            player.AddItem(enemyParty.PCs[i].ITEMSLOT.ITEMS[j]);
+                            if(random.Next(3) == 0)
+                                player.AddItem(enemyParty.PCs[i].ITEMSLOT.ITEMS[j]);
                         }
                     }
 
                     for(int i = 0; i < playerParty.MEMBERS; i++)
                     {
+                        playerParty.PCs[i].EXP += sum;
                         if (playerParty.PCs[i].NOW_HP == 0)
                             playerParty.PCs[i].NOW_HP++;
+                        if (playerParty.PCs[i].NOW_SP == 0)
+                            playerParty.PCs[i].NOW_SP++;
+                        if (playerParty.PCs[i].NOW_PHYSICSAL != player.PARTY.PCs[i].MAX_PHYSICSAL)
+                            playerParty.PCs[i].NOW_PHYSICSAL = player.PARTY.PCs[i].MAX_PHYSICSAL;
+                        if (playerParty.PCs[i].NOW_MENTAL != player.PARTY.PCs[i].MAX_MENTAL)
+                            playerParty.PCs[i].NOW_MENTAL = player.PARTY.PCs[i].MAX_MENTAL;
+                        if (playerParty.PCs[i].NOW_INITIATIVE != player.PARTY.PCs[i].MAX_INITIATIVE)
+                            playerParty.PCs[i].NOW_INITIATIVE = player.PARTY.PCs[i].MAX_INITIATIVE;
                     }
                     break;
                 // 플레이어 패배
@@ -369,7 +379,7 @@
                         PC target = Targeting(pc.SKILLSLOT.SKILLS[select] is IAttackable);
                         if (target == null)
                             break;
-                        if (pc.SKILLSLOT.UseSkill(select, target, pc.STATUS))
+                        if (pc.UseSkill(select, target))
                             return true;
                         break;
                     case Key.CANEL:
@@ -388,6 +398,9 @@
         {
             int select = 0;
             int count = pc.ITEMSLOT.QUANTITY;
+
+            if (select == count)
+                return false;
 
             while (true)
             {
@@ -420,15 +433,23 @@
                         if (select < 0)
                             select = count - 1;
                         while (pc.ITEMSLOT.ITEMS[select] == null)
+                        {
                             select--;
+                            if (select < 0)
+                                select = count - 1;
+                        }
                         break;
                     case Key.RIGHT:
                     case Key.DOWN:
                         select++;
                         if (select >= count)
                             select = 0;
-                        if (pc.ITEMSLOT.ITEMS[select] == null)
-                            select = 0;
+                        while (pc.ITEMSLOT.ITEMS[select] == null)
+                        {
+                            select++;
+                            if (select >= count)
+                                select = 0;
+                        }
                         break;
                     case Key.ENTER:
                         PC target = Targeting(pc.ITEMSLOT.ITEMS[select] is IAttackable);
@@ -478,30 +499,17 @@
         PC Targeting(bool isAttack)
         {
             int select = 0;
-            for(int i = 0; i < turnOrder.Count; i++)
+            while ((isAttack && (playerParty.Contains(turnOrder[select]) || turnOrder[select].NOW_HP == 0)) || (!isAttack && enemyParty.Contains(turnOrder[select])))
             {
-                if (isAttack)
-                {
-                    if (enemyParty.Contains(turnOrder[i]))
-                    {
-                        select = i;
-                        break;
-                    }
-                }
-                else
-                {
-                    if (playerParty.Contains(turnOrder[i]))
-                    {
-                        select = i;
-                        break;
-                    }
-                }
+                select++;
+                if (select >= turnOrder.Count)
+                    select = 0;
             }
 
             while (true)
             {
                 // 출력창 지우기
-                Console.SetCursorPosition(0, 14);
+                Console.SetCursorPosition(0, 15);
                 for (int i = 0; i < 5; i++)
                 {
                     for (int j = 0; j < 60; j++)
@@ -509,7 +517,7 @@
                     Console.WriteLine();
                 }
 
-                Console.SetCursorPosition(0, 14);
+                Console.SetCursorPosition(0, 15);
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine($"[대상 : {turnOrder[select].NAME}]");
 
@@ -522,28 +530,24 @@
                         select--;
                         if (select < 0)
                             select = turnOrder.Count - 1;
-                        if (isAttack && playerParty.Contains(turnOrder[select]))
+                        while ((isAttack && (playerParty.Contains(turnOrder[select]) || turnOrder[select].NOW_HP == 0)) || (!isAttack && enemyParty.Contains(turnOrder[select])))
+                        {
                             select--;
-                        if (select < 0)
-                            select = turnOrder.Count - 1;
-                        while (turnOrder[select] == null)
-                            select--;
-                        if (select < 0)
-                            select = turnOrder.Count - 1;
+                            if (select < 0)
+                                select = turnOrder.Count - 1;
+                        }
                         break;
                     case Key.RIGHT:
                     case Key.DOWN:
                         select++;
                         if (select >= turnOrder.Count)
                             select = 0;
-                        if (isAttack && playerParty.Contains(turnOrder[select]))
+                        while ((isAttack && (playerParty.Contains(turnOrder[select]) || turnOrder[select].NOW_HP == 0)) || (!isAttack && enemyParty.Contains(turnOrder[select])))
+                        {
                             select++;
-                        if (select >= turnOrder.Count)
-                            select = 0;
-                        if (turnOrder[select] == null)
-                            select = 0;
-                        if (select >= turnOrder.Count)
-                            select = 0;
+                            if(select >= turnOrder.Count)
+                                select = 0;
+                        }
                         break;
                     case Key.ENTER:
                         return turnOrder[select];
@@ -636,7 +640,7 @@
                 {
                     select -= enemy.ITEMSLOT.QUANTITY;
                     Console.WriteLine($"{enemy.SKILLSLOT.SKILLS[select].NAME} 을 사용했다!");
-                    if (enemy.SKILLSLOT.UseSkill(select, target, enemy.STATUS))
+                    if (enemy.UseSkill(select, target))
                         done = true;
                 }
             }

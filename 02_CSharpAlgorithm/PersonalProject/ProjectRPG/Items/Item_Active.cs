@@ -8,11 +8,6 @@
         protected bool consumable;    // 소모 여부
 
         /// <summary>
-        /// 소모성에 대한 프로퍼티
-        /// </summary>
-        public bool CONSUMABLE { get { return consumable; } }
-
-        /// <summary>
         /// 아이템 타입을 설정하는 생성자
         /// </summary>
         public Item_Active()

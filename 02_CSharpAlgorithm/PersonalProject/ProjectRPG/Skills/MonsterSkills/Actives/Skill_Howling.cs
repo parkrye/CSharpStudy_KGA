@@ -4,20 +4,20 @@
     /// 액티브 스킬을 상속한 상세 스킬 클래스
     /// </summary>
     [Serializable]
-    internal class Skill_Scratch : Skill_Active, IAttackable
+    internal class Skill_Howling : Skill_Active, IBurfable, IHealable
     {
         /// <summary>
         /// 생성자
         /// </summary>
         /// <param name="_level">스킬 레벨. 기본 1</param>
         /// <param name="_exp">스킬 경험치. 기본 0</param>
-        public Skill_Scratch(int _level = 1, int _exp = 0) : base()
+        public Skill_Howling(int _level = 1, int _exp = 0) : base()
         {
-            name = "(A)햘퀴기";
+            name = "(A)하울링";
             level = _level;
             exp = _exp;
             value = 1;
-            cost = 0;
+            cost = 10;
             rank = 0;
         }
 
@@ -25,19 +25,23 @@
         {
             if (other != null)
             {
-                return Attack(other, param1[1, 2]);
+                Burf(self);
+                Heal(self);
+                return true;
             }
             return false;
         }
 
-        public bool Attack(IHitable hitable, params int[] param)
+        public void Burf(Character target)
         {
-            if(hitable.Hit(param[0] / 3 * value * (level + rank * 10)))
-            {
-                GetEXP(1);
-                return true;
-            }
-            return false;
+            target.NOW_PHYSICSAL += target.MAX_PHYSICSAL / 10;
+            target.NOW_MENTAL += target.MAX_MENTAL / 10;
+            target.NOW_INITIATIVE += target.MAX_INITIATIVE / 10;
+        }
+
+        public void Heal(Character target)
+        {
+            target.NOW_HP += target.MAX_HP / 10;
         }
 
         protected override void RankUp()
