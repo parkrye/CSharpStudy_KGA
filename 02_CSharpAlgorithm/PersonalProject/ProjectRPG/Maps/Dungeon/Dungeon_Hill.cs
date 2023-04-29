@@ -88,7 +88,7 @@ namespace ProjectRPG
         {
             Console.Clear();
             Console.SetCursorPosition(0, 0);
-            Console.ForegroundColor = ConsoleColor.Red;
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
             Thread.Sleep(100);
             Console.WriteLine("　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　");
             Console.WriteLine("　□□□　　　□□　　□　　□　　□□□　□□□□　□□□　　");
