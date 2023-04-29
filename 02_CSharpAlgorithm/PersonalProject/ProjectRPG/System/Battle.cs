@@ -227,6 +227,10 @@
                     for(int i = 0; i < playerParty.MEMBERS; i++)
                     {
                         playerParty.PCs[i].EXP += sum;
+                        if (playerParty.PCs[i].NOW_HP > playerParty.PCs[i].MAX_HP)
+                            playerParty.PCs[i].NOW_HP = playerParty.PCs[i].MAX_HP;
+                        if (playerParty.PCs[i].NOW_SP > playerParty.PCs[i].MAX_SP)
+                            playerParty.PCs[i].NOW_SP = playerParty.PCs[i].MAX_SP;
                         if (playerParty.PCs[i].NOW_HP == 0)
                             playerParty.PCs[i].NOW_HP++;
                         if (playerParty.PCs[i].NOW_SP == 0)
