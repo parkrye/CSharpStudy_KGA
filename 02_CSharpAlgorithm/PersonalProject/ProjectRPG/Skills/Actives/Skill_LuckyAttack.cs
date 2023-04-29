@@ -4,19 +4,19 @@
     /// 액티브 스킬을 상속한 상세 스킬 클래스
     /// </summary>
     [Serializable]
-    internal class Skill_DashAttack : Skill_Active, IAttackable
+    internal class Skill_LuckyAttack : Skill_Active, IAttackable
     {
         /// <summary>
         /// 생성자
         /// </summary>
         /// <param name="_level">스킬 레벨. 기본 1</param>
         /// <param name="_exp">스킬 경험치. 기본 0</param>
-        public Skill_DashAttack(int _level = 1, int _exp = 0) : base()
+        public Skill_LuckyAttack(int _level = 1, int _exp = 0) : base()
         {
-            name = "(A)몸통박치기";
+            name = "(A)행운의 일격";
             level = _level;
             exp = _exp;
-            value = 2;
+            value = 1;
             cost = 5;
             rank = 0;
         }
@@ -25,7 +25,7 @@
         {
             if (other != null)
             {
-                if(other is IHitable)
+                if (other is IHitable)
                     return Attack(other, param1[1, 2]);
                 return false;
             }
@@ -34,7 +34,7 @@
 
         public bool Attack(IHitable hitable, params int[] param)
         {
-            if(hitable.Hit(param[0] / 2 * value * (level + rank * 10)))
+            if(hitable.Hit(new Random().Next(value * 2 + 1) * param[0] + (level + rank * 10)))
             {
                 GetEXP(1);
                 return true;
@@ -50,14 +50,14 @@
             switch (rank)
             {
                 case 1:
-                    name = "(A)태클";
-                    value += 2;
-                    cost += 3;
+                    name = "(A)급소 공격";
+                    value += 1;
+                    cost += 2;
                     break;
                 case 2:
-                    name = "(A)맹렬한 돌진";
-                    value += 2;
-                    cost += 3;
+                    name = "(A)천운의 일격";
+                    value += 1;
+                    cost += 2;
                     break;
             }
         }

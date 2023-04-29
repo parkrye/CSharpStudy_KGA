@@ -282,6 +282,7 @@
                                     DrawPlayer();
                                     break;
                                 case 1:
+                                    new Dungeon_Forest(player).EnterDungeon();
                                     DrawMap();
                                     DrawPlayer();
                                     break;

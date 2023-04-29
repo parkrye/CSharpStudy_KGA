@@ -16,7 +16,7 @@
             name = "(P)질긴 피부";
             level = _level;
             exp = _exp;
-            value = 15;
+            value = 3;
             cost = 0;
             rank = 0;
         }

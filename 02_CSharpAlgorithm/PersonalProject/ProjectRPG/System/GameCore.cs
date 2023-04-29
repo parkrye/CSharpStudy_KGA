@@ -115,6 +115,8 @@ namespace ProjectRPG
                         Console.SetCursorPosition(8, 6);
                         Console.Write("이름을 입력해주세요 : ");
                         player = new Player(Console.ReadLine());
+                        if (player.NAME.Length == 0)
+                            break;
                         player.EmployCharacter(new PC(new Class_Soldier()));
                         field.StartMap(player);
                         break;
@@ -126,6 +128,7 @@ namespace ProjectRPG
                         isPlaying = false;
                         break;
                 }
+                Console.Clear();
                 DrawMain();
                 select = false;
                 cursor = 0;

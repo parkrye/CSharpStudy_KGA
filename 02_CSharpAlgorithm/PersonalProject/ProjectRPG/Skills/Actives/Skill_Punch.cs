@@ -4,20 +4,20 @@
     /// 액티브 스킬을 상속한 상세 스킬 클래스
     /// </summary>
     [Serializable]
-    internal class Skill_Blessing : Skill_Active, IBurfable
+    internal class Skill_Punch : Skill_Active, IAttackable
     {
         /// <summary>
         /// 생성자
         /// </summary>
         /// <param name="_level">스킬 레벨. 기본 1</param>
         /// <param name="_exp">스킬 경험치. 기본 0</param>
-        public Skill_Blessing(int _level = 1, int _exp = 0) : base()
+        public Skill_Punch(int _level = 1, int _exp = 0) : base()
         {
-            name = "(A)축성";
+            name = "(A)주먹질";
             level = _level;
             exp = _exp;
             value = 1;
-            cost = 10;
+            cost = 0;
             rank = 0;
         }
 
@@ -25,17 +25,21 @@
         {
             if (other != null)
             {
-                Burf(other);
-                return true;
+                if (other is IHitable)
+                    return Attack(other, param1[1, 2]);
+                return false;
             }
             return false;
         }
 
-        public void Burf(Character target)
+        public bool Attack(IHitable hitable, params int[] param)
         {
-            target.NOW_PHYSICSAL += value + (level + rank * 10) / 10;
-            target.NOW_MENTAL += value + (level + rank * 10) / 10;
-            target.NOW_INITIATIVE += value + (level + rank * 10) / 10;
+            if(hitable.Hit(param[0] * value + (level + rank * 10)))
+            {
+                GetEXP(1);
+                return true;
+            }
+            return false;
         }
 
         protected override void RankUp()
@@ -46,14 +50,12 @@
             switch (rank)
             {
                 case 1:
-                    name = "(A)축복";
-                    value += 2;
-                    cost += 3;
+                    name = "(A)훅";
+                    value += 1;
                     break;
                 case 2:
-                    name = "(A)대축복";
-                    value += 2;
-                    cost += 3;
+                    name = "(A)스트레이트";
+                    value += 1;
                     break;
             }
         }

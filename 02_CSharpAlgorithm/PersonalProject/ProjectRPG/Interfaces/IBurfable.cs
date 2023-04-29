@@ -10,6 +10,7 @@
         /// 대상을 버프한다
         /// </summary>
         /// <param name="target">대상</param>
-        public void Burf(Character target);
+        /// <param name="param">시전자 능력치</param>
+        public void Burf(Character target, params int[] param);
     }
 }

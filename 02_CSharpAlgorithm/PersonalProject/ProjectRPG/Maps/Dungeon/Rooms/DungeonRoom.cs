@@ -77,13 +77,13 @@
 
             if (index < 99)
             {
-                Console.SetCursorPosition(22, 1);
+                Console.SetCursorPosition(20, 1);
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.Write($"[{name} : {index}/10]");
             }
             else
             {
-                Console.SetCursorPosition(23, 1);
+                Console.SetCursorPosition(25, 1);
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.Write($"[{name}]");
             }

@@ -16,7 +16,7 @@
                 Console.ForegroundColor = ConsoleColor.White;
             Console.Write("[휴식하기]");
 
-            Console.SetCursorPosition(30, 4);
+            Console.SetCursorPosition(35, 4);
             if (cursor == 1)
                 Console.ForegroundColor = ConsoleColor.Green;
             else
@@ -56,7 +56,7 @@
                         switch(new Random().Next(5))
                         {
                             case 0:
-                                Console.SetCursorPosition(15, 6);
+                                Console.SetCursorPosition(12, 6);
                                 Console.ForegroundColor = ConsoleColor.White;
                                 Console.Write("[어둠 속에서 적이 나타났다!]");
                                 Thread.Sleep(500);
@@ -80,7 +80,7 @@
                                 }
                                 break;
                             default:
-                                Console.SetCursorPosition(15, 6);
+                                Console.SetCursorPosition(12, 6);
                                 Console.ForegroundColor = ConsoleColor.White;
                                 Console.Write("[무사히 휴식할 수 있었다]");
                                 Thread.Sleep(1000);

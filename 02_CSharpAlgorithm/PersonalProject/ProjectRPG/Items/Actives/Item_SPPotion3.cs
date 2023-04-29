@@ -16,7 +16,7 @@
             return consumable;
         }
 
-        public void Heal(Character target)
+        public void Heal(Character target, params int[] param)
         {
             target.NOW_SP += new Random().Next(12) + new Random().Next(12) + 2;
         }

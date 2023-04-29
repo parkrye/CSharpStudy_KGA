@@ -2,12 +2,12 @@
 
 namespace ProjectRPG
 {
-    internal class Dungeon_Hill : Dungeon
+    internal class Dungeon_Forest : Dungeon
     {
-        public Dungeon_Hill(Player player) : base(player)
+        public Dungeon_Forest(Player player) : base(player)
         {
-            name = "언덕 던전";
-            depth = 1;
+            name = "숲 던전";
+            depth = 2;
 
             EnemySetting();
             ItemSetting();
@@ -21,13 +21,16 @@ namespace ProjectRPG
             int num = new Random().Next(4) + 1;
             for (int j = 0; j < num; j++)
             {
-                switch (new Random().Next(10))
+                switch (new Random().Next(3))
                 {
                     case 0:
-                        party.AddPC(new Monster_Orc(j + 1));
+                        party.AddPC(new Monster_Skeleton(j + 1));
                         break;
-                    default:
-                        party.AddPC(new Monster_Goblin(j + 1));
+                    case 1:
+                        party.AddPC(new Monster_Zombie(j + 1));
+                        break;
+                    case 2:
+                        party.AddPC(new Monster_Vampire(j + 1));
                         break;
                 }
             }
@@ -43,8 +46,12 @@ namespace ProjectRPG
                     return new Item_HPPotion1();
                 case 1:
                     return new Item_SPPotion1();
+                case 2:
+                    return new Item_HPPotion2();
+                case 3:
+                    return new Item_SPPotion2();
                 default:
-                    return new Item_WoodenAculpture();
+                    return new Item_BronzeCoin();
             }
         }
 
@@ -78,8 +85,8 @@ namespace ProjectRPG
         protected override void BossSetting()
         {
             Party boss = new Party();
-            boss.AddPC(new Monster_GreenLord());
-            Item bossDrop = new Item_HPPotion2();
+            boss.AddPC(new Monster_Necromancer());
+            Item bossDrop = new Item_MysteriousRing();
 
             bossRoom = new BossRoom(player, boss, bossDrop);
         }
@@ -88,7 +95,7 @@ namespace ProjectRPG
         {
             Console.Clear();
             Console.SetCursorPosition(0, 0);
-            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.ForegroundColor = ConsoleColor.DarkRed;
             Thread.Sleep(100);
             Console.WriteLine("　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　");
             Console.WriteLine("　□□□　　　□□　　□　　□　　□□□　□□□□　□□□　　");

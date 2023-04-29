@@ -4,20 +4,20 @@
     /// 액티브 스킬을 상속한 상세 스킬 클래스
     /// </summary>
     [Serializable]
-    internal class Skill_Swing : Skill_Active, IAttackable
+    internal class Skill_ThrowDagger : Skill_Active, IAttackable
     {
         /// <summary>
         /// 생성자
         /// </summary>
         /// <param name="_level">스킬 레벨. 기본 1</param>
         /// <param name="_exp">스킬 경험치. 기본 0</param>
-        public Skill_Swing(int _level = 1, int _exp = 0) : base()
+        public Skill_ThrowDagger(int _level = 1, int _exp = 0) : base()
         {
-            name = "(A)휘두르기";
+            name = "(A)투석";
             level = _level;
             exp = _exp;
-            value = 1;
-            cost = 0;
+            value = 2;
+            cost = 5;
             rank = 0;
         }
 
@@ -25,14 +25,16 @@
         {
             if (other != null)
             {
-                return Attack(other, param1[1, 2]);
+                if (other is IHitable)
+                    return Attack(other, param1[1, 2]);
+                return false;
             }
             return false;
         }
 
         public bool Attack(IHitable hitable, params int[] param)
         {
-            if(hitable.Hit(param[0] / 2 * value * (level + rank * 10)))
+            if(hitable.Hit(param[0] * value + (level + rank * 10)))
             {
                 GetEXP(1);
                 return true;
@@ -44,6 +46,20 @@
         {
             rank++;
             level -= 10;
+
+            switch (rank)
+            {
+                case 1:
+                    name = "(A)다트 투척";
+                    value += 1;
+                    cost += 2;
+                    break;
+                case 2:
+                    name = "(A)단검 투척";
+                    value += 1;
+                    cost += 2;
+                    break;
+            }
         }
     }
 }
