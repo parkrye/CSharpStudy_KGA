@@ -33,8 +33,11 @@
         {
             if (param1[1,1] > 0)
                 return false;
-            param1[1,1] += value * (level + rank * 10);
-            used = true;
+            if (!used)
+            {
+                param1[1, 1] += value * (level + rank * 10);
+                used = true;
+            }
             return true;
         }
 

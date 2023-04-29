@@ -25,13 +25,6 @@
 
         public override bool Active(int[,] param1, ref int param2)
         {
-            if (!used)
-            {
-                if (Cast(param1, ref param2))
-                {
-                    return true;
-                }
-            }
             return false;
         }
 

@@ -15,8 +15,9 @@
         /// <summary>
         /// 커서, 나가기, 입장을 초기화하는 생성자
         /// </summary>
-        public TownSite()
+        public TownSite(Player _player)
         {
+            player = _player;
             cursor = 0;
             outSite = false;
             goSite = false;
@@ -26,9 +27,8 @@
         /// 해당 장소에 들어가는 메소드
         /// </summary>
         /// <param name="_player">플레이어</param>
-        public void GetIn(Player _player)
+        public void GetIn()
         {
-            player = _player;
             ShowUI();
             while (!outSite)
             {

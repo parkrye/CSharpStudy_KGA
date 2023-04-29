@@ -5,7 +5,7 @@
     /// </summary>
     internal class Clinic : TownSite
     {
-        public Clinic() : base()
+        public Clinic(Player _player) : base(_player)
         {
             name = "의료소";
         }

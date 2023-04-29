@@ -12,7 +12,7 @@
 
         protected override void ShowContent()
         {
-            Console.SetCursorPosition(25, 5);
+            Console.SetCursorPosition(26, 5);
             if (!battleOver)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
@@ -52,7 +52,6 @@
                         Console.Write("[보스를 격퇴하고 아이템을 획득했다]");
                         player.AddItem(item);
                         battleOver = true;
-                        player.FINDINGS[1] = true;
                     }
                     else
                     {

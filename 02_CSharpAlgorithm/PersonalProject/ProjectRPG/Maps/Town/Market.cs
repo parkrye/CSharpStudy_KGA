@@ -13,7 +13,7 @@ namespace ProjectRPG
         Screen screen;
         int subCursor;
 
-        public Market() : base()
+        public Market(Player _player) : base(_player)
         {
             name = "상점";
             items = new List<Item>();

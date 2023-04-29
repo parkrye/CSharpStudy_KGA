@@ -12,7 +12,7 @@ namespace ProjectRPG
         int prevCursor;     // 이전 커서를 기억하기 위한 변수
         int subCursor;
 
-        public Home() : base()
+        public Home(Player _player) : base(_player)
         {
             name = "집";
             prevCursor = 0;

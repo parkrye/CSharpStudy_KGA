@@ -8,7 +8,7 @@
         List<Class> classes;    // 랜덤 생성을 위한 클래스 모음
         PC[] characters;        // 대기중인 캐릭터들. 최대 4
 
-        public Tavern() : base()
+        public Tavern(Player _player) : base(_player)
         {
             name = "주막";
             classes = new List<Class>();
