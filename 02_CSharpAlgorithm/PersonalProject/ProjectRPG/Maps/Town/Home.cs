@@ -550,7 +550,7 @@ namespace ProjectRPG
                         else
                         {
                             screen = Screen.StorageItem;
-                            prevCursor = cursor;
+                            prevCursor = subCursor + cursor;
                             cursor = 0;
                         }
                         subCursor = 0;
@@ -565,7 +565,7 @@ namespace ProjectRPG
                         else
                         {
                             screen = Screen.LodgingCharacter;
-                            prevCursor = cursor;
+                            prevCursor = subCursor + cursor;
                             cursor = 0;
                         }
                         subCursor = 0;
