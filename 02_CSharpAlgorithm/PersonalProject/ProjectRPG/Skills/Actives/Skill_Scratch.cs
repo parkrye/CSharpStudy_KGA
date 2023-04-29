@@ -25,7 +25,7 @@
         {
             if (other != null)
             {
-                return Attack(other, param1[1, 2]);
+                return Attack(other, param1[1, 1]);
             }
             return false;
         }
