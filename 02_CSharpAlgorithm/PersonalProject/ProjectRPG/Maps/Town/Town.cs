@@ -10,13 +10,13 @@
         Market market;
         Tavern tavern;
 
-        public Town() : base()
+        public Town(Player _player) : base(_player)
         {
             name = "마을";
-            clinic = new Clinic();
-            home = new Home();
-            market = new Market();
-            tavern = new Tavern();
+            clinic = new Clinic(player);
+            home = new Home(player);
+            market = new Market(player);
+            tavern = new Tavern(player);
         }
 
         protected override void ShowSites()
@@ -103,19 +103,19 @@
                 switch (cursor)
                 {
                     case 0:
-                        home.GetIn(player);
+                        home.GetIn();
                         ShowUI();
                         break;
                     case 1:
-                        tavern.GetIn(player);
+                        tavern.GetIn();
                         ShowUI();
                         break;
                     case 2:
-                        clinic.GetIn(player);
+                        clinic.GetIn();
                         ShowUI();
                         break;
                     case 3:
-                        market.GetIn(player);
+                        market.GetIn();
                         ShowUI();
                         break;
                     case 4:

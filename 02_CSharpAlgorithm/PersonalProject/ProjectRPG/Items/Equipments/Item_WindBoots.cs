@@ -6,7 +6,7 @@
         public Item_WindBoots()
         {
             name = "(E)바람 신발";
-            price = 20;
+            price = 50;
         }
 
         public override void AddListener(Character character) { }

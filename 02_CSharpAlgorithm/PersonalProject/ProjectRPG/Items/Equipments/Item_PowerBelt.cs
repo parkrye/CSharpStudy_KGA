@@ -6,7 +6,7 @@
         public Item_PowerBelt()
         {
             name = "(E)힘의 벨트";
-            price = 20;
+            price = 50;
         }
 
         public override void AddListener(Character character) { }

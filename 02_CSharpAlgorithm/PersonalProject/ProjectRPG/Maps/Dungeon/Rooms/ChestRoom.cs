@@ -14,14 +14,14 @@ namespace ProjectRPG
 
         protected override void ShowContent()
         {
-            Console.SetCursorPosition(15, 4);
+            Console.SetCursorPosition(16, 4);
             if(cursor == 0)
                 Console.ForegroundColor = ConsoleColor.Green;
             else
                 Console.ForegroundColor = ConsoleColor.White;
             Console.Write("[열어보기]");
 
-            Console.SetCursorPosition(35, 4);
+            Console.SetCursorPosition(34, 4);
             if (cursor == 1)
                 Console.ForegroundColor = ConsoleColor.Green;
             else

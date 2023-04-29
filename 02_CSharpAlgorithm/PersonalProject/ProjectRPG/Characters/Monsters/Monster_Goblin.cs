@@ -16,11 +16,13 @@
             MAX_INITIATIVE = random.Next(10, 20);
             StatusSetting(true);
 
-            SKILLSLOT = new SkillSlot(this, 1);
+            SKILLSLOT = new SkillSlot(this, 2);
             SKILLSLOT.AddSkill(new Skill_Scratch());
+            SKILLSLOT.AddSkill(new Skill_Bite());
 
-            ITEMSLOT = new ItemSlot(this, 1);
-            if(random.Next(10) == 0)
+            ITEMSLOT = new ItemSlot(this, 2);
+            ITEMSLOT.AddItem(new Item_GoblinApple());
+            if (random.Next(10) == 0)
                 ITEMSLOT.AddItem(new Item_WoodenAculpture());
 
             for (int i = 0; i < 5; i++)

@@ -266,7 +266,7 @@
                 case Key.ENTER:
                     if (tiles[position.y, position.x] == Tile.T)
                     {
-                        new Town().GetIn(player);
+                        new Town(player).GetIn();
                         DrawMap();
                         DrawPlayer();
                     }

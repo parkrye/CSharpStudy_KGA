@@ -14,6 +14,6 @@
             type = SkillType.ACTIVE;
         }
 
-        public abstract override bool Active(int[,] param1, params int[] param2);
+        public abstract override bool Active(int[,] param1, ref int param2);
     }
 }

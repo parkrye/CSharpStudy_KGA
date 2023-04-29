@@ -25,16 +25,20 @@
         {
             if(character != null)
             {
-                character.AddListenerOnHPDecreased(Active);
+                character.AddListenerOnHPDecreased(Cast);
             }
         }
 
-        public override bool Cast(int[,] param1, params int[] param2)
+        public override bool Cast(int[,] param1, ref int param2)
         {
-            if (param1[1,0] > 0)
+            if (param1[1, 0] > 0)
                 return false;
-            param1[1,0] += value * (level + rank * 10);
-            used = true;
+            if (!used)
+            {
+                param1[1, 0] = 0;
+                param1[1, 0] += value * (level + rank * 10);
+                used = true;
+            }
             return true;
         }
 

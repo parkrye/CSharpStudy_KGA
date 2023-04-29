@@ -24,15 +24,15 @@
         public override void AddListener(Character character)
         {
             if (character != null)
-                character.AddListenerOnDamaged(Active);
+                character.AddListenerOnDamaged(Cast);
         }
 
-        public override bool Cast(int[,] param1, params int[] param2)
+        public override bool Cast(int[,] param1, ref int param2)
         {
-            if (param2[0] <= param1[1, 1])
+            if (param2 <= param1[1, 1])
             {
-                param1[1, 1] -= param2[0];
-                param2[0] = 0;
+                param1[1, 1] -= param2;
+                param2 = 0;
             }
             return true;
         }
