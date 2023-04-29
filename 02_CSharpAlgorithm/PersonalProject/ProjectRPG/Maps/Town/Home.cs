@@ -598,6 +598,7 @@ namespace ProjectRPG
                                 case 1:
                                     player.PartyToEmployed(prevCursor);
                                     screen = Screen.Party;
+                                    cursor = 0;
                                     break;
                             }
                         }
@@ -605,7 +606,6 @@ namespace ProjectRPG
                         {
                             screen = Screen.Party;
                         }
-                        cursor = 0;
                         subCursor = 0;
                         break;
 
