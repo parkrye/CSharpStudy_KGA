@@ -25,17 +25,17 @@
         {
             if (other != null)
             {
-                Burf(other);
+                Burf(other, param1[1,3]);
                 return true;
             }
             return false;
         }
 
-        public void Burf(Character target)
+        public void Burf(Character target, params int[] param)
         {
-            target.NOW_PHYSICSAL += value + (level + rank * 10) / 10;
-            target.NOW_MENTAL += value + (level + rank * 10) / 10;
-            target.NOW_INITIATIVE += value + (level + rank * 10) / 10;
+            target.NOW_PHYSICSAL += param[0] * value + (level + rank * 10) / 10;
+            target.NOW_MENTAL += param[0] * value + (level + rank * 10) / 10;
+            target.NOW_INITIATIVE += param[0] * value + (level + rank * 10) / 10;
         }
 
         protected override void RankUp()

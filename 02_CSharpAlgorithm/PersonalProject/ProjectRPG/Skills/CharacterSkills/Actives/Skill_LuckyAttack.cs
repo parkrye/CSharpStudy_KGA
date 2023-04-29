@@ -34,7 +34,7 @@
 
         public bool Attack(IHitable hitable, params int[] param)
         {
-            if(hitable.Hit(new Random().Next(value * 2 + 1) * param[0] / 2 * (level + rank * 10)))
+            if(hitable.Hit(new Random().Next(value * 2 + 1) * param[0] + (level + rank * 10)))
             {
                 GetEXP(1);
                 return true;

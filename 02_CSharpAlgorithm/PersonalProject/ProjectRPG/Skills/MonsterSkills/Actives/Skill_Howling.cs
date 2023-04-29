@@ -32,14 +32,14 @@
             return false;
         }
 
-        public void Burf(Character target)
+        public void Burf(Character target, params int[] param)
         {
             target.NOW_PHYSICSAL += target.MAX_PHYSICSAL / 10;
             target.NOW_MENTAL += target.MAX_MENTAL / 10;
             target.NOW_INITIATIVE += target.MAX_INITIATIVE / 10;
         }
 
-        public void Heal(Character target)
+        public void Heal(Character target, params int[] param)
         {
             target.NOW_HP += target.MAX_HP / 10;
         }

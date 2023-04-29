@@ -25,15 +25,15 @@
         {
             if (other != null)
             {
-                Heal(other);
+                Heal(other, param1[1, 3]);
                 return true;
             }
             return false;
         }
 
-        public void Heal(Character target)
+        public void Heal(Character target, params int[] param)
         {
-            target.NOW_HP += value * (level + rank * 10);
+            target.NOW_HP += param[0] * value + (level + rank * 10);
         }
 
         protected override void RankUp()

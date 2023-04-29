@@ -142,9 +142,11 @@
         /// <summary>
         /// 피격시 발생하는 이벤트
         /// </summary>
-        /// <param name="damage">데미지</param>
-        public bool Hit(int damage)
+        /// <param name="_damage">데미지 변수</param>
+        public bool Hit(int _damage)
         {
+            int damage = new Random().Next(_damage / 2) + new Random().Next(_damage / 2) + 1;
+
             OnDamaged?.Invoke(status, damage);                   // 데미지 발생에 대한 패시브 스킬이 시전되고, 데미지를 조정한다
 
             NOW_HP -= damage;
