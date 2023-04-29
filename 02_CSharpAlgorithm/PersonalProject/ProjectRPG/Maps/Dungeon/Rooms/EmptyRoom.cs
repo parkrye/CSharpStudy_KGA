@@ -16,7 +16,7 @@
                 Console.ForegroundColor = ConsoleColor.White;
             Console.Write("[휴식하기]");
 
-            Console.SetCursorPosition(30, 4);
+            Console.SetCursorPosition(35, 4);
             if (cursor == 1)
                 Console.ForegroundColor = ConsoleColor.Green;
             else
