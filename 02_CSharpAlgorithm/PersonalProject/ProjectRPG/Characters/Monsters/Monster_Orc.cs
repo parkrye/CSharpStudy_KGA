@@ -16,12 +16,15 @@
             MAX_INITIATIVE = random.Next(5, 20);
             StatusSetting(true);
 
-            SKILLSLOT = new SkillSlot(this, 2);
+            SKILLSLOT = new SkillSlot(this, 3);
             SKILLSLOT.AddSkill(new Skill_Swing());
             SKILLSLOT.AddSkill(new Skill_RoughSkin());
+            SKILLSLOT.AddSkill(new Skill_Bite());
 
-            ITEMSLOT = new ItemSlot(this, 2);
+            ITEMSLOT = new ItemSlot(this, 4);
             ITEMSLOT.AddItem(new Item_WoodenClub());
+            ITEMSLOT.AddItem(new Item_GoblinApple());
+            ITEMSLOT.AddItem(new Item_GoblinApple());
             if(random.Next(10) < 2)
                 ITEMSLOT.AddItem(new Item_WoodenAculpture());
 

@@ -6,7 +6,7 @@
         public Item_WoodenClub()
         {
             name = "(E)나무 몽둥이";
-            price = 15;
+            price = 20;
         }
 
         public override void AddListener(Character character) { }
