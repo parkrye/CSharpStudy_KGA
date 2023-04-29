@@ -18,7 +18,7 @@
 
         public void Heal(Character target, params int[] param)
         {
-            target.NOW_SP += new Random().Next(6) + 1;
+            target.NOW_SP += new Random().Next(4) + new Random().Next(4) + 1;
         }
     }
 }

@@ -9,17 +9,17 @@
             Random random = new Random();
 
             status = new int[2, 5];
-            MAX_HP = random.Next(40, 60);
+            MAX_HP = random.Next(60, 80);
             MAX_SP = random.Next(30, 50);
-            MAX_PHYSICSAL = random.Next(20, 30);
-            MAX_MENTAL = random.Next(10, 20);
-            MAX_INITIATIVE = random.Next(20, 30);
+            MAX_PHYSICSAL = random.Next(30, 50);
+            MAX_MENTAL = random.Next(20, 30);
+            MAX_INITIATIVE = random.Next(20, 40);
             StatusSetting(true);
 
             SKILLSLOT = new SkillSlot(this, 3);
-            SKILLSLOT.AddSkill(new Skill_Swing());
-            SKILLSLOT.AddSkill(new Skill_RoughSkin());
-            SKILLSLOT.AddSkill(new Skill_Howling());
+            SKILLSLOT.AddSkill(new Skill_Swing(5));
+            SKILLSLOT.AddSkill(new Skill_RoughSkin(5));
+            SKILLSLOT.AddSkill(new Skill_Howling(5));
 
             ITEMSLOT = new ItemSlot(this, 1);
             ITEMSLOT.AddItem(new Item_WoodenClub());
