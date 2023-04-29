@@ -133,7 +133,7 @@ namespace ProjectRPG
 
         public SerializedPC GetSerialized()
         {
-            return new SerializedPC(name, status, skillSlot, itemSlot, difficulty, exp);
+            return new SerializedPC(name, status, skillSlot, itemSlot, difficulty, level, exp);
         }
     }
 
@@ -145,15 +145,17 @@ namespace ProjectRPG
         public SkillSlot skillSlot;
         public ItemSlot itemSlot;
         public int difficulty;
+        public int level;
         public int exp;
 
-        public SerializedPC(string _name, int[,] _status, SkillSlot _skillSlot, ItemSlot _itemSlot, int _difficulty, int _exp)
+        public SerializedPC(string _name, int[,] _status, SkillSlot _skillSlot, ItemSlot _itemSlot, int _difficulty, int _level, int _exp)
         {
             name = _name;
             status = _status;
             skillSlot = _skillSlot;
             itemSlot = _itemSlot;
             difficulty = _difficulty;
+            level = _level;
             exp = _exp;
         }
     }

@@ -21,7 +21,7 @@
             rank = 0;
         }
 
-        public override bool Active(int[,] param1, params int[] param2)
+        public override bool Active(int[,] param1, ref int param2)
         {
             if (other != null)
             {

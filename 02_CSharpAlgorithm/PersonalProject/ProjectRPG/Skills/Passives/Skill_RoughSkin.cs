@@ -24,15 +24,15 @@
         public override void AddListener(Character character)
         {
             if (character != null)
-                character.AddListenerOnDamaged(Active);
+                character.AddListenerOnDamaged(Cast);
         }
 
-        public override bool Cast(int[,] param1, params int[] param2)
+        public override bool Cast(int[,] param1, ref int param2)
         {
-            if (param2[0] > value * (level + rank * 10))
-                param2[0] -= value * (level + rank * 10);
+            if (param2 > value * (level + rank * 10))
+                param2 -= value * (level + rank * 10);
             else
-                param2[0] = 1;
+                param2 = 1;
             return true;
         }
 

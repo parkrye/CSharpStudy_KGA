@@ -25,11 +25,11 @@
         {
             if(character != null)
             {
-                character.AddListenerOnHPDecreased(Active);
+                character.AddListenerOnHPDecreased(Cast);
             }
         }
 
-        public override bool Cast(int[,] param1, params int[] param2)
+        public override bool Cast(int[,] param1, ref int param2)
         {
             if (param1[1,0] > 0)
                 return false;

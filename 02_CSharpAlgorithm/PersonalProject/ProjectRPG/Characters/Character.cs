@@ -22,12 +22,14 @@
         protected SkillSlot skillSlot;  // 캐릭터의 스킬
         protected ItemSlot itemSlot;    // 캐릭터의 아이템
         protected int difficulty;       // 캐릭터 위험도(적일때 이용)
+        protected int level;
         protected int exp;              // 캐릭터 성장도
+        int dummy = 0;
 
         // 이벤트 호출을 위한 대리자
         // 패시브 스킬, 아이템의 사용을 위해 사용
         // param1 : 능력치ㅡ param2 : 부가적인 데이터
-        public delegate bool PlayerDelegate(int[,] param1, params int[] param2);
+        public delegate bool PlayerDelegate(int[,] param1, ref int param2);
         [field: NonSerialized]
         protected event PlayerDelegate? OnDamaged, OnHPDecreased, OnSPDecreased;
 
@@ -98,9 +100,10 @@
             set 
             { 
                 exp = value; 
-                while (exp > 100) 
+                while (exp > 50 * (level + 1)) 
                 { 
-                    exp -= 100;
+                    exp -= 50 * (level + 1);
+                    level++;
                     int growth = (MAX_HP / 10) < 1 ? 1 : (MAX_HP / 10);
                     MAX_HP += growth;
                     growth = (MAX_SP / 10) < 1 ? 1 : (MAX_SP / 10);
@@ -142,8 +145,8 @@
         /// <param name="targetable">스킬 대상</param>
         public bool UseSkill(int index, Character target)
         {
-            bool result = skillSlot.UseSkill(index, target, status);                  // 스킬 슬롯에서 해당 스킬을 시전하고, 소모 활력을 반환받는다
-            OnSPDecreased?.Invoke(status);                                  // 활력 감소에 대한 패시브 스킬이 시전되고, 활력을 조정한다
+            bool result = skillSlot.UseSkill(index, target, status, ref dummy);                  // 스킬 슬롯에서 해당 스킬을 시전하고, 소모 활력을 반환받는다
+            OnSPDecreased?.Invoke(status, ref dummy);                                  // 활력 감소에 대한 패시브 스킬이 시전되고, 활력을 조정한다
             return result;
         }
 
@@ -155,10 +158,10 @@
         {
             int damage = new Random().Next(_damage / 2) + new Random().Next(_damage / 2) + 1;
 
-            OnDamaged?.Invoke(status, damage);                   // 데미지 발생에 대한 패시브 스킬이 시전되고, 데미지를 조정한다
+            OnDamaged?.Invoke(status, ref damage);                   // 데미지 발생에 대한 패시브 스킬이 시전되고, 데미지를 조정한다
 
             NOW_HP -= damage;
-            OnHPDecreased?.Invoke(status);                       // 체력 감소에 대한 패시프 스킬이 시전되고, 체력을 조정한다
+            OnHPDecreased?.Invoke(status, ref dummy);                       // 체력 감소에 대한 패시프 스킬이 시전되고, 체력을 조정한다
             if (NOW_HP < 0)                                   // 체력이 0 이하라면 사망한다
             {
                 NOW_HP = 0;

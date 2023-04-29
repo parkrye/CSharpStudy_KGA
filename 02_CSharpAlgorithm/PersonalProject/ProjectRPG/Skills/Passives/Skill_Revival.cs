@@ -24,16 +24,16 @@
         public override void AddListener(Character character)
         {
             if (character != null)
-                character.AddListenerOnHPDecreased(Active);
+                character.AddListenerOnHPDecreased(Cast);
         }
 
-        public override bool Cast(int[,] param1, params int[] param2)
+        public override bool Cast(int[,] param1, ref int param2)
         {
             if (param1[1, 0] <= 0)
             {
-                param1[0, 0] /= 2;
+                for(int i = 0; i < param1.GetLength(1); i++)
+                    param1[0, i] /= 2;
                 param1[1, 0] = param1[0, 0];
-                used = true;
             }
             return true;
         }

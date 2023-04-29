@@ -24,17 +24,7 @@
         public override void AddListener(Character character)
         {
             if (character != null)
-                character.AddListenerOnDamaged(Active);
-        }
-
-        public override bool Cast(int[,] param1, params int[] param2)
-        {
-            if(new Random().Next(10) < Math.Log(level, 10) * 10)
-            {
-                param2[0] /= value - rank;
-                return true;
-            }
-            return true;
+                character.AddListenerOnDamaged(Cast);
         }
 
         protected override void RankUp()
@@ -51,6 +41,16 @@
                     name = "(A)회피술";
                     break;
             }
+        }
+
+        public override bool Cast(int[,] param1, ref int param2)
+        {
+            if (new Random().Next(10) < Math.Log(level, 10) * 10)
+            {
+                param2 /= value - rank;
+                return true;
+            }
+            return true;
         }
     }
 }
