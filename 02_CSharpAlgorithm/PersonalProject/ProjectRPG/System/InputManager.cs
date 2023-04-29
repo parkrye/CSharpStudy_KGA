@@ -4,42 +4,52 @@
 
     internal static class InputManager
     {
+        static bool inputProcess = false;
+
         /// <summary>
         /// 키 입력을 열거형 키로 반환하는 메소드
         /// </summary>
         /// <returns>열거형 키</returns>
         public static Key GetInput()
         {
-            ConsoleKey inputKey = Console.ReadKey().Key;
-            Key key;
-
-            switch (inputKey)
+            if (!inputProcess)
             {
-                default:
-                    key = Key.NONE;
-                    break;
-                case ConsoleKey.LeftArrow:
-                    key = Key.LEFT;
-                    break;
-                case ConsoleKey.RightArrow:
-                    key = Key.RIGHT;
-                    break;
-                case ConsoleKey.UpArrow:
-                    key = Key.UP;
-                    break;
-                case ConsoleKey.DownArrow:
-                    key = Key.DOWN;
-                    break;
-                case ConsoleKey.Enter:
-                case ConsoleKey.Spacebar:
-                    key = Key.ENTER;
-                    break;
-                case ConsoleKey.Backspace:
-                    key = Key.CANEL;
-                    break;
-            }
+                inputProcess = true;
+                ConsoleKey inputKey = Console.ReadKey().Key;
+                Key key;
 
-            return key;
+                switch (inputKey)
+                {
+                    default:
+                        key = Key.NONE;
+                        break;
+                    case ConsoleKey.LeftArrow:
+                        key = Key.LEFT;
+                        break;
+                    case ConsoleKey.RightArrow:
+                        key = Key.RIGHT;
+                        break;
+                    case ConsoleKey.UpArrow:
+                        key = Key.UP;
+                        break;
+                    case ConsoleKey.DownArrow:
+                        key = Key.DOWN;
+                        break;
+                    case ConsoleKey.Enter:
+                    case ConsoleKey.Spacebar:
+                        key = Key.ENTER;
+                        break;
+                    case ConsoleKey.Backspace:
+                        key = Key.CANEL;
+                        break;
+                }
+                inputProcess = false;
+                return key;
+            }
+            else
+            {
+                return Key.NONE;
+            }
         }
     }
 }
