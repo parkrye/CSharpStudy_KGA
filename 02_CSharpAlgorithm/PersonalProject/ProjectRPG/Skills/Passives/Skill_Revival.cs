@@ -13,12 +13,14 @@
         /// <param name="_exp">스킬 경험치. 기본 0</param>
         public Skill_Revival(int _level = 1, int _exp = 0) : base()
         {
-            name = "(P)부활";
+            name = "(P)가짜 생명";
             level = _level;
             exp = _exp;
             value = 0;
             cost = 0;
             rank = 0;
+            if (level >= 10)
+                RankUp();
         }
 
         public override void AddListener(Character character)
@@ -32,7 +34,7 @@
             if (param1[1, 0] <= 0 && -param1[1, 0] < param1[0, 0])
             {
                 for(int i = 0; i < param1.GetLength(1); i++)
-                    param1[0, i] /= 2;
+                    param1[0, i] /= (5 - rank);
                 param1[1, 0] = param1[0, 0];
             }
             return true;
@@ -42,6 +44,16 @@
         {
             rank++;
             level -= 10;
+
+            switch (rank)
+            {
+                case 1:
+                    name = "(P)생명 연금";
+                    break;
+                case 2:
+                    name = "(P)부활";
+                    break;
+            }
         }
     }
 }

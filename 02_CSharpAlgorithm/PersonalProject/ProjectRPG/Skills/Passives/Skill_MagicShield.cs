@@ -19,6 +19,8 @@
             value = 0;
             cost = 0;
             rank = 0;
+            if (level >= 10)
+                RankUp();
         }
 
         public override void AddListener(Character character)
@@ -31,7 +33,7 @@
         {
             if (param2 <= param1[1, 1])
             {
-                param1[1, 1] -= param2;
+                param1[1, 1] -= param2 * (4 - rank) / 4;
                 param2 = 0;
             }
             return true;
@@ -41,6 +43,16 @@
         {
             rank++;
             level -= 10;
+
+            switch (rank)
+            {
+                case 1:
+                    name = "(P)마법 보호막";
+                    break;
+                case 2:
+                    name = "(P)마력 장벽";
+                    break;
+            }
         }
     }
 }

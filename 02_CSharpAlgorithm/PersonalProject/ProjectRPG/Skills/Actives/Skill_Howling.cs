@@ -19,6 +19,8 @@
             value = 1;
             cost = 10;
             rank = 0;
+            if (level >= 10)
+                RankUp();
         }
 
         public override bool Active(int[,] param1, ref int param2)
@@ -34,20 +36,30 @@
 
         public void Burf(Character target, params int[] param)
         {
-            target.NOW_PHYSICSAL += target.MAX_PHYSICSAL / 10;
-            target.NOW_MENTAL += target.MAX_MENTAL / 10;
-            target.NOW_INITIATIVE += target.MAX_INITIATIVE / 10;
+            target.NOW_PHYSICSAL += target.MAX_PHYSICSAL / 10 + level + rank * 10;
+            target.NOW_MENTAL += target.MAX_MENTAL / 10 + level + rank * 10;
+            target.NOW_INITIATIVE += target.MAX_INITIATIVE / 10 + level + rank * 10;
         }
 
         public void Heal(Character target, params int[] param)
         {
-            target.NOW_HP += target.MAX_HP / 10;
+            target.NOW_HP += target.MAX_HP / 10 + level + rank * 10;
         }
 
         protected override void RankUp()
         {
             rank++;
             level -= 10;
+
+            switch (rank)
+            {
+                case 1:
+                    name = "(A)각성";
+                    break;
+                case 2:
+                    name = "(A)야성의 힘";
+                    break;
+            }
         }
     }
 }

@@ -19,6 +19,8 @@
             value = 1f;
             cost = 5;
             rank = 0;
+            if (level >= 10)
+                RankUp();
         }
 
         public override bool Active(int[,] param1, ref int param2)
@@ -52,13 +54,9 @@
             {
                 case 1:
                     name = "(A)급소 공격";
-                    value += 1;
-                    cost += 2;
                     break;
                 case 2:
                     name = "(A)천운의 일격";
-                    value += 1;
-                    cost += 2;
                     break;
             }
         }

@@ -52,11 +52,12 @@
         /// </summary>
         void LevelUp()
         {
-            exp -= level * (10 + rank);
-            level++;
-
             while (rank < 3 && level >= 10)
+            {
+                exp -= level * (10 + rank);
+                level++;
                 RankUp();
+            }
         }
 
         protected abstract void RankUp();

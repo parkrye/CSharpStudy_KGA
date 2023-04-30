@@ -19,6 +19,8 @@
             value = 0.8f;
             cost = 0;
             rank = 0;
+            if (level >= 10)
+                RankUp();
         }
 
         public override bool Active(int[,] param1, ref int param2)
@@ -45,6 +47,16 @@
         {
             rank++;
             level -= 10;
+
+            switch (rank)
+            {
+                case 1:
+                    name = "(A)마법 미사일";
+                    break;
+                case 2:
+                    name = "(A)마탄";
+                    break;
+            }
         }
     }
 }

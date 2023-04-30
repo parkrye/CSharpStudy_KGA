@@ -104,19 +104,11 @@
                 { 
                     exp -= 50 * (level + 1);
                     level++;
-                    int growth = (MAX_HP / 10) < 1 ? 1 : (MAX_HP / 10);
-                    MAX_HP += growth;
-                    growth = (MAX_SP / 10) < 1 ? 1 : (MAX_SP / 10);
-                    MAX_SP += growth;
-                    growth = (MAX_PHYSICSAL / 10) < 1 ? 1 : (MAX_PHYSICSAL / 10);
-                    growth = growth > 10 ? 10 : growth;
-                    MAX_PHYSICSAL += growth;
-                    growth = (MAX_MENTAL / 10) < 1 ? 1 : (MAX_MENTAL / 10);
-                    growth = growth > 10 ? 10 : growth;
-                    MAX_MENTAL += growth;
-                    growth = (MAX_INITIATIVE / 10) < 1 ? 1 : (MAX_INITIATIVE / 10);
-                    growth = growth > 10 ? 10 : growth;
-                    MAX_INITIATIVE += growth;
+                    MAX_HP += level * 2;
+                    MAX_SP += level * 2;
+                    MAX_PHYSICSAL += level;
+                    MAX_MENTAL += level;
+                    MAX_INITIATIVE += level;
                     StatusSetting(true);
                 }  
             } 

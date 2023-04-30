@@ -19,6 +19,8 @@
             value = 2;
             cost = 10;
             rank = 0;
+            if (level >= 10)
+                RankUp();
         }
 
         public override bool Active(int[,] param1, ref int param2)
@@ -45,13 +47,9 @@
             {
                 case 1:
                     name = "(A)상처 회복";
-                    value += 2;
-                    cost += 3;
                     break;
                 case 2:
                     name = "(A)대치유";
-                    value += 2;
-                    cost += 3;
                     break;
             }
         }

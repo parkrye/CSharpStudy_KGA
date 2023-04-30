@@ -19,6 +19,8 @@
             value = 3;
             cost = 0;
             rank = 0;
+            if (level >= 10)
+                RankUp();
         }
 
         public override void AddListener(Character character)
@@ -40,6 +42,16 @@
         {
             rank++;
             level -= 10;
+
+            switch (rank)
+            {
+                case 1:
+                    name = "(P)바위 피부";
+                    break;
+                case 2:
+                    name = "(P)강철 피부";
+                    break;
+            }
         }
     }
 }

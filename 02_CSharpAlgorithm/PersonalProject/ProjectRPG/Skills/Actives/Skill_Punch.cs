@@ -19,6 +19,8 @@
             value = 0.5f;
             cost = 0;
             rank = 0;
+            if (level >= 10)
+                RankUp();
         }
 
         public override bool Active(int[,] param1, ref int param2)
@@ -52,11 +54,9 @@
             {
                 case 1:
                     name = "(A)훅";
-                    value += 1;
                     break;
                 case 2:
                     name = "(A)스트레이트";
-                    value += 1;
                     break;
             }
         }

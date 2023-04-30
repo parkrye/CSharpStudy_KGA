@@ -13,12 +13,12 @@
 
         public override void Equiped(int[,] param)
         {
-            param[0, 3] += 3;
+            param[0, 3] += 20;
         }
 
         public override void Removed(int[,] param)
         {
-            param[0, 3] -= 3;
+            param[0, 3] -= 20;
         }
     }
 }

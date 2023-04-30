@@ -17,9 +17,9 @@
             StatusSetting(true);
 
             SKILLSLOT = new SkillSlot(this, 3);
-            SKILLSLOT.AddSkill(new Skill_Revival());
-            SKILLSLOT.AddSkill(new Skill_Bite());
-            SKILLSLOT.AddSkill(new Skill_Bloodsucking());
+            SKILLSLOT.AddSkill(new Skill_Revival(new Random().Next(7)));
+            SKILLSLOT.AddSkill(new Skill_Bite(new Random().Next(7)));
+            SKILLSLOT.AddSkill(new Skill_Bloodsucking(new Random().Next(7)));
 
             ITEMSLOT = new ItemSlot(this, 1);
             if(random.Next(10) == 0)

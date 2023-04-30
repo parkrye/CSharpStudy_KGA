@@ -19,6 +19,8 @@
             value = 1;
             cost = 0;
             rank = 0;
+            if (level >= 10)
+                RankUp();
         }
 
         public override void AddListener(Character character)

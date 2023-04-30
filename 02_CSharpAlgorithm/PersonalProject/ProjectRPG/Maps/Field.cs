@@ -351,17 +351,32 @@
                 int mon = new Random().Next(20);
                 switch (mon)
                 {
-                    case 0:
-                        party.AddPC(new PC(new Class_Soldier()));
-                        break;
                     case 1:
-                        party.AddPC(new PC(new Class_Clown()));
+                        party.AddPC(new Monster_Goblin(j + 1));
                         break;
                     case 2:
-                        party.AddPC(new PC(new Class_Hunter()));
+                        if (player.FINDINGS[1])
+                            party.AddPC(new Monster_Skeleton(j + 1));
+                        else
+                            party.AddPC(new PC());
                         break;
                     case 3:
-                        party.AddPC(new PC(new Class_Soccerer()));
+                        if (player.FINDINGS[1])
+                            party.AddPC(new Monster_Zombie(j + 1));
+                        else
+                            party.AddPC(new PC());
+                        break;
+                    case 4:
+                        if (player.FINDINGS[2])
+                            party.AddPC(new Monster_Skeleton(j + 1));
+                        else
+                            party.AddPC(new PC());
+                        break;
+                    case 5:
+                        if (player.FINDINGS[2])
+                            party.AddPC(new Monster_Zombie(j + 1));
+                        else
+                            party.AddPC(new PC());
                         break;
                     default:
                         party.AddPC(new Monster_Goblin(j + 1));
