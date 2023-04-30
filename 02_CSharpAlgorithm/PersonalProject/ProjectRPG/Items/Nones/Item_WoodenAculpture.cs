@@ -6,7 +6,7 @@
         public Item_WoodenAculpture() : base()
         {
             name = "(N)나무 조각품";
-            price = 5;
+            price = 15;
         }
     }
 }

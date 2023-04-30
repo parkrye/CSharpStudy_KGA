@@ -9,16 +9,16 @@
             Random random = new Random();
 
             status = new int[2, 5];
-            MAX_HP = random.Next(5, 15);
-            MAX_SP = random.Next(5, 15);
-            MAX_PHYSICSAL = random.Next(5, 15);
-            MAX_MENTAL = random.Next(1, 5);
-            MAX_INITIATIVE = random.Next(10, 20);
+            MAX_HP = random.Next(5, 10);
+            MAX_SP = random.Next(5, 10);
+            MAX_PHYSICSAL = random.Next(5, 10);
+            MAX_MENTAL = random.Next(5, 10);
+            MAX_INITIATIVE = random.Next(5, 10);
             StatusSetting(true);
 
             SKILLSLOT = new SkillSlot(this, 2);
-            SKILLSLOT.AddSkill(new Skill_Scratch());
-            SKILLSLOT.AddSkill(new Skill_Bite());
+            SKILLSLOT.AddSkill(new Skill_Scratch(new Random().Next(3)));
+            SKILLSLOT.AddSkill(new Skill_Bite(new Random().Next(3)));
 
             ITEMSLOT = new ItemSlot(this, 2);
             ITEMSLOT.AddItem(new Item_GoblinApple());

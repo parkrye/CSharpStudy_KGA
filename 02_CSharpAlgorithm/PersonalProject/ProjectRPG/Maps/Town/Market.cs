@@ -29,34 +29,12 @@ namespace ProjectRPG
         /// </summary>
         void ItemSetting()
         {
-            for(int i = 0; i < player.FINDINGS.Length; i++)
-            {
-                if (player.FINDINGS[i])
-                {
-                    switch (i)
-                    {
-                        case 0:
-                            items.Add(new Item_HPPotion1());
-                            items.Add(new Item_SPPotion1());
-                            break;
-                        case 1:
-                            items.Add(new Item_HPPotion2());
-                            items.Add(new Item_SPPotion2());
-                            items.Add(new Item_WoodenClub());
-                            items.Add(new Item_ManaStone());
-                            break;
-                        case 3:
-                            items.Add(new Item_HPPotion3());
-                            items.Add(new Item_SPPotion3());
-                            break;
-                        case 4:
-                            items.Add(new Item_MysteriousRing());
-                            items.Add(new Item_PowerBelt());
-                            items.Add(new Item_WindBoots());
-                            break;
-                    }
-                }
-            }
+            items.Add(new Item_HPPotion1());
+            items.Add(new Item_SPPotion1());
+            items.Add(new Item_HPPotion2());
+            items.Add(new Item_SPPotion2());
+            items.Add(new Item_HPPotion3());
+            items.Add(new Item_SPPotion3());
         }
 
         /// <summary>
@@ -74,13 +52,8 @@ namespace ProjectRPG
                     case 1: product = new Item_SPPotion1(); break;
                     case 2: product = new Item_HPPotion2(); break;
                     case 3: product = new Item_SPPotion2(); break;
-                    case 4: product = new Item_WoodenClub(); break;
-                    case 5: product = new Item_ManaStone(); break;
                     case 6: product = new Item_HPPotion3(); break;
                     case 7: product = new Item_SPPotion3(); break;
-                    case 8: product = new Item_MysteriousRing(); break;
-                    case 9: product = new Item_PowerBelt(); break;
-                    case 10: product = new Item_WindBoots(); break;
                 }
                 products[i] = product;
             }

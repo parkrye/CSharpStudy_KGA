@@ -18,7 +18,8 @@
         protected int rank, level, exp;     // 스킬 랭크, 레벨, 경험치
         protected SkillType type;           // 스킬 유형
 
-        protected int value, cost;          // 스킬 변수, 소모량
+        protected float value;          // 스킬 변수
+        protected int cost;          // 소모량
 
         /// <summary>
         /// 스킬 이름에 대한 프로퍼티
@@ -51,11 +52,12 @@
         /// </summary>
         void LevelUp()
         {
-            exp -= level * (10 + rank);
-            level++;
-
             while (rank < 3 && level >= 10)
+            {
+                exp -= level * (10 + rank);
+                level++;
                 RankUp();
+            }
         }
 
         protected abstract void RankUp();

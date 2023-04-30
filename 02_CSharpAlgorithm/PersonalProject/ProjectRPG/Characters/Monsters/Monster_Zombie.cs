@@ -9,16 +9,16 @@
             Random random = new Random();
 
             status = new int[2, 5];
-            MAX_HP = random.Next(20, 40);
+            MAX_HP = random.Next(30, 40);
             MAX_SP = 0;
             MAX_PHYSICSAL = random.Next(10, 20);
             MAX_MENTAL = 0;
-            MAX_INITIATIVE = random.Next(1, 5);
+            MAX_INITIATIVE = random.Next(5, 10);
             StatusSetting(true);
 
             SKILLSLOT = new SkillSlot(this, 2);
-            SKILLSLOT.AddSkill(new Skill_Revival());
-            SKILLSLOT.AddSkill(new Skill_Bite());
+            SKILLSLOT.AddSkill(new Skill_Revival(new Random().Next(5)));
+            SKILLSLOT.AddSkill(new Skill_Bite(new Random().Next(5)));
 
             ITEMSLOT = new ItemSlot(this, 1);
             if(random.Next(10) == 0)

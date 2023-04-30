@@ -16,9 +16,11 @@
             name = "(A)축성";
             level = _level;
             exp = _exp;
-            value = 1;
+            value = 0.5f;
             cost = 10;
             rank = 0;
+            if (level >= 10)
+                RankUp();
         }
 
         public override bool Active(int[,] param1, ref int param2)
@@ -33,9 +35,9 @@
 
         public void Burf(Character target, params int[] param)
         {
-            target.NOW_PHYSICSAL += param[0] * value + (level + rank * 10) / 10;
-            target.NOW_MENTAL += param[0] * value + (level + rank * 10) / 10;
-            target.NOW_INITIATIVE += param[0] * value + (level + rank * 10) / 10;
+            target.NOW_PHYSICSAL += (int)(param[0] * value + (level + rank * 10) / 10);
+            target.NOW_MENTAL += (int)(param[0] * value + (level + rank * 10) / 10);
+            target.NOW_INITIATIVE += (int)(param[0] * value + (level + rank * 10) / 10);
         }
 
         protected override void RankUp()
@@ -47,13 +49,9 @@
             {
                 case 1:
                     name = "(A)축복";
-                    value += 2;
-                    cost += 3;
                     break;
                 case 2:
                     name = "(A)대축복";
-                    value += 2;
-                    cost += 3;
                     break;
             }
         }

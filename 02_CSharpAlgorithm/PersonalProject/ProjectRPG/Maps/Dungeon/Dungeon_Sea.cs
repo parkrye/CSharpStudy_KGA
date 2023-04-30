@@ -21,16 +21,19 @@ namespace ProjectRPG
             int num = new Random().Next(4) + 1;
             for (int j = 0; j < num; j++)
             {
-                switch (new Random().Next(3))
+                switch (new Random().Next(4))
                 {
                     case 0:
-                        party.AddPC(new Monster_Skeleton(j + 1));
+                        party.AddPC(new Monster_ArmoredTurtle(j + 1));
                         break;
                     case 1:
-                        party.AddPC(new Monster_Zombie(j + 1));
+                        party.AddPC(new Monster_Merman(j + 1));
                         break;
                     case 2:
-                        party.AddPC(new Monster_Vampire(j + 1));
+                        party.AddPC(new Monster_SeaGhost(j + 1));
+                        break;
+                    case 3:
+                        party.AddPC(new Monster_BoneFish(j + 1));
                         break;
                 }
             }
@@ -85,8 +88,8 @@ namespace ProjectRPG
         protected override void BossSetting()
         {
             Party boss = new Party();
-            boss.AddPC(new Monster_Necromancer());
-            Item bossDrop = new Item_MysteriousRing();
+            boss.AddPC(new Monster_Seaserpent());
+            Item bossDrop = new Item_Trident();
 
             bossRoom = new BossRoom(player, boss, bossDrop);
         }

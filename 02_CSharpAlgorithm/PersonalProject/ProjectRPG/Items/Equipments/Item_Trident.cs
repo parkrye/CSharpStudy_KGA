@@ -1,11 +1,11 @@
 ﻿namespace ProjectRPG
 {
     [Serializable]
-    internal class Item_MysteriousRing : Item_Equipment
+    internal class Item_Trident : Item_Equipment
     {
-        public Item_MysteriousRing()
+        public Item_Trident()
         {
-            name = "(E)신비한 반지";
+            name = "(E)삼지창";
             price = 50;
         }
 
@@ -13,12 +13,14 @@
 
         public override void Equiped(int[,] param)
         {
-            param[0, 3] += 20;
+            param[0, 2] += 10;
+            param[0, 4] += 10;
         }
 
         public override void Removed(int[,] param)
         {
-            param[0, 3] -= 20;
+            param[0, 2] -= 10;
+            param[0, 4] -= 10;
         }
     }
 }

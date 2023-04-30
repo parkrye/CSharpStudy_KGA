@@ -104,19 +104,11 @@
                 { 
                     exp -= 50 * (level + 1);
                     level++;
-                    int growth = (MAX_HP / 10) < 1 ? 1 : (MAX_HP / 10);
-                    MAX_HP += growth;
-                    growth = (MAX_SP / 10) < 1 ? 1 : (MAX_SP / 10);
-                    MAX_SP += growth;
-                    growth = (MAX_PHYSICSAL / 10) < 1 ? 1 : (MAX_PHYSICSAL / 10);
-                    growth = growth > 10 ? 10 : growth;
-                    MAX_PHYSICSAL += growth;
-                    growth = (MAX_MENTAL / 10) < 1 ? 1 : (MAX_MENTAL / 10);
-                    growth = growth > 10 ? 10 : growth;
-                    MAX_MENTAL += growth;
-                    growth = (MAX_INITIATIVE / 10) < 1 ? 1 : (MAX_INITIATIVE / 10);
-                    growth = growth > 10 ? 10 : growth;
-                    MAX_INITIATIVE += growth;
+                    MAX_HP += level * 2;
+                    MAX_SP += level * 2;
+                    MAX_PHYSICSAL += level;
+                    MAX_MENTAL += level;
+                    MAX_INITIATIVE += level;
                     StatusSetting(true);
                 }  
             } 
@@ -153,11 +145,9 @@
         /// <summary>
         /// 피격시 발생하는 이벤트
         /// </summary>
-        /// <param name="_damage">데미지 변수</param>
-        public bool Hit(int _damage)
+        /// <param name="damage">데미지 변수</param>
+        public bool Hit(int damage)
         {
-            int damage = new Random().Next(_damage / 2) + new Random().Next(_damage / 2) + 1;
-
             OnDamaged?.Invoke(status, ref damage);                   // 데미지 발생에 대한 패시브 스킬이 시전되고, 데미지를 조정한다
 
             NOW_HP -= damage;
