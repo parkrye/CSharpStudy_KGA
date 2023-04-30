@@ -33,7 +33,7 @@
 
         public void Heal(Character target, params int[] param)
         {
-            target.NOW_HP += param[0] * value + (level + rank * 10);
+            target.NOW_HP += new Random().Next(param[0] * (int)value + (level + rank * 10));
         }
 
         protected override void RankUp()

@@ -16,7 +16,7 @@
             name = "(A)축성";
             level = _level;
             exp = _exp;
-            value = 1;
+            value = 0.5f;
             cost = 10;
             rank = 0;
         }
@@ -33,9 +33,9 @@
 
         public void Burf(Character target, params int[] param)
         {
-            target.NOW_PHYSICSAL += param[0] * value + (level + rank * 10) / 10;
-            target.NOW_MENTAL += param[0] * value + (level + rank * 10) / 10;
-            target.NOW_INITIATIVE += param[0] * value + (level + rank * 10) / 10;
+            target.NOW_PHYSICSAL += (int)(param[0] * value + (level + rank * 10) / 10);
+            target.NOW_MENTAL += (int)(param[0] * value + (level + rank * 10) / 10);
+            target.NOW_INITIATIVE += (int)(param[0] * value + (level + rank * 10) / 10);
         }
 
         protected override void RankUp()

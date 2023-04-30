@@ -16,7 +16,7 @@
             name = "(A)주먹질";
             level = _level;
             exp = _exp;
-            value = 1;
+            value = 0.5f;
             cost = 0;
             rank = 0;
         }
@@ -34,7 +34,8 @@
 
         public bool Attack(IHitable hitable, params int[] param)
         {
-            if(hitable.Hit(param[0] * value + (level + rank * 10)))
+            int damage = new Random().Next((int)(param[0] * value + (level + rank * 10)));
+            if (hitable.Hit(damage))
             {
                 GetEXP(1);
                 return true;

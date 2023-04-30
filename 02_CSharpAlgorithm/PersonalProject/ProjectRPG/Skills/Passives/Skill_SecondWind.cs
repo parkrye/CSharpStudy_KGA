@@ -36,7 +36,7 @@
             if (!used)
             {
                 param1[1, 0] = 0;
-                param1[1, 0] += value * (level + rank * 10);
+                param1[1, 0] += (int)value * (level + rank * 10);
                 used = true;
             }
             return true;

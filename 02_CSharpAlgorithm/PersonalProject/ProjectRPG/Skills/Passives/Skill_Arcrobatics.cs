@@ -16,7 +16,7 @@
             name = "(P)날렵한 몸놀림";
             level = _level;
             exp = _exp;
-            value = 4;
+            value = 1;
             cost = 0;
             rank = 0;
         }
@@ -45,9 +45,9 @@
 
         public override bool Cast(int[,] param1, ref int param2)
         {
-            if (new Random().Next(10) < Math.Log(level, 10) * 10)
+            if (new Random().Next(10) < Math.Log(rank < 1 ? level : 9, 10) * 5)
             {
-                param2 /= value - rank;
+                param2 /= (int)value + rank;
                 return true;
             }
             return true;

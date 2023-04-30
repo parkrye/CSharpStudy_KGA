@@ -13,10 +13,10 @@
         /// <param name="_exp">스킬 경험치. 기본 0</param>
         public Skill_ThrowDagger(int _level = 1, int _exp = 0) : base()
         {
-            name = "(A)투석";
+            name = "(A)슬링";
             level = _level;
             exp = _exp;
-            value = 2;
+            value = 0.8f;
             cost = 5;
             rank = 0;
         }
@@ -34,7 +34,8 @@
 
         public bool Attack(IHitable hitable, params int[] param)
         {
-            if(hitable.Hit(param[0] * value + (level + rank * 10)))
+            int damage = new Random().Next((int)(param[0] * value + (level + rank * 10)));
+            if (hitable.Hit(damage))
             {
                 GetEXP(1);
                 return true;

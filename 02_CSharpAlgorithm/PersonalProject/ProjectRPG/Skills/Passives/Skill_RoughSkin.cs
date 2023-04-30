@@ -30,7 +30,7 @@
         public override bool Cast(int[,] param1, ref int param2)
         {
             if (param2 > value * (level + rank * 10))
-                param2 -= value * (level + rank * 10);
+                param2 -= (int)value * (level + rank * 10);
             else
                 param2 = 1;
             return true;

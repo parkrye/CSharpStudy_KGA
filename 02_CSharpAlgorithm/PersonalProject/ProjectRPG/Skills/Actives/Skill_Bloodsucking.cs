@@ -16,7 +16,7 @@
             name = "(A)흡혈";
             level = _level;
             exp = _exp;
-            value = 1;
+            value = 0.5f;
             cost = 5;
             rank = 0;
         }
@@ -32,9 +32,10 @@
 
         public bool Attack(IHitable hitable, params int[] param)
         {
-            if(hitable.Hit(param[0] * value + (level + rank * 10)))
+            int damage = new Random().Next((int)(param[0] * value + (level + rank * 10)));
+            if (hitable.Hit(damage))
             {
-                self.NOW_HP += ((param[0] * value + (level + rank * 10)) < 10 ? 1 : (param[0] * value + (level + rank * 10)) / 10);
+                self.NOW_HP += (damage < 10 ? 1 : damage / 10);
                 GetEXP(1);
                 return true;
             }
