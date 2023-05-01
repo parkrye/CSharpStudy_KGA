@@ -17,9 +17,9 @@
             StatusSetting(true);
 
             SKILLSLOT = new SkillSlot(this, 3);
-            SKILLSLOT.AddSkill(new Skill_Revival(new Random().Next(7)));
-            SKILLSLOT.AddSkill(new Skill_MagicBolt(new Random().Next(7)));
-            SKILLSLOT.AddSkill(new Skill_MagicShield(new Random().Next(7)));
+            SKILLSLOT.AddSkill(new Skill_Revival(new Random().Next(7) + 1));
+            SKILLSLOT.AddSkill(new Skill_MagicBolt(new Random().Next(7) + 1));
+            SKILLSLOT.AddSkill(new Skill_MagicShield(new Random().Next(7) + 1));
 
             ITEMSLOT = new ItemSlot(this, 1);
             if(random.Next(10) == 0)

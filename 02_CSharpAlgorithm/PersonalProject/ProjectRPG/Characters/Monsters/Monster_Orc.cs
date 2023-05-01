@@ -17,9 +17,9 @@
             StatusSetting(true);
 
             SKILLSLOT = new SkillSlot(this, 3);
-            SKILLSLOT.AddSkill(new Skill_Swing(new Random().Next(5)));
-            SKILLSLOT.AddSkill(new Skill_RoughSkin(new Random().Next(5)));
-            SKILLSLOT.AddSkill(new Skill_Bite(new Random().Next(5)));
+            SKILLSLOT.AddSkill(new Skill_Swing(new Random().Next(5) + 1));
+            SKILLSLOT.AddSkill(new Skill_RoughSkin(new Random().Next(5) + 1));
+            SKILLSLOT.AddSkill(new Skill_Bite(new Random().Next(5) + 1));
 
             ITEMSLOT = new ItemSlot(this, 4);
             ITEMSLOT.AddItem(new Item_WoodenClub());
