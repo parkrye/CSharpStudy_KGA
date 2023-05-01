@@ -7,7 +7,7 @@ namespace ProjectRPG
         public Dungeon_Sea(Player player) : base(player)
         {
             name = "해안 던전";
-            depth = 0;
+            depth = 3;
 
             EnemySetting();
             ItemSetting();
