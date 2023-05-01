@@ -73,7 +73,7 @@ namespace ProjectRPG
                     break;
 
                 case Screen.Party:
-                    Console.SetCursorPosition(25, 2);
+                    Console.SetCursorPosition(24, 2);
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.Write("[파티]");
                     for (int i = 0; i < player.PARTY.MEMBERS; i++)
@@ -98,7 +98,7 @@ namespace ProjectRPG
                     break;
 
                 case Screen.Storage:
-                    Console.SetCursorPosition(25, 2);
+                    Console.SetCursorPosition(24, 2);
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.Write("[창고]");
                     for (int i = 0; i < 4; i++)
@@ -123,7 +123,7 @@ namespace ProjectRPG
                     break;
 
                 case Screen.Lodging:
-                    Console.SetCursorPosition(25, 2);
+                    Console.SetCursorPosition(24, 2);
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.Write("[객실]");
                     for (int i = 0; i < 4; i++)
@@ -148,7 +148,7 @@ namespace ProjectRPG
                     break;
 
                 case Screen.Room:
-                    Console.SetCursorPosition(25, 2);
+                    Console.SetCursorPosition(24, 2);
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.Write("[침실]");
 
@@ -173,14 +173,14 @@ namespace ProjectRPG
                     Console.Write($"[{player.PARTY.PCs[prevCursor].NAME}] [HP : {player.PARTY.PCs[prevCursor].MAX_HP} | SP : {player.PARTY.PCs[prevCursor].MAX_HP}]");
                     Console.SetCursorPosition(10, 3);
                     Console.Write($"[신체 : {player.PARTY.PCs[prevCursor].MAX_PHYSICSAL} | 정신 : {player.PARTY.PCs[prevCursor].MAX_MENTAL} | 순발력 : {player.PARTY.PCs[prevCursor].MAX_INITIATIVE}]");
-                    Console.SetCursorPosition(5, 4);
+                    Console.SetCursorPosition(4, 4);
                     Console.Write("[보유 기술] ");
                     for (int i = 0; i < player.PARTY.PCs[prevCursor].SKILLSLOT.QUANTITY; i++)
                     {
                         if(i == 1) Console.SetCursorPosition(10, 5);
                         Console.Write($"[{player.PARTY.PCs[prevCursor].SKILLSLOT.SKILLS[i].NAME}] ");
                     }
-                    Console.SetCursorPosition(5, 6);
+                    Console.SetCursorPosition(4, 6);
                     Console.Write("[보유 아이템] ");
                     for (int i = 0; i < player.PARTY.PCs[prevCursor].ITEMSLOT.QUANTITY; i++)
                     {
@@ -246,7 +246,7 @@ namespace ProjectRPG
                         Console.ForegroundColor = ConsoleColor.White;
                     Console.Write("[파티에 들여보내기]");
 
-                    Console.SetCursorPosition(35, 6);
+                    Console.SetCursorPosition(34, 6);
                     if (cursor == 1)
                         Console.ForegroundColor = ConsoleColor.Green;
                     else

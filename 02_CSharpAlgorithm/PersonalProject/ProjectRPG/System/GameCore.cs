@@ -4,7 +4,6 @@ namespace ProjectRPG
 {
     internal class GameCore
     {
-        Field field;
         Player player;
 
         bool isPlaying;
@@ -15,10 +14,12 @@ namespace ProjectRPG
         {
             Console.Title = "Project RPG";
             Console.CursorVisible = false;
-
-            field = new Field();
             isPlaying = true;
-            cursor = 0;
+
+            if (new FileInfo("save.dat").Exists)
+                cursor = 1;
+            else
+                cursor = 0;
             select = false;
         }
 
@@ -130,11 +131,11 @@ namespace ProjectRPG
                             player.PARTY.PCs[3].STATUS = new int[2, 5] { { 99999,99999,99999,99999,99999 }, { 99999,99999,99999,99999,99999 } };
                         }
                         player.EmployCharacter(new PC(new Class_Soldier()));
-                        field.StartMap(player);
+                        new Field(player).StartMap();
                         break;
                     case 1:
                         player = new Player(DataManager.LoadFile());
-                        field.StartMap(player);
+                        new Field(player).StartMap();
                         break;
                     case 2:
                         isPlaying = false;
