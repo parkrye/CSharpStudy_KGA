@@ -46,6 +46,12 @@
                         return;
                     index++;
                 }
+                Crossroad crossroad = new Crossroad(player, null, null);
+                crossroad.GetIn(99);
+                if (crossroad.IsReturn())
+                {
+                    return;
+                }
             }
             BossCutScene();
             bossRoom.GetIn(99);

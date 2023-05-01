@@ -287,10 +287,12 @@
                                     DrawPlayer();
                                     break;
                                 case 2:
+                                    new Dungeon_Sea(player).EnterDungeon();
                                     DrawMap();
                                     DrawPlayer();
                                     break;
                                 case 3:
+                                    new Dungeon_Deep(player).EnterDungeon();
                                     DrawMap();
                                     DrawPlayer();
                                     break;

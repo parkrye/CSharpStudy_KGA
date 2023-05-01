@@ -15,7 +15,7 @@
         protected Character self, other;  // 스킬 보유자, 지목한 대상
 
         protected string name;              // 스킬 이름
-        protected int rank, level, exp;     // 스킬 랭크, 레벨, 경험치
+        protected int rank, level = 1, exp;     // 스킬 랭크, 레벨, 경험치
         protected SkillType type;           // 스킬 유형
 
         protected float value;          // 스킬 변수
@@ -43,7 +43,7 @@
         protected void GetEXP(int addEXP)
         {
             exp += addEXP;
-            while (exp >= level * (10 + rank))
+            while (exp >= level * 10 + (100 * rank) && rank < 3 && level >= 10)
                 LevelUp();
         }
 
@@ -54,7 +54,7 @@
         {
             while (rank < 3 && level >= 10)
             {
-                exp -= level * (10 + rank);
+                exp -= level - 10 + (100 * rank);
                 level++;
                 RankUp();
             }
