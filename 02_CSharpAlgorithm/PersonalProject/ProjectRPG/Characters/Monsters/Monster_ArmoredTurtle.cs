@@ -17,12 +17,13 @@
             StatusSetting(true);
 
             SKILLSLOT = new SkillSlot(this, 3);
-            SKILLSLOT.AddSkill(new Skill_Bite(new Random().Next(7)));
-            SKILLSLOT.AddSkill(new Skill_RoughSkin(new Random().Next(7)));
-            SKILLSLOT.AddSkill(new Skill_SecondWind(new Random().Next(7)));
+            SKILLSLOT.AddSkill(new Skill_Bite(new Random().Next(7) + 1));
+            SKILLSLOT.AddSkill(new Skill_RoughSkin(new Random().Next(7) + 1));
+            SKILLSLOT.AddSkill(new Skill_SecondWind(new Random().Next(7) + 1));
 
-            ITEMSLOT = new ItemSlot(this, 1);
-            if(random.Next(10) == 0)
+            ITEMSLOT = new ItemSlot(this, 2);
+            ITEMSLOT.AddItem(new Item_SimpleBomb());
+            if (random.Next(10) == 0)
                 ITEMSLOT.AddItem(new Item_ShiningShell());
 
             for (int i = 0; i < 5; i++)

@@ -11,10 +11,15 @@
         Dictionary<int, (int y, int x)> dungeonDict1;    // 던전 번호, 던전 위치(y, x)
         Dictionary<(int y, int x), int> dungeonDict2;    // 던전 위치(y, x), 던전 번호
 
+        Menu menu;
         Player player;
 
-        public Field()
+        public Field(Player _player)
         {
+            inMap = true;
+            player = _player;
+            position = player.POSITION;
+
             tiles = new Tile[20, 20];
             dungeonDict1 = new Dictionary<int, (int x, int y)>();
             dungeonDict2 = new Dictionary<(int y, int x), int>();
@@ -22,14 +27,12 @@
             SetField();
             SetDungeons();
             EnemySetting();
+
+            menu = new Menu();
         }
 
-        public void StartMap(Player _player)
+        public void StartMap()
         {
-            inMap = true;
-            player = _player;
-            position = player.POSITION;
-
             DrawMap();
             while (inMap)
             {
@@ -287,10 +290,12 @@
                                     DrawPlayer();
                                     break;
                                 case 2:
+                                    new Dungeon_Sea(player).EnterDungeon();
                                     DrawMap();
                                     DrawPlayer();
                                     break;
                                 case 3:
+                                    new Dungeon_Deep(player).EnterDungeon();
                                     DrawMap();
                                     DrawPlayer();
                                     break;
@@ -299,7 +304,12 @@
                     }
                     break;
                 case Key.CANEL:
-                    inMap = false;
+                    inMap = menu.StartMenu(player);
+                    if (inMap)
+                    {
+                        DrawMap();
+                        DrawPlayer();
+                    }
                     break;
             }
 

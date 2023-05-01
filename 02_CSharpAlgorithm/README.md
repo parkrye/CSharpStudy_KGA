@@ -10,7 +10,8 @@
 + [이진탐색트리](https://github.com/parkrye/KGA/tree/master/02_CSharpAlgorithm/Study/07_BinarySearchTree)
 + [해시테이블](https://github.com/parkrye/KGA/tree/master/02_CSharpAlgorithm/Study/08_HashTable)
 + [알고리즘 설계기법](https://github.com/parkrye/KGA/tree/master/02_CSharpAlgorithm/Study/09_DesignTechnique)
-+ [정렬](https://github.com/parkrye/KGA/tree/master/02_CSharpAlgorithm/Study/10_Sort)
++ [정렬](https://github.com/parkrye/KGA/tree/master/02_CSharpAlgorithm/Study/10_Sorting)
++ [검색](https://github.com/parkrye/KGA/tree/master/02_CSharpAlgorithm/Study/11_Searching)
 ## 과제
 + [과제 1](https://github.com/parkrye/KGA/tree/master/02_CSharpAlgorithm/Homework/Homework_01)
 + [과제 2](https://github.com/parkrye/KGA/tree/master/02_CSharpAlgorithm/Homework/Homework_02)

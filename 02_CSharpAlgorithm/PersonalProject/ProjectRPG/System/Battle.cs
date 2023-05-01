@@ -2,17 +2,12 @@
 {
     internal class Battle
     {
-        int turn;
-        int battleOver;
-        Player player;
-        Party playerParty, enemyParty;
-        List<PC> turnOrder;
-        Random random;
-
-        public int TURN
-        {
-            get { return turn; }
-        }
+        int turn;       // 턴
+        int battleOver; // 전투 종료 상황
+        Player player;  // 플레이어
+        Party playerParty, enemyParty;  // 플레이어 파티, 적 파티
+        List<PC> turnOrder; // 턴 순서
+        Random random;  // 전투에서 사용할 랜덤 클래스
 
         /// <summary>
         /// 생성자
@@ -207,6 +202,7 @@
                 case 1:
                     Console.SetCursorPosition(0, 10);
                     Console.WriteLine("전투에서 승리했습니다!");
+                    // 돈 획득
                     int sum = 0;
                     for(int i = 0; i < enemyParty.MEMBERS; i++)
                     {
@@ -214,6 +210,7 @@
                     }
                     player.AddMoney(sum / 2);
 
+                    // 아이템 획득
                     List<Item> items = new List<Item>();
                     for (int i = 0; i < enemyParty.MEMBERS; i++)
                     {
@@ -224,6 +221,7 @@
                         }
                     }
 
+                    // 생존한 캐릭터는 경험치, 기절한 캐릭터는 회복, 능력치 변동 초기화
                     for(int i = 0; i < playerParty.MEMBERS; i++)
                     {
                         if (playerParty.PCs[i].NOW_HP > 0)
@@ -236,18 +234,14 @@
                             playerParty.PCs[i].NOW_HP++;
                         if (playerParty.PCs[i].NOW_SP == 0)
                             playerParty.PCs[i].NOW_SP++;
-                        if (playerParty.PCs[i].NOW_PHYSICSAL != player.PARTY.PCs[i].MAX_PHYSICSAL)
-                            playerParty.PCs[i].NOW_PHYSICSAL = player.PARTY.PCs[i].MAX_PHYSICSAL;
-                        if (playerParty.PCs[i].NOW_MENTAL != player.PARTY.PCs[i].MAX_MENTAL)
-                            playerParty.PCs[i].NOW_MENTAL = player.PARTY.PCs[i].MAX_MENTAL;
-                        if (playerParty.PCs[i].NOW_INITIATIVE != player.PARTY.PCs[i].MAX_INITIATIVE)
-                            playerParty.PCs[i].NOW_INITIATIVE = player.PARTY.PCs[i].MAX_INITIATIVE;
+                        playerParty.PCs[i].StatusSetting(false);
                     }
                     break;
                 // 플레이어 패배
                 case 2:
                     Console.SetCursorPosition(0, 10);
                     Console.WriteLine("전투에서 패배했습니다..");
+                    // 패배한 캐릭터는 모두 사망
                     while (playerParty.MEMBERS > 0)
                         playerParty.RemovePC(0);
                     break;
@@ -260,6 +254,8 @@
                     {
                         if (playerParty.PCs[i].NOW_HP == 0)
                             playerParty.PCs[i].NOW_HP++;
+                        if (playerParty.PCs[i].NOW_SP == 0)
+                            playerParty.PCs[i].NOW_SP++;
                     }
                     break;
             }

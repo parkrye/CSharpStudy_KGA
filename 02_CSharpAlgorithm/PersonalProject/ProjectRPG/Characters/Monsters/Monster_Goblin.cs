@@ -17,8 +17,8 @@
             StatusSetting(true);
 
             SKILLSLOT = new SkillSlot(this, 2);
-            SKILLSLOT.AddSkill(new Skill_Scratch(new Random().Next(3)));
-            SKILLSLOT.AddSkill(new Skill_Bite(new Random().Next(3)));
+            SKILLSLOT.AddSkill(new Skill_Scratch(new Random().Next(3) + 1));
+            SKILLSLOT.AddSkill(new Skill_Bite(new Random().Next(3) + 1));
 
             ITEMSLOT = new ItemSlot(this, 2);
             ITEMSLOT.AddItem(new Item_GoblinApple());
