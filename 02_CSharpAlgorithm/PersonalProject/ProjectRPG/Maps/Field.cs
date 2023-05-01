@@ -18,10 +18,6 @@
             tiles = new Tile[20, 20];
             dungeonDict1 = new Dictionary<int, (int x, int y)>();
             dungeonDict2 = new Dictionary<(int y, int x), int>();
-
-            SetField();
-            SetDungeons();
-            EnemySetting();
         }
 
         public void StartMap(Player _player)
@@ -29,6 +25,10 @@
             inMap = true;
             player = _player;
             position = player.POSITION;
+
+            SetField();
+            SetDungeons();
+            EnemySetting();
 
             DrawMap();
             while (inMap)
