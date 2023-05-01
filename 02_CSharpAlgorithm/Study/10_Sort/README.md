@@ -1,1 +1,0 @@
-### [뒤로가기](https://github.com/parkrye/KGA/tree/master/02_CSharpAlgorithm)
