@@ -7,7 +7,7 @@ namespace ProjectRPG
         public Dungeon_Sea(Player player) : base(player)
         {
             name = "해안 던전";
-            depth = 3;
+            depth = 0;
 
             EnemySetting();
             ItemSetting();
@@ -100,119 +100,6 @@ namespace ProjectRPG
             Console.SetCursorPosition(0, 0);
             Console.ForegroundColor = ConsoleColor.DarkBlue;
             Thread.Sleep(100);
-            Console.WriteLine("　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　");
-            Console.WriteLine("　□□□　　　□□　　□　　□　　□□□　□□□□　□□□　　");
-            Thread.Sleep(50);
-            Console.WriteLine("　□　　□　□　　□　□　　□　□　　　　□　　　　□　　□　");
-            Thread.Sleep(50);
-            Console.WriteLine("　□　　□　□　　□　□□　□　□　　　　□　　　　□　　□　");
-            Thread.Sleep(50);
-            Console.WriteLine("　□　　□　□□□□　□□　□　□　　　　□□□□　□□□　　");
-            Thread.Sleep(50);
-            Console.WriteLine("　□　　□　□　　□　□　□□　□　□□　□　　　　□　　□　");
-            Thread.Sleep(50);
-            Console.WriteLine("　□　　□　□　　□　□　□□　□　　□　□　　　　□　　□　");
-            Thread.Sleep(50);
-            Console.WriteLine("　□　　□　□　　□　□　　□　□　　□　□　　　　□　　□　");
-            Thread.Sleep(50);
-            Console.WriteLine("　□□□　　□　　□　□　　□　　□□□　□□□□　□　　□　");
-            Console.WriteLine("　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　");
-            Thread.Sleep(50);
-            Console.SetCursorPosition(0, 0);
-            Console.WriteLine("　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　");
-            Console.WriteLine("　■■■　　　■■　　■　　■　　■■■　■■■■　■■■　　");
-            Thread.Sleep(50);
-            Console.WriteLine("　■　　■　■　　■　■　　■　■　　　　■　　　　■　　■　");
-            Thread.Sleep(50);
-            Console.WriteLine("　■　　■　■　　■　■■　■　■　　　　■　　　　■　　■　");
-            Thread.Sleep(50);
-            Console.WriteLine("　■　　■　■■■■　■■　■　■　　　　■■■■　■■■　　");
-            Thread.Sleep(50);
-            Console.WriteLine("　■　　■　■　　■　■　■■　■　■■　■　　　　■　　■　");
-            Thread.Sleep(50);
-            Console.WriteLine("　■　　■　■　　■　■　■■　■　　■　■　　　　■　　■　");
-            Thread.Sleep(50);
-            Console.WriteLine("　■　　■　■　　■　■　　■　■　　■　■　　　　■　　■　");
-            Thread.Sleep(50);
-            Console.WriteLine("　■■■　　■　　■　■　　■　　■■■　■■■■　■　　■　");
-            Console.WriteLine("　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　");
-            Thread.Sleep(50);
-            Console.SetCursorPosition(0, 0);
-            Console.WriteLine("　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　");
-            Console.WriteLine("　□□□　　　□□　　□　　□　　□□□　□□□□　□□□　　");
-            Thread.Sleep(50);
-            Console.WriteLine("　□　　□　□　　□　□　　□　□　　　　□　　　　□　　□　");
-            Thread.Sleep(50);
-            Console.WriteLine("　□　　□　□　　□　□□　□　□　　　　□　　　　□　　□　");
-            Thread.Sleep(50);
-            Console.WriteLine("　□　　□　□□□□　□□　□　□　　　　□□□□　□□□　　");
-            Thread.Sleep(50);
-            Console.WriteLine("　□　　□　□　　□　□　□□　□　□□　□　　　　□　　□　");
-            Thread.Sleep(50);
-            Console.WriteLine("　□　　□　□　　□　□　□□　□　　□　□　　　　□　　□　");
-            Thread.Sleep(50);
-            Console.WriteLine("　□　　□　□　　□　□　　□　□　　□　□　　　　□　　□　");
-            Thread.Sleep(50);
-            Console.WriteLine("　□□□　　□　　□　□　　□　　□□□　□□□□　□　　□　");
-            Console.WriteLine("　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　");
-            Thread.Sleep(50);
-            Console.SetCursorPosition(0, 0);
-            Console.WriteLine("　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　");
-            Console.WriteLine("　■■■　　　■■　　■　　■　　■■■　■■■■　■■■　　");
-            Thread.Sleep(50);
-            Console.WriteLine("　■　　■　■　　■　■　　■　■　　　　■　　　　■　　■　");
-            Thread.Sleep(50);
-            Console.WriteLine("　■　　■　■　　■　■■　■　■　　　　■　　　　■　　■　");
-            Thread.Sleep(50);
-            Console.WriteLine("　■　　■　■■■■　■■　■　■　　　　■■■■　■■■　　");
-            Thread.Sleep(50);
-            Console.WriteLine("　■　　■　■　　■　■　■■　■　■■　■　　　　■　　■　");
-            Thread.Sleep(50);
-            Console.WriteLine("　■　　■　■　　■　■　■■　■　　■　■　　　　■　　■　");
-            Thread.Sleep(50);
-            Console.WriteLine("　■　　■　■　　■　■　　■　■　　■　■　　　　■　　■　");
-            Thread.Sleep(50);
-            Console.WriteLine("　■■■　　■　　■　■　　■　　■■■　■■■■　■　　■　");
-            Console.WriteLine("　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　");
-            Thread.Sleep(50);
-            Console.SetCursorPosition(0, 0);
-            Console.WriteLine("　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　");
-            Console.WriteLine("　□□□　　　□□　　□　　□　　□□□　□□□□　□□□　　");
-            Thread.Sleep(50);
-            Console.WriteLine("　□　　□　□　　□　□　　□　□　　　　□　　　　□　　□　");
-            Thread.Sleep(50);
-            Console.WriteLine("　□　　□　□　　□　□□　□　□　　　　□　　　　□　　□　");
-            Thread.Sleep(50);
-            Console.WriteLine("　□　　□　□□□□　□□　□　□　　　　□□□□　□□□　　");
-            Thread.Sleep(50);
-            Console.WriteLine("　□　　□　□　　□　□　□□　□　□□　□　　　　□　　□　");
-            Thread.Sleep(50);
-            Console.WriteLine("　□　　□　□　　□　□　□□　□　　□　□　　　　□　　□　");
-            Thread.Sleep(50);
-            Console.WriteLine("　□　　□　□　　□　□　　□　□　　□　□　　　　□　　□　");
-            Thread.Sleep(50);
-            Console.WriteLine("　□□□　　□　　□　□　　□　　□□□　□□□□　□　　□　");
-            Console.WriteLine("　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　");
-            Thread.Sleep(50);
-            Console.SetCursorPosition(0, 0);
-            Console.WriteLine("　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　");
-            Console.WriteLine("　■■■　　　■■　　■　　■　　■■■　■■■■　■■■　　");
-            Thread.Sleep(50);
-            Console.WriteLine("　■　　■　■　　■　■　　■　■　　　　■　　　　■　　■　");
-            Thread.Sleep(50);
-            Console.WriteLine("　■　　■　■　　■　■■　■　■　　　　■　　　　■　　■　");
-            Thread.Sleep(50);
-            Console.WriteLine("　■　　■　■■■■　■■　■　■　　　　■■■■　■■■　　");
-            Thread.Sleep(50);
-            Console.WriteLine("　■　　■　■　　■　■　■■　■　■■　■　　　　■　　■　");
-            Thread.Sleep(50);
-            Console.WriteLine("　■　　■　■　　■　■　■■　■　　■　■　　　　■　　■　");
-            Thread.Sleep(50);
-            Console.WriteLine("　■　　■　■　　■　■　　■　■　　■　■　　　　■　　■　");
-            Thread.Sleep(50);
-            Console.WriteLine("　■■■　　■　　■　■　　■　　■■■　■■■■　■　　■　");
-            Console.WriteLine("　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　");
-            Thread.Sleep(100);
             Console.SetCursorPosition(0, 0);
             Console.WriteLine("　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　");
             Console.WriteLine("　■■■　　　■■　　■　　■　　■■■　■■■■　■■■　　");
@@ -230,40 +117,57 @@ namespace ProjectRPG
                 Console.SetCursorPosition(0, i);
                 Console.WriteLine("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
             }
-            for (int i = 29; i >= 0; i-=2)
+            for (int i = 58; i >= 0; i-=2)
             {
-                Thread.Sleep(25);
+                Thread.Sleep(100);
                 Console.SetCursorPosition(i, 7);
-                Console.WriteLine("　　");
-                if(i < 29)
+                Console.Write("　");
+                if(i < 56)
                 {
-                    Console.SetCursorPosition(i + 2, 7);
-                    Console.WriteLine("■■");
+                    Console.SetCursorPosition(i + 4, 7);
+                    Console.Write("■");
                 }
             }
             Console.SetCursorPosition(0, 7);
-            Console.WriteLine("■■");
-            for (int i = 0; i < 26; i+=4)
+            Console.Write("■■");
+            for (int i = 0; i < 60; i+=2)
             {
-                Thread.Sleep(25);
+                Thread.Sleep(100);
                 Console.SetCursorPosition(i, 4);
-                Console.WriteLine("　　　　");
-                Console.WriteLine("　　　　");
-                Console.WriteLine("　　　　");
-                if(i > 0)
+                Console.Write("　");
+                Console.SetCursorPosition(i, 5);
+                Console.Write("　");
+                Console.SetCursorPosition(i, 6);
+                Console.Write("　");
+                if(i > 6)
                 {
-                    Console.SetCursorPosition(i - 4, 4);
-                    Console.WriteLine("■■■■");
-                    Console.WriteLine("■■■■");
-                    Console.WriteLine("■■■■");
+                    Console.SetCursorPosition(i - 8, 4);
+                    Console.Write("■");
+                    Console.SetCursorPosition(i - 8, 5);
+                    Console.Write("■");
+                    Console.SetCursorPosition(i - 8, 6);
+                    Console.Write("■");
                 }
             }
-            Console.SetCursorPosition(26, 4);
-            Console.WriteLine("■■■■");
-            Console.WriteLine("■■■■");
-            Console.WriteLine("■■■■");
+            Console.SetCursorPosition(52, 4);
+            Console.Write("■■■■");
+            Console.SetCursorPosition(52, 5);
+            Console.Write("■■■■");
+            Console.SetCursorPosition(52, 6);
+            Console.Write("■■■■");
             Thread.Sleep(500);
-            Console.Clear();
+            for(int i = 0; i < 4; i++)
+            {
+                Thread.Sleep(50);
+                Console.SetCursorPosition(0, i);
+                Console.WriteLine("　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　");
+                Console.SetCursorPosition(0, 9 - i);
+                Console.WriteLine("　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　");
+                Console.SetCursorPosition(0, i + 1);
+                Console.WriteLine("　■　■　■　■　■　■　■　■　■　■　■　■　■　■　■　");
+                Console.SetCursorPosition(0, 9 - i - 1);
+                Console.WriteLine("■　■　■　■　■　■　■　■　■　■　■　■　■　■　■　■");
+            }
         }
     }
 }
