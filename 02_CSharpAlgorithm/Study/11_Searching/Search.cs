@@ -94,6 +94,7 @@
             Queue<int> bfsQueue = new Queue<int>();
 
             bfsQueue.Enqueue(start);
+
             while (bfsQueue.Count > 0)
             {
                 int next = bfsQueue.Dequeue();
