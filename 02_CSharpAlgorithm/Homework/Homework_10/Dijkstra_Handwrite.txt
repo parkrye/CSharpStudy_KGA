@@ -1,0 +1,110 @@
+[0 단계 : 시작 노드(0)를 지정]
+	dist	path	visit
+0	0		0		true
+1	INF		-1		false
+2	INF		-1		false
+3	INF		-1		false
+4	INF		-1		false
+5	INF		-1		false
+6	INF		-1		false
+7	INF		-1		false
+
+[1 단계 : 시작 노드(0)로부터 거리 측정 및 거리가 INF보다 작은 경우, 거리를 저장하고 경로를 시작 노드(0)로 저장]
+	dist	path	visit
+0	0		0		true
+1	INF		-1		false
+2	7		0		false
+3	3		0		false
+4	7		0		false
+5	INF		-1		false
+6	INF		-1		false
+7	INF		-1		false
+
+[2 단계 : 방문하지 않은 노드 중 거리가 가장 짧은 노드에 대해, 해당 노드를 방문하고 도달할 수 있는 거리가 기존 거리보다 작은 경우, 거리를 저장하고 경로를 해당 노드로 저장]
+	[2-1 단계 : 3 - 7 갱신]
+		dist	path	visit
+	0	0		0		true
+	1	INF		-1		false
+	2	7		0		false
+	3	3		0		true
+	4	7		0		false
+	5	INF		-1		false
+	6	INF		-1		false
+	7	11		3		false
+
+	[2-2 단계 : 2 - 6 갱신]
+		dist	path	visit
+	0	0		0		true
+	1	INF		-1		false
+	2	7		0		true
+	3	3		0		true
+	4	7		0		false
+	5	INF		-1		false
+	6	11		2		false
+	7	11		3		false
+
+	[2-3 단계 : 4]
+		dist	path	visit
+	0	0		0		true
+	1	INF		-1		false
+	2	7		0		true
+	3	3		0		true
+	4	7		0		true
+	5	INF		-1		false
+	6	11		2		false
+	7	11		3		false
+
+	[2-4 단계 : 6 - 5 갱신]
+		dist	path	visit
+	0	0		0		true
+	1	INF		-1		false
+	2	7		0		true
+	3	3		0		true
+	4	7		0		true
+	5	14		6		false
+	6	11		2		true
+	7	11		3		false
+
+	[2-5 단계 : 7]
+		dist	path	visit
+	0	0		0		true
+	1	INF		-1		false
+	2	7		0		true
+	3	3		0		true
+	4	7		0		true
+	5	14		6		false
+	6	11		2		true
+	7	11		3		true
+
+	[2-6 단계 : 5]
+		dist	path	visit
+	0	0		0		true
+	1	INF		-1		false
+	2	7		0		true
+	3	3		0		true
+	4	7		0		true
+	5	14		6		true
+	6	11		2		true
+	7	11		3		true
+
+	[2-7 단계 : 1]
+		dist	path	visit
+	0	0		0		true
+	1	INF		-1		true
+	2	7		0		true
+	3	3		0		true
+	4	7		0		true
+	5	14		6		true
+	6	11		2		true
+	7	11		3		true
+
+[결과]
+	dist	path	visit
+0	0		0		true
+1	INF		-1		true
+2	7		0		true
+3	3		0		true
+4	7		0		true
+5	14		6		true
+6	11		2		true
+7	11		3		true
