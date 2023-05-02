@@ -53,8 +53,12 @@ namespace ProjectRPG
                     return new Item_HPPotion2();
                 case 3:
                     return new Item_SPPotion2();
+                case 4:
+                    return new Item_HPPotion3();
+                case 5:
+                    return new Item_SPPotion3();
                 default:
-                    return new Item_BronzeCoin();
+                    return new Item_ShiningShell();
             }
         }
 
@@ -88,6 +92,7 @@ namespace ProjectRPG
         protected override void BossSetting()
         {
             Party boss = new Party();
+            boss.AddPC(new Monster_Seaserpent());
             boss.AddPC(new Monster_Seaserpent());
             Item bossDrop = new Item_Trident();
 

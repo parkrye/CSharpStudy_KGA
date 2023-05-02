@@ -16,9 +16,11 @@
             MAX_INITIATIVE = random.Next(30, 40);
             StatusSetting(true);
 
-            SKILLSLOT = new SkillSlot(this, 3);
+            SKILLSLOT = new SkillSlot(this, 5);
             SKILLSLOT.AddSkill(new Skill_Revival(new Random().Next(7) + 1));
             SKILLSLOT.AddSkill(new Skill_MagicBolt(new Random().Next(7) + 1));
+            SKILLSLOT.AddSkill(new Skill_WaterShot(new Random().Next(7) + 1));
+            SKILLSLOT.AddSkill(new Skill_Curse(new Random().Next(7) + 1));
             SKILLSLOT.AddSkill(new Skill_MagicShield(new Random().Next(7) + 1));
 
             ITEMSLOT = new ItemSlot(this, 1);

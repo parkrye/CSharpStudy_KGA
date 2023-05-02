@@ -4,9 +4,9 @@
     {
         public Monster_Necromancer(int index = -1)
         {
-            name = $"네크로맨서";
+            name = $"사령사";
             if (index > -1)
-                name += index;
+                name += $" {index}";
 
             Random random = new Random();
 
@@ -18,10 +18,14 @@
             MAX_INITIATIVE = random.Next(30, 40);
             StatusSetting(true);
 
-            SKILLSLOT = new SkillSlot(this, 3);
+            SKILLSLOT = new SkillSlot(this, 7);
+            SKILLSLOT.AddSkill(new Skill_FireBreath(15));
+            SKILLSLOT.AddSkill(new Skill_WaterShot(15));
             SKILLSLOT.AddSkill(new Skill_MagicShield(15));
             SKILLSLOT.AddSkill(new Skill_MagicBolt(15));
+            SKILLSLOT.AddSkill(new Skill_Curse(15));
             SKILLSLOT.AddSkill(new Skill_DeepBreath(15));
+            SKILLSLOT.AddSkill(new Skill_PainRefactor(15));
 
             ITEMSLOT = new ItemSlot(this, 3);
             ITEMSLOT.AddItem(new Item_SPPotion2());

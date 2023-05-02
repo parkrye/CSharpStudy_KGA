@@ -2,9 +2,11 @@
 {
     internal class Monster_Seaserpent : PC
     {
-        public Monster_Seaserpent()
+        public Monster_Seaserpent(int index = -1)
         {
             name = $"해룡";
+            if (index > -1)
+                name += $" {index}";
 
             Random random = new Random();
 

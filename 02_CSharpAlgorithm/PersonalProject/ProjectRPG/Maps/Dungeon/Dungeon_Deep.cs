@@ -21,16 +21,22 @@ namespace ProjectRPG
             int num = new Random().Next(4) + 1;
             for (int j = 0; j < num; j++)
             {
-                switch (new Random().Next(3))
+                switch (new Random().Next(5))
                 {
                     case 0:
-                        party.AddPC(new Monster_Skeleton(j + 1));
+                        party.AddPC(new Monster_DeepOne(j + 1));
                         break;
                     case 1:
-                        party.AddPC(new Monster_Zombie(j + 1));
+                        party.AddPC(new Monster_Gremrin(j + 1));
                         break;
                     case 2:
-                        party.AddPC(new Monster_Vampire(j + 1));
+                        party.AddPC(new Monster_Cultist(j + 1));
+                        break;
+                    case 3:
+                        party.AddPC(new Monster_Color(j + 1));
+                        break;
+                    case 4:
+                        party.AddPC(new Monster_Demon(j + 1));
                         break;
                 }
             }
@@ -50,8 +56,14 @@ namespace ProjectRPG
                     return new Item_HPPotion2();
                 case 3:
                     return new Item_SPPotion2();
+                case 4:
+                case 5:
+                    return new Item_HPPotion3();
+                case 6:
+                case 7:
+                    return new Item_SPPotion3();
                 default:
-                    return new Item_BronzeCoin();
+                    return new Item_ShiningShell();
             }
         }
 
