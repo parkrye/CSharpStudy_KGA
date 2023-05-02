@@ -388,6 +388,18 @@
                         else
                             party.AddPC(new PC());
                         break;
+                    case 6:
+                        if (player.FINDINGS[3])
+                            party.AddPC(new Monster_Merman(j + 1));
+                        else
+                            party.AddPC(new PC());
+                        break;
+                    case 7:
+                        if (player.FINDINGS[3])
+                            party.AddPC(new Monster_SeaGhost(j + 1));
+                        else
+                            party.AddPC(new PC());
+                        break;
                     default:
                         party.AddPC(new Monster_Goblin(j + 1));
                         break;

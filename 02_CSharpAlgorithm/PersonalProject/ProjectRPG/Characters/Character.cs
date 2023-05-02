@@ -47,31 +47,31 @@
         /// 캐릭터 체력에 대한 프로퍼티
         /// </summary>
         public int MAX_HP { get { return status[0, 0]; } set { status[0, 0] = value; } }
-        public int NOW_HP { get { return status[1, 0]; } set { if(value <= MAX_HP) status[1, 0] = value; } }
+        public int NOW_HP { get { return status[1, 0]; } set { status[1, 0] = value; if (status[1, 0] > MAX_HP) status[1, 0] = MAX_HP; if (status[1, 0] < 0) status[1, 0] = 0; } }
 
         /// <summary>
         /// 캐릭터 활력에 대한 프로퍼티
         /// </summary>
         public int MAX_SP { get { return status[0, 1]; } set { status[0, 1] = value; } }
-        public int NOW_SP { get { return status[1, 1]; } set { if (value <= MAX_SP) status[1, 1] = value; } }
+        public int NOW_SP { get { return status[1, 1]; } set { status[1, 1] = value; if (status[1, 1] > NOW_SP) status[1, 1] = NOW_SP; if (status[1, 1] < 0) status[1, 1] = 0; } }
 
         /// <summary>
         /// 캐릭터 신체능력에 대한 프로퍼티
         /// </summary>
         public int MAX_PHYSICSAL { get { return status[0, 2]; } set { status[0, 2] = value; } }
-        public int NOW_PHYSICSAL { get { return status[1, 2]; } set { status[1, 2] = value; } }
+        public int NOW_PHYSICSAL { get { return status[1, 2]; } set { status[1, 2] = value; if (status[1, 2] < 0) status[1, 2] = 1; } }
 
         /// <summary>
         /// 캐릭터 정신능력에 대한 프로퍼티
         /// </summary>
         public int MAX_MENTAL { get { return status[0, 3]; } set { status[0, 3] = value; } }
-        public int NOW_MENTAL { get { return status[1, 3]; } set { status[1, 3] = value; } }
+        public int NOW_MENTAL { get { return status[1, 3]; } set { status[1, 3] = value; if (status[1, 3] < 0) status[1, 3] = 1; } }
 
         /// <summary>
         /// 캐릭터 행동 우선도에 대한 프로퍼티
         /// </summary>
         public int MAX_INITIATIVE { get { return status[0, 4]; } set { status[0, 4] = value; } }
-        public int NOW_INITIATIVE { get { return status[1, 4]; } set { status[1, 4] = value; } }
+        public int NOW_INITIATIVE { get { return status[1, 4]; } set { status[1, 4] = value; if (status[1, 4] < 0) status[1, 4] = 1; } }
 
         /// <summary>
         /// 위험도에 대한 프로퍼티
@@ -152,10 +152,7 @@
 
             NOW_HP -= damage;
             OnHPDecreased?.Invoke(status, ref dummy);                       // 체력 감소에 대한 패시프 스킬이 시전되고, 체력을 조정한다
-            if (NOW_HP < 0)                                   // 체력이 0 이하라면 사망한다
-            {
-                NOW_HP = 0;
-            }
+
             return true;
         }
 

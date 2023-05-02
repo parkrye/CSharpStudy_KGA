@@ -17,9 +17,9 @@
             StatusSetting(true);
 
             SKILLSLOT = new SkillSlot(this, 4);
-            SKILLSLOT.AddSkill(new Skill_LuckyAttack(new Random().Next(7) + 1));
+            SKILLSLOT.AddSkill(new Skill_WaterShot(new Random().Next(7) + 1));;
             SKILLSLOT.AddSkill(new Skill_Scratch(new Random().Next(7) + 1));
-            SKILLSLOT.AddSkill(new Skill_Howling(new Random().Next(7) + 1));
+            SKILLSLOT.AddSkill(new Skill_HealingWord(new Random().Next(7) + 1));
             SKILLSLOT.AddSkill(new Skill_Arcrobatics(new Random().Next(7) + 1));
 
             ITEMSLOT = new ItemSlot(this, 2);

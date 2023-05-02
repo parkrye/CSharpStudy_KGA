@@ -4,7 +4,7 @@
     {
         public Monster_Skeleton(int index)
         {
-            name = $"스켈레톤 {index}";
+            name = $"해골병 {index}";
 
             Random random = new Random();
 

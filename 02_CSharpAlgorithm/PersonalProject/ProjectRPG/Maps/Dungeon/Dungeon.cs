@@ -55,7 +55,7 @@
             }
             BossCutScene();
             bossRoom.GetIn(99);
-            if (player.PARTY.MEMBERS > 0)
+            if (player.PARTY.MEMBERS > 0 && depth < 4)
                 player.FINDINGS[depth] = true;
         }
 

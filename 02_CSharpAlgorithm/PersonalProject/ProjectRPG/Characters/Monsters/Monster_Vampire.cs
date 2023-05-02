@@ -4,7 +4,7 @@
     {
         public Monster_Vampire(int index)
         {
-            name = $"뱀파이어 {index}";
+            name = $"흡혈귀 {index}";
 
             Random random = new Random();
 

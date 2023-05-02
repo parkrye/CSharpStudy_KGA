@@ -4,7 +4,7 @@
     {
         public Monster_ArmoredTurtle(int index)
         {
-            name = $"무장거북 {index}";
+            name = $"갑골어 {index}";
 
             Random random = new Random();
 
@@ -16,8 +16,9 @@
             MAX_INITIATIVE = random.Next(10, 20);
             StatusSetting(true);
 
-            SKILLSLOT = new SkillSlot(this, 3);
+            SKILLSLOT = new SkillSlot(this, 4);
             SKILLSLOT.AddSkill(new Skill_Bite(new Random().Next(7) + 1));
+            SKILLSLOT.AddSkill(new Skill_WaterShot(new Random().Next(7) + 1));
             SKILLSLOT.AddSkill(new Skill_RoughSkin(new Random().Next(7) + 1));
             SKILLSLOT.AddSkill(new Skill_SecondWind(new Random().Next(7) + 1));
 
