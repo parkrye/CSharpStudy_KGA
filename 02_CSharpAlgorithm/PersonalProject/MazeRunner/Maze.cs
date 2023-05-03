@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,7 @@ namespace MazeRunner
         Tile[,] maze;                           // 미로 배열
         bool submit, completed;                 // 제출 여부, 완성 여부
         int size;                               // 미로 크기
+        (int x, int y) start, goal;
 
         /// <summary>
         /// 미로 생성자
@@ -105,28 +107,27 @@ namespace MazeRunner
         /// <returns>미로 제출 여부</returns>
         bool MoveCursor(ref int x, ref int y)
         {
-            ConsoleKey key = Console.ReadKey().Key;
-            switch (key)
+            switch (InputManager.GetInput())
             {
-                case ConsoleKey.LeftArrow:
+                case Key.Left:
                     if (x > 1)
                         x--;
                     break;
-                case ConsoleKey.RightArrow:
+                case Key.Right:
                     if (x < size - 2)
                         x++;
                     break;
-                case ConsoleKey.UpArrow:
+                case Key.Up:
                     if (y > 1)
                         y--;
                     break;
-                case ConsoleKey.DownArrow:
+                case Key.Down:
                     if (y < size - 2)
                         y++;
                     break;
-                case ConsoleKey.Spacebar:
+                case Key.Space:
                     return true;
-                case ConsoleKey.Enter:
+                case Key.Enter:
                     submit = true;
                     break;
             }
@@ -151,14 +152,16 @@ namespace MazeRunner
                         if (startBool)
                             return false;
                         startBool = true;
-                        goalPos = (y, x);
+                        startPos = (x, y);
+                        start = (x, y);
                     }
                     if (maze[y, x] == Tile.Goal)
                     {
                         if (goalBool)
                             return false;
                         goalBool = true;
-                        startPos = (y, x);
+                        goalPos = (x, y);
+                        goal = (x, y);
                     }
                 }
             }
@@ -207,6 +210,75 @@ namespace MazeRunner
                 }
             }
 
+            return false;
+        }
+
+        public void RunMaze()
+        {
+            Console.Clear();
+
+            bool[,] visit = new bool[size, size];
+            bool[,] route = new bool[size, size];
+            route[start.y, start.x] = true;
+            Solve(start, visit, route);
+            PrintRoute(route);
+
+        }
+
+        void PrintRoute(bool[,] route)
+        {
+            PrintMaze();
+            Console.SetCursorPosition(0, 0);
+            for (int y = 0; y < size; y++)
+            {
+                for (int x = 0; x < size; x++)
+                {
+                    if (route[y, x] == true)
+                        Console.Write("○");
+                    else
+                    {
+                        if (maze[y, x] == Tile.Road)
+                            Console.Write("　");
+                        else if (maze[y, x] == Tile.Wall)
+                            Console.Write("■");
+                        else if (maze[y, x] == Tile.Goal)
+                            Console.Write("※");
+                        else if (maze[y, x] == Tile.Start)
+                            Console.Write("＠");
+                    }
+                }
+                Console.WriteLine();
+            }
+        }
+
+        bool Solve((int x, int y) point, bool[,] visit, bool[,] route)
+        {
+            if(point == goal)
+            {
+                return true;
+            }
+
+            visit[point.y, point.x] = true;
+            for (int yi = -1; yi < 2; yi++)
+            {
+                for(int xi = -1; xi < 2; xi++)
+                {
+                    if (xi == yi)
+                        continue;
+                    if (xi != 0 && yi != 0)
+                        continue;
+                    if (point.y + yi > 0 && point.y + yi < size - 1 &&
+                        point.x + xi > 0 && point.x + xi < size - 1 &&
+                        maze[point.y + yi, point.x + xi] != Tile.Wall && 
+                        !visit[point.y + yi, point.x + xi])
+                    {
+                        route[point.y + yi, point.x + xi] = true;
+                        if (Solve((point.x + xi, point.y + yi), visit, route))
+                            return true;
+                        route[point.y + yi, point.x + xi] = false;
+                    }
+                }
+            }
             return false;
         }
     }
