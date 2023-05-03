@@ -42,6 +42,7 @@
                         key = Key.Space;
                         break;
                     case ConsoleKey.Backspace:
+                    case ConsoleKey.Escape:
                         key = Key.Cancel;
                         break;
                 }

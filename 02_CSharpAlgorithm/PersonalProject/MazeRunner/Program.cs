@@ -4,9 +4,8 @@
     {
         static void Main(string[] args)
         {
-            Maze mz = new Maze();
-            mz.MakeMaze();
-            mz.RunMaze();
+            GameCore gameCore = new GameCore();
+            gameCore.StartGame();
         }
     }
 }
