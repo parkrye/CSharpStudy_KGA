@@ -14,6 +14,7 @@
 + [검색](https://github.com/parkrye/KGA/tree/master/02_CSharpAlgorithm/Study/11_Searching)
 + [최단경로](https://github.com/parkrye/KGA/tree/master/02_CSharpAlgorithm/Study/12_ShortestPath)
 + [경로찾기](https://github.com/parkrye/KGA/tree/master/02_CSharpAlgorithm/Study/13_PathFinding)
++ [텍스트 RPG](https://github.com/parkrye/KGA/tree/master/02_CSharpAlgorithm/Study/ProjectTextRPG)
 ## 과제
 + [과제 1](https://github.com/parkrye/KGA/tree/master/02_CSharpAlgorithm/Homework/Homework_01)
 + [과제 2](https://github.com/parkrye/KGA/tree/master/02_CSharpAlgorithm/Homework/Homework_02)

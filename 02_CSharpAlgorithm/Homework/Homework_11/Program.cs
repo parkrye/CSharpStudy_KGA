@@ -48,7 +48,8 @@ namespace Homework_11
                 visited[node.point.y, node.point.x] = true;
 
                 // 3. 다음으로 탐색할 정점이 도착지인 경우
-                if(node.point.x == end.x && node.point.y == end.y)
+                // 도착했다고 판단해서 경로 반환
+                if (node.point.x == end.x && node.point.y == end.y)
                 {
                     path = new List<Point>();
                     while(node.parent != null)
@@ -59,23 +60,41 @@ namespace Homework_11
                     path.Reverse();
                     return true;
                 }
-                // 도착했다고 판단해서 경로 반환
-
 
                 // 4. AStar 탐색을 진행
-                // 방향 탐색
-                // 4-1. 탐색하면 안되는 경우
-                // 맵을 벗어났을 경우
-                // 탐색할 수 없는 정점일 경우
-                // 이미 방문한 정점일 경우
+                for(int i = 0; i < Direction.Length; i++)
+                {
+                    // 방향 탐색
+                    int x = node.point.x + Direction[i].x;
+                    int y = node.point.y + Direction[i].y;
 
+                    // 4-1. 탐색하면 안되는 경우
+                    // 맵을 벗어났을 경우
+                    if (x < 0 || x >= tileMap.GetLength(0) || y < 0 || y >= tileMap.GetLength(1))
+                        continue;
+                    // 탐색할 수 없는 정점일 경우
+                    if (!tileMap[y, x])
+                        continue;
+                    // 이미 방문한 정점일 경우
+                    if (visited[y, x])
+                        continue;
+                    // 4-2. 탐색한 정점 만들기
+                    int g = node.g + CostStraight;
+                    int h = Heuristic(new Point(x, y), end);
+                    Node newNode = new Node(new Point(x, y), node, g, h);
 
-                // 4-2. 탐색한 정점 만들기
-
-                // 4-3. 정점의 갱신이 필요한 경우 새로운 정점으로 할당
-                // 탐색하지 않은 정점이거나
-                // 가중치가 높은 정점인 경우
+                    // 4-3. 정점의 갱신이 필요한 경우 새로운 정점으로 할당
+                    // 탐색하지 않은 정점이거나
+                    // 가중치가 높은 정점인 경우
+                    if (nodes[y, x] == null || nodes[y, x].f > newNode.f)
+                    {
+                        nextPointPQ.Enqueue(newNode, newNode.f);
+                        nodes[newNode.point.y, newNode.point.x] = newNode;
+                    }
+                }
             }
+            path = null;
+            return false;
         }
 
 

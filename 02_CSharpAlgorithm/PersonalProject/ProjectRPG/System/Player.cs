@@ -1,8 +1,4 @@
-﻿using System.Dynamic;
-using System.Reflection.Emit;
-using System.Runtime.Serialization.Formatters.Binary;
-
-namespace ProjectRPG
+﻿namespace ProjectRPG
 {
     [Serializable]
     internal class Player

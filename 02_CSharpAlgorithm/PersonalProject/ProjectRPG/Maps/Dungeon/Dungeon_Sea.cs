@@ -95,6 +95,7 @@ namespace ProjectRPG
             boss.AddPC(new Monster_Seaserpent());
             boss.AddPC(new Monster_Seaserpent());
             Item bossDrop = new Item_Trident();
+            skillStone = new SkillStone(player, boss.PCs[0].SKILLSLOT.SKILLS);
 
             bossRoom = new BossRoom(player, boss, bossDrop);
         }
