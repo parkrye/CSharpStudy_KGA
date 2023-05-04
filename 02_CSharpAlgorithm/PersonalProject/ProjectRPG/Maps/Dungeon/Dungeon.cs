@@ -9,6 +9,7 @@
         protected int depth;                        // 던전 깊이
         protected Queue<Queue<DungeonRoom>> floors; // 던전 층
         protected BossRoom bossRoom;                // 보스룸
+        protected SkillStone skillStone;            // 스킬석
 
         protected Player player;
 
@@ -56,6 +57,7 @@
             BossCutScene();
             bossRoom.GetIn(99);
             if (player.PARTY.MEMBERS > 0 && depth < 4)
+                skillStone.LearnSkill();
                 player.FINDINGS[depth] = true;
         }
 

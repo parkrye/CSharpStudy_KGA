@@ -80,6 +80,7 @@ namespace ProjectRPG
             Party boss = new Party();
             boss.AddPC(new Monster_GreenLord());
             Item bossDrop = new Item_HPPotion2();
+            skillStone = new SkillStone(player, boss.PCs[0].SKILLSLOT.SKILLS);
 
             bossRoom = new BossRoom(player, boss, bossDrop);
         }

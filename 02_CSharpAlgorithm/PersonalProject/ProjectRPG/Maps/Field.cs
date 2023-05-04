@@ -315,39 +315,57 @@
 
             if (tiles[position.y, position.x] == Tile.W)
             {
-                if(new Random().Next(10) == 0)
+                switch (new Random().Next(100))
                 {
-                    if (player.PARTY.MEMBERS > 0)
-                    {
-                        new Battle(player, EnemySetting()).StartBattle();
-                        if(player.PARTY.MEMBERS > 0)
+                    case 0:
+                        new SkillStone(player).LearnSkill();
+                        DrawMap();
+                        DrawPlayer();
+                        break;
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 7:
+                    case 8:
+                    case 9:
+                    case 10:
+                        if (player.PARTY.MEMBERS > 0)
                         {
-                            Console.Clear();
-                            Thread.Sleep(500);
+                            new Battle(player, EnemySetting()).StartBattle();
+                            if(player.PARTY.MEMBERS > 0)
+                            {
+                                Console.Clear();
+                                Thread.Sleep(500);
+                            }
+                            else
+                            {
+                                Console.Clear();
+                                Console.SetCursorPosition(18, 5);
+                                Console.ForegroundColor = ConsoleColor.White;
+                                Console.Write("[모든 파티원을 잃었다]");
+                                Console.SetCursorPosition(18, 5);
+                                Console.Write("[그리고 돈을 빼앗겼다]");
+                                player.LoseMoney(player.MONEY / 2);
+                                Thread.Sleep(1000);
+                            }
                         }
                         else
                         {
                             Console.Clear();
-                            Console.SetCursorPosition(18, 5);
+                            Console.SetCursorPosition(15, 6);
                             Console.ForegroundColor = ConsoleColor.White;
-                            Console.Write("[모든 파티원을 잃었다]");
-                            Console.SetCursorPosition(18, 5);
-                            Console.Write("[그리고 돈을 빼앗겼다]");
+                            Console.Write("[도적을 만나 돈을 빼앗겼다]");
                             player.LoseMoney(player.MONEY / 2);
                             Thread.Sleep(1000);
                         }
-                    }
-                    else
-                    {
-                        Console.Clear();
-                        Console.SetCursorPosition(15, 6);
-                        Console.ForegroundColor = ConsoleColor.White;
-                        Console.Write("[도적을 만나 돈을 빼앗겼다]");
-                        player.LoseMoney(player.MONEY / 2);
-                        Thread.Sleep(1000);
-                    }
-                    DrawMap();
-                    DrawPlayer();
+                        DrawMap();
+                        DrawPlayer();
+                        break;
+                    default:
+                        break;
                 }
             }
         }

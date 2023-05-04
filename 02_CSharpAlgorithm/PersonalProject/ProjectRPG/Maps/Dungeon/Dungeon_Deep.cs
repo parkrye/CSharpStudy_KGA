@@ -97,8 +97,9 @@ namespace ProjectRPG
         protected override void BossSetting()
         {
             Party boss = new Party();
-            boss.AddPC(new Monster_Necromancer());
+            boss.AddPC(new Monster_Shaman());
             Item bossDrop = new Item_MysteriousRing();
+            skillStone = new SkillStone(player, boss.PCs[0].SKILLSLOT.SKILLS);
 
             bossRoom = new BossRoom(player, boss, bossDrop);
         }
