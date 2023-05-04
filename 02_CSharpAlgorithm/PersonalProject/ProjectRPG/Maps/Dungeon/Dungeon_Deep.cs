@@ -98,7 +98,7 @@ namespace ProjectRPG
         {
             Party boss = new Party();
             boss.AddPC(new Monster_Shaman());
-            Item bossDrop = new Item_MysteriousRing();
+            Item bossDrop = new Item_UnknownScope();
             skillStone = new SkillStone(player, boss.PCs[0].SKILLSLOT.SKILLS);
 
             bossRoom = new BossRoom(player, boss, bossDrop);
