@@ -175,7 +175,7 @@ namespace ProjectTextRPG
             int itemCount = random.Next(5, 10);
             for (int i = 0; i < itemCount; i++)
             {
-                switch (random.Next(6))
+                switch (random.Next(7))
                 {
                     case 0:
                         items.Add(new Potion(floor));
@@ -193,6 +193,9 @@ namespace ProjectTextRPG
                         items.Add(new WizardPotion(floor));
                         break;
                     case 5:
+                        items.Add(new RoguePotion(floor));
+                        break;
+                    case 6:
                         items.Add(new WeightPotion(floor));
                         break;
                 }
@@ -293,7 +296,7 @@ namespace ProjectTextRPG
                         shop.Add(new WizardPotion(floor));
                         break;
                     case 8:
-                        shop.Add(new Potion(floor));
+                        shop.Add(new RoguePotion(floor));
                         break;
                     case 9:
                         shop.Add(new WeightPotion(floor));

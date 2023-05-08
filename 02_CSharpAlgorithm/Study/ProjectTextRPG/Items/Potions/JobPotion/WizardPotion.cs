@@ -7,7 +7,7 @@
             name = "마법사의 포션";
             description = "마법사로 전직한다";
             weight = 1;
-            price = 15;
+            price = 15 + floor;
         }
 
         public override bool Use()

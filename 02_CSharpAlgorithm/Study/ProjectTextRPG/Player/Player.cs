@@ -4,6 +4,7 @@
     {
         public char icon = 'ⓟ';
         public Position position;
+        public int step;
 
         public int CurHp { get; set; }
         public int MaxHp { get; set; }
@@ -36,6 +37,7 @@
             LimitWeight = 10;
             Money = 0;
             Hunger = 100;
+            step = 0;
 
             skills = new List<Skill>();
             inventory = new List<Item>();
@@ -138,7 +140,8 @@
 
             position.x += x;
             position.y += y;
-            Hunger--;                
+            if(++step % 2 == 0)
+                Hunger--;                
 
             return true;
         }

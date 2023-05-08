@@ -163,7 +163,7 @@ namespace ProjectTextRPG
             Item item = Data.ItemInPos(Data.player.position);
             if (item != null)
             {
-                if(Data.player.NowEight < Data.player.LimitWeight + item.weight)
+                if(Data.player.NowEight + item.weight < Data.player.LimitWeight)
                 {
                     Data.player.GetItem(item);
                     Data.items.Remove(item);
