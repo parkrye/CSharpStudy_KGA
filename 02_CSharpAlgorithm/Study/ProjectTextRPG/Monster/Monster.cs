@@ -13,8 +13,9 @@ namespace ProjectTextRPG
         public int maxHp;
         public int ap;
         public int dp;
+        public DeadCause deadCause;
 
-        public Monster()
+        public Monster(int floor)
         {
             while (true)
             {
@@ -65,26 +66,26 @@ namespace ProjectTextRPG
         {
             if (damage > dp)
             {
-                Console.WriteLine($"{name}(은/는) {damage - dp} 데미지를 받았다.");
+                Console.WriteLine($"{name}(은/는) {damage - dp} 데미지를 받았다!");
                 curHp -= damage - dp;
             }
             else
-                Console.WriteLine($"공격은 {name}에게 먹히지 않았다.");
+                Console.WriteLine($"{name}(은/는) 아무렇지 않다!");
 
-            Thread.Sleep(1000);
+            Thread.Sleep(500);
 
             if (curHp <= 0)
             {
                 Console.WriteLine($"{name}(은/는) 쓰려졌다!");
-                Thread.Sleep(1000);
+                Thread.Sleep(500);
             }
         }
 
         public void Attack(Player player)
         {
-            Console.WriteLine($"{name}(이/가) 플레이어를 공격합니다.");
-            Thread.Sleep(1000);
-            player.TakeDamage(ap);
+            Console.WriteLine($"{name}(이/가) 당신을 공격했다!");
+            Thread.Sleep(500);
+            player.TakeDamage(Data.random.Next(ap / 2, ap * 2));
         }
     }
 }

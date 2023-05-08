@@ -1,10 +1,10 @@
 ﻿namespace ProjectTextRPG
 {
-    public class WarriorAttack : Skill
+    public class RogueAttack : Skill
     {
-        public WarriorAttack()
+        public RogueAttack()
         {
-            name = "전사 공격";
+            name = "도적 공격";
 
         }
 

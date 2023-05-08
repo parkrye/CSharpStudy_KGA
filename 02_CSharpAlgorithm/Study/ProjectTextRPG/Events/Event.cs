@@ -1,14 +1,11 @@
 ﻿namespace ProjectTextRPG
 {
-    public abstract class Item
+    public abstract class Event
     {
-        public string name;
-        public string description;
-        public char icon = '★';
+        public char icon;
         public Position position;
-        public int weight, price;
 
-        public Item(int floor) 
+        public Event()
         {
             while (true)
             {
@@ -23,6 +20,6 @@
             }
         }
 
-        public abstract bool Use();
+        public abstract void Active();
     }
 }

@@ -4,9 +4,10 @@
     {
         public Warrior() 
         {
-            addHP = 20;
-            addAp = 0;
-            addDP = 10;
+            name = "전사";
+            addHP = 10;
+            addAp = 1;
+            addDP = 1;
             skillList = new List<Skill>();
             skillList.Add(new WarriorAttack());
         }

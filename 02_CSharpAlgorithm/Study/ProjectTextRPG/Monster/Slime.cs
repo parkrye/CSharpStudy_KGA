@@ -2,14 +2,15 @@
 {
     public class Slime : Monster
     {
-        public Slime() : base()
+        public Slime(int floor) : base(floor)
         {
             icon = 'ⓢ';
             name = "슬라임";
-            maxHp = 10;
+            maxHp = Data.random.Next((10 + floor) / 2, (10 + floor) * 2);
             curHp = maxHp;
-            ap = 3;
-            dp = 0;
+            ap = Data.random.Next((3 + floor) / 2, (3 + floor) * 2);
+            dp = Data.random.Next((floor) / 2, (floor) * 2);
+            deadCause = DeadCause.Melt;
         }
 
         public override void MonsterAction()

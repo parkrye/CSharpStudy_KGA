@@ -3,6 +3,7 @@
     public class BattleScene : Scene
     {
         Monster monster;
+        int cursor;
 
         public BattleScene(Game _game) : base(_game)
         {
@@ -13,10 +14,10 @@
         {
             Console.Clear();
             Console.WriteLine();
-            Console.WriteLine($"{monster.name}    {monster.curHp,3}/{monster.maxHp,3}");
+            Console.WriteLine($"[{monster.name}    {monster.curHp,3}/{monster.maxHp,3}]");
             Console.WriteLine();
             Console.WriteLine();
-            Console.WriteLine($"플레이어    {Data.player.CurHp,3}/{Data.player.MaxHp}");
+            Console.WriteLine($"[플레이어    {Data.player.CurHp,3}/{Data.player.MaxHp}]");
             Console.WriteLine();
         }
 
@@ -24,26 +25,36 @@
         {
             for (int i = 0; i < Data.player.skills.Count; i++)
             {
-                Console.Write($"{i + 1,2}. {Data.player.skills[i].name} ");
+                if(cursor == i) Console.ForegroundColor = ConsoleColor.Green;
+                else Console.ForegroundColor = ConsoleColor.White;
+                Console.Write($"[{Data.player.skills[i].name}] ");
             }
-            Console.WriteLine();
-            Console.Write("명령을 입력하세요 : ");
+            Console.WriteLine("\n");
 
-            string input = Console.ReadLine();
-
-            int index;
-            if (!int.TryParse(input, out index))
+            bool action = false;
+            switch (Console.ReadKey().Key)
             {
-                Console.WriteLine("잘못 입력하셨습니다.");
-                return;
-            }
-            if (index < 1 || index > Data.player.skills.Count)
-            {
-                Console.WriteLine("잘못 입력하셨습니다.");
-                return;
+                case ConsoleKey.UpArrow:
+                case ConsoleKey.LeftArrow:
+                    cursor--;
+                    if (cursor < 0)
+                        cursor = Data.player.skills.Count - 1;
+                    break;
+                case ConsoleKey.DownArrow:
+                case ConsoleKey.RightArrow:
+                    cursor++;
+                    if (cursor >= Data.player.skills.Count)
+                        cursor = 0;
+                    break;
+                case ConsoleKey.Enter:
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Data.player.skills[cursor].Active(monster);
+                    action = true;
+                    break;
             }
 
-            Data.player.skills[index - 1].Active(monster);
+            if (!action)
+                return;
 
             // 턴 결과
             if (monster.curHp <= 0)
@@ -58,7 +69,7 @@
             // 턴 결과
             if (Data.player.CurHp <= 0)
             {
-                game.GameOver();
+                game.GameOver(monster.deadCause);
                 return;
             }
             else
@@ -71,18 +82,23 @@
         {
             this.monster = monster;
             Data.monsters.Remove(monster);
+            cursor = 0;
 
             Console.Clear();
-            Console.WriteLine($"{monster.name}(와/과) 전투 시작!");
-            Thread.Sleep(1000);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine();
+            Console.WriteLine($"[{monster.name}(와/과) 전투 시작!]");
+            Thread.Sleep(500);
         }
 
         public void EndBattle()
         {
             Console.Clear();
-            Console.WriteLine("전투에서 승리했다!");
+            Console.WriteLine();
+            Console.WriteLine("[전투에서 승리했다!]");
 
-            Thread.Sleep(2000);
+            Thread.Sleep(500);
+            Console.Clear();
             game.Map();
         }
     }

@@ -10,9 +10,10 @@
 
         public override void Active(Monster monster)
         {
-            Console.WriteLine($"플레이어가 {name}으로 {monster.name}(을/를) 공격한다.");
-            monster.TakeDamage(Data.player.AP * 2);
-            Thread.Sleep(1000);
+            Console.WriteLine($"당신은 {name}으로 {monster.name}(을/를) 공격했다!");
+            Thread.Sleep(500);
+            monster.TakeDamage(Data.random.Next(Data.player.AP / 2, Data.player.AP * 2));
+            Thread.Sleep(500);
         }
     }
 }

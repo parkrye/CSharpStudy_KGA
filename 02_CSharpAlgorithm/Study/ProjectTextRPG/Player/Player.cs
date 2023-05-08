@@ -4,6 +4,7 @@
     {
         public char icon = 'ⓟ';
         public Position position;
+        public int step;
 
         public int CurHp { get; set; }
         public int MaxHp { get; set; }
@@ -12,33 +13,45 @@
         public int MaxExp { get; set; }
         public int AP { get; set; }
         public int DP { get; set; }
+        public int Sight { get; set; }
+        public int NowEight { get { int sum = 0; foreach (Item item in inventory) sum += item.weight; return sum; } }
+        public int LimitWeight { get; set; }
+        public int Money { get; set; }
+        public int Hunger { get; set; }
         public Job JOB { get; set; }
 
         public List<Skill> skills;
 
+        public List<Item> inventory;
+
         public Player()
         {
-            MaxHp = 100;
+            MaxHp = 50;
             CurHp = MaxHp;
             Level = 1;
             MaxExp = 100;
             CurExp = 0;
             AP = 5;
-            DP = 1;
+            DP = 0;
+            Sight = 8;
+            LimitWeight = 10;
+            Money = 0;
+            Hunger = 100;
+            step = 0;
 
             skills = new List<Skill>();
-            skills.Add(new Attack());
-            skills.Add(new Recovery());
+            inventory = new List<Item>();
+            AddJob(new None());
         }
 
         public void GetItem(Item item)
         {
-            Data.inventory.Add(item);
+            inventory.Add(item);
         }
 
         public void UseItem(Item item)
         {
-            Data.inventory.Remove(item);
+            inventory.Remove(item);
             item.Use();
         }
 
@@ -47,6 +60,9 @@
             CurExp += value;
             while (CurExp >= MaxExp) 
             {
+                AP++;
+                MaxHp += 10;
+                CurHp += 10;
                 CurExp -= MaxExp;
                 Level++;
                 MaxExp += (Level) * ( MaxExp - Level + 1);
@@ -83,18 +99,18 @@
         {
             if (damage > DP)
             {
-                Console.WriteLine($"플레이어는 {damage - DP} 데미지를 받았다.");
+                Console.WriteLine($"당신은 {damage - DP} 데미지를 받았다!");
                 CurHp -= damage - DP;
             }
             else
-                Console.WriteLine($"공격은 플레이어에게 먹히지 않았다.");
+                Console.WriteLine($"당신은 아무렇지 않다!");
 
-            Thread.Sleep(1000);
+            Thread.Sleep(500);
 
             if (CurHp <= 0)
             {
-                Console.WriteLine($"플레이어는 쓰려졌다!");
-                Thread.Sleep(1000);
+                Console.WriteLine($"당신은 쓰려졌다!");
+                Thread.Sleep(500);
             }
         }
 
@@ -124,8 +140,38 @@
 
             position.x += x;
             position.y += y;
+            if(++step % 2 == 0)
+                Hunger--;                
 
             return true;
+        }
+
+        public bool AddJob(Job _job)
+        {
+            if (_job is not None && JOB is not None)
+                return false;
+            JOB = _job;
+            MaxHp += _job.addHP;
+           AP += _job.addAp;
+           DP += _job.addDP;
+            foreach (Skill skill in _job.skillList)
+                skills.Add(skill);
+            return true;
+        }
+
+        public bool AddSight(int add = 1)
+        {
+            if (Sight == 20)
+                return false;
+            Sight += add;
+            return true;
+        }
+
+        public void Eat(int value)
+        {
+            Hunger += value;
+            if (Hunger >= 200)
+                Data.game.GameOver(DeadCause.Eat);
         }
     }
 }

@@ -1,23 +1,20 @@
 ﻿namespace ProjectTextRPG
 {
-    public class Zombie : Monster
+    public class Demon : Monster
     {
-        public Zombie(int floor) : base(floor)
+        public Demon(int floor) : base(floor)
         {
-            icon = 'ⓩ';
-            name = "좀비";
-            maxHp = Data.random.Next((20 + floor) / 2, (20 + floor) * 2);
+            icon = 'ⓓ';
+            name = "악마";
+            maxHp = Data.random.Next((30 + floor) / 2, (30 + floor) * 2);
             curHp = maxHp;
-            ap = Data.random.Next((1 + floor) / 2, (1 + floor) * 2);
-            dp = Data.random.Next((1 + floor) / 2, (1 + floor) * 2);
-            deadCause = DeadCause.Tear;
+            ap = Data.random.Next((4 + floor) / 2, (4 + floor) * 2);
+            dp = Data.random.Next((4 + floor) / 2, (4 + floor) * 2);
+            deadCause = DeadCause.Burn;
         }
 
         public override void MonsterAction()
         {
-            if (moveCount++ % 2 != 0)
-                return;
-
             List<Position> path;
             if (!AStar.PathFinding(in Data.map, position, Data.player.position, out path))
                 return;

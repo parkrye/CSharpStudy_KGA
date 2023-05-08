@@ -10,11 +10,11 @@
 
         public override void Active(Monster monster)
         {
-            Console.WriteLine($"플레이어가 {name}으로 회복을 시도합니다.");
-            Thread.Sleep(1000);
+            Console.WriteLine($"당신은 {name}으로 회복을 시도했다!");
+            Thread.Sleep(500);
             Data.player.Heal(5);
-            Console.WriteLine($"플레이어의 체력이 {Data.player.CurHp}가 되었습니다.");
-            Thread.Sleep(1000);
+            Console.WriteLine($"체력이 {Data.player.CurHp}가 되었다!");
+            Thread.Sleep(500);
         }
     }
 }
