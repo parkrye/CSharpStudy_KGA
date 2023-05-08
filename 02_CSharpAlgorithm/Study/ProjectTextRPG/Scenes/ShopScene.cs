@@ -1,16 +1,12 @@
-﻿using System;
-using System.Reflection;
-using System.Text;
-
-namespace ProjectTextRPG
+﻿namespace ProjectTextRPG
 {
-    public class InventoryScene : Scene
+    public class ShopScene : Scene
     {
         int cursor;
-        enum Screen { Main, Use, Sort };
+        enum Screen { Main, Buy, Sell };
         Screen screen = Screen.Main;
 
-        public InventoryScene(Game game) : base(game)
+        public ShopScene(Game game) : base(game)
         {
 
         }
@@ -18,20 +14,8 @@ namespace ProjectTextRPG
         public override void Render()
         {
             Console.SetCursorPosition(0, 0);
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine("[인벤토리]");
-            sb.AppendLine($"[소지금 : {Data.player.Money} | 현재 무게 : {Data.player.NowEight} / {Data.player.LimitWeight}]");
-            for (int i = 0; i < Data.player.inventory.Count; i++)
-            {
-                sb.Append($"{Data.player.inventory[i].name}\t");
-                sb.Append($"${Data.player.inventory[i].price}\t");
-                sb.Append($"{Data.player.inventory[i].weight}㎏\t");
-                sb.Append($"{Data.player.inventory[i].description}");
-                sb.AppendLine();
-            }
-            sb.AppendLine();
-
-            Console.Write(sb.ToString());
+            Console.WriteLine("[상점]");
+            Console.WriteLine($"[소지금 : {Data.player.Money} | 현재 무게 : {Data.player.NowEight} / {Data.player.LimitWeight}]");
         }
 
         public override void Update()
@@ -41,11 +25,11 @@ namespace ProjectTextRPG
                 case Screen.Main:
                     MainUpdate();
                     break;
-                case Screen.Use:
-                    UseUpdate();
+                case Screen.Buy:
+                    BuyUpdate();
                     break;
-                case Screen.Sort:
-                    SortUpdate();
+                case Screen.Sell:
+                    SellUpdate();
                     break;
             }
         }
@@ -54,13 +38,13 @@ namespace ProjectTextRPG
         {
             if (cursor == 0) Console.ForegroundColor = ConsoleColor.Green;
             else Console.ForegroundColor = ConsoleColor.White;
-            Console.Write("[아이템 사용]\t");
+            Console.Write("아이템 구매\t");
             if (cursor == 1) Console.ForegroundColor = ConsoleColor.Green;
             else Console.ForegroundColor = ConsoleColor.White;
-            Console.Write("[아이템 정렬]");
+            Console.Write("아이템 판매\t");
             if (cursor == 2) Console.ForegroundColor = ConsoleColor.Green;
             else Console.ForegroundColor = ConsoleColor.White;
-            Console.Write("[인벤토리 닫기]\t");
+            Console.Write("상점 나가기");
 
             switch (Console.ReadKey().Key)
             {
@@ -81,10 +65,10 @@ namespace ProjectTextRPG
                     switch (cursor)
                     {
                         case 0:
-                            screen = Screen.Use;
+                            screen = Screen.Buy;
                             break;
                         case 1:
-                            screen = Screen.Sort;
+                            screen = Screen.Sell;
                             break;
                         case 2:
                             game.Map();
@@ -99,19 +83,76 @@ namespace ProjectTextRPG
             }
         }
 
-        void UseUpdate()
+        void BuyUpdate()
         {
-            if(Data.player.inventory.Count == 0)
+            if(Data.shop.Count == 0)
             {
                 screen = Screen.Main;
                 cursor = 0;
                 return;
             }
+            Console.SetCursorPosition(0, 3);
 
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.Write($"[사용할 아이템 : ");
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write($"{Data.player.inventory[cursor].name}]");
+            Console.WriteLine($"구매 가능한 아이템");
+
+            for(int i = 0; i < Data.shop.Count; i++)
+            {
+                if(cursor == i) Console.ForegroundColor = ConsoleColor.Green;
+                else Console.ForegroundColor= ConsoleColor.White;
+                Console.WriteLine($"{Data.shop[i].name} {Data.shop[i].price}$ {Data.shop[i].weight}㎏ {Data.shop[i].description}");
+            }
+
+            switch (Console.ReadKey().Key)
+            {
+                case ConsoleKey.LeftArrow:
+                case ConsoleKey.UpArrow:
+                    cursor--;
+                    if (cursor < 0)
+                        cursor = Data.shop.Count - 1;
+                    break;
+                case ConsoleKey.RightArrow:
+                case ConsoleKey.DownArrow:
+                    cursor++;
+                    if (cursor >= Data.shop.Count)
+                        cursor = 0;
+                    break;
+                case ConsoleKey.Enter:
+                    if (Data.shop[cursor].price <= Data.player.Money)
+                    {
+                        Data.player.Money -= Data.shop[cursor].price;
+                        Data.player.inventory.Add(Data.shop[cursor]);
+                        Data.shop.RemoveAt(cursor);
+                    }
+                    if (cursor >= Data.player.inventory.Count)
+                        cursor --;
+                    Console.Clear();
+                    break;
+                case ConsoleKey.Backspace:
+                    Console.Clear();
+                    screen = Screen.Main;
+                    cursor = 0;
+                    break;
+            }
+        }
+
+        void SellUpdate()
+        {
+            if (Data.player.inventory.Count == 0)
+            {
+                screen = Screen.Main;
+                cursor = 0;
+                return;
+            }
+            Console.SetCursorPosition(0, 3);
+
+            Console.WriteLine($"판매 가능한 아이템");
+
+            for (int i = 0; i < Data.player.inventory.Count; i++)
+            {
+                if (cursor == i) Console.ForegroundColor = ConsoleColor.Green;
+                else Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine($"{Data.player.inventory[i].name} {(int)(Data.player.inventory[i].price * 0.8)}$ {Data.player.inventory[i].weight}㎏ {Data.player.inventory[i].description}");
+            }
 
             switch (Console.ReadKey().Key)
             {
@@ -128,75 +169,11 @@ namespace ProjectTextRPG
                         cursor = 0;
                     break;
                 case ConsoleKey.Enter:
-                    Console.Clear();
-                    if (Data.player.inventory[cursor].Use())
-                        Data.player.inventory.RemoveAt(cursor);
+                    Data.player.Money += (int)(Data.player.inventory[cursor].price * 0.8);
+                    Data.shop.Add(Data.player.inventory[cursor]);
+                    Data.player.inventory.RemoveAt(cursor);
                     if (cursor >= Data.player.inventory.Count)
-                        cursor --;
-                    Console.Clear();
-                    break;
-                case ConsoleKey.Backspace:
-                    Console.Clear();
-                    screen = Screen.Main;
-                    cursor = 0;
-                    break;
-            }
-        }
-
-        void SortUpdate()
-        {
-            if(Data.player.inventory.Count == 0)
-            {
-                screen = Screen.Main;
-                cursor = 0;
-                return;
-            }
-
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.Write($"[정렬할 기준 : ");
-            Console.ForegroundColor = ConsoleColor.Green;
-            switch (cursor)
-            {
-                case 0:
-                    Console.Write("이름]");
-                    break;
-                case 1:
-                    Console.Write("가격]");
-                    break;
-                case 2:
-                    Console.Write("무게]");
-                    break;
-            }
-
-            switch (Console.ReadKey().Key)
-            {
-                case ConsoleKey.LeftArrow:
-                case ConsoleKey.UpArrow:
-                    cursor--;
-                    if (cursor < 0)
-                        cursor = 2;
-                    break;
-                case ConsoleKey.RightArrow:
-                case ConsoleKey.DownArrow:
-                    cursor++;
-                    if (cursor > 2)
-                        cursor = 0;
-                    break;
-                case ConsoleKey.Enter:
-                    switch (cursor)
-                    {
-                        case 0:
-                            Data.player.inventory.Sort(Comparer<Item>.Create((a, b) => a.name.CompareTo(b.name)));
-                            break;
-                        case 1:
-                            Data.player.inventory.Sort(Comparer<Item>.Create((a, b) => a.price - b.price));
-                            break;
-                        case 2:
-                            Data.player.inventory.Sort(Comparer<Item>.Create((a, b) => a.weight - b.weight));
-                            break;
-                    }
-                    screen = Screen.Main;
-                    cursor = 0;
+                        cursor--;
                     Console.Clear();
                     break;
                 case ConsoleKey.Backspace:

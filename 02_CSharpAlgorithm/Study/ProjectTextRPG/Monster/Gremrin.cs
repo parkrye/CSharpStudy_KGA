@@ -2,14 +2,15 @@
 {
     public class Gremrin : Monster
     {
-        public Gremrin() : base()
+        public Gremrin(int floor) : base(floor)
         {
             icon = 'ⓖ';
             name = "그렘린";
-            maxHp = 15;
+            maxHp = Data.random.Next((10 + floor) / 2, (10 + floor) * 2);
             curHp = maxHp;
-            ap = 2;
-            dp = 1;
+            ap = Data.random.Next((2 + floor) / 2, (2 + floor) * 2);
+            dp = Data.random.Next((1 + floor) / 2, (1 + floor) * 2);
+            deadCause = DeadCause.Tear;
         }
 
         public override void MonsterAction()
@@ -21,7 +22,10 @@
             if (!AStar.PathFinding(in Data.map, position, Data.player.position, out path))
                 return;
 
-            for(int i = 1; i <= 2 && i < path.Count; i++)
+            if (path.Count <= 1 || path.Count > 30)
+                return;
+
+                for (int i = 1; i <= 2 && i < path.Count; i++)
             {
                 if (path[i].x == position.x)
                 {

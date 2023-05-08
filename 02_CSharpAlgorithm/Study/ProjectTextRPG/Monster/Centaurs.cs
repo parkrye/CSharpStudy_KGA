@@ -2,14 +2,15 @@
 {
     public class Centaurs : Monster
     {
-        public Centaurs() : base()
+        public Centaurs(int floor) : base(floor)
         {
             icon = 'ⓒ';
             name = "켄타우르스";
-            maxHp = 30;
+            maxHp = Data.random.Next((20 + floor) / 2, (20 + floor) * 2);
             curHp = maxHp;
-            ap = 2;
-            dp = 0;
+            ap = Data.random.Next((2 + floor) / 2, (2 + floor) * 2);
+            dp = Data.random.Next((floor) / 2, (floor) * 2);
+            deadCause = DeadCause.Beat;
         }
 
         public override void MonsterAction()
@@ -21,7 +22,7 @@
             if (!AStar.PathFinding(in Data.map, position, Data.player.position, out path))
                 return;
 
-            if (path.Count <= 1)
+            if (path.Count <= 1 || path.Count > 30)
                 return;
 
             if (path[1].x == position.x)
