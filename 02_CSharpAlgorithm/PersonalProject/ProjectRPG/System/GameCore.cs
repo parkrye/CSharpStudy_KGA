@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-
-namespace ProjectRPG
+﻿namespace ProjectRPG
 {
     internal class GameCore
     {
